@@ -1,0 +1,76 @@
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<div class="box-collateral box-reviews ajax-reload" id="customer-reviews" rel="product.review" mode="replace">
+    <?php /* we need this because reviews block takes product id from query string */?>
+    <?php if ($_product = Mage::registry('product')): ?>
+        <script type="text/javascript">
+            AntiVarnish.addQueryParam({param: 'id', value : '<?php echo $_product->getId() ?>'});
+            AntiVarnish.addCallBack('customer-reviews', function(){jQuery('#customer-reviews h2').click(function(){
+    			jQuery(this).next('#review-form').toggle("slow");
+    		});});
+        </script>
+    <?php endif;?>
+	<?php if (count($_items)):?>
+		<p class='count_review'>There are currently <strong><?php echo count($_items); ?> reviews.</strong></p>
+		<!--h2><?php echo $this->__('Customer Reviews') ?></h2-->
+		<?php echo $this->getChildHtml('toolbar') ?>
+		<dl>
+			<dd>
+				<div class='carousel-wap' id="carousel-wrapper">
+					<div id="carousel-content" class='carousel-cont'>
+						<?php foreach ($_items as $_review):?>
+						<div class='slide'>
+							<?php $_votes = $_review->getRatingVotes(); ?>
+							<?php if (count($_votes)): ?>
+							<table class="ratings-table">
+								<col width="1" />
+								<col />
+								<tbody>
+									<?php foreach ($_votes as $_vote): ?>
+									<tr>
+										<th>
+											<?php // echo $this->escapeHtml($_vote->getRatingCode()) ?>
+										</th>
+										<td>
+											<div class="rating-box">
+												<div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+											</div>
+										</td>
+									</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+							<?php endif; ?>
+							<div class="actual-review"> 
+								<?php echo nl2br($this->htmlEscape($_review->getDetail())) ?> 
+							</div>
+							<p class="date">
+								<?php echo $this->__(' Written by <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?>
+								<?php echo $this->__(' on %s', $this->formatDate($_review->getCreatedAt()), 'long') ?>
+							</p> 
+						</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+				<div class="controls">
+					<a style="float: right" rel="next" class="carousel-control ico-next" href="javascript:">&nbsp;</a>
+					<a rel="prev" class="carousel-control ico-prev" href="javascript:">&nbsp;</a>
+				</div>
+			</dd>
+		</dl>
+		<?php echo $this->getChildHtml('toolbar') ?>
+	<?php endif;?>
+	<?php echo $this->getChildHtml('review_form') ?> 
+</div>
+
+<?php if (count($_items)) :?>
+<script type="text/javascript">
+	if($('carousel-wrapper')){
+		new Carousel($('carousel-wrapper'),
+					 $('carousel-wrapper').select('.slide'),
+					 $('customer-reviews').select('.controls a'),
+					 { wheel: false}
+					);
+	}
+	
+</script>
+<?php endif;?>

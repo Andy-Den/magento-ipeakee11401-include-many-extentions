@@ -1,0 +1,41 @@
+<?php $_filter = $this->getPriceQuestion(); ?>
+<?php if(isset($_filter)):?>
+	<?php if($this->isPriceSlider()): ?>
+		<?php $maxPrice =  $this->getMaxPrice($_filter);?>
+		<div class="cel_Price">
+			<p>
+			<input type="text" id="price-slider-range-giftfinder-display" />
+			<input type="hidden" name="filter_PriceQuestion" id="filter_PriceQuestion" />
+			</p>
+			<div id="price-slider-range-giftfinder"></div>
+		</div>
+		<script>
+			jQuery(document).ready(function() {
+			jQuery( "#price-slider-range-giftfinder" ).slider({
+				range: true,
+				min: 0,
+				max: <?php echo $maxPrice;?> ,
+				step: 5,
+				values: [ 0, <?php echo $maxPrice;?> ],
+				slide: function( event, ui ) {
+					jQuery( "#price-slider-range-giftfinder-display" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+					jQuery( "#filter_PriceQuestion").val("_P" + ui.values[ 0 ] + "_" + ui.values[ 1 ]);
+				},
+				stop: function(event, ui) {
+					var answerId = "_P" + ui.values[ 0 ] + "_" + ui.values[ 1 ];
+					jQuery( "#filter_PriceQuestion").val(answerId);
+					<?php if(!$this->isGiftfinderStandardTemplate()):?>
+						var url = '<?php echo $this->answerQuestionUrl(""); ?>' + '&amp;answerId=' + answerId;
+						url = url.replace(new RegExp("&amp;",'g'),"&");
+						celebrosSetLocation(url);
+					<?php endif;?>
+				}
+			});
+			jQuery( "#price-slider-range-giftfinder-display" ).val( "$" + jQuery( "#price-slider-range-giftfinder" ).slider( "values", 0 ) +
+			" - $" + jQuery( "#price-slider-range-giftfinder" ).slider( "values", 1 ) );
+			});
+		</script>
+	<?php else:?>
+		<?php echo $this->getFilterHtmlSelect($_filter);?>
+	<?php endif;?>
+<?php endif;?>

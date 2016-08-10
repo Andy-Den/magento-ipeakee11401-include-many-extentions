@@ -1,0 +1,113 @@
+<script type="text/javascript">
+    //change distance number
+    function changeDistance(id)
+    {
+        var distanceVal = document.getElementById(id);
+        if(distanceVal.value < 1) {
+            distanceVal.value = 50;
+        }
+    }
+</script>
+<div style="width: 100%; clear: both">
+<h1 class="locator-h1"><?php echo $this->__('Service your hover') ?></h1>
+<div class="loc-srch">
+<div class="locator-search">
+    <form class="locator-form-search loc-srch-form" id="form-locator-search" action="<?php echo Mage::getURL('') ?>locator/search/">
+
+        <?php
+        //@todo get from config
+        $countries = array(
+            'Australia' => 'Australia'
+        );
+        $param = $this->getRequest()->getParam('country');
+
+        if (isset($param)) {
+            $selected = $this->getRequest()->getParam('country');
+        } else {
+            //if no parameters are passed from the url, see if we can get them from config
+            $defaultsearch = Mage::helper('ak_locator/search')->parseQueryString(Mage::getStoreConfig('locator_settings/search/default_search_params'));
+            if (isset($defaultsearch['country'])) {
+                $selected = $defaultsearch['country'];
+            }
+        }
+        ?>
+
+        <select id="loc-search-country" class="loc-srch-country" name="country" style="display:none">
+            <?php foreach ($countries as $country => $value) : ?>
+                <option <?php if($country == @$selected ){ echo 'selected="selected"';} ?> value="<?php echo $value; ?>"><?php echo $country; ?></option>
+            <?php endforeach; ?>
+        </select>
+
+
+
+
+
+        <!--        <select name="a">-->
+        <!--          <option value="">Any State</option>-->
+        <!--          <option value="victoria">Victoria</option>-->
+        <!--          <option value="new south wales">New South Wales</option>-->
+        <!--        </select>-->
+        <?php
+        $uriLocator = $this->getRequest()->getParam('s');
+        if(Mage::helper('ak_locator')->isDetailPage() == 1) {
+            $uriLocator = null;
+        }
+        ?>
+
+        <div class="mid-contain">
+        <!--<p><?php /*echo $this->__('Enter Postcode or Suburb') */?></p>-->
+        <input id='locator-autocomplete' name="s" type="text" class="loc-srch-s input-text required-entry" value="<?php echo $uriLocator; ?>" />
+        </div>
+        <?php if($this->showDistanceFilter()): ?>
+        <div class="locator-distance">
+                <span><?php echo $this->__('within') ?></span>
+                <input name="distance" type="number" id="distance" onblur="changeDistance('distance')" value="<?php echo $this->getCurrentDistance($this->getRequest()); ?>" class="loc-srch-dis input-text" />
+        </div>
+        <span class="km-locator">KM</span>
+        <?php endif;?>
+        <div class="search-store">
+            <button type="submit" class="button"><span><span><?php echo Mage::helper('ak_locator')->setTextButton(); ?></span></span></button>
+        </div>
+        <span class="loc-loader loader loader-med"></span>
+    </form>
+
+
+    <div class="locator-state search-areas">
+        <span class="OR"><?php echo $this->__('OR') ?></span>
+        <a class="loc-trigger" href="<?php echo Mage::getURL('') ?>locator/search/?country=new zealand">ALL NEW ZEALAND</a>
+
+    </div>
+
+</div>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        var LocatorForm = new Varien.searchForm('form-locator-search', 'locator-autocomplete', '<?php echo $this->__('Enter a postcode or suburb') ?>');
+        //]]>
+    </script>
+
+    <!--    <form class="loc-srch-form" action="--><?php //echo Mage::getURL('') ?><!--locator/search/">-->
+    <!--        --><?php //if($this->showSearchFilter()): ?>
+    <!--          Postcode or suburb: <input id='locator-autocomplete' name="s" type="text" class="loc-srch-s input-text required-entry" placeholder="--><?php //echo $this->__('Enter a postcode or suburb') ?><!--" value="--><?php //echo $this->getRequest()->getParam('s'); ?><!--" />-->
+    <!--        --><?php //endif; ?>
+    <!---->
+    <!--        --><?php //if($this->showDistanceFilter()): ?>
+    <!--          within <input name="distance" type="number" value="--><?php //echo $this->getCurrentDistance($this->getRequest()); ?><!--" class="loc-srch-dis" />Km-->
+    <!--         --><?php //endif; ?>
+    <!--        <button type="submit" class="btn">search</button>-->
+    <!---->
+    <!--        <span class="loc-loader loader loader-med"></span>-->
+    <!--    </form>-->
+    <!---->
+    <!---->
+
+    <?php
+    // This is just an example of how the theme level can be used to link to different types of searches
+    ?>
+
+
+</div>
+<script type="text/javascript">
+    var dataForm = new VarienForm('locator-search', true);
+</script>
+</div>

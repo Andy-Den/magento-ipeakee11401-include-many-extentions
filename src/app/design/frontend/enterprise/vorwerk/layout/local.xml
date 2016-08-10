@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+
+    <default>
+        <reference name="root">
+            <block type="core/text_list" name="after_header" as="after_header" translate="label">
+                <label>After header</label>
+            </block>
+        </reference>
+        <remove name="awis.sidebar.left.bottom"/>
+        <remove name="warehouse"/>
+        <remove name="catalog.compare.sidebar"/>
+        <remove name="right.poll"/>
+        <remove name="right.reports.product.viewed"/>
+        <remove name="right.reports.product.compared"/>
+        <remove name="wishlist_sidebar"/>
+        <remove name="awis.sidebar.right.bottom"/>
+        <remove name="feefo_logo_right"/>
+        <remove name="paypal.partner.right.logo"/>
+        <remove name="bml.right.logo"/>
+        <remove name="sale.reorder.sidebar"/>
+
+        <reference name="head">
+
+
+            <action method="removeItem"><type>js</type><name>mgxtips/jquery-1.4.2.js</name></action>
+            <action method="removeItem"><type>js</type><name>mgxtips/jquery.qtip-1.0.0-rc3.min.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/jqzoom/jquery-1.3.1.min.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/jqzoom/jquery.jqzoom1.0.1.js</name></action>
+
+            <!-- Vorwerk supplied -->
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/shop-basic.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/shop-detailed.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/megamenu.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/masterstylesheet.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/productstylesheet.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/galleriffic.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/image_animation.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/slideshow.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>js/vorwerk/fancybox2/source/jquery.fancybox.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>js/vorwerk/fancybox2/source/helpers/jquery.fancybox-buttons.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>js/vorwerk/fancybox2/source/helpers/jquery.fancybox-thumbs.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/ie6.css</stylesheet><params/><if>lt IE 6</if></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/megamenu-ie.css</stylesheet><params/><if>lt IE 8</if></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/megamenu-ie.css</stylesheet><params/><if>lt IE 8</if></action>
+            <action method="addItem"><type>skin_js</type><script>js/vorwerk/fancybox2/source/jquery.fancybox.pack.js</script></action>
+            <action method="addItem"><type>skin_js</type><script>js/vorwerk/fancybox2/source/helpers/jquery.fancybox-media.js</script></action>
+
+            <action method="addItem"><type>skin_js</type><script>js/vorwerk/vorwerk.js</script></action>
+
+            <!-- Infortis Ultraslideshow -->
+            <action method="addItem"><type>skin_css</type><name>css/infortis/ultra-slideshow/ultra-slideshow.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/infortis/_shared/generic-nav.css</name><params/></action>
+            <action method="addJs"><script>infortis/jquery/jquery-1.7.2.min.js</script></action>
+            <action method="addJs"><script>infortis/jquery/jquery-noconflict.js</script></action>
+            <action method="addJs"><script>infortis/jquery/plugins/jquery.easing.min.js</script></action>
+            <action method="addJs"><script>infortis/jquery/plugins/jquery.flexslider.min.js</script></action>
+
+            <!-- Balance -->
+            <action method="addItem"><type>skin_css</type><stylesheet>css/main.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/sidebar.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/home.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/category.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><stylesheet>css/product.css</stylesheet></action>
+
+            <action method="addItem"><type>skin_css</type><stylesheet>css/vorwerk/buttons.css</stylesheet></action>
+
+        </reference>
+
+        <reference name="top.menu">
+            <remove name="explodedmenu.topnav" />
+            <block type="page/html_topmenu" name="top.menu.catalog" template="page/html/topmenu.phtml"/>
+        </reference>
+
+        <reference name="footer">
+            <remove name="footer_links"/>
+            <remove name="cms_footer_links"/>
+            <remove name="store_switcher"/>
+        </reference>
+    </default>
+
+
+    <cms_index_index>
+
+        <reference name="root">
+            <remove name="breadcrumbs.container"/>
+        </reference>
+
+        <reference name="content">
+            <block type="core/template" name="content.home" template="page/html/home.phtml">
+
+                <block type="cms/block" name="content.home.banner" as="banner">
+                    <action method="setBlockId"><block_id>vorwerk_home_banner</block_id></action>
+                </block>
+
+                <block type="cms/block" name="content.home.left" as="left">
+                    <action method="setBlockId"><block_id>vorwerk_home_left</block_id></action>
+                </block>
+                <block type="cms/block" name="content.home.middle" as="middle">
+                    <action method="setBlockId"><block_id>vorwerk_home_middle</block_id></action>
+                </block>
+                <block type="cms/block" name="content.home.right" as="right">
+                    <action method="setBlockId"><block_id>vorwerk_home_right</block_id></action>
+                </block>
+
+            </block>
+        </reference>
+        <reference name="after_header">
+            <block type="core/template" name="banner.home" template="page/html/bannercontainer.phtml">
+                <block type="ultraslideshow/slideshow" name="content.home.slideshow" as="slideshow" template="infortis/ultraslideshow/slideshow.phtml">
+                    <block type="ultraslideshow/config" name="content.home.slideshow.config" as="slideshowConfig" template="infortis/ultraslideshow/config.phtml" output="toHtml"/>
+                </block>
+            </block>
+        </reference>
+    </cms_index_index>
+
+
+    <cms_page>
+        <reference name="left">
+            <block type="page/html_wrapper" name="right.cms_navigation.wrapper">
+                <action method="setElementClass"><value>cms-navigation</value></action>
+                <block type="cms/block" name="right.cms_navigation" as="right_cms_navigation">
+                    <action method="setBlockId"><block_id>vorwerk_cms_navigation</block_id></action>
+                </block>
+            </block>
+        </reference>
+    </cms_page>
+
+
+    <all_category_views>
+        <update handle="page_two_columns_left"/>
+
+        <remove name="category.title"/>
+
+        <reference name="head">
+            <action method="removeItem"><type>js</type><name>mgxtips/jquery-1.4.2.js</name></action>
+            <action method="removeItem"><type>js</type><name>mgxtips/jquery.qtip-1.0.0-rc3.min.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/jqzoom/jquery-1.3.1.min.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/jqzoom/jquery.jqzoom1.0.1.js</name></action>
+        </reference>
+
+        <reference name="product_list">
+            <action method="setColumnCount"><count>3</count></action>
+            <block type="catalog/category_view" name="product_list.category.title" as="title" template="catalog/category/title.phtml"/>
+        </reference>
+    </all_category_views>
+
+    <catalog_category_default>
+        <update handle="all_category_views"/>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <update handle="all_category_views"/>
+    </catalog_category_layered>
+
+
+    <catalog_product_view>
+        <update handle="page_two_columns_right"/>
+
+        <reference name="head">
+            <action method="removeItem"><type>js</type><name>mgxtips/jquery-1.4.2.js</name></action>
+            <action method="removeItem"><type>js</type><name>mgxtips/jquery.qtip-1.0.0-rc3.min.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/jqzoom/jquery-1.3.1.min.js</name></action>
+            <action method="removeItem"><type>skin_js</type><name>js/jqzoom/jquery.jqzoom1.0.1.js</name></action>
+        </reference>
+
+        <reference name="breadcrumbs.container">
+            <block type="core/template" name="product.view.title" as="product_view_title" after="breadcrumbs" template="catalog/product/title.phtml"/>
+        </reference>
+
+        <reference name="right">
+            <block type="core/template" name="catalog.product.right.video" template="catalog/product/view/video.phtml"/>
+            <block type="core/template" name="catalog.product.right.cms_content" template="catalog/product/view/cms_content.phtml"/>
+            <block type="catalog/product_list_related" name="catalog.product.right.related" template="catalog/product/list/related.phtml"/>
+        </reference>
+    </catalog_product_view>
+
+</layout>

@@ -1,0 +1,63 @@
+<div class="dashboard">
+<?php $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+		  $breadcrumbs->addCrumb('home', array('label'=>Mage::helper('cms')->__('Home'), 'title'=>Mage::helper('cms')->__('Home Page'), 'link'=>Mage::getBaseUrl()));
+		  $breadcrumbs->addCrumb('review-details', array('label'=>'Review Details', 'title'=>'Review Details'));
+		  echo $this->getLayout()->getBlock('breadcrumbs')->toHtml();?>
+		  
+<div class="page_wrap" >
+<div class="page_content" >
+<?php if($this->getProductData()->getId()): ?>
+<h2 class="page_title page_title_gray"><?php echo $this->__('Review Details') ?></h2>
+<div class="product-review">
+ 
+        
+
+    <div class="product-img-box">
+        <a class="product-image" href="<?php echo $this->getProductData()->getProductUrl() ?>"><img src="<?php echo $this->helper('catalog/image')->init($this->getProductData(), 'image')->resize(285, 285); ?>" alt="<?php echo $this->htmlEscape($this->getProductData()->getName()) ?>" height="285" width="285" /></a>
+        <?php if( $this->getRating() && $this->getRating()->getSize()): ?>
+        <p><?php echo $this->__('Average Customer Rating:') ?></p>
+        <?php echo $this->getReviewsSummaryHtml($this->getProductData()) ?>
+        <?php endif; ?>
+    </div>
+    <div class="details">
+        <h2 class="product-name"><?php echo $this->htmlEscape($this->getProductData()->getName()) ?></h2>
+        <?php if( $this->getRating() && $this->getRating()->getSize()): ?>
+        <strong><?php echo ($this->isReviewOwner()) ? $this->__('Your Rating:') : $this->__('Rating:'); ?></strong>
+        <table class="data-table review-summary-table">
+        <?php foreach ($this->getRating() as $_rating): ?>
+        <?php if($_rating->getPercent()): ?>
+            <tr>
+                <td class="label"><?php echo $this->escapeHtml($_rating->getRatingCode()) ?></td>
+                <td class="value">
+                    <div class="rating-box">
+                        <div class="rating" style="width:<?php echo ceil($_rating->getPercent()) ?>%;"></div>
+                    </div></td>
+            </tr>
+        <?php endif; ?>
+        <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+        <p class="date">
+            <?php if ($this->isReviewOwner()): ?>
+                <?php echo $this->__('Your Review (submitted on %s):', $this->dateFormat($this->getReviewData()->getCreatedAt())) ?>
+            <?php else :?>
+                <?php echo $this->__('Review (submitted on %s):', $this->dateFormat($this->getReviewData()->getCreatedAt())) ?>
+            <?php endif;?>
+        </p>
+        <p><?php echo nl2br($this->htmlEscape($this->getReviewData()->getDetail())) ?></p>
+    </div>
+    
+</div>
+<?php endif; ?>
+</div>
+<div class="page_foot"></div>
+<div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->getBackUrl() ?>"><small>&laquo; </small><?php echo $this->__('Back to My Reviews') ?></a></p>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+//$j1_6(".col-main").css({'padding-right':'20px','padding-left':'0'});;
+$j1_6(".page_content").css({'float':'none'});
+$j1_6(".product-review").css({'padding-left':'20px', 'padding-top':'10px','padding-right':'20px'});
+</script>

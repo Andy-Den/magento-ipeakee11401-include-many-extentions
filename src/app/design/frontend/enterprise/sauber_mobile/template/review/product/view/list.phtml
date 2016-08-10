@@ -1,0 +1,123 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<div class="box-collateral box-reviews" id="customer-reviews">
+    <div class="cus-review" id="cus-review">
+    <?php if (count($_items)):?>
+   	<div class="review-toobar">
+		<?php echo $this->getChildHtml('toolbar') ?>
+	</div>
+    <dl class="box-content" id="product-reviews-list">
+    <?php $i=0; ?>
+    <?php foreach ($_items as $_review): $i++;?>
+        <dt <?php if($i>2):?>style="display:none"<?php endif;?>>
+            <!--<a href="<?php echo $this->getReviewUrl($_review->getId()) ?>">--><?php echo $this->htmlEscape($_review->getTitle()) ?><!--</a>--> <?php //echo $this->__('Review by %s', $this->htmlEscape($_review->getNickname())) ?>
+        </dt>
+        <dd <?php if($i>2):?>style="display:none"<?php endif;?>>
+            <table class="data-table review-summary-table">
+                <col />
+                <col />
+                <tbody>
+                    <?php foreach ($_review->getRatingVotes() as $_vote): ?>
+                    <tr>
+<!--                        <th class="label"><?php //echo $this->escapeHtml($_vote->getRatingCode()) ?></th>-->
+                        <td class="value">
+                            <div class="rating-box">
+                                <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <p><?php echo nl2br($this->htmlEscape($_review->getDetail())) ?></p>
+            <p class="date"><?php echo $this->__('%s (%s)',$this->htmlEscape($_review->getNickname()), $this->formatDate($_review->getCreatedAt()), 'long') ?></p>
+        </dd>
+    <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">decorateGeneric($$('#product-reviews-list dd'), ['last']);</script>
+    <div class="review-toobar">
+		<?php echo $this->getChildHtml('toolbar') ?>
+    </div>
+   
+ <?php endif;?>
+     </div>
+    <div class="form-reviews" style="display:none">
+        <?php echo $this->getChildHtml('review_form') ?>
+    </div>
+    <?php if($i>2):?>
+    <div class="buttons-set" id="show_me_review"><a id="button_show_more_review" onclick="show_more_review(this)" class="button-review" href="javascript:void(0)"><?php echo $this->__('Show More Reviews'); ?></a></div>
+    <?php endif; ?>
+    <div class="buttons-set" id="write_review"><a onclick="write_review(this)" class="button-review write" href="javascript:void(0)"><?php echo $this->__('Write a Review'); ?></a></div>
+</div>
+<script type="text/javascript">
+    function show_more_review(obj){
+        $$('#product-reviews-list dt,#product-reviews-list dd').each(function(el){
+            if(el.getStyle('display')=='none'){
+               el.setStyle({'display':'block'});
+            }
+        })
+        $(obj).hide();
+        var _height = $('customer-reviews').getHeight();
+            _height = _height+15;
+            $('enterprise-tabs').setStyle({'height':_height+'px'});
+     }
+    
+    function write_review(obj){
+        $$('.form-reviews')[0].show();
+        $('cus-review').hide();
+        $(obj).hide();
+        $('show_me_review').hide();
+        var _height = $$('.form-reviews')[0].getHeight();
+            _height = _height+70;
+            $('enterprise-tabs').setStyle({'height':_height+'px'});
+         Effect.ScrollTo('enterprise-tabs', { duration:'1'});
+     }
+     function activeTabReview(){
+         $$('#enterprise-tabs dt.overview-tab')[0].removeClassName('active');
+         $$('#enterprise-tabs dt.review-tab')[0].addClassName('active');
+         $$('#enterprise-tabs dd.review-tab')[0].setStyle({'display':'block'});
+         Effect.ScrollTo('enterprise-tabs', { duration:'1'});
+     }
+     <?php if($this->getRequest()->getParam('review')){  ?>
+        var collateralTabs = new Enterprise.Tabs('enterprise-tabs');
+         Event.observe(window, 'load', function() {
+                collateralTabs.select();
+                activeTabReview();
+                $$('#enterprise-tabs dd.overview-tab div.tab-content')[0].setStyle({'display':'none'});
+                show_more_review('button_show_more_review');
+                $$('#enterprise-tabs dt.overview-tab h2')[0].observe('click',function(){
+                    $$('#enterprise-tabs dd.overview-tab div.tab-content')[0].setStyle({'display':'block'});
+                });
+         });
+     <?php }else{ ?>
+        var collateralTabs = new Enterprise.Tabs('enterprise-tabs');
+        Event.observe(window, 'load', function() {
+                collateralTabs.select();
+        });
+     <?php } ?>
+</script>

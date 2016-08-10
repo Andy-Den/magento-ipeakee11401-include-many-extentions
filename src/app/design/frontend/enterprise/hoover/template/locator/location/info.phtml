@@ -1,0 +1,77 @@
+<?php
+/**
+ * Location extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @copyright   Copyright (c) 2013 Andrew Kett. (http://www.andrewkett.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<?php
+$loc = $this->getLocations()->getFirstItem();
+?>
+<div class="locator-view-title">
+
+    <div class="store-desc">
+        <!-- todo: this is wrong, do like next example -->
+        <p><address itemprop="address"><?php echo $loc->address;?></address></p>
+        <!--
+        <address itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <span itemprop="streetAddress">1901 Lemur Ave</span>
+            <span itemprop="addressLocality"><?php echo $loc->locality; ?></span>,
+            <span itemprop="addressRegion"><?php echo $loc->administrative_area; ?></span> <span itemprop="postalCode"><?php echo $loc->postal_code; ?></span>
+        </address>
+        -->
+        <?php if($loc->store_phone):?>
+            <p class="loc-data-phone">P: <span><?php echo $loc->store_phone;?></span></p>
+        <?php endif; ?>
+        <?php if($loc->store_fax):?>
+            <p class="loc-data-fax">F: <?php echo $loc->store_fax;?></p>
+        <?php endif; ?>
+       <!-- <div class="link-detail-locator">
+            <a href="<?php /*echo $loc->directions_link; */?>" target="_blank"  class="button mobile">GET DIRECTIONS</a>
+        </div>-->
+    </div>
+</div>
+<div class="store-view-attr tab-tradinghours">
+    <h2><?php echo $this->__("Trading Hours")?></h2>
+    <div class="info-content">
+        <p class="store_hours_weekday"><?php echo $this->__("Monday")?></p><p class="store_hours">&nbsp;<?php echo $loc->store_hours_monday;?></p>
+        <p class="store_hours_weekday"><?php echo $this->__("Tuesday")?></p><p class="store_hours">&nbsp;<?php echo $loc->store_hours_tuesday?></p>
+        <p class="store_hours_weekday"><?php echo $this->__("Wednesday")?></p><p class="store_hours">&nbsp;<?php echo $loc->store_hours_wednesday;?></p>
+        <p class="store_hours_weekday"><?php echo $this->__("Thursday")?></p><p class="store_hours">&nbsp;<?php echo $loc->store_hours_thursday;?></p>
+        <p class="store_hours_weekday"><?php echo $this->__("Friday")?></p><p class="store_hours">&nbsp;<?php echo $loc->store_hours_friday;?></p>
+        <p class="store_hours_weekday"><?php echo $this->__("Saturday")?></p><p class="store_hours">&nbsp;<?php echo $loc->store_hours_saturday;?></p>
+        <p class="store_hours_weekday"><?php echo $this->__("Sunday")?></p><p class="store_hours">&nbsp;<?php echo $loc->store_hours_sunday;?></p>
+    </div>
+</div>
+
+<?php if($loc->store_description) : ?>
+    <div class="store-view-attr store_description desktop">
+        <h2 ><?php echo $this->__("Description")?></h2>
+        <div class="info-content"><p id='storeDesc' class="active"><?php echo $loc->store_description;?></p>
+        </div>
+    </div>
+<?php endif; ?>
+
+<div class="download_free_voucher">
+    <?php
+        if ($loc->enable_voucher_block) {
+            echo $this->getLayout()->createBlock('cms/block')->setBlockId('find_a_store_lhs_2')->toHtml();
+        }
+    ?>
+</div>
+
+<!--<p class="back-link"><a onclick="window.history.back()"><small>< </small><?php /*echo $this->__('Back') */?></a></p>-->
+
+<div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+    <meta itemprop="latitude" content="<?php echo $loc->getLatitude(); ?>" />
+    <meta itemprop="longitude" content="<?php echo $loc->getLongitude(); ?>" />
+</div>

@@ -1,0 +1,17 @@
+.carousel { background-color: #333333; border: 2px solid #555555; clear: both; left: 20px; margin-top: 10px; position: relative;}
+.carousel .container { overflow: hidden; position: absolute;}
+.carousel .navButton { cursor: pointer; display: block; text-indent: -9999px; z-index: 10;}
+
+/* Horizontal Carousel */
+#Carousel2 { height:88px; width:260px; }
+#Carousel2 .container { left:26px; top:12px; width:210px; height:100px; }        
+#Carousel2 .items { top:0; left:2px; width:1000px;}
+#Carousel2 .item { height:70px;  width:70px; float:left; clear:right; }
+#Carousel2 .item .icon img { position:relative; left:0px; width:65px !important; height:65px; cursor:pointer;}
+#Carousel2 .navButton { position:absolute; bottom:0px; width:24px; height:87px; }
+#Carousel2 .navButton.previous {  left:0px; background-image:url('../../images/optionimages/button.left.png'); }
+#Carousel2 .navButton.next { right:0px; background-image:url('../../images/optionimages/button.right.png'); }
+
+/* Hide data items from selector */
+#Carousel2 .item .key { display:none;}
+#Carousel2 .item .picture { display:none;}

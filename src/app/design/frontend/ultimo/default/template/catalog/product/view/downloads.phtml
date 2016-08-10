@@ -1,0 +1,102 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php /* @var $this Mage_Core_Block_Template */?>
+<?php $_product = Mage::registry('product');
+$download = $this->getLayout()->getBlock('downloads.product');
+?>
+<?php $isAllCategories = $download->getIsAllCategories(); ?>
+<?php $items = $download->getItems() ?>
+<?php $_helper = Mage::helper('downloads') ?>
+<div class="content">
+    <div class="youtube-tab">
+        <?php
+        preg_match(
+            '/[\\?\\&]v=([^\\?\\&]+)/',
+            $_product->getData("youtube_url"),
+            $matches
+        );
+        // $matches[ 1 ] should contain the youtube id
+        ?>
+        <?php if ($_product->getData('youtube_url')): ?>
+            <iframe width="725" height="398" src="http://www.youtube.com/embed/<?php echo $matches[1]?>" frameborder="0" allowfullscreen></iframe>
+        <?php endif ?>
+    </div>
+    <div class="downloads">
+
+        <?php if ($items): ?>
+            <?php if ($_helper->checkCustomerAccess($items)): ?>
+                <div class="downloads-links-block">
+                    <?php if ($download->getTitle()) { ?><div class="head">
+                        <h4><?php echo $download->getTitle() ?></h4>
+                        </div><?php } ?>
+
+                    <table border="0" cellspacing="2">
+                        <tbody>
+                        <?php $categoryId = false; ?>
+                        <?php foreach ($items as $item): ?>
+                            <?php if ($_helper->checkCustomerGroupAccess($item) || !$_helper->isHideFiles()): ?>
+                                <?php if ($isAllCategories): ?>
+                                    <?php if ($item->getCategoryId() !== $categoryId): ?>
+                                        <?php $categoryId = $item->getCategoryId(); ?>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h5><?php echo $item->getTitle() ?></h5>
+                                            </td>
+                                        </tr>
+                                    <?php endif ?>
+                                <?php endif ?>
+                                <tr>
+                                    <td><?php echo $_helper->getIcon($item->getType()) ?></td>
+                                    <td>
+                                        <?php $fileName = $item->getName() ?>
+                                        <?php if ($_helper->checkCustomerGroupAccess($item)) { ?>
+                                            <?php if ($item->getEmbedCode() != ''): ?>
+                                                <a href="#" onclick="Downloads.open('<?php echo $_helper->getEmbedLink($item) ?>'); return false;" title="<?php echo $_helper->htmlEscape($fileName) ?>"><?php echo $fileName ?> <span>(<?php echo $item->getType(); ?>)</span></a>
+                                            <?php else: ?>
+                                                <a <?php if ($item->getUrl() != '' || $item->getType() == 'pdf'): ?>target="_blank"<?php endif; ?> href="<?php echo $item->getUrl() != '' ? $item->getUrl() : $_helper->getDownloadLink($item) ?>" title="<?php echo $_helper->htmlEscape($fileName) ?>"><?php echo $this->getType() == 'downloads/product_link' && Mage::app()->getRequest()->getParam('mode') != 'list' && strlen($fileName) > Mage::helper('downloads')->getNameSize() ? (substr($fileName, 0, Mage::helper('downloads')->getNameSize()) . '...') : $fileName ?> <span>(<?php echo $item->getType(); ?>)</span></a>
+                                            <?php endif; ?>
+                                        <?php } else { ?>
+                                            <?php echo $fileName ?>
+                                        <?php } ?>
+                                        <?php if (!$_helper->checkCustomerGroupAccess($item)) { ?>
+                                            <p><?php echo $_helper->getHowToDownloadMessage() ?></p>
+                                        <?php } ?>
+                                        <?php if ($_helper->isDisplayDownloads() && !$download->getIsCategory() && $item->getEmbedCode() == ''): ?>
+                                            <?php echo $_helper->__('Downloads') ?>: <?php echo $item->getDownloads() ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</div>
+

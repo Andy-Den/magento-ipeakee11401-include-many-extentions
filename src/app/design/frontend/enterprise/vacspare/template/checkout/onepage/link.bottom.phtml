@@ -1,0 +1,3 @@
+<?php if ($this->isPossibleOnepageCheckout()):?>
+           <a href="javascript:void(0)" class="checkout-link-large" onclick="window.location='<?php echo $this->getCheckoutUrl() ?>';"><?php echo $this->__('CHECKOUT') ?></a>
+ <?php endif?>

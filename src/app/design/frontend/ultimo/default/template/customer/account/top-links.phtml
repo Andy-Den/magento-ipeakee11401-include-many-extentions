@@ -1,0 +1,11 @@
+<div id="mobile-account-top-links" class="mobile" style="display: none">
+    <ul class="links">
+    <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()){?>
+        <li><a title="Login" href="<?php echo Mage::getBaseUrl() . 'customer/account/login/?___SID=S';?>">Login</a></li>
+        <li><a title="register" href="<?php echo Mage::getBaseUrl() . 'customer/account/create/?___SID=S';?>">Register</a></li>
+    <?php }else{?>
+            <li><a title="Account" href="<?php echo Mage::getBaseUrl() . 'customer/account';?>">Account</a></li>
+            <li><a title="Log Out" href="<?php echo Mage::getBaseUrl() . 'customer/account/logout';?>">Log Out</a></li>
+    <?php }?>
+    </ul>
+</div>

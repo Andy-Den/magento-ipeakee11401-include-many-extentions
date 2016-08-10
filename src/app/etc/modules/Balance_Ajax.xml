@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Balance_Ajax>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Celebros_Salesperson/>
+            </depends>
+        </Balance_Ajax>
+    </modules>
+</config>

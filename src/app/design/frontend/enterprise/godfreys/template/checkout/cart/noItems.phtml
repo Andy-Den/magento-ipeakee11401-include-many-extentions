@@ -1,0 +1,50 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<div class="wide_page_wrap" style="margin-bottom:0;">
+    <div class="wide_page_content" style="background-image: url('<?php echo($this->getSkinUrl()); ?>images/404bg.jpg'); background-position: bottom right; background-repeat: no-repeat;">
+        <h2 class="page_title page_title_gray"><?php echo $this->__('Your Shopping Cart is Empty') ?></h2>
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+        <div class="page_inner" style="height: 118px;">
+            <p><strong><?php echo $this->__("You currently can't checkout as you have no items in your shopping cart.") ?></strong></p>
+            <p>Please return to our <a href="/">home page</a>, feel free to browse our <a href="/">online store</a>.</p>
+            <p><a href="<?php echo $this->getContinueShoppingUrl();?>"><img src="<?php echo($this->getSkinUrl()); ?>images/continueshopping.png"/></a></p>
+        </div>
+    </div>
+</div>
+<div class="wide_page_foot" style="margin-bottom: 20px;"></div>
+
+<div id="contents">
+    <?php
+    $filter = new Mage_Widget_Model_Template_Filter();
+    $_widget = $filter->filter('{{widget type="tal_tabs/tabs" template="tal/tabs/page/home-product-tabs.phtml" block_ids="featured-products,latest-products" }}');
+    echo $_widget;
+    ?>
+</div>
+<div class="right-col">
+<img src="<?php echo($this->getSkinUrl()); ?>images/sidebar_banner1.png" alt="" />
+<img src="<?php echo($this->getSkinUrl()); ?>images/sidebar_banner2.png" alt="" />
+<?php echo $this->getLayout()->createBlock('accessory/search_form_mini')->setTemplate('accessory/search/form/mini.phtml')->toHtml(); ?></div>

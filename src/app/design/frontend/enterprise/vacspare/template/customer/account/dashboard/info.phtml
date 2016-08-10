@@ -1,0 +1,30 @@
+<div class="col2_container col2_container_info">
+<div class="col2">
+	<dl>
+		<dt><?php echo $this->__('Contact Information') ?> </dt>
+	    <dd>
+			<?php echo $this->htmlEscape($this->getCustomer()->getName()) ?><br />
+	        <?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?><br />
+	   	</dd>
+	</dl>
+	<a class="edit-link" href="<?php echo $this->getUrl('customer/account/edit') ?>"><?php echo $this->__('Edit') ?></a>
+	<a class="change-pass-link" href="<?php echo $this->getChangePasswordUrl() ?>" ><?php echo $this->__('Change Password') ?></a>
+</div>
+<?php if( $this->isNewsletterEnabled() ): ?>
+<div class="col2 right">
+	<dl>
+		<dt><?php echo $this->__('SUBSCRIPTIONS')?></dt>
+        <dd>
+        	<?php if( $this->getIsSubscribed() ): ?>
+            	<?php echo $this->__("You are currently subscribed to 'General Subscription'.") ?>
+				<a class="join-vip" href="<?php echo $this->getUrl('newsletter/manage') ?>"><?php echo $this->__('Joinvip club') ?></a>
+            <?php else: ?>
+				<!-- GVAC-329 -->
+				You are not currently subscribed to the Vacspare newsletter. You can subscribe here (<a class="join-vip" href="<?php echo $this->getUrl('newsletter/manage') ?>"><?php echo $this->__('Joinvip club') ?></a>).            	
+            <?php endif; ?>
+      	</dd>
+	</dl>
+	
+</div>
+<?php endif; ?>
+</div>

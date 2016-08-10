@@ -1,0 +1,19 @@
+<?php
+/**
+ * Celebros Qwiser - Magento Extension
+ *
+ * @category    Celebros
+ * @package     Celebros_Salesperson
+ * @author		Celebros - Pavel Feldman (email: MagentoSupport@celebros.com)
+ *
+ */
+?>
+
+<?php $_filter = $this->getQuestion()?>
+<?php if((int)$_filter->Answers->Count > 0):?>
+	<?php foreach ($_filter->Answers->Items as $answer):?>
+		<?php $checked = $this->isAnsweredAnswer($answer) ? 'checked="checked"' : ''?>
+		<input type="radio" name="filter_<?php echo $_filter->Id?>" value="<?php echo $answer->Id ?>" <?php echo $checked ?>> <?php echo $answer->Text ?>
+	<?php endforeach;?>
+	<input type="radio" name="filter_<?php echo $_filter->Id?>" value=""> All
+<?php endif;?>

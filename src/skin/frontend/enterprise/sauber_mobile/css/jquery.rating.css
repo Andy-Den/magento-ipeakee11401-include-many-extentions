@@ -1,0 +1,37 @@
+div.rating-cancel, div.star-rating {
+    background: none repeat scroll 0 0 transparent;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    overflow: hidden;
+    text-indent: -999em;
+    width: 16px;
+}
+div.rating-cancel {
+    display: none !important;
+}
+div.star-rating, div.star-rating a {
+    background: url("../images/i_star_blank.png") no-repeat scroll 0 0 transparent;
+}
+div.rating-cancel a, div.star-rating a {
+    background-position: 0 0;
+    border: 0 none;
+    display: block;
+    height: 100%;
+    width: 16px;
+}
+div.star-rating-on a {
+    background: url("../images/i_star.png") no-repeat scroll 0 0 transparent;
+}
+div.star-rating-hover a {
+    background: url("../images/i_star.png") no-repeat scroll 0 0 transparent;
+}
+div.star-rating-readonly a {
+    cursor: default !important;
+}
+div.star-rating {
+    background: none repeat scroll 0 0 transparent !important;
+    float: left;
+    overflow: hidden !important;
+    width: 16px;
+}

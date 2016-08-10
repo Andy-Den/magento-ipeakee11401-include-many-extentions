@@ -1,0 +1,41 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Warehouse
+ * @copyright   Copyright (c) 2011 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+?>
+<?php $helper = $this->helper('warehouse'); ?>
+<?php if ($this->isEnabled()) : ?>
+<div class="block block-list block-customer-warehouse">
+    <div class="block-title">
+        <strong>
+            <span><?php echo $helper->__('Your Warehouse') ?></span>
+        </strong>
+    </div>
+    <div class="block-content">
+        <ol id="warehouses">
+            <?php foreach ($this->getWarehouses() as $warehouse) : ?>
+            <li id="warehouse-<?php echo $warehouse->getCode() ?>" class="warehouse">
+                <a class="<?php if ($warehouse->getId() == $this->getWarehouseId()) : ?> active-warehouse<?php endif; ?>" href="<?php echo $this->getUrl('checkout/cart/setWarehouse') ?>w/<?php echo $warehouse->getCode() ?>">
+                    <?php echo $warehouse->getTitle() ?>
+                </a>
+            </li>
+            <?php endforeach; ?>    
+        </ol>
+    </div>
+</div>
+<?php endif; ?>

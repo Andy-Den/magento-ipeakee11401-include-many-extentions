@@ -1,0 +1,66 @@
+<?php
+/**
+ * Accessory search mini form
+ *
+ * @see Balance_Accessory_Block_Search_Form_Mini
+ */
+?>
+
+<div class="accessory-finder-mini">
+	<div class="accessory-search accessory-search-mini sidebar-box">
+		<?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+		<form id="accessory-search-form" action="<?php echo $this->getMiniSearchPostUrl(); ?>" method="get">
+			<div class="fieldset"> 
+				<ul class="form-list">
+					<?php foreach ($this->getSearchAttributes() as $_attribute): ?>
+					<?php $_code = $_attribute->getAttributeCode(); ?>
+					<li>
+						<label for="<?php echo $_code; ?>"><?php echo $this->getAttributeLabel($_attribute); ?></label>
+						<?php switch ($this->getAttributeInputType($_attribute)):
+                            case 'select': ?>
+						<div class="input-box" id="select-wrapper-<?php echo $_code; ?>"> <?php echo $this->getAttributeSelectElement($_attribute); ?> </div>
+						<?php break; ?>
+						<?php endswitch; ?>
+					</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+			<div id="acc-finder-button">
+				<button type="submit" title="Search" class="button"><img src="<?php echo($this->getSkinUrl()); ?>images/accessories-finder-search.png" alt="Search"></button>
+			</div>
+		</form>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    //var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script> 
+<script type="text/javascript">
+    //<![CDATA[
+    
+    var form = $('accessory-search-form');
+    var brandDropDown = form['accessory_brands'];
+    Event.observe(brandDropDown, 'change', function()
+    {
+        //Element.show('accessory-please-wait');
+        $('select-wrapper-accessory_models').innerHTML = "<img src=\"<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>\" alt=\"\" class=\"v-middle\" />";
+        
+        var actionurl = '<?php echo $this->getUrl('accessory/filter/byBrand') ?>';
+        var form = $('accessory-search-form');
+        var selectedBrand = form['accessory_brands'];
+        new Ajax.Request(actionurl, {
+            method: 'post',
+            parameters: "accessory_brands=" + selectedBrand.getValue(),
+            onComplete: function(transport) {
+                //Element.hide('accessory-please-wait');
+                $('select-wrapper-accessory_models').innerHTML = "";
+                $('select-wrapper-accessory_models').innerHTML = transport.responseText;
+ 
+            }
+        });
+    });
+    
+    //]]>
+</script>

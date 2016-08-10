@@ -1,0 +1,47 @@
+<?php
+$quote = Mage::getSingleton('checkout/session')->getQuote();
+$_items = $quote->getAllItems();
+if(count($_items) <= 0) {
+    return ;
+}
+?>
+<form action="<?php echo $this->getSubmitUrl() ?>" id="cart_nostepcheckout_form" method="post">
+    <?php echo $this->getBlockHtml('formkey') ?>
+     <div class="no-display">
+
+     </div>    
+    <button id="btn-nostepcheckout-form-cart" type="button" title="Place Order" class="button btn-cart" onclick="cartNoStepCheckoutForm.submit(this);" style="display:none;"><span><span>Place Order</span></span></button>
+</form>
+
+<script type="text/javascript">    
+    var cartNoStepCheckoutForm = new VarienForm('cart_nostepcheckout_form');
+    cartNoStepCheckoutForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+               form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(cartNoStepCheckoutForm);
+</script>    
+<div id="nostepcheckout-dialog">
+    <div class="nostepcheckout-loader"></div>
+    <div class="nostepcheckout-error"></div>
+    <div class="nostepcheckout-content"></div>
+    
+</div>

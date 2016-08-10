@@ -1,0 +1,94 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ *
+ * @category    Innoexts
+ * @package     Innoexts_CustomerLocator
+ * @copyright   Copyright (c) 2011 Innoexts (http://www.innoexts.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if ($this->isAllowLocationModification()) : ?>
+<?php $helper = $this->getTextHelper() ?>
+<div class="block block-customer-address">
+    <div class="block-title">
+        <strong><span><?php echo $helper->__('Your Location') ?></span></strong>
+    </div>
+    <form action="<?php echo $this->getUrl('customer/account/applyAddress') ?>" method="post" id="customer-address-form">
+        <div class="block-content">
+        	<ul class="form-list">
+                <li>
+                    <label for="country" class="required"><em>*</em><?php echo $helper->__('Country') ?></label>
+                    <div class="input-box">
+                        <?php echo Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect($this->getCountryId()) ?>
+                    </div>
+                </li>
+                <li>
+                    <label for="region_id"<?php if ($this->isRegionRequired()) : ?> class="required"<?php endif; ?>>
+                        <?php if ($this->isRegionRequired()) : ?><em>*</em><?php endif; ?><?php echo $helper->__('State/Province') ?>
+                    </label>
+                    <div class="input-box">
+                        <select id="region_id" name="region_id" title="<?php echo $helper->__('State/Province') ?>" style="display:none;"<?php if ($this->isRegionRequired()) : ?> class="validate-select"<?php endif; ?>>
+                            <option value=""><?php echo $helper->__('Please select region') ?></option>
+                        </select>
+                        <script type="text/javascript">
+                        //<![CDATA[
+                            $('region_id').setAttribute('defaultValue', "<?php echo $this->getRegionId() ?>");
+                        //]]>
+                        </script>
+                        <input type="text" id="region" name="region" value="<?php echo $this->htmlEscape($this->getRegion()) ?>"  title="<?php echo $helper->__('State/Province') ?>" class="input-text<?php if ($this->isRegionRequired()) : ?> required-entry<?php endif; ?>" style="display:none;" />
+                   </div>
+                </li>
+                <li>
+                    <label for="city"<?php if ($this->isCityRequired()) : ?> class="required"<?php endif; ?>>
+                        <?php if ($this->isCityRequired()) : ?><em>*</em><?php endif; ?><?php echo $helper->__('City') ?>
+                    </label>
+                    <div class="input-box">
+                        <input class="input-text<?php if ($this->isCityRequired()) : ?> required-entry<?php endif; ?>" id="city" type="text" name="city" value="<?php echo $this->htmlEscape($this->getCity()) ?>" />
+                    </div>
+                </li>
+                <li>
+                    <label for="postcode"<?php if ($this->isPostcodeRequired()) : ?> class="required"<?php endif; ?>>
+                        <?php if ($this->isPostcodeRequired()) : ?><em>*</em><?php endif; ?><?php echo $helper->__('Zip/Postal Code') ?>
+                    </label>
+                    <div class="input-box">
+                        <input class="input-text validate-postcode<?php if ($this->isPostcodeRequired()): ?> required-entry<?php endif; ?>" type="text" id="postcode" name="postcode" value="<?php echo $this->htmlEscape($this->getPostcode()) ?>" />
+                    </div>
+                </li>
+            </ul>
+            <div class="actions">
+                <button type="submit" title="<?php echo $helper->__('Apply') ?>" class="button" name="apply" value="<?php echo $helper->__('Apply') ?>"><span><span><?php echo $helper->__('Apply') ?></span></span></button>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+    //]]>
+    </script>
+    <script type="text/javascript">
+    //<![CDATA[
+        var customerAddressForm = new VarienForm('customer-address-form');
+        var countriesWithOptionalZip = <?php echo $this->helper('directory')->getCountriesWithOptionalZip(true) ?>;
+        customerAddressForm.submit = function () {
+            var country = $F('country');
+            var optionalZip = false;
+            for (i = 0; i < countriesWithOptionalZip.length; i++) { if (countriesWithOptionalZip[i] == country) { optionalZip = true; } }
+            if (optionalZip) { $('postcode').removeClassName('required-entry'); }
+            else { $('postcode').addClassName('required-entry'); }
+            return VarienForm.prototype.submit.bind(customerAddressForm)();
+        }
+    //]]>
+    </script>
+</div>
+<?php endif; ?>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Vacspare_Tradegroup>
+            <version>0.1.0</version>
+        </Vacspare_Tradegroup>
+    </modules>
+    <frontend>
+        <routers>
+            <tradegroup>
+                <use>standard</use>
+                <args>
+                    <module>Vacspare_Tradegroup</module>
+                    <frontName>tradegroup</frontName>
+                </args>
+            </tradegroup>
+        </routers>
+        <layout>
+            <updates>
+                <tradegroup>
+                    <file>tradegroup.xml</file>
+                </tradegroup>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<tradegroup before="Mage_Adminhtml">Vacspare_Tradegroup_Adminhtml</tradegroup>
+					</modules>
+				</args>
+			</adminhtml>
+        </routers>
+    </admin>
+
+    <global>
+        <models>
+            <tradegroup>
+                <class>Vacspare_Tradegroup_Model</class>
+                <resourceModel>tradegroup_mysql4</resourceModel>
+            </tradegroup>
+            <tradegroup_mysql4>
+                <class>Vacspare_Tradegroup_Model_Mysql4</class>
+                <entities>
+                    <tradegroup>
+                        <table>tradegroup</table>
+                    </tradegroup>
+                </entities>
+            </tradegroup_mysql4>
+        </models>
+        <blocks>
+            <tradegroup>
+                <class>Vacspare_Tradegroup_Block</class>
+            </tradegroup>
+            
+           <checkout>
+               <rewrite>
+                   <onepage>Vacspare_Tradegroup_Block_Checkout_Onepage</onepage>
+               </rewrite>
+           </checkout>
+    
+       
+        </blocks>
+        <helpers>
+            <tradegroup>
+                <class>Vacspare_Tradegroup_Helper</class>
+            </tradegroup>
+        </helpers>
+    </global>
+</config>

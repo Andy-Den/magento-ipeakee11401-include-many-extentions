@@ -1,0 +1,14 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php // echo $_product->getData('youtube_url') ?>	
+<?php
+    preg_match(
+        '/[\\?\\&]v=([^\\?\\&]+)/',
+        $_product->getData("youtube_url"),
+        $matches
+    );
+    // $matches[ 1 ] should contain the youtube id
+?>
+<?php if ($_product->getData('youtube_url')): ?>	
+<iframe width="725" height="398" src="http://www.youtube.com/embed/<?php echo $matches[1]?>" frameborder="0" allowfullscreen></iframe>
+<?php endif ?>

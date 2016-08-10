@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <accessory_filter_bybrand translate="label">
+        <label>Filtered Model Dropdown</label>
+            <remove name="root" />
+            <block type="accessory/search_form_model_dropdown" output="toHtml" name="accessory.search.model.dropdown" template="accessory/search/form/model/dropdown.phtml" />
+    </accessory_filter_bybrand>
+    <!--<accessory_search translate="label">-->
+        <!--<label>Accessory Search (Anchor)</label>-->
+        <!--<reference name="content">-->
+            <!--<block type="accessory/search_form" name="accessory.search" before="product_list_toolbar" template="accessory/search/form.phtml"/>-->
+        <!--</reference>-->
+        <!--<remove name="accessory.mini.search"/>-->
+    <!--</accessory_search>-->
+</layout>

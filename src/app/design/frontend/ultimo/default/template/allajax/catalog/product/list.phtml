@@ -1,0 +1,484 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+
+<?php
+$_productCollection=$this->getLoadedProductCollection();
+$_collectionSize = $_productCollection->count();
+?>
+<?php
+echo $this->getLayout()->createBlock('core/messages')->toHtml();
+?>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+
+<?php if ($_collectionSize && $tmpHtml = $this->getChildHtml('block_category_above_collection')): ?>
+    <div class="block_category_above_collection std"><?php echo $tmpHtml; ?></div>
+<?php endif; ?>
+
+<?php if(!$_collectionSize): ?>
+    <?php if ($tmpHtml = $this->getChildHtml('block_category_above_empty_collection')): ?>
+        <div class="block_category_above_empty_collection std"><?php echo $tmpHtml; ?></div>
+    <?php else: ?>
+        <div class="accessory">
+            <?php
+            if(in_array('accessory_search', $this->getLayout()->getUpdate()->getHandles()))
+                echo $this->getLayout()->createBlock("accessory/search_form")->setBlockId("accessory.search2")->setTemplate("accessory/search/form.phtml")->toHtml();
+            ?>
+        </div>
+        <p class="note-msg empty-catalog"><?php echo $this->__('There are no products matching the selection.') ?></p>
+    <?php endif; ?>
+<?php else: ?>
+
+    <?php
+    $_helper = $this->helper('catalog/output');
+    $theme = $this->helper('ultimo');
+    $helpLabels = $this->helper('ultimo/labels');
+    $helpTemplate = $this->helper('ultimo/template');
+    $helpImg = $this->helper('infortis/image');
+
+    //Default image size
+    $imgWidth = 295;
+    $imgHeight = 295;
+
+    //Aspect ratio settings
+    if ($theme->getCfg('category/aspect_ratio'))
+        $imgHeight = 0; //Height will be computed automatically (based on width) to keep the aspect ratio
+
+    //Hide toolbar
+    $hideToolbar = false;
+    if ($this->getHideToolbar())
+    {
+        $hideToolbar = true;
+    }
+    ?>
+
+    <div class="category-products">
+    <?php
+    if(in_array('accessory_search', $this->getLayout()->getUpdate()->getHandles()))
+        echo $this->getLayout()->createBlock("accessory/search_form")->setBlockId("accessory.search2")->setTemplate("accessory/search/form.phtml")->toHtml();
+    ?>
+    <div class="toolbar-top">
+        <?php if (!$hideToolbar): ?>
+            <?php echo $this->getToolbarHtml() ?>
+        <?php endif; ?>
+    </div>
+
+
+    <?php if($this->getMode()!='grid'): //List mode ?>
+
+        <?php
+        //Get list configuration array
+        $lc = $theme->getCfgGroup('category_list');
+
+        //List classes
+        $listClasses = '';
+        if ($lc['hover_effect'])
+            $listClasses = ' hover-effect';
+
+
+        ?>
+
+        <?php $_iterator = 0; ?>
+        <ul class="products-list<?php if($listClasses) echo $listClasses; ?>" id="products-list">
+
+            <?php foreach ($_productCollection as $_product): ?>
+
+
+                <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?> allajax-productdatafetch-<?php echo $_product->getId(); ?>">
+
+                    <?php //Product Image ?>
+                    <div class="product-image-wrapper grid12-4 mobile-grid-half">
+
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image" style="max-width:<?php echo $imgWidth; ?>px;">
+                            <img class="allajax-imagesfetch-<?php echo $_product->getId(); ?>" src="<?php echo $helpImg->getImg($_product, $imgWidth, $imgHeight, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+
+                            <?php if ($theme->getCfg('category/alt_image')): ?>
+                                <?php echo $theme->getAltImgHtml($_product, $imgWidth, $imgHeight); ?>
+                            <?php endif; ?>
+
+                            <?php echo $helpLabels->getLabels($_product); //Product labels ?>
+                            <?php if($_product->getData('shoutout')): ?>
+                                <?php $_dinkus = strtolower($_product->getAttributeText('shoutout'));
+                                $_dinkus = str_replace(' ', '-', $_dinkus); ?>
+                                <div class="shoutout"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>frontend/ultimo/default/images/dinkus/<?php echo $_dinkus ?>.png" alt="<?php echo $_product->getAttributeText('shoutout') ?>" /></div>
+                            <?php endif; ?>
+                        </a>
+
+                    </div> <!-- end: product-image-wrapper -->
+
+                    <?php //Product description ?>
+                    <div class="product-shop grid12-5 mobile-grid-half">
+                        <div class="product-shop-inner">
+                            <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                            <h2 class="product-name allajax-namefetch-<?php echo $_product->getId(); ?>"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
+
+                            <div class="desc std">
+                                <?php  echo Mage::helper('core/string')->truncate($this->stripTags($_product->getShortDescription()), 150); ?>
+                                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                            </div>
+
+                            <dl class="product_features">
+                                <?php if($_product->getData('warranty') == '80'): ?>
+                                    <dd class="warranty-1yr"><img src="/js/spacer.gif" width="60" height="60" title="1 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('warranty') == '81'): ?>
+                                    <dd class="warranty-2yr"><img src="/js/spacer.gif" width="60" height="60" title="2 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('warranty') == '82'): ?>
+                                    <dd class="warranty-3yr"><img src="/js/spacer.gif" width="60" height="60" title="3 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('warranty') == '83'): ?>
+                                    <dd class="warranty-4yr"><img src="/js/spacer.gif" width="60" height="60" title="4 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('warranty') == '84'): ?>
+                                    <dd class="warranty-5yr"><img src="/js/spacer.gif" width="60" height="60" title="5 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('anti_allergy') == '92'): ?>
+                                    <dd class="allergies"><img src="/js/spacer.gif" width="60" height="60" title="Anti-Allergy" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('asthma') == '94'): ?>
+                                    <dd class="asthma"><img src="/js/spacer.gif" width="60" height="60" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('pet_hair') == '111'): ?>
+                                    <dd class="pets"><img src="/js/spacer.gif" width="60" height="60" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('level_of_clean') == '32'): ?>
+                                    <dd class="single-action"><img src="/js/spacer.gif" width="60" height="60" title="Single Action" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('level_of_clean') == '33'): ?>
+                                    <dd class="double-action"><img src="/js/spacer.gif" width="60" height="60" title="Double Action" /></dd>
+                                <?php endif ?>
+                                <?php if($_product->getData('level_of_clean') == '34'): ?>
+                                    <dd class="triple-action"><img src="/js/spacer.gif" width="60" height="60" title="Triple Action" /></dd>
+                                <?php endif ?>
+                            </dl>
+
+
+                        </div>
+                    </div>
+
+                    <div class="right-column grid12-3 mobile-grid-half">
+                        <?php echo $this->getReviewsSummaryHtml($_product, 'short'); ?>
+
+                        <?php if (!$_product->isSaleable() && $_product->getPrice() == 0): ?>
+                            <p class="avaibility visit-store-info">
+                                <span><?php echo $this->__('Please visit stores for pricing information') ?></span></p>
+                        <?php else: ?>
+                            <?php echo $this->getPriceHtml($_product, true) ?>
+
+                            <?php if ($_product->isSaleable()): ?>
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                        class="button btn-cart"
+                                        onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>','<?php echo $_product->getId(); ?>','<?php if ($_product->getTypeId() == 'simple' && empty($customcheck)) { ?>simple<?php } else { ?>config<?php } ?>')">
+                                    <span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                            <?php else: ?>
+                                <?php if ($_product->getData('online_only') == 1) { ?>
+                                    <p class="availability out-of-stock">
+                                        <span><?php echo $this->__('Out of stock') ?></span></p>
+                                <?php } else { ?>
+                                    <a href="/locator"
+                                       class="instore-only"><?php echo $this->__('Instore Only') ?></a>
+                                <?php } ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <?php
+                        if ($lc['addtolinks_simple'])
+                            echo $helpTemplate->getCategoryAddtoLinks($_product, $this->getAddToCompareUrl($_product), 'addto-gaps-right');
+                        else
+                            echo $helpTemplate->getCategoryAddtoLinksComplex($_product, $this->getAddToCompareUrl($_product), 'addto-gaps-right');
+                        ?>
+                    </div>
+
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+
+    <?php else: //Grid mode ?>
+
+        <?php
+        //Get grid configuration array
+        $gc = $theme->getCfgGroup('category_grid');
+
+        //Get number of columns (from parameter or from theme config)
+        $columnCount = 3;
+        if ($this->getGridColumnCount())
+        {
+            $columnCount = $this->getGridColumnCount();
+        }
+        else
+        {
+            $columnCount = $gc['column_count'];
+        }
+
+        //Grid classes
+        $gridClasses = '';
+        if ($gc['display_name'] == 2 && $gc['display_name_single_line'] == true)
+            $gridClasses .= ' single-line-name';
+        if ($gc['centered'])
+            $gridClasses .= ' centered';
+        if ($gc['hover_effect'])
+            $gridClasses .= ' hover-effect';
+        if ($gc['equal_height'])
+            $gridClasses .= ' equal-height';
+
+        //Size of grid elements
+        if ($gc['elements_size'])
+        {
+            $gridClasses .= ' size-' . $gc['elements_size'];
+        }
+        else
+        {
+            //Calculate size based on number of columns
+            if ($columnCount >= 6)
+            {
+                $gridClasses .= ' size-xs';
+            }
+            elseif ($columnCount >= 4)
+            {
+                $gridClasses .= ' size-s';
+            }
+        }
+
+        //Container "actions" at the bottom of the grid item stores button and add-to links
+        //If at least one of those elements was set as "Display on hover" but no element was set as "Display":
+        //apply appropriate classes to the container.
+        $actionsClasses = '';
+        if ($gc['display_addtocart'] == 1 || ($gc['display_addtolinks'] == 1 && !$gc['addtolinks_simple']))
+        {
+            $actionsClasses = ' display-onhover';
+        }
+        if ($gc['display_addtocart'] == 2 || ($gc['display_addtolinks'] == 2 && !$gc['addtolinks_simple']))
+        {
+            $actionsClasses = '';
+        }
+        ?>
+
+        <ul class="products-grid category-products-grid itemgrid itemgrid-adaptive itemgrid-<?php echo $columnCount; ?>col<?php if($gridClasses) echo $gridClasses; ?>">
+            <?php foreach ($_productCollection as $_product): ?>
+
+                <li class="item allajax-productdatafetch-<?php echo $_product->getId(); ?>">
+
+
+                    <div class="product-image-wrapper" style="max-width:<?php echo $imgWidth; ?>px;">
+                        <?php //Add-to links
+                        if ($gc['display_addtolinks'] != 0 && $gc['addtolinks_simple'])
+                        {
+                            if ($gc['display_addtolinks'] == 1) //Display on hover
+                            echo $helpTemplate->getCategoryAddtoLinksComplex_2($_product, $this->getAddToCompareUrl($_product), 'addto-links-icons addto-onimage display-onhover');
+                            else //Always display
+                            echo $helpTemplate->getCategoryAddtoLinksComplex_2($_product, $this->getAddToCompareUrl($_product), 'addto-links-icons addto-onimage');
+                        }
+                        ?>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" class="product-image">
+                            <img class="allajax-imagesfetch-<?php echo $_product->getId(); ?>" src="<?php echo $helpImg->getImg($_product, $imgWidth, $imgHeight, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" />
+
+                            <?php if ($theme->getCfg('category/alt_image')): ?>
+                                <?php echo $theme->getAltImgHtml($_product, $imgWidth, $imgHeight); ?>
+                            <?php endif; ?>
+
+                            <?php echo $helpLabels->getLabels($_product); //Product labels ?>
+                            <?php if($_product->getData('shoutout')): ?>
+                                <?php $_dinkus = strtolower($_product->getAttributeText('shoutout'));
+                                $_dinkus = str_replace(' ', '-', $_dinkus); ?>
+                                <div class="shoutout"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>frontend/ultimo/default/images/dinkus/<?php echo $_dinkus ?>.png" alt="<?php echo $_product->getAttributeText('shoutout') ?>" /></div>
+                            <?php endif; ?>
+                        </a>
+
+
+
+
+                    </div> <!-- end: product-image-wrapper -->
+
+                    <h2 class="product-name allajax-namefetch-<?php echo $_product->getId(); ?>"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+
+                    <?php
+                    $showrating = $gc['display_rating'];
+                    if ($showrating == 0){
+                        $showrating = 'no-display';
+                    }
+                    if ($showrating == 1){
+                        $showrating = 'display-onhover';
+                    }
+                    if ($showrating == 2){
+                        $showrating = 'yes-display';
+                    }
+                    ?>
+
+                    <div class="<?php echo $showrating;?>">
+                        <?php echo $this->getReviewsSummaryHtml($_product, 'short'); ?>
+                    </div>
+
+
+                    <?php if ($gc['display_price'] == 1) echo '<div class="display-onhover">'; ?>
+                    <?php if (!$_product->isSaleable() && $_product->getPrice() == 0): ?>
+                        <div class="no-price">
+                            <?php echo $this->getPriceHtml($_product, true); ?>
+                        </div>
+                        <?php else: ?>
+                        <?php echo $this->getPriceHtml($_product, true); ?>
+                    <?php endif; ?>
+                    <?php if ($gc['display_price'] == 1) echo '</div>'; ?>
+
+                    <?php
+                    //If at least one element was set as "Display on hover" but no element was set as "Display":
+                    //aggregate classes from those elements and apply them to the "actions" container.
+                    $actionsClasses = '';
+                    if ($gc['display_addtocart'] == 1 || ($gc['display_addtolinks'] == 1 && !$gc['addtolinks_simple']))
+                    {
+                        $actionsClasses = ' display-onhover';
+                    }
+                    if ($gc['display_addtocart'] == 2 || ($gc['display_addtolinks'] == 2 && !$gc['addtolinks_simple']))
+                    {
+                        $actionsClasses = '';
+                    }
+                    ?>
+                    <?php if (!$_product->isSaleable() && $_product->getPrice() == 0): ?>
+                        <p class="avaibility visit-store-info">
+                            <span><?php echo $this->__('Please visit stores for pricing information') ?></span></p>
+                    <?php else: ?>
+
+                        <div class="actions clearer<?php echo $actionsClasses; ?>">
+                            <?php //Cart button ?>
+                            <?php if ($gc['display_addtocart'] != 0): ?>
+
+                                <?php if ($_product->isSaleable()): ?>
+                                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                            class="button btn-cart"
+                                            onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>','<?php echo $_product->getId(); ?>','<?php if ($_product->getTypeId() == 'simple' && empty($customcheck)) { ?>simple<?php } else { ?>config<?php } ?>')">
+                                        <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                    </button>
+                                <?php else: ?>
+                                    <?php if ($_product->getData('online_only') == 1) { ?>
+                                        <p class="availability out-of-stock">
+                                            <span><?php echo $this->__('Out of stock') ?></span></p>
+                                    <?php } else { ?>
+                                        <a href="/locator"
+                                           class="instore-only"><?php echo $this->__('Instore Only') ?></a>
+                                    <?php } ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <?php //Add-to links
+                            if ($gc['display_addtolinks'] != 0 && !$gc['addtolinks_simple']) {
+                                echo $helpTemplate->getCategoryAddtoLinks($_product, $this->getAddToCompareUrl($_product), 'addto-gaps-right addto-texticons');
+                            }
+                            ?>
+                        </div>
+                    <?php endif; ?>
+                    <!-- end: actions -->
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; //end: if grid mode ?>
+
+    <?php if (!$hideToolbar): ?>
+        <div class="toolbar-bottom">
+            <?php echo $this->getToolbarHtml() ?>
+        </div>
+    <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($_collectionSize && $tmpHtml = $this->getChildHtml('block_category_below_collection')): ?>
+    <div class="block_category_below_collection std"><?php echo $tmpHtml; ?></div>
+<?php endif; ?>
+
+<a style="display: none;" id="various1" href="#allajax-content" >Inline</a>
+
+
+    <div style="display: none;">
+        <div id="inline1" style="width:300px;height:100px;overflow:auto;">
+
+            <div id="allajax-content" class="allajax-content bbb" >
+                <div class="allajax-preload" id="allajax-prestep">
+                    <a id="ajax-loading-lightbx-pro-image" href="#" title=" " class="product-image" id="">
+                        <img src="#" width="128" height="128" alt=" ">
+                    </a>
+                    <div class="product-info">
+                        <h2 class="product-name" id="ajax-loading-lightbx-pro-name">
+                            <a href="#" title=" "> </a>
+                        </h2>
+                        <div class="ratings" id="ajax-loading-lightbx-pro-rating">
+
+                        </div>
+                        <div class="product-type-data"><div class="price-box" id="ajax-loading-lightbx-pro-price-box">
+
+                            </div></div>
+                    </div>
+                    <div class="allajax-loading" id="">
+                        <img alt="Loading..." src="<?php echo $this->getSkinUrl('balance/allajax/images/loading.gif'); ?>">
+                        <span id="add_to_cart">Loading...</span>
+                    </div>
+                    <div class="allajax-configurations" id="allajax-configurations-append">
+
+                    </div>
+
+                </div>
+                <div id="allajax-poststeps">
+                    <div class="allajax-respond-msg">
+
+                    </div>
+                    <a id="ajax-loading-lightbx-pro-image-respond" href="#" title=" " class="product-image" id="">
+                        <img src="#" width="160" height="160" alt=" ">
+                    </a>
+
+                    <div class="product-info">
+                        <h2 class="product-name" id="ajax-loading-lightbx-pro-name-respond">
+                        </h2>
+                        <div class="product-type-data"><div class="price-box" id="ajax-loading-lightbx-pro-price-box-respond">
+
+                            </div></div>
+                    </div>
+
+                    <div class="actions clearer">
+                    <button type="button" title="View all items in your shopping cart" class="button btn-inline button-view" id="allajax_view_cart" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>')"><span><span>View cart & checkout</span></span></button>
+                    <button type="button" title="View all items in your compare" class="button btn-inline button-view" id="allajax_view_compare" style="display: none" onclick="jQuery.fancybox.close();popWin('<?php echo Mage::helper('catalog/product_compare')->getListUrl(); ?>','compare','top:0,left:0,width=750,height=600,resizable=yes,scrollbars=yes')"><span><span><?php echo $this->__('Go to compare') ?></span></span></button>
+                    <button type="button" title="Continue Shopping" class="button btn-checkout btn-inline " onclick="jQuery.fancybox.close();"><span><span>Continue Shopping</span></span></button>
+						                                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+<script type="text/javascript">
+<?php $baseUrl = $this->getBaseUrl() ; ?>
+function getBaseUrl() { return '<?php echo $baseUrl; ?>'; }
+
+</script>

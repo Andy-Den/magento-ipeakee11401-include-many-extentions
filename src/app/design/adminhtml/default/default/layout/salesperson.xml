@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_salespersonadmin_mapping_index>
+        <update handle="salesperson_admin_mapping_index"/>
+        <reference name="content">
+            <block type="salesperson/adminhtml_mapping" name="mapping" template="salesperson/mapping.phtml"/>
+        </reference>
+    </adminhtml_salespersonadmin_mapping_index>
+</layout>

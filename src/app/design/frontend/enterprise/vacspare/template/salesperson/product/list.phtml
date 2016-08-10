@@ -1,0 +1,202 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php $_productCollection=$this->getLoadedProductCollection();
+$_visibility = array(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG);
+$_helper = $this->helper('catalog/output');
+$_helperCompare = $this->helper('catalog/product_compare');
+$_haveCompare = $_helperCompare->getItemCount(); ?>
+<?php if(!$this->getResultCount()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+    <?php echo $this->getToolbarHtml() ?>
+    <?php // List mode ?>
+    <?php if($this->getMode()!='grid'): ?>
+        <div id="products" class="salesperson-category-products products-list-new">
+            <?php $_iterator = 0; ?>
+            <ul class="products-list" id="products-list">
+            <?php foreach ($_productCollection as $_product): ?>
+            	<?php $id = $this->htmlEscape($_product->Field[$this->getMapping('id')]);
+            	$store = Mage::app()->getStore();
+            	$productModel = Mage::getModel('catalog/product')->load($id);
+
+                $block = Mage::app()->getLayout()->createBlock('catalog/product_list');
+                $html = $block->getReviewsSummaryHtml($productModel, 'short');
+
+                if($productModel->getData('status') == '1' && ($productModel->getData('visibility') == $_visibility[0] || $productModel->getData('visibility') == $_visibility[1])) {
+                    $shoutout = $productModel->getShoutout();
+                    $_productNameStripped = $this->htmlEscape( $_product->Field[$this->getMapping('title')]); ?>
+                    <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
+                        <?php if($productModel->getData('shoutout')): ?>
+                            <div class="shoutout" style="background:url(<?php echo($this->getSkinUrl()); ?>images/dinkus<?php echo $productModel->getData('shoutout') ?>.png)"></div>
+                        <?php endif; ?>
+                        <a href="<?php echo $productModel->getProductUrl() ?>" title="<?php echo $this->htmlEscape( $_product->Field[$this->getMapping('title')]) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($productModel, 'image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->htmlEscape($_product->Field[$this->getMapping('title')]) ?>" /></a>
+                        <div class="product_info">
+                            <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                            <a href="<?php echo $productModel->getProductUrl() ?>" title="<?php echo $this->htmlEscape( $_product->Field[$this->getMapping('title')]) ?>"><?php echo $this->htmlEscape( $_product->Field[$this->getMapping('title')])?></a>
+                            <p align="left" class="product-description"><?php echo Mage::getModel('catalog/product')->load($_product->getId())->getShortDescription() ?></p>
+                            <div class="tags" align="left"><?php echo $this->getChildHtml('productTagList')?></div>
+                            <a href="<?php echo $productModel->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>" class="learnmore" align="left">Learn More</a>
+                            <dl class="product_features">
+                                <?php if($productModel->getData('warranty') == '80'): ?>
+                                <dd class="warranty-1yr"><img src="/js/spacer.gif" width="60" height="60" title="1 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('warranty') == '81'): ?>
+                                <dd class="warranty-2yr"><img src="/js/spacer.gif" width="60" height="60" title="2 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('warranty') == '82'): ?>
+                                <dd class="warranty-3yr"><img src="/js/spacer.gif" width="60" height="60" title="3 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('warranty') == '83'): ?>
+                                <dd class="warranty-4yr"><img src="/js/spacer.gif" width="60" height="60" title="4 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('warranty') == '84'): ?>
+                                <dd class="warranty-5yr"><img src="/js/spacer.gif" width="60" height="60" title="5 Year Warranty" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('anti_allergy') == '92'): ?>
+                                <dd class="allergies"><img src="/js/spacer.gif" width="60" height="60" title="Anti-Allergy" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('asthma') == '94'): ?>
+                                <dd class="asthma"><img src="/js/spacer.gif" width="60" height="60" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('pet_hair') == '111'): ?>
+                                <dd class="pets"><img src="/js/spacer.gif" width="60" height="60" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('level_of_clean') == '32'): ?>
+                                <dd class="single-action"><img src="/js/spacer.gif" width="60" height="60" title="Single Action" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('level_of_clean') == '33'): ?>
+                                <dd class="double-action"><img src="/js/spacer.gif" width="60" height="60" title="Double Action" /></dd>
+                                <?php endif ?>
+                                <?php if($productModel->getData('level_of_clean') == '34'): ?>
+                                <dd class="triple-action"><img src="/js/spacer.gif" width="60" height="60" title="Triple Action" /></dd>
+                                <?php endif ?>
+                            </dl>
+                        </div>
+                        <div class="product-moreinfo">
+                            <div class="reviews" align="left">
+                                <?php echo $html; ?>
+                            </div>
+                            <div class="product_price" align="left">
+                                <?php echo $this->getPriceHtml($_product, true) ?>
+                            </div>
+                            <div class="product-list-view-test">
+                                <?php $inStock = $productModel->getData('is_in_stock');
+                                    if($inStock == '1'):?>
+                                    <a href="javascript:void(0)" class="add-to-cart" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getAddUrl($productModel) ?>')"><?php echo $this->__('Add to Cart') ?></a>
+                                <?php else: ?>
+                                    <a href="<?php echo $productModel->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->Field[$this->getMapping('title')]) ?>" class="moreinfo-link">more info</a>
+                                <?php endif; ?>
+                                <div class="compare-container">
+                                    <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                                        <a href="<?php echo $_compareUrl ?>" class="link-compare">Add to<br />Compare</a>
+                                    <?php endif; ?>
+                                    <?php if($_haveCompare > 0): ?>
+                                        <a href="javascript:void(0)" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')">Go to Compare</a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <?php } ?>
+            <?php endforeach; ?>
+            </ul>
+            <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+    <?php else: ?>
+
+        <?php // Grid Mode ?>
+        <?php $_collectionSize = count($_productCollection) /*$this->getResultCount()*/ ?>
+        <?php $_columnCount = $this->getColumnCount(); ?>
+    	<div class="clear"></div>
+        <div id="products" class="products-grid-new">
+            <?php $i=0;
+
+            $store = Mage::app()->getStore();
+            foreach ($_productCollection as $_product): ?>
+            	<?php $id = $this->htmlEscape($_product->Field[$this->getMapping('id')]);
+            	$productModel = Mage::getModel('catalog/product')->load($id);
+
+                $block = Mage::app()->getLayout()->createBlock('catalog/product_list');
+                $html = $block->getReviewsSummaryHtml($productModel, 'short');
+
+                if($productModel->getData('status') == '1' && ($productModel->getData('visibility') == $_visibility[0] || $productModel->getData('visibility') == $_visibility[1])) {
+                    $shoutout = $productModel->getShoutout();
+                    $_productNameStripped = $this->htmlEscape( $_product->Field[$this->getMapping('title')]); ?>
+                        <?php if ($i++%$_columnCount==0): ?>
+                            <ul class="products-grid">
+                        <?php endif; ?>
+                            <li>
+                                <?php if($shoutout): ?>
+                                    <div class="shoutout" style="background:url(<?php echo($this->getSkinUrl()); ?>images/dinkus<?php echo $shoutout; ?>.png)"></div>
+                                <?php endif; ?>
+                                <a href="<?php echo $productModel->getProductUrl() ?>" title="<?php echo $this->htmlEscape( $_product->Field[$this->getMapping('title')]) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($productModel, 'image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->htmlEscape($_product->Field[$this->getMapping('title')]) ?>" /></a>
+                                <div class="product-info" align="left"><a href="<?php echo $productModel->getProductUrl() ?>" title="<?php echo $this->htmlEscape( $_product->Field[$this->getMapping('title')]) ?>" class="product-title"><?php echo $this->htmlEscape($_product->Field[$this->getMapping('title')]) ?></a></div>
+                                <div class="product-moreinfo">
+                                    <?php //if(key_exists($this->getMapping('rating'), $_product->Field)): ?>
+                                        <div class="reviews" align="left"><?php echo $html; ?></div>
+                                    <?php //endif; ?>
+                                    <div class="product_price" align="left"><?php echo $this->getPriceHtml($_product, true) ?></div>
+                                    <?php $inStock = $productModel->getData('is_in_stock');
+                                    if($inStock == '1'): ?>
+                                        <a href="javascript:void(0)" class="add-to-cart" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getAddUrl($productModel) ?>')"><?php echo $this->__('Add to Cart') ?></a>
+                                    <?php else:?>
+                                        <a href="<?php echo $productModel->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>" class="moreinfo-link">more info</a>
+                                    <?php endif; ?>
+                                    <div class="compare-container">
+                                        <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                                            <a href="<?php echo $_compareUrl ?>" class="link-compare">Add to<br />Compare</a>
+                                        <?php endif; ?>
+                                        <?php if($_haveCompare > 0): ?>
+                                            <a href="javascript:void(0)" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')">Go to Compare</a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <a href="<?php echo $productModel->getProductUrl() ?>" class="product-view-details" align="left"><?php echo $this->__('View Product Details'); ?></a>
+                            </li>
+                        <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+                            </ul>
+                        <?php endif ?>
+                   <?php } ?>
+            <?php endforeach ?>
+        <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+    <?php endif; ?>
+</div>
+<?php endif; ?>
+<script type="text/javascript">
+    function toggleMoreInfo(el, is_true) {        
+        if(is_true == 1)
+            $j1_6('.'+el).addClass("active");
+        else
+            $j1_6('.'+el).removeClass("active");
+    }
+</script>
+<?php echo $this->getToolbarHtml() ?>

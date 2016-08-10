@@ -1,0 +1,85 @@
+<?php
+/**
+ *
+ */
+?>
+<?php $post = $this->getPost() ?>
+<?php $comments = $post->getComments() ?>
+<div id="disqus_thread">
+	<?php if ($comments): ?>
+	<div id="dsq-content">
+		<ul id="dsq-comments">
+			<?php $it = 0; foreach($comments as $comment): ++$it; ?>
+			<li class="comment" id="dsq-comment-<?php echo $it ?>">
+				<div id="dsq-comment-header-<?php echo $it ?>" class="dsq-comment-header">
+					<cite id="dsq-cite-<?php echo $it ?>"><?php if ($comment->getCommentAuthorUrl() !== '#'): ?><?php echo $comment->getCommentAuthorUrl() ?><?php endif; ?> <span id="dsq-author-user-<?php echo $it ?>"><?php echo $this->escapeHtml($comment->getCommentAuthor()) ?></span></cite>
+				</div>
+				<div id="dsq-comment-body-<?php echo $it ?>" class="dsq-comment-body">
+					<div id="dsq-comment-message-<?php echo $it ?>" class="dsq-comment-message">
+						<p><?php echo nl2br($this->escapeHtml($comment->getCommentContent())) ?></p>
+					</div>
+				</div>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+	<?php endif; ?>
+</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = '<?php echo $post->getPermalink() ?>';
+    var disqus_identifier = '<?php echo $this->getDisqusIdentifier($post) ?>';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = '<?php echo $this->getDisqusShortname() ?>';
+    var disqus_title = '<?php echo $this->getDisqusTitle($post); ?>';
+
+    var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '<?php echo $this->getDisqusLanguage() ?>';
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+        <?php if (!$this->helper('wordpress')->getWpOption('disqus_manual_sync')): ?>
+        config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '<?php echo Mage::helper('wordpress')->getBaseUrl() ?>?cf_action=sync_comments&post_id=<?php echo $post->getId() ?>';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+        <?php endif; ?>
+        <?php if ($this->canSso()): ?>
+	        <?php if ($sso = $this->getDisqusSso()): ?>
+				<?php foreach($sso as $k => $v): ?>
+					<?php echo "this.page.{$k} = '{$v}';" ?>
+				<?php endforeach; ?>
+				<?php echo $this->getDisqusSsoLogin() ?>
+			<?php endif; ?>
+		<?php endif; ?>
+    };
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/embed.js?pname=wordpress&pver=2.7.4';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>

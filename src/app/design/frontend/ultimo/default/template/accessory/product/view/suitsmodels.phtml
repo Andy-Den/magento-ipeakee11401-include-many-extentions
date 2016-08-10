@@ -1,0 +1,13 @@
+<?php /* @var $this Balance_Accessory_Block_Catalog_Product_View_Suitsmodels */ ?>
+<?php if ($_models = $this->getModels()) : ?>
+<div class="short-description key-features suits-models">
+    <h2><?php echo $this->__('Suits The Following Models:') ?></h2>
+    <div class="std">
+        <ul class="product-features-top3">
+            <?php foreach ($_models as $_model) : ?>
+                <li><?php echo $_model; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>

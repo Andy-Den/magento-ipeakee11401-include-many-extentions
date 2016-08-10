@@ -1,0 +1,40 @@
+<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+<div class="form-search">
+    <!-- <label for="search"><?php echo $this->__('Search site:') ?></label>-->
+    <input value="Search Products" id="keywords" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>" class="input-text" /><button type="submit" title="<?php echo $this->__('Go') ?>" class="go-button"><span><span><?php echo $this->__('Go') ?></span></span></button>
+    <!--  <a href="<?php echo Mage::helper('catalogsearch')->getAdvancedSearchUrl(); ?>"><?php echo $this->__('Advanced Search'); ?></a>-->
+    <div id="search_autocomplete" class="search-autocomplete"></div>
+    <script type="text/javascript">
+    //<![CDATA[
+        var searchForm = new Varien.searchForm('search_mini_form', 'keywords', '');
+        searchForm.initAutocomplete('<?php echo $this->helper('catalogsearch')->getSuggestUrl() ?>', 'search_autocomplete');
+    //]]>
+        function setInputText(element,text){
+        	
+        	if ($j1_6(element).val() != text){
+        		$j1_6(element).addClass('focused-text');
+        		$j1_6(element).removeClass('focus-out-text');
+        	}else{
+        		$j1_6(element).addClass('focus-out-text');
+        	}
+        	
+        	$j1_6(element).click(function(){
+        		if ($j1_6(this).val() == text){
+        			$j1_6(this).val('');
+        			$j1_6(this).addClass('focused-text');
+        			$j1_6(this).removeClass('focus-out-text');
+        		}
+        	});
+        	
+        	$j1_6(element).blur(function(){
+        		if ($j1_6.trim($j1_6(this).val()) == ''){
+        			$j1_6(this).val(text);
+        			$j1_6(this).removeClass('focused-text');
+        			$j1_6(this).addClass('focus-out-text');
+        		}
+        	});
+        }
+        setInputText('#keywords', 'Search Products');
+    </script>
+</div>
+</form>

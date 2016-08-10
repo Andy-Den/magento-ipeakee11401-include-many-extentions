@@ -1,0 +1,8 @@
+<?php if($this->helper('catalog/product_compare')->getItemCount()>0):?>
+    <?php
+    /*
+    <a href="#" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=930,height=800,resizable=yes,scrollbars=yes')"><?php echo $this->__('Compare');?> <?php echo $this->__('(%d)', $this->helper('catalog/product_compare')->getItemCount()) ?></a> |
+    */
+    ?>
+<?php endif; ?>
+<?php echo $this->getLayout()->getBlock('account.links')->toHtml();?>

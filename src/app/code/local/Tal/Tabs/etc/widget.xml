@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<widgets>
+    <Tal_Tabs type="tal_tabs/tabs" translate="name description" module="tal_tabs">
+        <name>Tabs</name>
+        <description>Adds simple configurable tabs</description>
+        <parameters>
+            <template translate="label">
+                <label>Frontend Template</label>
+                <visible>1</visible>
+                <required>1</required>
+                <type>text</type>
+                <value>tal/tabs/default_tabs.phtml</value>          
+            </template>
+            <block_ids>
+      		<label>Block ids</label>
+      		 <description>Enter comma,separated block ids</description>
+            <visible>1</visible>
+            <required>0</required>
+            <type>text</type>
+        </block_ids>
+        </parameters>
+        
+    </Tal_Tabs>
+</widgets>

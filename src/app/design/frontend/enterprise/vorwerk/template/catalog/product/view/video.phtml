@@ -1,0 +1,33 @@
+<?php
+
+$_product = Mage::registry('product');
+if (!$_product) return;
+
+$_youtubeUrl = $_product->getYoutubeUrl();
+if (!$_youtubeUrl) return;
+
+?>
+
+<div class="sidebar-boxed product-video">
+    <h3><?php echo $this->__('Watch the video'); ?></h3>
+    <a href="<?php echo $_youtubeUrl; ?>" class="fancybox-media">
+        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->keepFrame(false)->constrainOnly(true)->keepAspectRatio(true)->resize(192, 192); ?>">
+    </a>
+
+    <script>
+    ;(function ($) {
+    $(document).ready(function() {
+
+        $('.fancybox-media').fancybox({
+            openEffect : 'none',
+            closeEffect: 'none',
+            helpers: {
+                media: {}
+            }
+        });
+
+    });
+    })(mgxjQuery);
+    </script>
+
+</div>

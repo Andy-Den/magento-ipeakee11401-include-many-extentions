@@ -1,0 +1,47 @@
+<?php 
+	$u_agent = $_SERVER['HTTP_USER_AGENT'];
+    $ub = '';
+    if ( !preg_match('/MSIE/i',$u_agent)) {
+?>
+	<script type="text/javascript">
+	JQ(function() {
+	    JQ("#menu").megaMenu('<?php echo Mage::getStoreConfig('megamenu2/options/effect'); ?>');
+	});
+	</script>
+<?php  } ?>        
+
+
+<div class="nav-container ">
+    <ul id="menu" class="<?php echo Mage::getStoreConfig('megamenu2/options/color'); ?>"><!-- Begin Mega Menu -->
+
+        <?php echo $this->drawCatalog(); ?>
+
+        <?php if (Mage::getStoreConfig('megamenu2/allpages/enable')):  ?>
+        <?php $itemAlign = Mage::getStoreConfig('megamenu2/allpages/itemalign');  ?>
+        <?php $contentAlign = Mage::getStoreConfig('megamenu2/allpages/contentalign');  ?>
+        <?php $title = Mage::getStoreConfig('megamenu2/allpages/title');  ?>
+        <?php $storeId  = Mage::app()->getStore()->getId();
+              $storeUrl = Mage::getModel('core/store')->load($storeId)->getUrl();
+              $storeUrl.='#';
+        ?>
+        <?php $title = Mage::getStoreConfig('megamenu2/allpages/title');  ?>
+
+        <li class="mm2 <?php echo $itemAlign;?>">
+            <a class="drop" href="<?php echo $storeUrl;?>" ><?php echo $title;?></a>
+            <div class="dropcontent drop2columns align_<?php echo $contentAlign;?>">
+                <div class="col_2">
+                    <ul>
+                    <?php echo $this->drawAllCategoriesMenu(); ?>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <?php endif; ?>
+
+
+
+        <?php echo $this->drawAdminMenu(); ?>
+    </ul><!-- End Mega Menu -->
+
+
+</div>

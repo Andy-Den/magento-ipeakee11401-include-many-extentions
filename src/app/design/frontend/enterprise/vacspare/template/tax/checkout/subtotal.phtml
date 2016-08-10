@@ -1,0 +1,27 @@
+<?php if ($this->displayBoth()):?>
+<tr class="subtotal">
+    <td style="<?php echo $this->getStyle() ?>" class="a-left"  colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->helper('tax')->__('Subtotal (Excl. Tax)') ?><?php echo $this->__(':')?>
+    </td>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueExclTax()) ?>
+    </td>
+</tr>
+<tr class="subtotal">
+    <td style="<?php echo $this->getStyle() ?>"  colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->helper('tax')->__('Subtotal (Incl. Tax)') ?><?php echo $this->__(':')?>
+    </td>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueInclTax()) ?>
+    </td>
+</tr>
+<?php else : ?>
+<tr class="subtotal">
+    <td style="<?php echo $this->getStyle() ?>" class="a-left"  colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->getTotal()->getTitle() ?><?php echo $this->__(':')?>
+    </td>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>
+    </td>
+</tr>
+<?php endif;?>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Vacspare_Sintax>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Vacspare_Sintax>
+    </modules>
+</config>

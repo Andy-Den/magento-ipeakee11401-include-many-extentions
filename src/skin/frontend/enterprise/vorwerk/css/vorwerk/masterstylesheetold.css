@@ -1,0 +1,1038 @@
+@charset "utf-8";
+/* CSS Document */
+
+/**************************************************/
+/* MAIN STYLING */
+/**************************************************/
+
+
+html, body {
+	height: 100%;
+	}
+body {
+	margin: 0;
+	padding: 0;
+/*	background-image:url(background%20long%20copy.jpg);
+	background-repeat:repeat-x; */
+
+	background-image:url(../../images/vorwerk/background_horizontal2.jpg);
+	background-repeat:repeat-y;
+
+	}
+#apDivContainer {
+	min-height: 100%;
+	margin:0 auto;
+	padding-left: 25px;
+	padding-right:25px;
+	padding-top:1px;
+	padding-bottom:1px;
+
+	width:960px;
+}
+
+
+
+/**************************************************/
+/* SHADOW STLYING */
+/**************************************************/
+
+
+/*.shadow1 {
+        margin: 0 20px 20px 0;
+        background-color: rgb(68,68,68); /* Needed for IEs
+
+        -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+        -webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+        box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+
+        filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+        zoom: 1;
+}
+.shadow1 #shadowwrapper {
+        position: relative; /* This protects the inner element from being blurred
+        height:180px;
+
+		background-color: #fff;
+		border: 5px solid #FFFFFF;
+}
+
+*/
+
+
+.shadow {
+	-webkit-box-shadow:0 0 5px #cccccc;
+	-moz-box-shadow:0 0 5px #cccccc;
+	box-shadow:0 0 15px #cccccc;
+}
+
+
+
+
+/**************************************************/
+/* HEADER STLYING */
+/**************************************************/
+
+#apDivHeaderStrap {
+	top:0px;
+	height:198px;
+	width:100%;
+	background-color:#FFF;
+	z-index:1000;
+}
+
+#apDivHeaderContainer {
+	min-height: 100%;
+	margin:0 auto;
+	width:960px;
+}
+
+
+#apDivNavContainer {
+	position:relative;
+	z-index:26;
+	background-color:#FFF;
+	top:25px;
+	margin-top:20px;
+
+}
+
+
+#apDivLogo {
+	position:relative;
+	float:left
+	width:174px;
+	height:101px;
+	top:25px;
+	left:25px;
+	z-index:8;
+}
+
+
+#apDivLogoRight {
+	position:relative;
+	float:left;
+	left:760px;
+	width:220px;
+	height:100px;
+	top:-60px;
+	z-index:8;
+	margin:0;
+	padding:0;
+}
+
+#apDivLogoVK {
+	position:relative;
+	float:left;
+	width:91px;
+	height:17px;
+	top:50px;
+	z-index:8;
+	margin:0 15px 0 0;
+	padding:0;
+}
+
+#apDivLogoApprovedSeal {
+	position:relative;
+	float:left;
+	width:85px;
+	height:79px;
+	top:-3px;
+	z-index:8;
+	margin:0 0 0 10px;
+	padding:0;
+}
+#apDivHeaderTag {
+	position:absolute;
+	width:400px;
+	height:26px;
+	top:74px;
+	left:560px;
+	z-index:8;
+}
+
+#apDivHeaderLine {
+	position:absolute;
+	top: 110px;
+	width:960px;
+	height:10px;
+}
+
+/**************************************************/
+/* BODY STLYING */
+/**************************************************/
+
+/**************************************************/
+/* TEASER LAYOUT */
+/**************************************************/
+
+/*************** 1 ACROSS ***************/
+
+.teaser1{
+	float:left;
+	background-color:#FFF;
+	height:100%;
+	width:960px;
+	margin-left:0;
+}
+
+/*************** 2 ACROSS ***************/
+.teaser2{
+	float:left;
+	background-color:#FFF;
+	height:100%;
+	width:470px;
+	margin-left:20px;
+}
+
+.teaser2first{
+	float:left;
+	background-color:#FFF;
+	height:100%;
+	width:470px;
+	margin-left:0;
+}
+
+
+/*************** 3 ACROSS ***************/
+.teaser3{
+	float:left;
+	background-color:#FFF;
+	height:100%;
+	width:300px;
+	margin-left:30px;
+}
+
+.teaser3first{
+	float:left;
+	background-color:#FFF;
+	height:100%;
+	width:300px;
+	margin-left:0;
+}
+
+/*************** 4 ACROSS ***************/
+.teaser4{
+	float:left;
+	background-color:#FFF;
+	height:100%;
+	width:225px;
+	margin-left:20px;
+}
+
+.teaser4first{
+	float:left;
+	background-color:#FFF;
+	height:100%;
+	width:225px;
+	margin-left:0;
+}
+
+.teaser4NoBg{
+	float:left;
+	height:100%;
+	width:225px;
+	margin-left:15px; /*15 to cope with vertical line on home page */
+}
+
+.teaser4firstNoBg{
+	float:left;
+	height:100%;
+	width:225px;
+	margin-left:0;
+}
+
+
+/**************************************************/
+/* HOMEPAGE LAYOUT */
+/**************************************************/
+
+/*************** CONTAINER ***************/
+
+.home #MainContentContainer{
+	position:relative;
+	width:960px;
+}
+
+/*************** LEVEL 1 ***************/
+
+#Level1Home {
+	height:290px;
+	margin-top:30px;
+}
+
+#Level1Home #Box1{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:950px;
+	height:280px;
+	background-image:url(../../images/vorwerk/teaser_1_background.png);
+	background-repeat:no-repeat;
+}
+
+/*************** LEVEL 2 ***************/
+
+
+#Level2Home{
+	height:125px;
+	margin-top:40px;
+}
+
+
+/*#Level2Home #Box1{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:950px;
+	height:115px;
+}*/
+
+#Level2Home #Box1{
+	position:relative;
+	width:960px;
+	height:125px;
+}
+
+#Level2Home #Box2{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:215px;
+	height:120px;
+	background-color:#C90; /*Replace with Image */
+}
+
+#Level2Home #Box3{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:215px;
+	height:120px;
+	background-color:#C90; /*Replace with Image */
+}
+
+#Level2Home #Box4{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:215px;
+	height:120px;
+	background-color:#C90; /*Replace with Image */
+}
+
+/*************** LEVEL 3 ***************/
+
+#Level3Home{
+	height:330px;
+	margin-top:50px;
+}
+
+#Level3Home a.link-intern-150 {
+	font-size:12px;
+}
+
+
+#Level3Home #Box1{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:290px;
+	height:270px;
+}
+
+#Level3Home #Box2{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:290px;
+	height:270px;
+}
+
+#Level3Home #Box3{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:290px;
+	height:270px;
+}
+
+
+#Level3Home #Box1 h3,
+#Level3Home #Box2 h3,
+#Level3Home #Box3 h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	color: #113C2B;
+	font-size:16px;
+	text-transform:uppercase;
+	line-height:20px;
+	margin: 15px 0 15px 10px;
+}
+
+#Level3Home #Box1 h3 span,
+#Level3Home #Box2 h3 span,
+#Level3Home #Box3 h3 span {
+	font-family:Arial, Helvetica, sans-serif;
+	color: #009A3D;
+	font-size:16px;
+	text-transform:uppercase;
+}
+
+/*************** LEVEL 4 ***************/
+
+#Level4Home{
+	height:200px;
+	margin-top:50px;
+}
+
+
+#Level4Home #Box1{
+	position:relative;
+	width:225px;
+	height:200px;
+}
+
+#Level4Home #Box1 .image {
+	float:left;
+	margin:0;
+}
+
+#Level4Home #Box1 #TextBox {
+	float:left;
+	left:15px;
+	width:150px;
+}
+
+#Level4Home #VerticalLine {
+	position:relative;
+	float:left;
+	left:0px;
+	top:0px;
+	width:5px;
+	height:200px;
+	background-image:url(../../images/vorwerk/line_vertical.png);
+	background-repeat:repeat-y;
+}
+#Level4Home #Box2{
+	position:relative;
+	width:225px;
+	height:200px;
+}
+
+#Level4Home #Box2 .image {
+	float:left;
+	margin:0;
+}
+
+#Level4Home #Box2 #TextBox {
+	float:left;
+	left:15px;
+	width:150px;
+}
+
+#Level4Home #Box3{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:460px;
+	height:190px;
+	background: url("../../images/vorwerk/sarah_beeny_homepage.jpg") no-repeat;
+}
+
+#Level4Home #Box3 #TextBox {
+	position:relative;
+	float:left;
+	margin:0 0 0 190px;
+	width:265px;
+}
+
+#Level4Home #Box3 h3 {
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	color:#113C2B;
+	margin: 15px 0 0 0;
+	font-size:15px;
+}
+
+#Level4Home #Box3 h3 span {
+	color:#009A3D;
+}
+
+#Level4Home #Box3 h4 {
+	font-size:12px;
+	color:#113C2B;
+	margin:5px 0 0 0;
+}
+
+
+
+
+
+
+
+
+/**************************************************/
+/* FOOTER STLYING */
+/**************************************************/
+
+#apDivFooter {
+	position:relative;
+	float:left;
+	margin-top:40px;
+	height:126px;
+	width:960px;
+
+	z-index:1;
+	padding-bottom:50px;
+}
+
+#apDivFooterContainer {
+/*	background-color:#33C; */
+	height:126px;
+}
+/*******NEWSLETTER BAR*****************/
+
+#apDivNewsletterBar {
+	height:77px;
+	z-index:1000;
+	margin-bottom:25px;
+	background-image:url(../../images/vorwerk/newsletter_background_footer.png);
+	background-repeat:no-repeat;
+
+}
+
+#apDivNewsletterBarText {
+	position:relative;
+	width:650px;
+	left:85px;
+	top:35px;
+}
+#apDivNewsletterBar .vp1, #apDivContactUsFooterBar .vp1 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	line-height:12px;
+	color:#666666;
+}
+
+/*******CONTACT US BAR*****************/
+
+#apDivContactUsFooterBar {
+	position:relative;
+	top:10px;
+	width:960px;
+	height:50px;
+	z-index:1000;
+	margin-bottom:10px;
+
+
+}
+
+#apDivContactUsFooterBarBox1{
+	position:relative;
+	float:left;
+	top:9px;
+	height:15px;
+	width:75px;
+}
+#apDivContactUsFooterBarTelephone{
+	position:relative;
+	float:left;
+	top:4px;
+	height:19px;
+	width:14px;
+	background-image:url(../../images/vorwerk/phone.png);
+}
+
+
+#apDivContactUsFooterBarNumber{
+	position:relative;
+	float:left;
+	top:2px;
+	left:5px;
+	height:21px;
+	width:150px;
+}
+
+#apDivContactUsFooterBarOpeningTimes{
+	position:relative;
+	float:left;
+	top:8px;
+	left:5px;
+	height:21px;
+	width:300px;
+}
+
+#apDivContactUsFooterBarYoutube{
+	position:relative;
+	float:left;
+	top:8px;
+	left:160px;
+	height:21px;
+	width:55px;
+}
+
+#apDivContactUsFooterBarFacebook{
+	position:relative;
+	float:left;
+	top:8px;
+	left:175px;
+	height:21px;
+	width:21px;
+}
+
+#apDivContactUsLinks{
+	position:relative;
+	float:left;
+	top:0px;
+	left:200px;
+	width:150px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	line-height:20px;
+}
+
+
+
+
+/*******ADDRESS BAR*****************/
+
+#apDivAddressFooterBar {
+	position:relative;
+	top:20px;
+	width:960px;
+	height:50px;
+	z-index:1000;
+	margin-bottom:30px;
+}
+
+#apDivAddressFooterBarLogo{
+	position:relative;
+	float:left;
+	top:0px;
+	height:17px;
+	width:91px;
+	background-image:url("../../images/vorwerk/distri_logo.png");
+	background-repeat:no-repeat;
+}
+
+#apDivAddressFooterBarAddress{
+	position:relative;
+	float:left;
+	top:-12px;
+	left:30px;
+	width:600px;
+}
+
+#apDivAddressFooterBarAddress p.body1{
+	line-height:12px;
+}
+
+
+/**************************************************/
+/* DOTTED LINES */
+/**************************************************/
+.apDivHorizontalLine960 {
+	position:relative;
+	height:5px;
+	width:960px;
+	z-index:1001;
+	background-image:url(../../images/vorwerk/line_horizontal.png);
+	background-repeat:repeat-x;
+}
+
+.apDivHorizontalLine645 {
+	position:relative;
+	float:left;
+	height:5px;
+	width:645px;
+	z-index:10;
+	background-image:url(../../images/vorwerk/line_horizontal.png);
+	background-repeat:repeat-x;
+}
+
+.products .apDivHorizontalLine645 {
+	float:left;
+	height:5px;
+	width:645px;
+	margin:25px 0 25px 0;
+	z-index:10;
+	background-image:url(../../images/vorwerk/line_horizontal.png);
+	background-repeat:repeat-x;
+}
+
+.AboutUs .apDivHorizontalLine645NoMargin {
+	float:left;
+	height:5px;
+	width:645px;
+	margin:0 0 0 0;
+	z-index:1000;
+	background-image:url(../../images/vorwerk/line_horizontal.png);
+	background-repeat:repeat-x;
+}
+
+.AboutUs .apDivHorizontalLine645 {
+	position:relative;
+	float:left;
+	height:5px;
+	width:645px;
+	margin:25px 0 24px 0;
+	z-index:1000;
+	background-image:url(../../images/vorwerk/line_horizontal.png);
+	background-repeat:repeat-x;
+}
+
+.apDivHorizontalLine240 {
+	float:left;
+	height:5px;
+	width:240px;
+	z-index:1000;
+	background-image:url(../../images/vorwerk/line_horizontal.png);
+	background-repeat:repeat-x;
+}
+
+
+/**************************************************/
+/* FONTS */
+/**************************************************/
+
+/*************** GLOBAL ***************/
+
+p,
+ul {
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+p.body1 {
+	font-size:10px;
+	line-height:8px;
+	color:#595552;
+}
+
+p.body1 a {
+	text-decoration:none;
+	color:#595552;
+}
+
+p.body1 a:hover {
+	text-decoration:underline;
+	color:#009645;
+}
+
+p.body2 {
+	font-size:11px;
+	color:#595552;
+}
+
+p.body3,
+p.body3title {
+	font-size:13px;
+	color:#8c8c8c;
+	line-height:1.5em;
+}
+
+p.body3 a {
+	color:#8c8c8c;
+}
+
+p.body3 {
+	margin:0;
+}
+
+p.body3title {
+	font-weight:bold;
+	margin:0 0 5px 0;
+}
+
+p.body3quote {
+	font-size:13px;
+	color:#8c8c8c;
+	line-height:1.5em;
+	font-style:italic;
+	margin:0 25px 0 25px;
+}
+
+p.body3ShopHome {
+	font-size:12px;
+	color:#8c8c8c;
+	line-height:1.5em;
+	font-weight:bold;
+	margin-top:160px;
+}
+
+p.body4,
+ul.body4 {
+	font-size:11px;
+	color:#595552;
+	line-height:2em;
+}
+
+
+p.pressDate {
+	font-size:10px;
+	color:#8c8c8c;
+	line-height:1.5em;
+	margin:0 0 3px 0;
+}
+
+
+
+
+#MainContentContainer h3,
+.apDivMainContentFull h3,
+.apDivSubContentLevel1 h3,
+.apDivSubContentLevel2 h3,
+.apDivSubContentLevel3 h3,
+.SideBarTopicLast h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#113C2B;
+	text-transform:uppercase;
+}
+
+#MainContentContainer h3,
+.apDivMainContentFull h3,
+.apDivSubContentLevel1 h3,
+.apDivSubContentLevel2 h3,
+.apDivSubContentLevel3 h3,
+.SideBarTopicLast h3 {
+	font-size:16px;
+}
+
+h3.SideBar {
+	font-size:14px;
+}
+
+/*#MainContentContainer h4 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:23px;
+	font-weight:normal;
+	margin:0;
+	color:#8C8C8C;
+}*/
+
+#MainContentContainer h4 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+	font-weight:bold;
+	margin:0 0 12px 0;
+	color:#009A3D;
+	text-transform:uppercase;
+}
+
+.subTitleProduct150G,
+.subTitleProduct150DG {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	margin:0 0 12px 0;
+	color:#009A3D;
+	text-transform:uppercase;
+	margin: 15px 0 15px 0;
+}
+
+.subTitleProduct150G {
+	color:#009A3D;
+}
+
+.subTitleProduct150DG {
+	color:#113C2B;
+}
+
+/*************** HOMEPAGE ***************/
+
+.teaser3 h3, .teaser3first h3 {
+	margin:15px 15px 10px 15px;
+}
+
+.teaser3 .text, .teaser3first .text {
+	margin:15px 15px 20px 10px;
+}
+
+.home .teaser4NoBg h3, .home .teaser4firstNoBg h3{
+	margin:15px 15px 10px 0;
+}
+
+#Level4Home #Box1 #TextBox p.body2, #Level4Home #Box2 #TextBox p.body2 {
+	margin:0 0 0 15px;
+}
+
+/*************** PRODUCT PAGES ***************/
+
+#Level2Tools h4{
+	margin:25px 0 10px 0;
+}
+
+.apDivMainContentLeft .text, .apDivMainContentRight .text {
+	margin: 15px 0 0 0;
+}
+
+.apDivMainContentFull h3 {
+	margin: 20px 0 0 0;
+}
+
+.apDivMainContentFullTools h3 {
+	margin: 0;
+}
+
+.apDivMainContentFullTools #TextBox1 h3,
+.apDivMainContentFullTools #TextBox2 h3 {
+	margin: 10px 0 7px 0;
+}
+
+.apDivMainContentFullTools p.subtitle{
+	font-size:13px;
+	color:#8c8c8c;
+	margin: 0 0 5px 0;
+}
+
+.clearfix {
+	margin-bottom:50px;
+}
+
+.apDivSubContentLevel1 h3{
+	margin: 10px 20px 10px 20px;
+}
+
+.apDivSubContentLevel1 .text{
+	margin: 0 20px 0 20px;
+}
+
+.apDivSubContentLevel2 h3{
+	margin:0 0 15px 0;
+}
+
+.apDivSubContentLevel2 .text p.body2 {
+	margin-top:0;
+}
+
+.apDivSubContentLevel3 h3 {
+	margin:0 0 10px 0;
+}
+
+.apDivSubContentLevel3 .text {
+	line-height:25px;
+}
+
+.apDivSubContentLevel3 .text p.body2 {
+	margin-top:0;
+}
+
+
+.apDivMainContentRightTools ul li{
+}
+
+
+
+
+/*************** TABLES ***************/
+
+.TableText1 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#595552;
+}
+
+/*************** FOOTER ***************/
+
+.FooterTelephoneNumber {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:20px;
+	font-weight:bold;
+	color:#009A3D;
+}
+
+
+
+/*************** BREADCRUMBS ***************/
+
+.breadcrumb {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+
+.breadcrumb ul {
+	clear: both;
+	height: 12px;
+	margin: 0;
+	width: 960px;
+	list-style:none;
+	position:relative;
+	left:-40px;
+}
+
+.breadcrumb li {
+	color: #94908d;
+	float: left;
+	font-weight: bold;
+	line-height: 11px;
+	margin: 0 7px 0 0;
+}
+
+.breadcrumb li a,
+.breadcrumb li a:link,
+.breadcrumb li a:visited {
+	background: transparent url("../../images/vorwerk/nav/breadcrumb.png") 0 .35em no-repeat;
+	color: #817d7a;
+	display: block;
+	font-weight: normal;
+	margin: 0;
+	padding: 0 0 0 7px;
+	text-decoration: none;
+}
+
+.breadcrumb li a:hover,
+.breadcrumb li a:focus,
+.breadcrumb li a:active {
+	text-decoration: underline;
+}
+
+.breadcrumb li a.LastBreadcrumb {
+	font-weight: bold;
+}
+
+
+/* JS-Workaround for IE */
+.breadcrumb li:nth-child(2) a {
+	background: none;
+	padding: 0;
+}
+
+/*************** FREQUENTLY ASKED QUESTIONS ***************/
+
+.faqQuestion {
+	position:relative;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	margin: 0 20px 10px 20px;
+	padding: 12px 0;
+}
+
+.faqQuestion .line {
+	position:relative;
+	float:left;
+	background: url("../../images/vorwerk/line_horizontal.png")	repeat-x left bottom;
+	width:200px;
+	height:10px;
+}
+
+
+.faqQuestion a:link,
+.faqQuestion a:visited {
+	background: url("../../images/vorwerk/nav/faq_closed.png") no-repeat right center;
+	color: #009645;
+	display: block;
+	font-weight: bold;
+	line-height: 1.5em;
+	padding: 0 15px 0 0;
+	text-decoration: none;
+}
+
+.faqQuestion a:hover,
+.faqQuestion a:focus,
+.faqQuestion a:active {
+	background: url("../../images/vorwerk/nav/faq_closed_hover.png") no-repeat right center;
+	color: #8cbd5a;
+	text-decoration: underline;
+}
+

@@ -1,0 +1,22 @@
+<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+<div class="form-search">
+
+<script type="text/javascript">
+        //<![CDATA[
+        jQuery('#search_mini_form').submit(function (e) {
+            if (jQuery('#keywords').val() == 'Search products here...' || jQuery('#keywords').val() == '') {
+                e.preventDefault();
+                return false;
+            }
+        });
+       //]]>
+</script>
+
+    <input type="image" src="<?php echo $this->getSkinUrl('images/search-ico.png');?>" title="<?php echo $this->__('Go') ?>" class="go-button"></input>
+    <input value="Search products here..." id="keywords" onblur="if(this.value==''){this.value='Search products here...';}" onfocus="if(this.value=='Search products here...'){this.value='';}" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>" class="input-text" />
+
+    <div id="search_autocomplete" class="search-autocomplete"></div>
+    
+</div>
+<div class="clear">&nbsp;</div>
+</form>

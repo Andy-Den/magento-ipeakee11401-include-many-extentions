@@ -1,0 +1,119 @@
+<?php if ($this->hasItems()):?>
+<?php echo $this->__('')?>
+<?php
+    $_helperCompare = $this->helper('catalog/product_compare');
+    $_haveCompare = $_helperCompare->getItemCount();
+?>
+<div id="you-may-also-need">
+	<h2><?php echo $this->__('You may also need') ?></h2>
+    <div id="products" class="products-grid"><ul>
+    <?php $i=0; foreach($this->getItemCollection() as $_item): ?>
+        <?php $i++; ?>
+        <li>
+        <?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
+            <?php if (!$_item->getRequiredOptions()): ?>
+                <!--  <input type="checkbox" class="checkbox related-checkbox" id="related-checkbox<?php echo $_item->getId() ?>" name="related_products[]" value="<?php echo $_item->getId() ?>" />-->
+            <?php endif; ?>
+        <?php endif; ?>
+            
+                <a href="<?php echo $this->getProductUrl($_item) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'image')->resize(150) ?>" width="150" height="150" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
+                <div class="product-details">
+                    <h3 class="product-name"><a href="<?php echo $this->getProductUrl($_item) ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a></h3>
+                    
+                    <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                        <!--<p><a href="<?php echo $this->getAddToWishlistUrl($_item) ?>"><?php echo $this->__('Add to Wishlist') ?></a></p>-->
+                    <?php endif; ?>
+                </div>
+                <div class="product-moreinfo">
+                	<div class="reviews" align="left">
+                		<?php echo $this->getReviewsSummaryHtml($_item) ?>
+                	</div>
+                	
+                	<div class="product_price" align="left">
+                		<?php echo $this->getPriceHtml($_item, true, '-related') ?>
+                	</div>
+                	
+                	<?php if($_item->isSaleable()): ?>                    
+                		<a href="javascript:void(0)" onclick="setLocation('<?php echo $this->getAddToCartUrl($_item) ?>')" class="add-to-cart">add to cart</a>
+                	<?php else: ?>
+                    	<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $_item->getName(); ?>" class="moreinfo-link">more info</a>
+                	<?php endif; ?>
+                    <div class="compare-container">
+					<?php if($_compareUrl=$this->getAddToCompareUrl($_item)): ?>
+					<a href="<?php echo $_compareUrl?>">Add to<br />
+					Compare</a>
+					<?php endif; ?>
+					<?php if($_haveCompare > 0): ?>
+					<a href="javascript:void(0)" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')">Go to Compare</a>
+				<?php endif; ?>
+			</div>
+            </div>
+            
+        </li>
+        <?php if ($i % $this->getColumnCount() == 0 || $i == $this->getItemsCount()): ?>
+        
+        <?php endif ?>
+    <?php endforeach ?>
+    </ul>
+    </div>
+    <script type="text/javascript">decorateGeneric($$('.box-related ul.box-content'), ['odd','even','first','last'])</script>
+
+    <script type="text/javascript">
+    //<![CDATA[
+    $$('.related-checkbox').each(function(elem){
+        Event.observe(elem, 'click', addRelatedToProduct)
+    });
+    
+    var relatedProductsCheckFlag = false;
+    function selectAllRelated(txt){
+        if (relatedProductsCheckFlag == false) {
+            $$('.related-checkbox').each(function(elem){
+                elem.checked = true;
+            });
+            relatedProductsCheckFlag = true;
+            txt.innerHTML="<strong><?php echo $this->__('unselect all') ?><\/strong>";
+        } else {
+            $$('.related-checkbox').each(function(elem){
+                elem.checked = false;
+            });
+            relatedProductsCheckFlag = false;
+            txt.innerHTML="<strong><?php echo $this->__('select all') ?><\/strong>";
+        }
+        addRelatedToProduct();
+    }
+    
+    function addRelatedToProduct(){
+        var checkboxes = $$('.related-checkbox');
+        var values = [];
+        for(var i=0;i<checkboxes.length;i++){
+            if(checkboxes[i].checked) values.push(checkboxes[i].value);
+        }
+        if($('related-products-field')){
+            $('related-products-field').value = values.join(',');
+        }
+    }
+
+    /* $j1_6('.box-collateral .box-title').css({'background':'none','border':'none'});
+    //$j1_6('.item-info .product-details .price-box .regular-price .price').css({'color':'#232323'});
+    //$j1_6('.item-info .product-details .price-box .old-price .price').css({'color':'#232323', 'font-size':'15px'});
+    //$j1_6('.item-info .product-details .price-box .special-price .price-label').css({'font-size':'normal','font-size':'11px','text-transform':'none'});
+    //$j1_6('.item-info .product-details .price-box .special-price .price').css({'font-size':'normal','font-size':'11px'});
+    $j1_6("#you-may-also-need h2").css({'color':'#5e5e5e','font-weight':'bold'});
+    $j1_6(".reviews").css({'height':'16px'});
+    //$j1_6(".special-price .price-label").text('Save');
+    $j1_6(".special-price .price-label").css({'text-transform':'none', 'font-weight':'normal', 'font-size':'12px','position':'relative','top':'-3px'});
+    $j1_6(".special-price .price").css({'text-transform':'none', 'font-weight':'normal', 'font-size':'12px','position':'relative','top':'-19px','left':'-97px'});
+    $j1_6(".more-options2").css({'clear':'both', 'position':'absolute','left':'145px'});
+    $j1_6(".more-links li").css({ 'float':'none','padding':'0 0 0 10px!important','margin':'1px 0 0', 'position':'relative','top':'23px'});
+	$j1_6(".more-links-related").css({'right':'10px','height':'0','margin-bottom':'-1px','bottom':'96px'}); */
+	
+    function toggleMoreInfo(el, is_true) {        
+        if(is_true == 1)
+            $j1_6('.'+el).addClass("active");
+        else
+            $j1_6('.'+el).removeClass("active");
+    }
+    //]]>
+    </script>
+</div>
+<?php endif;?>

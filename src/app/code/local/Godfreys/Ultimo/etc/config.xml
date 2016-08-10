@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Godfreys_Ultimo>
+      <version>0.1.0</version>
+    </Godfreys_Ultimo>
+  </modules>
+  <global>
+	<blocks>
+	  <ultimo>
+		<class>Godfreys_Ultimo_Block</class>
+	  </ultimo>
+			<ultimo>
+				<rewrite>
+					<product_list_featured>Godfreys_Ultimo_Block_Ultimo_Product_List_Featured</product_list_featured>
+				</rewrite>
+			</ultimo>
+	</blocks>
+  </global>
+</config> 

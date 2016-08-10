@@ -1,0 +1,49 @@
+<?php
+/**
+ * Location extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @copyright   Copyright (c) 2013 Andrew Kett. (http://www.andrewkett.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+  $locations = $this->getLocations()->getItems();
+?>
+<?php if($locations): ?>
+    <?php if(count($locations) > 0): ?>
+        <ul class="locations">
+        <?php
+            $i = 0;
+            foreach($locations as $location):
+                $i++;
+        ?>
+            <li class="loc-ls-item">
+                <article itemscope itemtype="http://data-vocabulary.org/Place" class="loc loc-teaser" data-id="<?php echo $location->getId(); ?>">
+                    <h2 class="store-name" itemprop="name"><?php echo $location->getTitle(); ?></h2>
+                    <address itemprop="address"><?php echo $location->getAddress() ?></address>
+					<p itempro="store_phone" class="phone">P: <?php echo $location->getStorePhone() ?></p>
+                    <?php if($location->getStoreFax()) :?>
+                        <p itempro="store_fax" class="fax">F: <?php echo $location->getStoreFax() ?></p>
+                    <?php endif; ?>
+                    <?php if($location->getStoreFax()) :?>
+                    <p itempro="store_email" class="email">E: <a href="mailto:<?php echo $location->getStoreEmail();?>"><?php echo $location->getStoreEmail() ?></a></p>
+                    <?php endif; ?>
+                    <a itemprop="url" href="<?php echo $location->getUrl(); ?>">View More &gt</a>
+                    <a href="<?php echo $location->getDirectionsLink(); ?>" target="_blank">Get Directions &gt</a>
+					
+				</article>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+<?php else: ?>
+  No results found
+<?php endif; ?>
+

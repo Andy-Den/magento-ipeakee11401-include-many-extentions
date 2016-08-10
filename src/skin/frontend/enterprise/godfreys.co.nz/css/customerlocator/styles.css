@@ -1,0 +1,66 @@
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_CustomerLocator
+ * @copyright   Copyright (c) 2011 Innoexts (http://www.innoexts.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/* Mini Blocks */
+.block-customer-address { 
+    font-size: 11px; 
+    line-height: 1.25; 
+}
+.block-customer-address .block-title strong {
+    background-position: 0 0; 
+    background-repeat: no-repeat; 
+    padding-left: 21px;
+}
+/* Block: Customer Address */
+.block-customer-address .form-list { 
+    padding: 5px 10px; 
+}
+.block-customer-address .block-title strong {
+    background-image: url(../../images/i_shipping.gif);
+}
+.block-customer-address input.input-text { 
+    display: block; 
+    width: 167px; 
+    margin: 3px 0; 
+}
+.block-customer-address select {
+    display: block; 
+    width: 172px; 
+    margin: 3px 0;
+}
+.product_content dd{overflow: hidden;}
+.downloads-links-block{border-top:1px solid #D9D9D9;margin-top:20px;padding-top:20px;}
+.downloads-links-block .head{padding-bottom:10px;}
+.downloads-links-block a{color:red;font-size:12px;text-decoration: none;padding-left: 5px;}
+.downloads-links-block a span{text-transform: uppercase;}
+.head h4{
+    color: #9D9D9D;
+    font-size: 12px;
+    margin: 0;
+    padding: 0 0 5px;
+    text-transform: uppercase;
+}
+#product_config .product-options{display: block;margin-top:0;width: 100%;}
+.tipsyicon{display:none;}
+#product-options-wrapper label.required em{display:none;}
+#product-options-wrapper dt label{color:#5E5E5E;font-weight: normal;font-size:13px;}
+#product-options-wrapper dt{font-size:20px;}
+.product-options dd{border-bottom:none;}
+#product-options-wrapper .input-box{width:100%;}
+.product-options dd select{padding:5px;}
+.product-options dd.last{padding:0;margin:0;}

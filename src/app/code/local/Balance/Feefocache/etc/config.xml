@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<config>
+
+	<!-- ecomdev phpunit config -->
+	<phpunit>
+		<suite>
+			<modules>
+				<Balance_Feefocache />
+			</modules>
+		</suite>
+	</phpunit>
+
+	<!-- define the module, version and dependencies -->
+	<modules>
+		<Balance_Feefocache>
+		<version>0.0.3</version>
+		<!-- <depends> <Mage_Adminhtml /> <Balance_MyModul2 /> </depends> -->
+		</Balance_Feefocache>
+	</modules>
+        
+        <frontend>
+            <layout>
+                <updates>
+                    <reviews>
+                        <file>feefocache.xml</file>
+                    </reviews>
+                </updates>
+            </layout>
+             <product>
+                <collection>
+                    <attributes>
+                        <feefo_reviews_average />
+                        <feefo_reviews_count />
+                    </attributes>
+                </collection>
+            </product>
+        </frontend>
+
+	<global>
+		<!-- model configuration -->
+		<models>
+			<feefocache>
+			<class>Balance_Feefocache_Model</class>			
+			</feefocache>
+                        <catalog>
+                        <rewrite>
+                            <product>Balance_Feefocache_Model_Catalog_Product</product>
+                          
+                        </rewrite>
+                        </catalog>
+		</models>
+
+		<!-- resource model configuration -->
+		<resources>
+			<feefocache_setup>
+			<setup>
+				<module>Balance_Feefocache</module>
+				
+			</setup>
+			<connection>
+				<use>core_setup</use>
+			</connection>
+			</feefocache_setup>
+			<feefocache_write>
+			<connection>
+				<use>core_write</use>
+			</connection>
+			</feefocache_write>
+			<feefocache_read>
+			<connection>
+				<use>core_read</use>
+			</connection>
+			</feefocache_read>
+		</resources>
+
+		<!-- block path -->
+		<blocks>
+                    <review>
+                        <rewrite>
+                            <helper>Balance_Feefocache_Block_Review_Helper</helper>
+                        </rewrite>
+                    </review>     
+                    <feefocache>
+			<class>Balance_Feefocache_Block</class>
+                    </feefocache>  
+		</blocks>
+
+		<!-- helper classes -->
+		<helpers>
+			<feefocache>
+			<class>Balance_Feefocache_Helper</class>
+			</feefocache>
+		</helpers>
+
+	</global>
+        
+        <crontab>
+            <jobs>
+                <balance_feefocache_import_reviews>
+                    <schedule>
+                        <cron_expr>0 1 * * *</cron_expr>
+                    </schedule>
+                        <run><model>feefocache/cron::importReviews</model></run>
+                </balance_feefocache_import_reviews>
+                <balance_feefocache_update_review>
+                    <schedule>
+                        <cron_expr>0 4 * * *</cron_expr>
+                    </schedule>
+                    <run>
+                        <model>feefocache/cron::updateReviews</model>
+                    </run>
+                </balance_feefocache_update_review>
+            </jobs>
+        </crontab>
+
+	<!-- backend routing -->
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<feefocache before="Mage_Adminhtml">Balance_Feefocache_Adminhtml</feefocache>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+
+	<adminhtml>
+		<!-- access control list, aka permissions -->
+		<acl>
+			<resources>
+				<!-- <all> <title>Allow Everything</title> </all> -->
+				<admin>
+					<children>
+						<feefocache translate="title" module="feefocache">
+						<title>Feefocache Module</title>
+						<children>
+							<actions translate="title">
+								<title>Actions</title>
+								<children>
+									<aclkey1 translate="title">
+										<title>Feefocache Action 1</title>
+									</aclkey1>
+									<aclkey2 translate="title">
+										<title>Feefocache Action 2</title>
+									</aclkey2>
+								</children>
+							</actions>
+						</children>
+						<sort_order>1</sort_order>
+						</feefocache>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	
+		<!-- locale files -->
+		<translate>
+			<modules>
+				<feefocache>
+				<files>
+					<default>Balance_Feefocache.csv</default>
+				</files>
+				</feefocache>
+			</modules>
+		</translate>
+		<!-- layout files -->
+		<layout>
+			<updates>
+				<feefocache>
+				<file>feefocache.xml</file>
+				</feefocache>
+			</updates>
+		</layout>
+	</adminhtml>
+	<!-- crontab configuration -->
+	<!-- <crontab> <jobs> <feefocache> <schedule><cron_expr>*/15 
+		* * * *</cron_expr></schedule> <run><model>feefocache/myModel::cronMethod</model></run> 
+		</feefocache> </jobs> </crontab> -->
+</config>

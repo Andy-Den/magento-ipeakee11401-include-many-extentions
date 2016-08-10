@@ -1,0 +1,81 @@
+/* ------------------------------------------------------------- project: Vorwerk CD Relaunch, 2012 author: Benjamin Egner, Tom Raithel (triplesense.de)  last change: $Date: 2012-08-30 18:13:18 +0200 (Thu, 30 Aug 2012) $ last author: $Author: traithel $ svn path: $URL: http://sheise@svn.dev/vorwerk/cd-relaunch/FE/sass/basic/buttons.scss $ revision: $Rev: 6943 $  $Id: buttons.scss 6943 2012-08-30 16:13:18Z traithel $ ------------------------------------------------------------- */
+.button-lookalike { border: none; background: none; white-space: nowrap; display: inline-block; padding: 0; }
+.button-lookalike, .button-lookalike:link, .button-lookalike:visited { text-decoration: none; }
+.button-lookalike .buttonleft { display: block; float: left; }
+.button-lookalike .buttonright { display: block; float: left; }
+.button-lookalike .buttonmid { display: block; float: left; font-family: "LinotypeUniversW02-Bold 726184", Arial, Tahoma, Verdana, Helvetica, sans-serif; font-weight: normal !important; text-transform: uppercase; text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4); -khtml-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4); -moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4); -webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4); -o-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4); }
+.button-lookalike .buttonmid em, .button-lookalike .buttonmid span { font-family: "LinotypeUniversW02-Bold 726184", Arial, Tahoma, Verdana, Helvetica, sans-serif; }
+
+.button-lookalike.primary .buttonleft { width: 9px; height: 35px; }
+.button-lookalike.primary .buttonright { width: 9px; height: 35px; }
+.button-lookalike.primary .buttonmid { font-size: 15px; height: 25px; padding: 10px 8px 0 8px; line-height: 15px; }
+.button-lookalike.primary .buttonmid .buttonicon { top: 50%; padding: 0; }
+.button-lookalike.primary .buttonmid .buttoniconleft { display: block; padding-left: 16px; background-repeat: no-repeat; background-position: 0 50%; }
+.button-lookalike.primary .buttonmid .buttoniconright { display: block; padding-right: 16px; background-repeat: no-repeat; background-position: 100% 50%; }
+
+.button-lookalike.primary.green .buttonleft, .button-lookalike.primary.green .buttonright, .button-lookalike.primary.green .buttonmid { background: url(../../images/buttons/primary-green.png) no-repeat; }
+.button-lookalike.primary.green .buttonleft { background-position: 0 0; }
+.button-lookalike.primary.green .buttonright { background-position: 100% -40px; }
+.button-lookalike.primary.green .buttonmid { background-position: 0 -80px; background-repeat: repeat-x; color: white; }
+.button-lookalike.primary.green .buttonmid .buttoniconleft.arrow-right, .button-lookalike.primary.green .buttonmid .buttoniconright.arrow-right { background-image: url(../../images/buttons/icons/arrow-right.png); }
+.button-lookalike.primary.green .buttonmid .buttoniconleft.arrow-left, .button-lookalike.primary.green .buttonmid .buttoniconright.arrow-left { background-image: url(../../images/buttons/icons/arrow-left.png); }
+.button-lookalike.primary.green:hover .buttonleft { background-position: 0 -120px; }
+.button-lookalike.primary.green:hover .buttonright { background-position: 100% -160px; }
+.button-lookalike.primary.green:hover .buttonmid { background-position: 0 -200px; }
+.button-lookalike.primary.green.disabled .buttonleft { background-position: 0 -240px; }
+.button-lookalike.primary.green.disabled .buttonright { background-position: 100% -280px; }
+.button-lookalike.primary.green.disabled .buttonmid { background-position: 0 -320px; text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -khtml-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -o-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); }
+
+.button-lookalike.primary.orange .buttonleft, .button-lookalike.primary.orange .buttonright, .button-lookalike.primary.orange .buttonmid { background: url(../../images/buttons/primary-orange.png) no-repeat; }
+.button-lookalike.primary.orange .buttonleft { background-position: 0 0; }
+.button-lookalike.primary.orange .buttonright { background-position: 100% -40px; }
+.button-lookalike.primary.orange .buttonmid { background-position: 0 -80px; background-repeat: repeat-x; color: white; }
+.button-lookalike.primary.orange .buttonmid .buttoniconleft.arrow-right, .button-lookalike.primary.orange .buttonmid .buttoniconright.arrow-right { background-image: url(../../images/buttons/icons/arrow-right.png); }
+.button-lookalike.primary.orange .buttonmid .buttoniconleft.arrow-left, .button-lookalike.primary.orange .buttonmid .buttoniconright.arrow-left { background-image: url(../../images/buttons/icons/arrow-left.png); }
+.button-lookalike.primary.orange:hover .buttonleft { background-position: 0 -120px; }
+.button-lookalike.primary.orange:hover .buttonright { background-position: 100% -160px; }
+.button-lookalike.primary.orange:hover .buttonmid { background-position: 0 -200px; }
+.button-lookalike.primary.orange.disabled .buttonleft { background-position: 0 -240px; }
+.button-lookalike.primary.orange.disabled .buttonright { background-position: 100% -280px; }
+.button-lookalike.primary.orange.disabled .buttonmid { background-position: 0 -320px; text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -khtml-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -o-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); }
+
+.button-lookalike.secondary .buttonleft { width: 8px; height: 30px; }
+.button-lookalike.secondary .buttonright { width: 8px; height: 30px; }
+.button-lookalike.secondary .buttonmid { font-size: 13px; height: 22px; padding: 8px 8px 0 8px; line-height: 13px; }
+.button-lookalike.secondary .buttonmid .buttonicon { top: 50%; padding: 0; }
+.button-lookalike.secondary .buttonmid .buttoniconleft { display: block; padding-left: 16px; background-repeat: no-repeat; background-position: 0 50%; }
+.button-lookalike.secondary .buttonmid .buttoniconright { display: block; padding-right: 16px; background-repeat: no-repeat; background-position: 100% 50%; }
+
+.button-lookalike.secondary.green .buttonleft, .button-lookalike.secondary.green .buttonright, .button-lookalike.secondary.green .buttonmid { background: url(../../images/buttons/secondary-green.png) no-repeat; }
+.button-lookalike.secondary.green .buttonleft { background-position: 0 0; }
+.button-lookalike.secondary.green .buttonright { background-position: 100% -40px; }
+.button-lookalike.secondary.green .buttonmid { background-position: 0 -80px; background-repeat: repeat-x; color: white; }
+.button-lookalike.secondary.green .buttonmid .buttoniconleft.arrow-right, .button-lookalike.secondary.green .buttonmid .buttoniconright.arrow-right { background-image: url(../../images/buttons/icons/arrow-right.png); }
+.button-lookalike.secondary.green .buttonmid .buttoniconleft.arrow-left, .button-lookalike.secondary.green .buttonmid .buttoniconright.arrow-left { background-image: url(../../images/buttons/icons/arrow-left.png); }
+.button-lookalike.secondary.green:hover .buttonleft { background-position: 0 -120px; }
+.button-lookalike.secondary.green:hover .buttonright { background-position: 100% -160px; }
+.button-lookalike.secondary.green:hover .buttonmid { background-position: 0 -200px; }
+.button-lookalike.secondary.green.disabled .buttonleft { background-position: 0 -240px; }
+.button-lookalike.secondary.green.disabled .buttonright { background-position: 100% -280px; }
+.button-lookalike.secondary.green.disabled .buttonmid { background-position: 0 -320px; text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -khtml-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -o-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); }
+
+.button-lookalike.secondary.orange .buttonleft, .button-lookalike.secondary.orange .buttonright, .button-lookalike.secondary.orange .buttonmid { background: url(../../images/buttons/secondary-orange.png) no-repeat; }
+.button-lookalike.secondary.orange .buttonleft { background-position: 0 0; }
+.button-lookalike.secondary.orange .buttonright { background-position: 100% -40px; }
+.button-lookalike.secondary.orange .buttonmid { background-position: 0 -80px; background-repeat: repeat-x; color: white; }
+.button-lookalike.secondary.orange .buttonmid .buttoniconleft.arrow-right, .button-lookalike.secondary.orange .buttonmid .buttoniconright.arrow-right { background-image: url(../../images/buttons/icons/arrow-right.png); }
+.button-lookalike.secondary.orange .buttonmid .buttoniconleft.arrow-left, .button-lookalike.secondary.orange .buttonmid .buttoniconright.arrow-left { background-image: url(../../images/buttons/icons/arrow-left.png); }
+.button-lookalike.secondary.orange:hover .buttonleft { background-position: 0 -120px; }
+.button-lookalike.secondary.orange:hover .buttonright { background-position: 100% -160px; }
+.button-lookalike.secondary.orange:hover .buttonmid { background-position: 0 -200px; }
+.button-lookalike.secondary.orange.disabled .buttonleft { background-position: 0 -240px; }
+.button-lookalike.secondary.orange.disabled .buttonright { background-position: 100% -280px; }
+.button-lookalike.secondary.orange.disabled .buttonmid { background-position: 0 -320px; text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -khtml-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); -o-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2); }
+
+.button-lookalike.primary.cta_float { position: fixed; z-index: 9995; }
+.button-lookalike.primary.cta_float .buttonleft, .button-lookalike.primary.cta_float .buttonright, .button-lookalike.primary.cta_float .buttonmid { height: 60px; background: url(../../images/buttons/primary-orange-twoline.png) !important; }
+.button-lookalike.primary.cta_float .buttonleft { background-position: 0 0; width: 16px; }
+.button-lookalike.primary.cta_float .buttonmid { background-position: 0px -160px !important; line-height: 19px; }
+.button-lookalike.primary.cta_float .buttonright { background-position: 100% -80px !important; width: 16px; }
+
+@media (max-width: 1382px) { .button-lookalike.cta_float { display: none; } }

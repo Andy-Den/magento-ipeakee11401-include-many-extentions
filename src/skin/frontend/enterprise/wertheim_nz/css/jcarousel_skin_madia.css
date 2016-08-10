@@ -1,0 +1,143 @@
+.jcarousel-skin-media .jcarousel-container {
+    /*    -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: #D4D0C8;
+        border: 1px solid #808080;*/
+}
+
+.jcarousel-skin-media .jcarousel-direction-rtl {
+    direction: rtl;
+}
+
+.jcarousel-skin-media .jcarousel-container-horizontal {
+    /*    width: 245px;
+        padding: 20px 40px;*/
+}
+
+.jcarousel-skin-media .jcarousel-container-vertical {
+    width: 75px;
+    height: 245px;
+    padding: 40px 20px;
+}
+
+.jcarousel-skin-media .jcarousel-clip {
+    overflow: hidden;
+}
+
+.jcarousel-skin-media .jcarousel-clip-horizontal {
+    width: 210px;
+    margin: 0 auto;
+}
+
+.jcarousel-skin-media .jcarousel-clip-vertical {
+    width:  77px;
+    height: 245px;
+}
+
+.jcarousel-skin-media .jcarousel-item {
+    /*    width: 75px;
+        height: 75px;
+        border: 1px solid #fff;*/
+}
+
+.jcarousel-skin-media .jcarousel-item:hover,
+.jcarousel-skin-media .jcarousel-item:focus {
+    border-color: #808080;
+}
+
+.jcarousel-skin-media .jcarousel-item-horizontal {
+    margin-left: 0;
+    margin-right: 7px;
+}
+
+.jcarousel-skin-media .jcarousel-direction-rtl .jcarousel-item-horizontal {
+    margin-left: 7px;
+    margin-right: 0;
+}
+
+.jcarousel-skin-media .jcarousel-item-vertical {
+    margin-bottom: 7px;
+}
+
+.jcarousel-skin-media .jcarousel-item-placeholder {
+}
+
+/**
+ *  Horizontal Buttons
+*/
+.jcarousel-skin-media .jcarousel-next-horizontal {
+    position: absolute;
+    top: 35px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: transparent url("../images/reviews_next_small.png") no-repeat 0 0;
+}
+.catalog-product-view .jcarousel-skin-media .jcarousel-next-horizontal {
+    /*top:100%;*/
+}
+
+.jcarousel-skin-media .jcarousel-direction-rtl .jcarousel-next-horizontal {
+    left: 5px;
+    right: auto;
+    background-image: url("../images/reviews_prev_small.png");
+}
+
+.jcarousel-skin-media .jcarousel-next-horizontal:hover,
+.jcarousel-skin-media .jcarousel-next-horizontal:focus {
+    /*background-position: -32px 0;*/
+}
+
+.jcarousel-skin-media .jcarousel-next-horizontal:active {
+    /*background-position: -64px 0;*/
+}
+
+.jcarousel-skin-media .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-media .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-media .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-media .jcarousel-next-disabled-horizontal:active {
+    /*    cursor: default;
+        background-position: -96px 0;*/
+}
+
+.jcarousel-skin-media .jcarousel-prev-horizontal {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: transparent url("../images/reviews_prev_small.png") no-repeat 0 0;
+}
+
+.catalog-product-view .jcarousel-skin-media .jcarousel-prev-horizontal {
+    /*top: 100%;*/
+}
+.carousel_media img {
+    border: 1px solid;
+}
+
+.jcarousel-skin-media .jcarousel-direction-rtl .jcarousel-prev-horizontal {
+    left: auto;
+    right: 5px;
+    background-image: url("../images/reviews_next_small.png");
+}
+
+.jcarousel-skin-media .jcarousel-prev-horizontal:hover,
+.jcarousel-skin-media .jcarousel-prev-horizontal:focus {
+    /*background-position: -32px 0;*/
+}
+
+.jcarousel-skin-media .jcarousel-prev-horizontal:active {
+    /*background-position: -64px 0;*/
+}
+
+.jcarousel-skin-media .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-media .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-media .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-media .jcarousel-prev-disabled-horizontal:active {
+    /*    cursor: default;
+        background-position: -96px 0;*/
+}

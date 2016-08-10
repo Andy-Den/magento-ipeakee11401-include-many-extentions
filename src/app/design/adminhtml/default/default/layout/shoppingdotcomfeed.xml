@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_shoppingdotcomfeed_shoppingdotcomfeed_index>
+        <reference name="content">
+            <block type="shoppingdotcomfeed/adminhtml_shoppingdotcomfeed" name="shoppingdotcomfeed" />
+        </reference>
+    </adminhtml_shoppingdotcomfeed_shoppingdotcomfeed_index>
+        
+    <adminhtml_shoppingdotcomfeed_shoppingdotcomfeed_select>
+        <reference name="content">
+            <block type="shoppingdotcomfeed/adminhtml_catalog" name="shoppingdotcomfeed" />
+        </reference>
+    </adminhtml_shoppingdotcomfeed_shoppingdotcomfeed_select>      
+
+    <adminhtml_shoppingdotcomfeed_catalog_index> 
+        <reference name="content">
+            <block type="shoppingdotcomfeed/adminhtml_catalog" name="shoppingdotcomfeed" />
+        </reference>
+        <reference name="before_body_end">
+            <block type="shoppingdotcomfeed/adminhtml_preselect" name="preselector" template="shoppingdotcom/selector.phtml" />
+        </reference>
+    </adminhtml_shoppingdotcomfeed_catalog_index>
+    
+    
+    <adminhtml_shoppingdotcomfeed_catalog_grid> 
+        <block type="shoppingdotcomfeed/adminhtml_catalog_grid" name="admin.product.grid"/>
+    </adminhtml_shoppingdotcomfeed_catalog_grid>                        
+                   
+</layout>

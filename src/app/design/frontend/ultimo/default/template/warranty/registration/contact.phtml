@@ -1,0 +1,168 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<form id="warranty-contact" action="">
+<fieldset>
+    <ul class="form-list">
+    <li>
+        <fieldset>
+            <ul>
+                
+                <li class="fields">
+                    <div class="field">
+                        <div class="input-box">
+                            <?php echo $this->getLayout()->createBlock('warranty/registration_widget_gender')->toHtml(); ?>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="contact:telephone"><?php echo $this->__('Phone Number') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="contact:telephone" name="contact[telephone]" value="" title="<?php echo $this->__('Telephone') ?>" class="input-text validate-number" />
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="required" for="contact:postcode"><em>*</em><?php echo $this->__('Postcode') ?></label>
+                        <div class="input-box">
+                            <input type="text" id="contact:postcode" name="contact[postcode]" value="" maxlength="5" title="<?php echo $this->__('Postcode') ?>" class="input-text required-entry validate-number" />
+                        </div>
+                    </div>
+                    <div class="field radio-field">
+                        <label class="required" for="contact:children"><em>*</em><?php echo $this->__('Do you have children under 18?') ?></label>
+                        <div class="input-box">
+                            <div class="field">
+                                <input type="radio" id="contact:children:yes" name="contact[children]" checked="checked" value="1" /><label for="contact:children:yes" style="text-align: left">Yes </label>
+                            </div>
+                            <div class="field">
+                                <input type="radio" id="contact:children:no" name="contact[children]" value="0" /><label for="contact:children:no" style="text-align: left">No </label>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="field radio-field">
+                        <label class="required" for="contact:pets"><em>*</em><?php echo $this->__('Do you own any pets?') ?></label>
+                        <div class="input-box">
+                            <div class="field">
+                               <input type="radio" id="contact:pets:yes" name="contact[pets]" checked="checked" value="1" /> <label for="contact:pets:yes" style="text-align: left">Yes </label>
+                            </div>
+                            <div class="field">
+                                 <input type="radio" id="contact:pets:no" name="contact[pets]" value="0" /><label for ="contact:pets:no" style="text-align: left">No</label>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="field radio-field">
+                        <label><?php echo $this->__('Would you like to receive exclusive deals and competitions from Godfreys?') ?></label>
+                        <div class="input-box">
+                            <div class="field">
+                                    <input type="radio" name="contact[newsletter]" title="<?php echo $this->__('') ?>" value="1" id="contact:newsletter:yes" />
+	                            <label  for="contact:newsletter:yes" style="text-align: left"><?php echo $this->__('Yes Please!') ?> </label>
+                            </div>
+                            <div class="field">
+                                    <input type="radio" name="contact[newsletter]" title="<?php echo $this->__('') ?>" value="0" id="contact:newsletter:no" />
+	                            <label  for="contact:newsletter:no" style="text-align: left"><?php echo $this->__('No thanks') ?> </label>
+                            </div>
+                            
+                        </div>
+                    
+                    </div>
+                                    
+                                    
+            </ul>
+        </fieldset>
+     </li>
+    </ul>
+    <div class="buttons-set" id="billing-buttons-container">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p class="back-link"><a href="#" onclick="javascript:goBackContact(); return false;"><small><</small><?php echo $this->__('Back') ?></a></p>
+        <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="validateForm()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+        
+    </div>
+</fieldset>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+
+
+// the submission handler
+var Contact = Class.create();
+Contact.prototype = {
+    initialize: function(form, saveUrl){
+        this.form = form;
+        if ($(this.form)) {
+            $(this.form).observe('submit', function(event){this.save();Event.stop(event);}.bind(this));
+        }
+        this.saveUrl = saveUrl;
+        //this.onSave = this.nextStep.bindAsEventListener(this);
+        //this.onComplete = this.statusOk();
+    },
+
+    save: function(){
+        var validator = new Validation(this.form);
+        if (validator.validate()) {
+            var request = new Ajax.Request(
+                this.saveUrl,
+                {
+                    method:'post',
+                    onComplete: this.onComplete,
+                    onSuccess: this.onSave,
+                    //onFailure: this.statusFailure(),
+                    parameters: Form.serialize(this.form)
+                }
+            );
+        }
+    },
+    
+    onSave: function() {
+        finishSubmission();
+    }
+    
+  }
+
+// ---------------------------------------------
+
+    var contactForm = new VarienForm('warranty-contact');
+    function validateForm(){
+        var validator = new Validation('warranty-contact');
+        if(validator.validate()){
+            //accordion.closeSection('wr-contact');
+            $('progress-<?php echo $this->getNextStep() ?>').addClassName('complete');
+            $('progress-contact').removeClassName('complete');
+            accordion.openSection('wr-<?php echo $this->getNextStep() ?>');
+        } else {
+                
+        }
+    }
+    function goBackContact(){
+        //accordion.closeSection('wr-contact');
+        $('progress-contact').removeClassName('complete');
+        $('progress-<?php echo $this->getPreviousStep() ?>').addClassName('complete');
+        accordion.openSection('wr-<?php echo $this->getPreviousStep() ?>');
+    }
+//]]>
+</script>

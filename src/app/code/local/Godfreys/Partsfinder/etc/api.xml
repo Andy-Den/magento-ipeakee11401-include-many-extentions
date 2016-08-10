@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <partsfinder_accessory translate="title" module="partsfinder">
+                <title>Partsfinder</title>
+                <model>partsfinder/accessory_api</model>
+                <acl>partsfinder</acl>
+                <methods>
+                    <upsert translate="title" module="partsfinder">
+                        <title>Update or Insert</title>
+                        <acl>partsfinder</acl>
+                        <method>upsert</method>
+                    </upsert>
+                    <remove translate="title" module="partsfinder">
+                    	<title>Remove relation</title>
+                    	<acl>partsfinder</acl>
+                    	<method>remove</method>
+                    </remove>
+                    <list translate="title" module="partsfinder">
+                    	<title>Retrieve relation list</title>
+                    	<method>getlist</method>
+                    </list>
+                </methods>
+                <faults module="partsfinder">
+	                <invalid_data>
+	                    <code>100</code>
+	                    <message>Invalid data</message>
+	                </invalid_data>
+                </faults>
+            </partsfinder_accessory>
+        </resources>
+        <acl>
+            <resources>
+                <partsfinder translate="title" module="partsfinder">
+                     <title>Partsfinder API</title>
+                     <sort_order>1</sort_order>
+                </partsfinder>
+            </resources>
+        </acl>
+    </api>
+</config>

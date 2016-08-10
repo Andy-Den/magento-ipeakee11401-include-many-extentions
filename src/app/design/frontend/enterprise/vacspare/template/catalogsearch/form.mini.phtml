@@ -1,0 +1,25 @@
+<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+<div class="form-search">
+    <label><span><?php echo $this->__('Search') ?></span></label>
+	<div class='right-search-mini-form'>
+		<label>enter search term or product number</label>
+		<div class='input-armor1'>
+			<div class='input-armor2'>
+				<input value="Search a term or product number" id="keywords" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" class="input-text" />
+			</div>
+		</div>
+			<button type="submit" title="<?php echo $this->__('Go') ?>" class="go-button"><span><span><?php echo $this->__('Go') ?></span></span></button>
+		<!--  <a href="<?php echo Mage::helper('catalogsearch')->getAdvancedSearchUrl(); ?>"><?php echo $this->__('Advanced Search'); ?></a>-->
+		<div id="search_autocomplete" class="search-autocomplete"></div>
+	</div>
+    <script type="text/javascript">
+    //<![CDATA[
+        var searchForm = new Varien.searchForm('search_mini_form', 'keywords', 'Search a term or product number');
+        searchForm.initAutocomplete('<?php echo $this->helper('catalogsearch')->getSuggestUrl() ?>', 'search_autocomplete');
+    //]]>
+    </script>
+</div>
+</form>
+<!--<div class='filter_mini_search'>-->
+<!--    --><?php //echo $this->getChildHtml('accessory.mini.search'); ?>
+<!--</div>-->

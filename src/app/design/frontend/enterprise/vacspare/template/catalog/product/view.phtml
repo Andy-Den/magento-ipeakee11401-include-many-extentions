@@ -1,0 +1,223 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->setEscapeMessageFlag(true)->toHtml() ?></div>
+<div class="product-view">
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        <div class="product-essential">
+				<div class='product-right-box'>
+					<?php
+						$machines = Mage::getModel('partsfinder/accessory')->getRelationsById($_product->getId());
+						if (!empty($machines)) :
+					?>
+					<div class='product_model'>
+						<div class='product_model_title'>
+							<label>This will </label>
+							<label>fit Models</label>
+						</div>
+						<?php foreach($machines as $m) :?>
+							<p><?php echo $m['name'] ;?></p>
+						<?php endforeach;?>
+					</div>
+					<?php endif; ?>
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_promo')->toHtml() ?>
+				</div>
+                <div class="product-shop">
+                    <div class="product-main-info">
+                        <div class="product-name">
+                            <h1>
+								<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+							</h1>
+                        </div>
+
+                    </div>
+					<?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+                    <?php  echo $this->getChildHtml('tierprices') ?>
+                    <?php  echo $this->getChildHtml('extrahint') ?>
+
+					 <p class="product-ids"><?php echo $this->__('SKU# %s', $this->escapeHtml($_product->getSku())); ?></p>
+
+                        <?php echo $this->getChildHtml('alert_urls') ?>
+						<div class='price_box_custom'>
+                        <?php echo $this->getChildHtml('product_type_data') ?>
+						</div>
+
+<!--                    Fix don't show options product-->
+
+                        <div class="add-to-box">
+
+                                <?php echo $this->getChildHtml('addtocart') ?>
+
+                            <?php echo $this->getChildHtml('addto') ?>
+							<?php echo $this->getLayout()->CreateBlock('cms/block')->setBlockId('product_view_addto')->toHtml(); ?>
+                        </div>
+
+
+                    <?php if ($_product->getDescription()):?>
+
+                        <div class="description std">
+                            <dl id="description">
+                                <dt>
+									<h2><?php echo $this->__('Description') ?></h2>
+									<span class='icon_description'></span>
+								</dt>
+                                <dd><?php $description = $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description');
+					$description = str_replace(array("</li><br>","</li><br />"), "</li>", $description);
+					echo str_replace(array("<ul><br>", "<ul><br />"),"<ul>", $description); ?>
+				</dd>
+                            </dl>
+                        </div>
+						<script>
+						jQuery(document).ready(function() {
+							jQuery('#description dt').click(function() {
+								jQuery(this).next().slideToggle('fast');
+								jQuery(this).toggleClass('active');
+								return false;
+							});
+						});
+						</script>
+                    <?php endif;?>
+
+                    <?php echo $this->getChildHtml('other');?>
+                </div>
+                <div class="product-img-box">
+                    <?php echo $this->getChildHtml('media') ?>
+                </div>
+        </div>
+        <div class="clearer"></div>
+
+    </form>
+	<div id="product-accordion" class="accordion">
+		<div class="accordion-toggle active">
+			<?php echo $this->__('Delivery & Returns'); ?><span class="icon_description"></span></div>
+		<div class="accordion-content">
+			 <?php  echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_delivery')->toHtml();?>
+		</div>
+		<div class="accordion-toggle reviews-click" >
+			<?php echo $this->__('Reviews'); ?><span class="icon_description"></span></div>
+		<div class="accordion-content" style='display:none;'>
+			  <?php echo $this->getChildHtml('product_review'); ?>
+		</div>
+		<div class="accordion-toggle">
+			<?php echo $this->__('Need Help?'); ?><span class="icon_description"></span></div>
+		<div class="accordion-content" style='display:none;'>
+			   <?php  echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_help')->toHtml();?>
+		</div>
+	</div>
+	<?php echo $this->getChildHtml('product_specifications'); ?>
+    <?php echo $this->getLayout()->createBlock('downloads/product_link', '', array('id' => $_product->getId(), 'is_category'=>true))->toHtml() ?>
+    <?php echo $this->getChildHtml('upsell_products') ?>
+	<?php echo $this->getChildHtml('relatedProducts') ?>
+	<?php echo $this->getChildHtml('productTagList') ?>
+	<?php echo $this->getChildHtml('product_additional_data') ?>
+
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+               form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            // Remove custom datetime validators
+            for (var methodName in Validation.methods) {
+                if (methodName.match(/^validate-datetime-.*/i)) {
+                    delete Validation.methods[methodName];
+                }
+            }
+
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+//]]>
+</script>
+<script type="text/javascript">
+    /* Godfreys Amasty Navigation Menu Stuff */
+
+// jQuery(document).ready(function() {
+    // jQuery('dl#description dt').click(function() {
+        // jQuery(this).next().slideToggle('fast');
+        // jQuery(this).toggleClass('active');
+        // return false;
+    // });
+// })
+
+
+
+// document.observe("dom:loaded", function(){
+    // accordion = new Accordion("product-accordion",2);
+// })
+</script>

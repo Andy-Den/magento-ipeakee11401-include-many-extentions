@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Vacspare_Aslideshow Extension
+ *
+ * @category    Local
+ * @package     Vacspare_Aslideshow
+ * @author      dungnv (dungnv@arrowhitech.com)
+ * @copyright   Copyright(c) 2011 Arrowhitech Inc. (http://www.arrowhitech.com)
+ *
+ */
+
+/**
+ *
+ * @category   Local
+ * @package    Vacspare_Aslideshow
+ * @author     dungnv <dungnv@arrowhitech.com>
+ */
+
+-->
+<config>
+    <modules>
+        <Vacspare_Optionimages>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Vacspare_Optionimages>
+    </modules>
+</config>

@@ -1,0 +1,9 @@
+<?php
+$product = Mage::registry('product');
+$productId = empty($product) ? 0 : $product->getId();
+if (!empty($productId)) {
+?>
+<script type="text/javascript">
+jQuery('#li_p_<?php echo $productId;?>').addClass('current');
+</script>
+<?php } ?>

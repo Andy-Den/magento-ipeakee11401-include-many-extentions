@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+.itabs .i_titles .i_title .i_center			{color:#dfdfdf;}
+.itabs .i_titles .i_title .i_center			{background-image:url("../../../../images/itoris/producttabsslider/descending/white/d.png");}
+.itabs .i_titles .i_title .i_left				{background-image:url("../../../../images/itoris/producttabsslider/descending/white/dl.png");}
+
+.itabs .i_titles .i_title:hover .i_center		{color:white;}
+.itabs .i_titles .i_title:hover .i_center		{background-image:url("../../../../images/itoris/producttabsslider/descending/white/d_h.png");}
+.itabs .i_titles .i_title:hover .i_left		{background-image:url("../../../../images/itoris/producttabsslider/descending/white/dl_h.png");}
+
+.itabs .i_titles .i_title.i_current .i_center	{color:black;}
+.itabs .i_titles .i_title.i_current .i_center	{background-image:url("../../../../images/itoris/producttabsslider/descending/white/d_a.png");}
+.itabs .i_titles .i_title.i_current .i_left		{background-image:url("../../../../images/itoris/producttabsslider/descending/white/dl_a.png");}	
+
+.itabs .contents{border-color: #cccccc;background-color:white; background-repeat:repeat-x; background-image:url("../../../../images/itoris/producttabsslider/descending/white/b.png");}
+
+.itabs .i_titles .i_title .i_corner.r						{background-image:url("../../../../images/itoris/producttabsslider/descending/white/rc.png");}
+.itabs .i_titles .i_title:hover .i_corner.r				{background-image:url("../../../../images/itoris/producttabsslider/descending/white/rc_h.png");}
+.itabs .i_titles .i_title.i_current .i_corner.r				{background-image:url("../../../../images/itoris/producttabsslider/descending/white/rc_a.png");}
+
+.itabs .i_titles.with-scroll .i_scroll.i__left			{background-image:url("../../../../images/itoris/producttabsslider/descending/white/ml.png");}
+.itabs .i_titles.with-scroll .i_scroll.i__right			{background-image:url("../../../../images/itoris/producttabsslider/descending/white/mr.png");}
+
+.itabs .i_titles.with-scroll .i_scroll.i__left:hover		{background-image:url("../../../../images/itoris/producttabsslider/descending/white/ml_h.png");}
+.itabs .i_titles.with-scroll .i_scroll.i__right:hover		{background-image:url("../../../../images/itoris/producttabsslider/descending/white/mr_h.png");}
+
+
+.itabs .images-preload .d_h							{background-image:url("../../../../images/itoris/producttabsslider/descending/white/d_h.png");}
+.itabs .images-preload .dl_h						{background-image:url("../../../../images/itoris/producttabsslider/descending/white/dl_h.png");}
+/*.itabs .images-preload .dr_h						{background-image:url("../../../../images/itoris/producttabsslider/descending/white/dr_h.png");}*/
+
+.itabs .images-preload .ml_h						{background-image:url("../../../../images/itoris/producttabsslider/descending/white/ml_h.png");}
+.itabs .images-preload .mr_h						{background-image:url("../../../../images/itoris/producttabsslider/descending/white/mr_h.png");}
+.itabs .images-preload .rc_h						{background-image:url("../../../../images/itoris/producttabsslider/descending/white/rc_h.png");}
+
+.itabs .i_titles .i_title span				{color:#dfdfdf;}
+.itabs .i_titles .i_title:hover span		{color:#ffffff;}
+.itabs .i_titles .i_title.i_current span		{color:black;}

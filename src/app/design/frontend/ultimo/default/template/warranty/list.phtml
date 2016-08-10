@@ -1,0 +1,42 @@
+<div class="page_wrap">
+<div class="page_content">
+        <h2 class="page_title page_title_gray"><?php echo $this->__('Warranty Registration') ?></h2>
+</div>
+
+<div class="warranty-registration">
+    <?php $warranties = $this->getWarranties(); ?>
+    <?php if (count($warranties) > 0): ?>
+    <p class="intro"><?php echo $this->__('Below are the products you have registered')?></p>
+    
+    <a href="<?php echo Mage::getUrl('warranty/registration'); ?>">
+        <button type="button" title="<?php echo $this->__('Register Products') ?>" class="button"><span><span><?php echo $this->__('Register Products') ?></span></span></button>
+    </a>
+    <div class="warranty-list products-grid">
+    <?php foreach($warranties as $_warranty): ?>
+    <div class="item">
+        <div class="product-image-wrapper">
+            <img src="<?php echo $this->getWarrantyImage($_warranty); ?>" width="196px" height="196px" />
+        </div>
+        <div class="warranty-info">
+            <h4><?php echo ucwords($_warranty->getModel()); ?></h4>
+            <p><span class="bold"><?php echo $this->__('Make'); ?>:</span> <?php echo ucwords($_warranty->getMake()); ?></p>
+            <p><span class="bold"><?php echo $this->__('Model'); ?>:</span> <?php echo ucwords($_warranty->getModel()); ?></p>
+            <p><span class="bold"><?php echo $this->__('Serial'); ?>:</span> <?php echo ucwords($_warranty->getSerial()); ?></p>
+            <p><span class="bold"><?php echo $this->__('Date of Purchase'); ?>:</span> <?php echo ucwords($_warranty->getDateOfPurchase()); ?></p>
+        </div>
+        <div class="warranty-time-left">
+            <p><?php echo $this->__('Time left on warranty:'); ?> <span><?php echo $_warranty->getTimeLeft(); ?> <?php echo $this->__('Months'); ?></span></p>
+        </div>
+    </div>
+    <?php endforeach; ?>
+    </div>
+    <?php else: ?>
+        <p class="intro"><?php echo $this->__('You have not yet registered any warranties')?></p>
+				<p class="intro"><a href="<?php echo Mage::getUrl('warranty/registration'); ?>">
+			        <button type="button" title="<?php echo $this->__('Register Products') ?>" class="button"><span><span><?php echo $this->__('Register Products') ?></span></span></button>
+			    </a></p><br /><br />
+		
+    <?php endif; ?>
+</div>
+</div>
+<div class="page_foot"></div>

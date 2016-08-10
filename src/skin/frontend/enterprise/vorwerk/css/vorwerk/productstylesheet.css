@@ -1,0 +1,1664 @@
+@charset "utf-8";
+/* CSS Document */
+
+/**************************************************/
+/* PRODUCT PAGE LAYOUT */
+/**************************************************/
+
+/*************** CONTAINER ***************/
+
+.products #MainContentContainer{
+	position:relative;
+	width:960px;
+}
+
+.products .MainContentContainerLeft{
+	float:left;
+	width:695px;
+	margin:0;
+}
+
+/*************** LEVEL 1 ***************/
+
+#Level1OurProducts {
+	height:150px;
+	margin-top:25px;
+}
+
+#Level1OurProducts #Box1{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:950px;
+	height:145px;
+	background-image:url(../../images/vorwerk/our_products/banner_our_products.png);
+	background-repeat:no-repeat;
+}
+
+#Level1Tools {
+	float:left;
+	margin-top:25px;
+	width:695px;
+}
+
+
+
+#Level1Tools #Box1 {
+	position:relative;
+	float:left;
+	width:135px;
+	height:139px;
+}
+
+#Level1Tools #Box2,
+#Level1Tools #Box3,
+#Level1Tools #Box4,
+#Level1Tools #Box5 {
+	position:relative;
+	float:left;
+	width:135px;
+	margin-left:5px;
+	height:139px;
+				display:block;
+
+}
+
+#Level1Tools #Box1 img,
+#Level1Tools #Box2 img,
+#Level1Tools #Box3 img,
+#Level1Tools #Box4 img,
+#Level1Tools #Box5 img {
+	margin-left:5px;
+	margin-top:0px;
+}
+
+.toolsTab{
+	width:695px;
+	height:139px;
+	background-color: #ebe8e6;
+}
+
+.ToolsNavOff{
+	background-color: #f1edea;
+}
+
+.ToolsNavOn{
+	background-color: #FFF;
+}
+
+.ToolsNavWhiteBox{
+	position:relative;
+	top:160px;
+	width:135px;
+	height:10px;
+	background-color:#FFF;
+}
+
+/*************** WHITE BOX CONTROLS ***************/
+
+#Flexo{
+	position:relative;
+	left:0px;
+}
+
+#Duster{
+	position:relative;
+	left:140px;
+}
+
+#Crevice{
+	position:relative;
+	left:280px;
+}
+
+#HD40{
+	position:relative;
+	left:420px;
+}
+
+#Telescopic{
+	position:relative;
+	left:560px;
+}
+
+/*************** LEVEL 2 ***************/
+
+#Level2OurProducts{
+	height:245px;
+	margin-top:20px;
+}
+
+
+/*#Level2OurProducts #Box1{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:460px;
+	height:189px;
+	background-image:url(../../images/vorwerk/our_products/green_bkgd.jpg);
+	background-repeat:repeat-x;
+}*/
+
+#Level2OurProducts #Box1{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:460px;
+	height:235px;
+}
+
+#Level2OurProducts #Box1 #Text,
+#Level2OurProducts #Box2 #Text {
+	position:relative;
+	float:left;
+	left:0px;
+	width:250px;
+	margin:0;
+}
+
+#Level2OurProducts #Box1 #Image,
+#Level2OurProducts #Box2 #Image {
+	position:relative;
+	float:left;
+	width:210px;
+	top:0px;
+}
+
+#Level2OurProducts #Box2{
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:460px;
+	height:235px;
+}
+
+#Level2Tools {
+	position:relative;
+	float:left;
+	width:695px;
+	background-color: #FFF;
+	padding-bottom:50px;
+}
+
+
+
+/*************** LEVEL 3 ***************/
+
+#Level3OurProducts{
+	height:365px;
+	margin-top:30px;
+}
+
+#Level3OurProducts .Image,
+#Level4OurProducts .Image,
+#Level5OurProducts .Image{
+	margin: 0 0 0 0;
+}
+
+#Level3OurProducts h3,
+#Level4OurProducts h3,
+#Level5OurProducts h3{
+	margin: 10px 10px 10px 10px;
+}
+
+#Level3OurProducts p.body2,
+#Level4OurProducts p.body2,
+#Level5OurProducts p.body2 {
+	margin:0 10px 0 10px;
+}
+
+#Level3OurProducts h3,
+#Level4OurProducts h3,
+#Level5OurProducts h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#113C2B;
+	text-transform:uppercase;
+	font-size:14px;
+}
+
+
+#Level3OurProducts #Box1,
+#Level3OurProducts #Box2,
+#Level3OurProducts #Box3,
+#Level3OurProducts #Box4 {
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:215px;
+	height:265px;
+}
+
+/*************** LEVEL 4 ***************/
+
+#Level4OurProducts{
+	height:365px;
+	margin-top:30px;
+}
+
+
+#Level4OurProducts #Box1,
+#Level4OurProducts #Box2,
+#Level4OurProducts #Box3,
+#Level4OurProducts #Box4 {
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:215px;
+	height:265px;
+}
+
+/*************** LEVEL 5 ***************/
+
+#Level5OurProducts{
+	height:365px;
+	margin-top:30px;
+}
+
+
+#Level5OurProducts #Box1,
+#Level5OurProducts #Box2,
+#Level5OurProducts #Box3,
+#Level5OurProducts #Box4 {
+	position:relative;
+	margin-top:5px;
+	margin-left:5px;
+	width:215px;
+	height:265px;
+}
+
+/*************** BREADCRUMBS ***************/
+
+.apDivBreadcrumbs {
+	position:relative;
+	float:left;
+	width:960px;
+	top:15px;
+	margin-bottom:10px;
+}
+
+.apDivBreadcrumbs2 {
+	position:relative;
+	width:960px;
+	margin-top:15px;
+    margin-bottom: 30px;
+}
+
+/*************** TITLES ***************/
+
+.apDivTitleBar3 {
+	float:left;
+	width:960px;
+	height:1px;
+	margin-top:30px;
+}
+
+/*************** PRODUCT BANNERS ***************/
+
+.apDivProductBanner {
+	float:left;
+	background-color:#FFF;
+	width:960px;
+	height:150px;
+	top:70px;
+	margin-left:0;
+	margin-bottom:25px;
+	-webkit-box-shadow:0 0 5px #cccccc;
+	-moz-box-shadow:0 0 5px #cccccc;
+	box-shadow:0 0 15px #cccccc;
+}
+
+.apDivProductBanner2 {
+	height:150px;
+	margin-top:25px;
+}
+
+.apDivProductBanner .InnerContent,
+.apDivProductBanner2 .InnerContent   {
+	position:relative;
+	float:left;
+	margin-top:5px;
+	margin-left:5px;
+	width:950px;
+	height:140px;
+}
+
+/**************************************************/
+/* IMAGES WITH WHITE BACKGROUND */
+/**************************************************/
+
+#ImageContainer2 {
+	height:179px;
+	margin: 0 0 8px 0;
+}
+
+#ImageContainer3 {
+	height:199px;
+	margin: 10px 0 8px 0;
+}
+
+#ImageContainer4 {
+	height:200px;
+	margin: 10px 0 8px 0;
+}
+
+.ImageBox { /*On the About Us Pages */
+	position:relative;
+	float:left;
+	width:200px;
+	height:200px;
+}
+
+.PressImageBox { /*On the Press Summary Page */
+	position:relative;
+	float:left;
+	width:115px;
+	height:115px;
+}
+
+.BannerImage {
+	position:relative;
+	float:left;
+	width:645px;
+	height:120px;
+}
+
+.HalfBannerImage {
+	position:relative;
+	float:left;
+	width:310px;
+	height:125px;
+}
+
+#ImageContainer2 .InnerContent,
+#ImageContainer3 .InnerContent,
+#ImageContainer4 .InnerContent,
+.ImageBox .InnerContent,
+.BannerImage .InnerContent,
+.HalfBannerImage .InnerContent {
+	position:relative;
+	float:left;
+	margin-top:5px;
+	margin-left:5px;
+}
+
+.whitebackground {
+	background-color:#FFF;
+}
+
+
+#AboutUsLeft {
+	margin:0 15px 20px 0;
+}
+
+#AboutUsRight {
+	margin:0 0 20px 15px;
+}
+
+
+
+
+/**************************************************/
+/* ANIMATED IMAGES */
+/**************************************************/
+
+.image_animation img.active{
+	-webkit-box-shadow:0 0 0 #fff;
+	-moz-box-shadow:0 0 0 #fff;
+	box-shadow:0 0 0 #fff;
+}
+
+/**************************************************/
+/* LAYOUT */
+/**************************************************/
+
+#apDivMainContentContainer {
+	position:relative;
+	width:960px;
+	top:0px;
+}
+
+.apDivMainContentLevel1 {
+	float:left;
+	background-color:#FFF;
+	width:695px;
+	padding-bottom:50px;
+	-webkit-box-shadow:0 0 5px #cccccc;
+	-moz-box-shadow:0 0 5px #cccccc;
+	box-shadow:0 0 15px #cccccc;
+}
+
+.apDivSubContentContainer{
+	position:relative;
+	float:left;
+	margin-top:0;
+	margin-left:25px;
+	width:240px;
+}
+
+.apDivSubContentContainerLeft{
+	position:relative;
+	float:left;
+	margin-top:0;
+	margin-right:24px;
+	width:240px;
+}
+
+.apDivSubContentContainerRight{
+	position:relative;
+	float:right;
+	margin-top:0;
+	margin-left:24px;
+	width:240px;
+}
+
+.apDivSubContentContainer2{
+	position:relative;
+	float:left;
+	margin-top:25px;
+	margin-left:25px;
+	width:240px;
+}
+
+.apDivSubContentLevel1 {
+	float:left;
+	background-color:#FFF;
+	width:240px;
+	padding-bottom:15px;
+	margin-bottom:25px;
+	-webkit-box-shadow:0 0 5px #cccccc;
+	-moz-box-shadow:0 0 5px #cccccc;
+	box-shadow:0 0 15px #cccccc;
+}
+
+.apDivSubContentLevel2 {
+	float:left;
+	width:240px;
+	margin-top:25px;
+	margin-bottom:25px;
+}
+
+.apDivSubContentLevel3 {
+	float:left;
+	width:240px;
+	height:185px;
+	margin-top:25px;
+	margin-bottom:25px;
+}
+
+.apDivMainContentLeft {
+	position:relative;
+	float:left;
+	margin-top:40px;
+	margin-left:25px;
+	width:310px;
+}
+
+.apDivMainContentRight {
+	position:relative;
+	float:left;
+	margin-top:40px;
+	margin-left:25px;
+	width:310px;
+}
+
+.apDivMainContentFull {
+	position:relative;
+	float:left;
+	margin-left:25px;
+	width:645px;
+}
+
+.apDivMainContentThirds {
+	position:relative;
+	float:left;
+	margin: 0 0 0 0;
+	width:670px;
+}
+
+
+.AboutUsContentFullLengthFirst {
+	position:relative;
+	float:left;
+	margin: 0 0 0 24px;
+	width:645px;
+	padding:0;
+}
+
+.AboutUsContentFullLength {
+	position:relative;
+	float:left;
+	margin: 25px 0 0 24px;
+	width:645px;
+	padding:0;
+}
+
+.AboutUsContentTwoThirdsLength{
+	position:relative;
+	float:left;
+	width:430px;
+}
+
+.AboutUsContentGrandDesigns{
+	position:relative;
+	float:left;
+	width:320px;
+}
+
+.PressSummaryTextContainer {
+	position:relative;
+	float:left;
+	width:500px;
+	margin-left:10px;
+}
+
+.AboutUsContentHalfLengthFirst,
+.AboutUsContentHalfLength {
+	position:relative;
+	float:left;
+	width:310px;
+	padding:0;
+	margin: 0 0 24px 0;
+}
+
+.AboutUsContentHalfLength {
+	margin: 0 0 0 25px;
+}
+
+/**************************************************/
+/* SIDEBAR */
+/**************************************************/
+
+.SideBar3Container{
+	position:relative;
+	float:left;
+	margin:0 0 25px 25px;
+	width:240px;
+}
+
+.SideBar3Container2 { /*** For Tools Pages need the top margin ***/
+	position:relative;
+	float:left;
+	margin:25px 0 25px 25px;
+	width:240px;
+}
+
+.SideBar3Container3 { /*** For any page with shopContent DIV ***/
+	position:relative;
+	float:left;
+	margin:0 0 25px 25px;
+	width:239px;
+}
+
+.SideBarTopic {
+	position:relative;
+	float:left;
+	padding: 20px 0 20px 0;
+	background: url("../../images/vorwerk/line_horizontal.png")bottom repeat-x;
+	margin: 0 0 0 16px;
+}
+
+.SideBarTopicLast {
+	position:relative;
+	float:left;
+	padding: 20px 0 20px 0;
+	background: none;
+	margin: 0 0 0 16px;
+}
+
+.SideBarTopic h3,
+.SideBarTopicLast h3, {
+	margin: 0 0 12px 5px;
+}
+
+.SideBarTopic .image,
+.SideBarTopicLast .image {
+	float:left;
+	margin:0;
+	width:78px;
+}
+
+.SideBarTopic .text,
+.SideBarTopicLast .text {
+	float:left;
+	width:125px;
+	margin: 0 0 10px 7px;
+}
+
+.ShopSideBarTopicLast {
+	position:relative;
+	float:left;
+	padding: 20px 0 0 0;
+	background: none;
+	margin: 0 0 0 16px;
+}
+
+.ShopSideBarTopicLast h3 {
+	margin: 0 0 10px 5px;
+
+}
+.shopSideBarImage {
+	float:left;
+	margin:0 0 0 10px;
+	width:225px;
+}
+.SideBarTopicLast .shopText {
+	float:left;
+	width:230px;
+	margin: 0 0 10px 0;
+}
+
+.SideBarTopic p.body2,
+.SideBarTopicLast p.body2  {
+	margin: 0;
+}
+
+/*****************SIDE BAR VIDEO*********************/
+
+ul.fancybox {
+	list-style:none;
+	margin:0;
+	padding:0;
+	text-indent:0;
+}
+
+
+/*****************CORP BRANDING GREEN LINE*********************/
+
+.GreenLine {
+	position:relative;
+	float:left;
+	width:645px;
+	height:6px;
+	background-color:#009A3D;
+	margin: 0 0 45px 0;
+}
+
+.GreenLine400 {
+	position:relative;
+	float:left;
+	width:400px;
+	height:6px;
+	background-color:#009A3D;
+	margin: 0 0 45px 0;
+}
+
+/*****************TOOLS AND ATTACHMENTS LAYOUT *********************/
+
+.apDivMainContentLeftTools {
+	position:relative;
+	float:left;
+	margin-top:20PX;
+	margin-left:25px;
+	margin-bottom:25px;
+	width:310px;
+}
+
+.apDivMainContentLeftTools img#HD40_1,
+.apDivVk140Full1 {
+	margin:25px 0 25px 0;
+}
+
+.apDivMainContentLeftTools img#sp520set3{
+		margin:185px 0 25px 0;
+}
+
+.apDivMainContentLeftThird{
+	position:relative;
+	float:left;
+	margin-top:0;
+	margin-left:25px;
+	margin-bottom:25px;
+	width:200px;
+}
+
+.apDivMainContentLeftTwoThirds {
+	position:relative;
+	float:left;
+	margin-top:0;
+	margin-left:25px;
+	margin-bottom:25px;
+	width:420px;
+}
+
+.apDivMainContentRightThird{
+	position:relative;
+	float:left;
+	margin-top:0;
+	margin-left:25px;
+	margin-bottom:25px;
+	width:200px;
+}
+
+.apDivMainContentRightTools {
+	position:relative;
+	float:left;
+	margin-top:20PX;
+	margin-left:25px;
+	margin-bottom:25px;
+	width:310px;
+}
+
+.apDivMainContentRightTwoThirds {
+	position:relative;
+	float:left;
+	margin-top:0;
+	margin-left:25px;
+	margin-bottom:25px;
+	width:420px;
+}
+
+.apDivMainContentFullTools {
+	position:relative;
+	float:left;
+	margin-left:25px;
+	width:645px;
+}
+
+ #contactAddress .apDivMainContentFullTools { /*** On Contact us Page (no margin) ***/
+	position:relative;
+	float:left;
+	margin-left:0;
+	width:645px;
+}
+
+.apDivMainContentFullTools #Box1 {
+	position:relative;
+	float:left;
+	margin-left:0;
+	width:199px;
+	margin-bottom:70px;
+}
+
+.apDivMainContentFullTools #Box2,
+.apDivMainContentFullTools #Box3 {
+	position:relative;
+	float:left;
+	margin-left:24px;
+	width:199px;
+	margin-bottom:30px;
+
+}
+
+.apDivMainContentFullTools #TextBox1 {
+	position:relative;
+	float:left;
+	margin: 0 0 0 24px;
+	width:422px;
+}
+
+.apDivMainContentFullTools #TextBox2 {
+	position:relative;
+	float:left;
+	margin-right:24px;
+	width:422px;
+}
+
+/*****************MAIN IMAGE LABELS LAYOUT *********************/
+
+/************ROBOT*************/
+
+.mainImageRobot {
+	position:relative;
+	float:left;
+	width:648px;
+	height:480px;
+	margin: 0 0 25px 0;
+	background-image:url(../../images/vorwerk/our_products/vr100_01.jpg);
+	background-repeat:no-repeat;
+}
+
+.mainImageRobot .eyeCatcher {
+	position:relative;
+	float:left;
+	width:150px;
+	height:150px;
+	left: 50px;
+	top: 45px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageRobot .pointOne {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 468px;
+	top: 208px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageRobot .pointTwo {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 325px;
+	top: 175px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageRobot .pointThree {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 256px;
+	top: 215px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageRobot .pointFour {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 365px;
+	top: 315px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageRobot .pointFive {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 435px;
+	top: 350px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageRobot .pointSix {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 75px;
+	top: 280px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageRobot .pointSeven {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 215px;
+	top: 310px;
+	margin:0;
+	padding:0;
+}
+
+/************HANDHELD*************/
+
+.mainImageHandheld {
+	position:relative;
+	float:left;
+	width:648px;
+	height:480px;
+	margin: 0 0 25px 0;
+	background-image:url(../../images/vorwerk/our_products/vc100_06.jpg);
+	background-repeat:no-repeat;
+}
+
+.mainImageHandheld .eyeCatcher {
+	position:relative;
+	float:left;
+	width:150px;
+	height:150px;
+	left: 220px;
+	top: 55px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageHandheld .pointOne {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 425px;
+	top: 130px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageHandheld .pointTwo {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 427px;
+	top: 205px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageHandheld .pointThree {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 345px;
+	top: 245px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageHandheld .pointFour {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 365px;
+	top: 315px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageHandheld .pointFive {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 265px;
+	top: 390px;
+	margin:0;
+	padding:0;
+}
+
+/************UPRIGHT*************/
+
+.mainImageUpright {
+	position:relative;
+	float:left;
+	width:648px;
+	height:480px;
+	margin: 0 0 25px 0;
+	background-image:url("../../images/vorwerk/our_products/vk150_06.jpg");
+	background-repeat:no-repeat;
+}
+
+.mainImageUpright .eyeCatcher {
+	position:relative;
+	float:left;
+	width:150px;
+	height:150px;
+	left: 50px;
+	top: 25px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageUpright .pointOne {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 340px;
+	top: 12px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageUpright .pointTwo {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 290px;
+	top: 76px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageUpright .pointThree {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 285px;
+	top: 212px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageUpright .pointFour {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 316px;
+	top: 360px;
+	margin:0;
+	padding:0;
+}
+
+.mainImageUpright .pointFive {
+	position:absolute;
+	float:left;
+	width:35px;
+	height:35px;
+	left: 237px;
+	top: 424px;
+	margin:0;
+	padding:0;
+}
+
+
+
+/*****************ROBOT UPDATE BOX LAYOUT *********************/
+
+.apDivRobotUpdate {
+	position:relative;
+	float:left;
+	width:645px;
+	border:solid 1px #999999;
+	margin: 0 0 25px 0;
+}
+
+.apDivRobotUpdate .text{
+	position:relative;
+	float:left;
+	width:595px;
+	margin: 0 0 0 25px;
+}
+
+
+
+/*****************PRODUCT CONTENT LAYOUT*********************/
+
+.apDivEb360Right2{
+	margin-top:10px;
+}
+
+.apDivEb360Left3{
+	margin-top:20px;
+	margin-bottom:40px;
+}
+.apDivEb360Right3{
+	margin-top:90px;
+	margin-bottom:40px;
+}
+
+.apDivPb420Left1,
+.apDivPb420Right1 {
+	margin-bottom:25px;
+}
+
+.apDivPb420Left2 {
+	margin-bottom:110px;
+}
+
+.apDivPb420Left3,
+.apDivPb420Right3  {
+	margin-bottom:35px;
+}
+
+.apDivPb420Left4,
+.apDivPb420Right4 {
+	margin-bottom:40px;
+}
+
+.apDivPb420Left5,
+.apDivPb420Right5 {
+	margin-bottom:60px;
+}
+.apDivPb420Left6,
+.apDivPb420Right6 {
+	margin-bottom:140px;
+}
+.apDivPb420Left7,
+.apDivPb420LRight7 {
+	margin-bottom:150px;
+}
+.apDivFlexoLeft1 {
+	margin: 25px 0 0 0;
+}
+
+.apDivFilterBagLeft1 {
+	margin: 0 0 20px 0;
+}
+
+.apDivFilterBagRight1 {
+	margin: 0 0 40px 0;
+}
+
+.apDivFilterBagLeft2 {
+	margin: 60px 0 90px 0;
+}
+
+.apDivConsumablesLeft1 {
+	margin: 0 0 120px 0;
+}
+
+.apDivConsumablesRight1 {
+	margin: 0 0 20px 0;
+}
+
+.apDivConsumablesLeft3 {
+	margin: 40px 0 120px 0;
+}
+
+.apDivConsumablesRight3 {
+	margin: 40px 0 20px 0;
+}
+
+.apDivConsumablesLeft4 {
+	margin: 0 0 20px 0;
+}
+
+.apDivConsumablesRight4 {
+	margin: 0 0 50px 0;
+}
+
+.apDivConsumablesLeft5 {
+	margin: 0 0 40px 0;
+}
+
+.apDivConsumablesRight5 {
+	margin: 0 0 50px 0;
+}
+
+.apDivConsumablesLeft6 {
+	margin: 0 0 40px 0;
+}
+
+.apDivConsumablesRight6 {
+	margin: 0 0 130px 0;
+}
+
+
+.apDivToy140Left1 {
+	margin:0 0 150px 0;
+}
+
+.apDivToy140Right1 {
+	margin:0 0 30px 0;
+}
+
+.apDivToy140Right2 {
+	margin:0 0 100px 0;
+}
+
+.apDivToy140Right3 {
+	margin:0 0 0 0;
+}
+
+
+
+.box-related .product-image,
+.apDivSubContentLevel2 .image {
+	position:relative;
+	float:left;
+	height:63px;
+	width:63px;
+	background-color:#FFF;
+	margin-left:0;
+	-webkit-box-shadow:0 0 5px #cccccc;
+	-moz-box-shadow:0 0 5px #cccccc;
+	box-shadow:0 0 15px #cccccc;
+}
+
+.apDivSubContentLevel2 .text,
+.apDivSubContentLevel3 .text  {
+	position:relative;
+	float:left;
+	height:80px;
+	width:157px;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+
+/**************************************************/
+/* IMAGE GALLERIES */
+/**************************************************/
+
+.ImageGalleryContainer {
+	position:relative;
+	width:645px;
+	height:261px;
+	background-color:#FFF;
+}
+
+
+
+/**************************************************/
+/* TABLES */
+/**************************************************/
+table.technical-spec {
+	background-color: #fff;
+	border: 0 none;
+	border-collapse: collapse;
+	clear: both;
+	margin: 0 0 24px 0;
+	width: 100%;
+}
+
+table.technical-spec tr{
+	padding-bottom: 1px;
+}
+/* Zebra-Look
+.apDivMainContentFull table tbody tr.row-even td,
+.apDivMainContentFull table tbody tr.row-even th {
+	background: #f9f8f6;
+}
+*/
+
+table.technical-spec tr.alt td {
+	background: #f9f8f6;
+
+}
+
+table.technical-spec th,
+table.technical-spec td {
+	background-color: #fff;
+	border: 0 none;
+	border-bottom: 1px dotted #d0ccc9;
+	color: #595552;
+	font-size: 1em;
+	line-height: 1.5em;
+	padding: .5em 12px;
+	text-align: left;
+	vertical-align: middle;
+}
+table.technical-spec .caption {
+    font-weight: bold;
+    white-space:nowrap;
+}
+
+
+/**************************************************/
+/* LINKS */
+/**************************************************/
+
+a.link-intern,
+a.link-back,
+a.link-top {
+	background-repeat: no-repeat;
+	background-position: .2em .5em;
+	padding: 0 1em .5em 12px;
+}
+
+a.link-intern,
+a.link-intern:link,
+a.link-intern:visited {
+	background-image:url("../../images/vorwerk/nav/link_intern.png");
+	color: #009645;
+}
+
+a.link-intern:hover,
+a.link-intern:focus,
+a.link-intern:active {
+	background-image: url("../../images/vorwerk/nav/link_intern_hover.png");
+	color: #8cbd5a;
+}
+
+
+/*********************** NEW VK150 STYLE **************************/
+
+a.link-intern-150 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#009A3D;
+	text-transform:uppercase;
+	text-decoration:none;
+	font-weight:bold;
+	background-repeat: no-repeat;
+	background-position:right 2px;
+	padding: 0 1.1em .5em 0;
+}
+
+a.link-intern-150,
+a.link-intern-150:link,
+a.link-intern-150:visited {
+	background-image:url("../../images/vorwerk/nav/arrow_right.png");
+	color: #009A3D;
+}
+
+a.link-intern-150:hover,
+a.link-intern-150:focus,
+a.link-intern-150:active {
+	background-image: url("../../images/vorwerk/nav/arrow_right_hover.png");
+	color: #95C11C;
+}
+
+
+
+
+
+.menu_white .megamenu li a.main-nav-150 {
+	font-family:Arial, Helvetica, sans-serif;
+	line-height:30px;
+	color:#009A3D;
+	text-transform:uppercase;
+	text-decoration:none;
+	font-weight:bold;
+	text-transform:uppercase;
+	font-size:15px;
+
+}
+
+.menu_white .megamenu li a.main-nav-150,
+.menu_white .megamenu li a.main-nav-150:link,
+.menu_white .megamenu li a.main-nav-150:visited {
+	color: #009A3D;
+}
+
+.menu_white .megamenu li a.main-nav-150:hover,
+.menu_white .megamenu li a.main-nav-150:focus,
+.menu_white .megamenu li a.main-nav-150:active {
+	color: #95C11C;
+}
+
+
+/******************************************************************/
+
+
+a.link-back,
+a.link-back:link,
+a.link-back:visited {
+	background-image: url("../../images/vorwerk/nav/link_back.png");
+	color: #009645;
+}
+
+a.link-back:hover,
+a.link-back:focus,
+a.link-back:active {
+	background-image: url("../../images/vorwerk/nav/link_back_hover.png");
+	color: #8cbd5a;
+}
+
+a.link-top,
+a.link-top:link,
+a.link-top:visited {
+	background-image: url("../../images/vorwerk/nav/link_top.png");
+	color: #009645;
+}
+
+a.link-top:hover,
+a.link-top:focus,
+a.link-top:active {
+	background-image: url("../../images/vorwerk/nav/link_top_hover.png");
+	color: #8cbd5a;
+}
+
+a.link-footer{
+	background-repeat: no-repeat;
+	background-position: .2em .5em;
+	padding: 0 1em .5em 12px;
+}
+
+a.link-footer,
+a.link-footer:link,
+a.link-footer:visited {
+	background-image:url("../../images/vorwerk/nav/metanav_footer.png");
+	color: #a8a4a1;
+	text-decoration:none;
+}
+
+a.link-footer:hover,
+a.link-footer:focus,
+a.link-footer:active {
+	background-image: url("../../images/vorwerk/nav/metanav_footer_hover.png");
+	color: #009645;
+	text-decoration:underline;
+}
+
+.bottom-link {
+	text-align:right;
+	margin-top:15px;
+}
+
+.bottom-link .link-intern{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+
+a.link-pdf {
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	padding: 0 0 10px 30px;
+}
+
+a.link-pdf,
+a.link-pdf:link,
+a.link-pdf:visited {
+	background-image:url("../../images/vorwerk/nav/pdf-download-bullet.png");
+	color: #009645;
+}
+
+a.link-pdf:hover,
+a.link-pdf:focus,
+a.link-pdf:active {
+	background-image: url("../../images/vorwerk/nav/pdf-download-bullet.png");
+	color: #8cbd5a;
+}
+
+/*****************TOOLS NAVIGATION *********************/
+
+a.link-intern2 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+}
+
+a.link-intern2,
+a.link-intern2:link,
+a.link-intern2:visited {
+	color:#8c8c8c;
+	text-decoration:none;
+}
+
+a.link-intern2:hover,
+a.link-intern2:focus,
+a.link-intern2:active{
+	color: #009645;
+	text-decoration:underline;
+}
+
+
+/*****************BUTTON LOOKALIKES*********************/
+
+
+.button-lookalike {
+	text-align: right;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFF;
+}
+
+.button-lookalike.robotUpdate {
+	text-align: left;
+	padding: 0 0 0 40px;
+	margin: 10px 0 15px 0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color: #FFF;
+}
+
+/****************** GREEN BUTTON **********************/
+
+.button-lookalike a,
+.button-lookalike a:link,
+.button-lookalike a:visited {
+	background:url("../../images/vorwerk/nav/buttons-left.png") left 0 no-repeat;
+	color: #fff;
+	font-weight: bold;
+	height: 24px;
+	line-height: 24px;
+	margin: 0 0 0 0;
+	overflow: hidden; /* only one line */
+	padding: 0 0 0 25px;
+	text-decoration: none;
+	display: inline-block;
+
+}
+
+.button-lookalike a:hover,
+.button-lookalike a:focus,
+.button-lookalike a:active {
+	background: url("../../images/vorwerk/nav/buttons-left.png") left -100px no-repeat;
+
+}
+
+.button-lookalike a span {
+	background: url("../../images/vorwerk/nav/buttons-right.png") right 0 no-repeat;
+	display: inline-block;
+	padding: 0 16px 0 0;
+	text-align: left;
+}
+.button-lookalike a:hover span,
+.button-lookalike a:focus span,
+.button-lookalike a:active span {
+	background: url("../../images/vorwerk/nav/buttons-right.png") right -100px no-repeat;
+}
+
+/****************** ORANGE BUTTON **********************/
+
+.button-lookalike.orange a,
+.button-lookalike.orange a:link,
+.button-lookalike.orange a:visited {
+	background:url("../../images/vorwerk/nav/buttons-left.png") left -600px no-repeat;
+	color: #fff;
+	font-weight: bold;
+	height: 24px;
+	line-height: 24px;
+	margin: 0 0 0 0;
+	overflow: hidden; /* only one line */
+	padding: 0 0 0 25px;
+	text-decoration: none;
+	display: inline-block;
+
+}
+
+.button-lookalike.orange a:hover,
+.button-lookalike.orange a:focus,
+.button-lookalike.orange a:active {
+	background: url("../../images/vorwerk/nav/buttons-left.png") left -700px no-repeat;
+
+}
+
+.button-lookalike.orange a span {
+	background: url("../../images/vorwerk/nav/buttons-right.png") right -600px no-repeat;
+	display: inline-block;
+	padding: 0 16px 0 0;
+	text-align: left;
+}
+.button-lookalike.orange a:hover span,
+.button-lookalike.orange a:focus span,
+.button-lookalike.orange a:active span {
+	background: url("../../images/vorwerk/nav/buttons-right.png") right -700px no-repeat;
+}
+
+
+.apDivSubContentLevel1 .button-lookalike {
+	margin-top:15px;
+}
+
+#Level3Home #Box1 .button-lookalike {
+	float:left;
+	margin: 0 0 0 7px;
+
+}
+
+/****************** EYECATCHER BUTTON **********************/
+
+.button-eyecatcher {
+	width:150px;
+	height:150px;
+	background-image:url(../../images/vorwerk/homepage/homepage_eyecatcher.png);
+}
+
+/**************************************************/
+/* TYPOGRAPHY */
+/**************************************************/
+
+
+#apDivMainContentContainer p.productTitle {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+	font-weight:bold;
+	margin:0 0 12px 0;
+	color:#009A3D;
+	text-transform:uppercase;
+}
+
+.AboutUsContentTwoThirdsLength h3 {
+	margin: 0 0 10px 0;
+}
+
+
+.AboutUsContentHalfLengthFirst h3,
+.AboutUsContentHalfLength h3 {
+	margin: 140px 0 10px 0;
+}
+
+h2.AboutUsPageTitle {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:32px;
+	font-weight:bold;
+	color:#113C2B;
+	text-transform:uppercase;
+}
+
+h2.AboutUsPageTitle span {
+	color:#009A3D;
+}
+
+
+/*****************BULLET POINTS*********************/
+
+ul.tick {
+	margin: 0 24px 24px 0;
+	padding-left:24px;
+	list-style-type:none;
+}
+
+ul.tick li {
+	font-size:13px;
+	color:#8c8c8c;
+	line-height:1.5em;
+	background: url(../../images/vorwerk/tick.png) no-repeat;
+	background-position: 2px 2px;
+	padding: 0 10px 0 25px;
+	margin-left:0px;
+	margin-right:15px;
+}
+
+
+ul.body3 {
+	margin: 0 24px 24px 0;
+	padding-left:24px;
+}
+
+ul.body3 li {
+	font-size:13px;
+	color:#8c8c8c;
+	line-height:1.5em;
+	padding: 0 10px 0 25px;
+	margin-left:0px;
+	margin-right:15px;
+}
+
+ol.body3 {
+	margin: 0 24px 24px 0;
+	padding-left:24px;
+}
+
+ol.body3 li {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	color:#8c8c8c;
+	line-height:1.5em;
+	padding: 0 10px 0 5px;
+	margin-left:0px;
+	margin-right:10px;
+	margin-bottom:5px;
+}

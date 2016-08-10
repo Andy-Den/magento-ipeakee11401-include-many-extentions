@@ -1,0 +1,725 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	background-image: url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/page-backgorund.png");
+	background-position: center -83px;
+	background-repeat: no-repeat;
+	width:100%;
+	font-family:  Arial, Helvetica, sans-serif;
+}
+
+#EBdescription {
+	margin:0 auto;
+	width:926px;
+}
+
+.copyright {
+	font-family: arial,verdana !important;
+	font-size:11px;
+	color:#999;
+	clear:both;
+	padding-top:20px;
+	border-top:1px dotted #999;
+	display:none;
+	
+}
+.Header-Logo{
+	margin: -30px 0 0 0;
+}
+div {
+	/* border:1px solid;*/
+	
+}
+
+img {
+	border:0px;
+	
+}
+
+#right a {
+	color: #666666;
+	font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    line-height: 26px;
+	text-decoration:none;
+}
+
+#right a:hover {
+	text-decoration:underline
+}
+
+
+#content-left-main {
+	width: 930px;
+}
+
+#content-left-crum {
+	width:380px;
+	
+}
+
+#content-left-crum a:link, #content-left-crum a:visited, #content-left-crum a:active{
+	color:#4F4F4F;
+}
+
+#content-left-crum a:hover{
+	color:#e12a2e;
+}
+
+#more-options {
+	width:383px;
+}
+
+#more-options p img {
+	border:none;
+	
+}
+
+#more-info h1 {
+	font-size:11px!important;
+	font-weight:bold;
+	color:#ed1c24;
+}
+
+#shop-categories {
+	padding-top:35px;
+	margin-left:6px;	
+}
+
+
+#base-framework {
+    width: 942px;
+}
+
+.feature-products {
+	
+	border-top:1px dotted #999999;
+	border-bottom:1px dotted #999999;
+    clear: both;
+    color: #999999;
+    padding-bottom: 7px;
+    padding-top: 4px;
+    width: 942px;
+}
+
+.feature-products img {
+	margin-top:5px;
+	margin-bottom:5px;
+	padding-right:4px;
+}
+.Store-Search {
+    height: 36px;
+	position: relative;
+	width: 251px;
+	font-size: 12px;
+	float: right;
+	margin: -62px 294px 0 0;
+}
+.call_us_today span{
+	 color:red;
+}
+.call_us_today{
+	float: right;
+	text-align:right;
+	color: #4F4F4F;
+	margin: 8px 0 0 0;
+	font-weight:700;
+}
+.Store-Search p span{
+	color: #e12a2e;
+}
+.Store-Search h2 {
+    color: #FFFFFF;
+    font-size: 13px;
+    left: 10px;
+    position: absolute;
+    top: 5px;
+}
+#Search-UL {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#Search-UL LI {
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+#Search-UL LI p {
+    margin: 0;
+    padding: 7px 10px 0 0;
+}
+#Search-UL LI p {
+    color: #4F4F4F;
+}
+#Search-UL LI p {
+    font-size: 10px;
+    font-weight: bold;
+}
+#Search-UL LI #Search-Query {
+    border: 1px solid #DADADA;
+    float: left;
+    height: 20px;
+    margin: 0;
+    width: 185px;
+}
+#Search-UL LI #Search-Submit {
+    border: 0 none;
+    color: #e12a2e;
+    cursor: pointer;
+    float: left;
+    height: 23px;
+    margin: 0;
+    width: 29px;
+}
+#Search-UL LI #Search-Query {
+    color: #898989;
+}
+#Search-UL LI #Search-Query {
+    font-size: 12px;
+    font-weight: normal;
+	width: 210px;
+	height:23px;
+}
+
+#Store-Footer {
+	height: 36px;
+	margin-top:17px;
+}
+
+
+h1, h3 {
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px !important;
+	color:#ed1c24;
+}
+
+#prod-content {
+	width:922px;
+	/*margin:0 auto !important;*/
+	/*padding-top: 43px;*/
+	margin: 54px 0 0 0;
+	
+}
+
+#prod-menu {
+	width:230px;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	line-height:26px;
+}
+
+
+#prod-menu ul {
+	margin:0 18px 0 -33px;
+	}
+	
+#prod-menu li {
+	list-style:disc inside url("http://ebay.worldofwelding.com.au/_ebay-store/images/product-description/bullet-style.jpg");
+	text-decoration:none;
+	border-bottom:1px dotted #666666;	
+}
+.product_description{
+	border-bottom: 1px solid #CCC;
+}
+#prod-menu li a {
+	text-decoration:none;
+	color:#666666;
+}
+
+#prod-menu li a:hover {
+	text-decoration:underline;	
+	color:#666666;
+}
+.block_right h1{
+	color:black;
+	font-size: 20px !important;
+}
+#right strong{
+	color:A4A4A4;
+}
+#right {
+	width:381px;
+	float:left;
+	padding-left:25px;
+	color:#727272;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+}
+#specifications_table{
+	width: 363px;
+	border-bottom: 1px solid #CCC;
+	border-top: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	background-color: #FFF;
+}
+#specifications_table tr{
+	font-weight: 700;
+}
+#specifications_table .half{
+	background-color:#ececec;
+}
+#specifications_table td{
+	padding:7px;
+	width:181;
+}
+#specifications_table .alt{
+	background-color: #EDEDED;
+}
+#right td {
+	font-family:tahoma,arial,verdana ;
+	color:#5A5A5A !important;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+#left {
+	width:300px;
+	float:left;
+}
+#content-left-main #left {
+	margin: 0 0 0 32px;
+}
+#left h1 {
+	font-size:11px!important;
+	font-weight:bold;
+	color:#ed1c24;	
+}
+
+#Store-Header {
+	height: 120px;
+	width: 100%;
+}
+#Store-Header #Store-Menu-Left a, #Store-Header #Store-Menu-Left a:visited {
+	color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Left a:hover {
+	color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Right a {
+	color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Right a:hover {
+	color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Left LI {
+    margin: 0;
+    padding: 0 25px 0 10px;
+}
+#Store-Header #Store-Menu-Right LI {
+    margin: 0;
+    padding: 0 10px 0 25px;
+}
+#Store-Menu {
+	position: absolute;
+	top: 119px;
+	width: 920px;
+	text-transform: uppercase;
+	/*background-color: #D71317;*/
+	padding: 8px 10px;
+	margin: 0px 0 0 -7px;
+}
+#Store-Menu-Left {
+    float: left;
+    margin: 0 0 0 3px;
+    padding: 0 !important;
+    position: relative;
+}
+#Store-Menu #Store-Menu-Left a {
+    color: #FFFFFF;
+}
+#Store-Menu #Store-Menu-Left a:hover {
+    color: #FFFFFF;
+}
+#Store-Menu #Store-Menu-Right a {
+    color: #FFFFFF !important;
+}
+#Store-Menu #Store-Menu-Right a:hover {
+    color: #FFFFFF !important;
+}
+* html #Store-Menu-Left {
+    margin: 0 0 0 5px;
+}
+#Store-Menu-Left LI {
+    float: left;
+    list-style: none outside none;
+    margin: 0 3px 0 0;
+    position: relative;
+	padding: 0 7px;
+}
+#Store-Menu-Right {
+    float: right;
+    margin: 0 10px 0 0;
+    position: relative;
+}
+* html #Store-Menu-Right {
+    margin: 0 5px 0 0;
+}
+#Store-Menu-Right LI {
+    float: left;
+    list-style: none outside none;
+    margin: 0 0 0 20px;
+    position: relative;
+}
+#Store-Menu-Left a , #Store-Menu-Left a:hover  {
+	font-family: arial,verdana ;
+    font-size: 14px !important;
+    color: #4F4F4F;
+    font-weight: normal;
+	text-decoration:none;
+}
+#Store-Menu-Right {
+    float: right;
+    margin: 0 -12px 0 0;
+    position: relative;
+}
+* html #Store-Menu-Right {
+    margin: 0 5px 0 0;
+}
+#Store-Menu-Right LI {
+    float: left;
+    list-style: none outside none;
+    margin: 0 0 0 20px;
+    position: relative;
+	padding: 0 10px;
+}
+#Store-Header #Store-Menu-Right a {
+	color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Right a:hover {
+	color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Left LI {
+    margin: 0;
+    padding: 0 25px 0 15px;
+}
+#Store-Header #Store-Menu-Right LI {
+    margin: 0;
+    padding: 0 15px 0 25px;
+	
+}
+#Store-Menu UL LI a {
+    color: #4F4F4F !important;
+	font-family: arial,verdana ;
+    font-size: 12px !important;
+	text-decoration:none;
+}
+#Store-Menu UL LI a:hover {
+    color: #ef0000 !important;
+	text-decoration:underline;
+	font-size: 12px !important;
+}
+
+
+.tabs {float:left; width:936px; position:relative; margin-top:55px; padding-top:1px; padding-bottom: 30px; border-bottom:1px dotted #999999;}
+.tabs ul{float:left; width:auto; list-style:none; position:absolute; left:0; top:-31px; left:-40px;}
+.tabs ul li{float:left; width:auto; font-size:11px; font-weight:normal; margin:0 -1px 0 0; display:inline}
+.tabs ul li a:hover{background-position:0 -31px; color:#010101!important; background:#FFF;}
+
+
+.tabs ul li a {
+    background: none repeat scroll 0 0 #EAEAEA;
+    border: 1px solid #c7c7c7;
+    color: #595556 !important;
+    float: left;
+    font-family:  Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    height: 31px;
+    text-align: center;
+    text-decoration: none;
+    width: auto;
+	text-transform:uppercase;
+}
+
+
+
+.tabs ul li a span {
+    cursor: pointer;
+    float: left;
+    margin: 8px 21px 0;
+    width: auto;
+}
+
+
+
+.tabs ul li a.active {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #c7c7c7;
+    color: #595556 !important;
+    float: left;
+    font-family:  Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    height: 31px;
+    text-align: center;
+    text-decoration: none;
+    width: auto;
+	text-transform:uppercase;
+}
+
+
+
+.tabs ul li a.active span {
+    cursor: text;
+    float: left;
+    margin: 8px 21px 0;
+    width: auto;
+}
+
+
+
+.tabs .description{float:left; width:710px;}
+
+.tabs .description .description_mid p {
+	
+	float:left;
+	width:910px; 
+	line-height:18px;
+	margin:0 0 0 6px;
+	display:inline;
+	padding-bottom:18px;
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+	color: #3E3E3E;
+	
+	}
+	
+.tabs .description .description_mid p.last{padding-bottom:0;}
+
+
+
+.tabs .description .description_mid {
+	border: 1px solid #c7c7c7;
+    color: #3E3E3E;
+    float: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    padding: 16px 15px 19px;
+    width: 910px;	
+
+}
+#Store-Menu-Left a {
+	color: white !important;
+}
+#Store-Menu-Right a {
+	color: white !important;
+}
+#Store-Menu-Right li.join-mail {
+    background-color:#E50F11; 
+	margin: -9px 1px auto;
+	line-height:36px;
+	height:36px;
+}
+#Store-Menu-Right li.join-mail a img{
+    margin-right:10px #E50F11; 
+}
+#Store-Menu-Right li.join-mail a img{
+	vertical-align: middle !important;
+	border: none;
+}
+#Store-Menu-Right li.join-mail span {
+	color:#FFFFFF;
+}
+#Store-Menu-Right li.join-mail a img{
+    margin: 0;
+    padding: 0 5px
+}
+
+/* Description Tabs */
+
+
+.tabs .description .description_top{float:left; width:710px; height:8px; line-height:8px; font-size:1px; display:none;}
+.tabs .description .description_bottom{float:left; width:710px; height:8px; line-height:8px; font-size:1px; display:none;}
+
+.menu-sep {
+	color:#CCC;
+	padding:0px !important;
+	margin:0px !important;
+}
+/* Store Front Feature Products */
+.block_right{
+	margin: -15px 0 0 164px;
+	width: 389px;
+}
+#bank_details_info strong{
+	color: black !important;
+}
+#bank_details_info{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	clear:both;
+	color: #4F4F4F;
+}
+.banck_details_block{
+	border-right: 1px solid #CCC;
+	padding: 0 9px 0 9px;
+	width:35%;
+}
+.banck_details_block table{
+	font-size: 12px;
+	color: #4F4F4F;
+}
+.banck_details_block_first{
+	padding: 0 9px 0 0px;
+	width:31%;
+	border-bottom:1px solid red;
+}
+.banck_details_block_last{
+	padding: 0 9px 0 9px;
+}
+.gallery-image div{
+	color:#ED1C24 !important;
+}
+.image_span{
+float:right;
+margin-top: -56px !important;
+}
+.bank_desc_table{
+	width:84%;
+	font-size:12px;
+	color:#4F4F4F;
+}
+.adjust_tag{
+	/*margin: -73px 0 0 0;*/
+	padding:10px 0 0;
+}
+.banck_details_block_last .lat_p{
+	/*margin: -151px 0 0 0;*/
+}
+.store_footer{
+	position: absolute;
+	bottom: 0px;
+	width:923px;
+	border-top:1px solid #CCC;
+}
+.store_footer table{
+	width:100%;
+}
+.store_footer .call_us_today{
+	margin:-15px 0 0 0!important;
+}
+.call_us_today span{
+	 color:#E91A20;
+	 font-size: 20px;
+}
+.call_us_today {
+    color: #333333;
+    float: right;
+    font-weight: 700;
+    margin: -24px 28px 0 400px;
+    text-align: right;
+    width: 223px;
+}
+.paypal_verified{
+	background:url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/PayPalSeal_68px.png");
+	width: 69px;
+	height: 68px;
+}
+.card_types_image{
+	background: url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/PaymentOptions.png");
+	width: 137px;
+	height: 25px;
+	margin: 5px 0 0 0;
+	float:right;
+}
+.need_help_group{
+	float: right;
+	margin: -59px -23px 0 10px;
+	width: 100%;
+	color: #4F4F4F;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+.adjust_height{
+	/*height:600px;*/
+}
+.policies_info{
+	margin:0 0 0 31px;
+}
+.policies_info strong{
+	color:#EB1C24;
+}
+#Store-Menu ul li a {
+	color: #4F4F4F !important;
+}
+
+.breadcrum {
+	padding:0 0 30px 15px;	
+	color:#4F4F4F;
+	font-size:12px;
+	border-bottom: 1px solid #EDEDED;
+	margin-bottom:20px;
+}
+
+.red {
+	color:#ef0000;
+}
+
+.red_border {
+	border-bottom:1px solid #ef0000;
+}
+
+.buttons {
+    border-bottom: 1px solid #EDEDED;
+    border-top: 1px solid #EDEDED;
+    margin: 20px 0;
+    padding: 20px 0;
+}
+
+.content_block {
+	padding-top:20px;
+	width:920px;
+
+}
+
+.listings {
+    background-image: url("http://genuwin.balancenet.com.au/skin/frontend/base/default/images/Ebay_images/nav_arrow.jpg");
+    background-position: 2px 3px;
+    background-repeat: no-repeat;
+    padding: 0 0 3px 20px;
+} 
+
+.Yes {
+	display:block !important;
+}
+.specs {
+	padding:2px;
+	border:1px solid #ccc;
+	width:360px;
+
+}
+
+.specs_l {
+	background-color:#CCC;
+
+}
+
+.specs_l{
+	width:50%;
+	float:left;
+}
+
+.specs_r  {
+	float:right;
+}
+
+/***** IE ONLY STYLES */
+#prod-content {
+margin : 0 100px\9 !important; /* IE8 and below */  
+}
+#right {
+    width : none\9 !important;  /* IE8 and below */  
+    float : none\9 !important; /* IE8 and below */  
+}
+
+.breadcrum {
+	padding-top : 50px\9 !important;
+}
+/*****  IE ONLY STYLES END */

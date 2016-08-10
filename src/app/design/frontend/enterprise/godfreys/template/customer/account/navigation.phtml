@@ -1,0 +1,23 @@
+
+	<div id="categories" class="sidebar-box ext-customer-navigation">
+		<h2><?php echo $this->__('My Account'); ?></h2>
+	    <div id="categories_list">
+	        <ul>
+	            <?php $_links = $this->getLinks(); ?>
+	            <?php $_index = 1; ?>
+	            <?php $_count = count($_links); ?>
+	            <?php foreach ($_links as $_link): ?>
+	                <?php $_last = ($_index++ >= $_count); ?>
+	                <?php if ($this->isActive($_link)): ?>
+	                    <li class="active<?php echo ($_last ? ' last' : '') ?>"><?php echo $_link->getLabel() ?></li>
+	                <?php else: ?>
+	                    <li<?php echo ($_last ? ' class="last"' : '') ?>><a href="<?php echo $_link->getUrl() ?>"><?php echo $_link->getLabel() ?></a></li>
+	                <?php endif; ?>
+	            <?php endforeach; ?>
+	        </ul>
+    	</div>    
+    	<div id="cat-box-foot"class="box-foot"></div>
+	</div>	
+<script type="text/javascript">
+	// $j1_6("#cat-box-foot").css({'position':'relative','top':'-12px'});
+</script>

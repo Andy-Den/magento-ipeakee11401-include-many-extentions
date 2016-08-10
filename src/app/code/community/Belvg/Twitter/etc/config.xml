@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg_Twitterconnect
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+   */-->
+<config>
+    <modules>
+        <Belvg_Twitter>
+            <version>1.1.7</version>
+        </Belvg_Twitter>
+    </modules>
+    <frontend>
+        <routers>
+            <twitter>
+                <use>standard</use>
+                <args>
+                    <module>Belvg_Twitter</module>
+                    <frontName>twitter</frontName>
+                </args>
+            </twitter>
+        </routers>
+        <layout>
+            <updates>
+                <twitter>
+                    <file>FB-Twitter-Connect.xml</file>
+                </twitter>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+				<args>
+					<modules>
+						<twitter before="Mage_Adminhtml">Belvg_Twitter_Adminhtml</twitter>
+					</modules>
+				</args>
+			</adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <twitter>
+                    <file>twitter.xml</file>
+                </twitter>
+            </updates>
+        </layout>
+        <menu>
+            <cms translate="title" module="cms">
+                <children>
+                    <twitter translate="title">
+                        <title>Twitter</title>
+                        <children>
+                            <twitter_tweets translate="title">
+                                <title>Accounts</title>
+                                <action>adminhtml/belvg_twitter_admin</action>
+                                <sort_order>100</sort_order>
+                            </twitter_tweets>
+                        </children>
+
+                    </twitter>
+                </children>
+            </cms>
+
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <twitter>
+                            <title>Twitter Module</title>
+                            <sort_order>200</sort_order>
+                        </twitter>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <global>
+        <rewrite>
+            <twitter_index_ipad>
+                <from><![CDATA[#^/ipad/#]]></from>
+                <to>/twitter/index/ipad/</to>
+            </twitter_index_ipad>
+            <twitter_admin>
+                <from><![CDATA[#^/twitter_admin/#]]></from>
+                <to>/twitter/admin/</to>
+            </twitter_admin>
+            <twitter_index_ipad>
+                <from><![CDATA[#^/ipad#]]></from>
+                <to>/twitter/index/ipad/</to>
+            </twitter_index_ipad>
+        </rewrite>
+        <models>
+            <twitter>
+                <class>Belvg_Twitter_Model</class>
+                <resourceModel>twitter_mysql4</resourceModel>
+            </twitter>
+            <twitter_mysql4>
+                <class>Belvg_Twitter_Model_Mysql4</class>
+                <entities>
+                    <twitter>
+                        <table>belvg_twitter_settings</table>
+                    </twitter>
+                </entities>
+            </twitter_mysql4>
+        </models>
+        <resources>
+            <twitter_setup>
+                <setup>
+                    <module>Belvg_Twitter</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </twitter_setup>
+            <twitter_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </twitter_write>
+            <twitter_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </twitter_read>
+        </resources>
+        <blocks>
+            <twitter>
+                <class>Belvg_Twitter_Block</class>
+            </twitter>
+        </blocks>
+        <helpers>
+            <twitter>
+                <class>Belvg_Twitter_Helper</class>
+            </twitter>
+        </helpers>
+    </global>
+</config>

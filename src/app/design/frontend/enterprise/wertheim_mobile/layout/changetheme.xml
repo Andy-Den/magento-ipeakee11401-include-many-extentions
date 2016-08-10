@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+		<reference name="footer">
+			<block type="core/template" name="changetheme" template="itech/changetheme.phtml"/>
+		</reference>
+	</default>
+</layout>

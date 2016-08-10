@@ -1,0 +1,229 @@
+<?php
+
+/**
+
+ * Magento Enterprise Edition
+
+ *
+
+ * NOTICE OF LICENSE
+
+ *
+
+ * This source file is subject to the Magento Enterprise Edition License
+
+ * that is bundled with this package in the file LICENSE_EE.txt.
+
+ * It is also available through the world-wide-web at this URL:
+
+ * http://www.magentocommerce.com/license/enterprise-edition
+
+ * If you did not receive a copy of the license and are unable to
+
+ * obtain it through the world-wide-web, please send an email
+
+ * to license@magentocommerce.com so we can send you a copy immediately.
+
+ *
+
+ * DISCLAIMER
+
+ *
+
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+
+ * versions in the future. If you wish to customize Magento for your
+
+ * needs please refer to http://www.magentocommerce.com for more information.
+
+ *
+
+ * @category    design
+
+ * @package     enterprise_default
+
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+
+ */
+
+?>
+<?php
+
+/**
+
+ * Product list template
+
+ *
+
+ * @see Mage_Catalog_Block_Product_List
+
+ */
+
+?>
+<!-- Google Code for Store Locator Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 982960858;
+var google_conversion_language = "en";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "oKYICP7flAMQ2pXb1AM";
+var google_conversion_value = 0;
+if (10) {
+  google_conversion_value = 10;
+}
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/982960858/?value=10&amp;label=oKYICP7flAMQ2pXb1AM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<?php
+	$start_time = microtime(true);
+	echo "<!--TIME START:".$start_time."-->";
+
+	if(isset($_REQUEST['enlarge']) && $_REQUEST['enlarge']=1){
+		$is_enlarged = true;
+	} else {
+		$is_enlarged = false;
+	}
+
+	$curr_dir = getcwd(); 
+	$myKey = Mage::getStoreConfig('storelocator/general/google_api_key');
+	$ErrorMessage=Mage::getStoreConfig('storelocator/general/error_message');
+	
+	if(!($ErrorMessage)){
+		$ErrorMessage = 'There are no stores found with "Search Term / postcode" please try again or contact us.';
+	}
+	
+	
+	$_productCollection=$this->getLoadedProductCollection();
+	$_helper = $this->helper('catalog/output');
+	
+	$loc_order = $GLOBALS['locator_order'];
+?>
+
+<?php if(!$_productCollection->count()): ?>
+	<p class="note-msg"><?php echo $ErrorMessage; ?></p>
+<?php else: ?>
+	<?php $Base = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>
+	<div class="tab_container">
+		<div id="tab1" class="tab_content">
+		<?php
+			//echo $curr_dir; die();
+			require_once($curr_dir."/GoogleMap.php");
+			require_once($curr_dir."/JSMin.php");
+			$MAP_OBJECT = new GoogleMapAPI();
+			$MAP_OBJECT->_minify_js = isset($_REQUEST["min"])?FALSE:TRUE;
+			$MAP_OBJECT->setMapType('map');
+		?>
+			<ul class="list-item" <?php echo ($is_enlarged)?'style="min-height:560px;"':'' ?>>
+			<?php $_collectionSize = $_productCollection->count() ?>
+			<?php $_columnCount = $this->getColumnCount(); ?>
+			<?php
+				$new_order = array();
+				foreach ($_productCollection as $_product) {		
+					//echo "Analayzing Product:".$_product->getId()."<br>";
+					for($i=0;$i<count($loc_order);$i++) {
+						if ($loc_order[$i] == $_product->getId()) {
+							$new_order[$_product->getId()] = $i;
+							//echo "RESULT:".$i."<br>";
+						}
+					}
+				}
+				natsort($new_order);
+				
+				$i = 0;
+				$loc_order = array();
+				foreach ($new_order AS $store=>$dist) {
+						//echo "$store: $dist<br>";
+						$loc_order[$i] = $store;
+						//echo "NEW ORDER:".$loc_order[$i]."<br>";
+						$i++;
+				}
+			?>
+			<?php $i=0; $jj=0; ?>
+			<?php foreach ($_productCollection as $_product): ?>
+				<?php 
+					if ($loc_order[$jj]) {
+						unset($_product);
+						$_product = Mage::getModel('catalog/product')->load($loc_order[$jj]); 
+					} else {
+						$_product = Mage::getModel('catalog/product')->load($_product->getId());
+					}
+					$jj++;
+					?>
+				<?php $_productNameStripped=$_helper->productAttribute($_product, $_product->getName() , 'name'); ?>
+				<?php   		
+					//$longitude = (float)$_product->getLongitude();
+					$longitude = (float)$_helper->productAttribute($_product, $_product->getLongitude() , 'longitude');
+					//$latitude = (float)$_product->getLatitude();
+					$latitude = (float)$_helper->productAttribute($_product, $_product->getLatitude() , 'latitude');
+					$address = '<div style="margin-top:25px;"><img src="'.$this->getSkinUrl('images/pin-icon.png').'" align="right"><p style="font-weight:bold;color:#19388A;"><a href="'.$_product->getProductUrl().'">'.addslashes($_productNameStripped).'</a></p>'.addslashes($_product->getStoreAddress()).'<br/>'.addslashes($_product->getStoreCity()).', '.$_product->getStoreState().' '.$_product->getStorePostcode().'<br /><a href="'.$_product->getProductUrl().'">View Detail</a></div>';
+					$marker_id = $MAP_OBJECT->addMarkerByCoords($longitude,$latitude,$_productNameStripped, $address,'',$this->getSkinUrl('images/pin-icon.png'));
+					$MAP_OBJECT->addMarkerOpener($marker_id, 'findme'.$marker_id);
+				?>
+				<li class="item<?php if($i==0): ?> first<?php endif; ?>">
+					<h2 class="product-name store-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
+					<p><?php echo $_product->getStoreAddress(); ?> <?php echo $_product->getStoreCity();?><?php if($_product->getStoreState()): ?>, <?php echo $_product->getStoreState();?><?php endif; ?><?php if($_product->getStorePostcode()): ?>, <?php echo $_product->getStorePostcode();?><?php endif; ?></p>
+					<p>P: <?php echo $_product->getStorePhone();?><br /><?php if($_product->getStoreFax() != ''): ?>F: <?php echo $_product->getStoreFax() ?><br /><?php endif; ?><?php if($_product->getStoreEmail()): ?>E: <a href="mailto:<?php echo $_product->getStoreEmail() ?>"><?php echo $_product->getStoreEmail() ?></a><?php else: ?><br/><?php endif; ?></p>
+					<p class="more-link">
+						<a class="first" title="<?php echo $_productNameStripped; ?>" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View Store Details') ?></a>
+						<a href="http://maps.google.com/maps?daddr=<?php echo $_product->getStoreAddress().', '.($_product->getData('store_address_2') != '' ? $_product->getData('store_address_2') : $_product->getData('store_address_3')).', '.$_product->getStoreCity().', '.$_product->getStateCode().' '.$_product->getStorePostcode(); ?>" target="_blank"><?php echo $this->__('Find on map') ?></a>
+					</p>
+					<div class="toptext" style="display:none">
+						<a id="<?php echo 'findme'.$marker_id; ?>" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><img src="<?php echo $this->getSkinUrl('images/icon-map.png');?>"></a>
+					</div>
+				</li>
+
+				
+			  <?php $i++; endforeach; ?>
+			</ul>
+			<div class="toolbar-bottom"> <?php echo $this->getToolbarHtml() ?> </div>
+		</div>
+		<div id="tab2">
+			<div class="rightmappart" <?php echo ($is_enlarged)?'style="width:530px;"':'' ?>>
+			<?php
+				if($is_enlarged){
+					$URLN = str_replace("&enlarge=1","",$_SERVER['REQUEST_URI']);
+					$URLN = str_replace("?enlarge=1","",$URLN);
+					$BUTTEXT ='Shrink';
+				} else{
+					if(!($_SERVER['QUERY_STRING'])){
+						$URLN = $_SERVER['REQUEST_URI']."?enlarge=1";
+					}else{
+						$URLN = $_SERVER['REQUEST_URI']."&enlarge=1";
+					}
+					$BUTTEXT ='Enlarge';
+				}
+			?>
+			<div class="map"> 
+				<script type="text/javascript">
+					jQuery.noConflict();
+				</script>
+				<?php echo $MAP_OBJECT->getHeaderJS();?>
+				<?php echo $MAP_OBJECT->getMapJS();?>
+				<?php echo $MAP_OBJECT->printOnLoad();?>
+				<?php echo $MAP_OBJECT->printMap();?>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$('map').style.width='600px';
+			$('map').style.height='465px';
+		</script>
+		</div>     
+	</div>
+<?php endif; ?>
+<?php
+	$end_time=microtime(true);
+	echo "<!--";
+	echo "TIME END:".$end_time."::::::::";
+	echo "DIFF:".($end_time-$start_time);
+	echo "-->";
+?>

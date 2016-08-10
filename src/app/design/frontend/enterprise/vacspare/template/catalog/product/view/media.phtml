@@ -1,0 +1,72 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/output');
+?>
+
+<div id="product_pictures" style="position:relative;">
+<?php if ($_product->getData('youtube_url')): ?>
+<div id="video-play-overlay" style="float:left;clear:none;z-index:99;position:absolute;left:110px;top:110px;display:none" onmouseover="jQuery('#video-play-overlay').show()" onmouseout="jQuery('#video-play-overlay').hide()"><a href="<?php echo $_product->getData('youtube_url') ?>" class="fancy-youtube"><img src="<?php echo $this->getSkinUrl('images/video-play-overlay.png') ?>" /></a></div>
+<div id="product_large_picture" onmouseover="jQuery('#video-play-overlay').show()" onmouseout="jQuery('#video-play-overlay').hide()"> <a href="javascript:void(0)" onclick="$j1_6('ul#product_thumbs_img li:first-child a').click()">
+	<?php
+		$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image').'" height="395" width="475" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" style="width:475px" />';
+		echo $_helper->productAttribute($_product, $_img, 'watermark');
+	?>
+	</a>
+	<?php else: ?>
+	<div id="product_large_picture"> <a href="javascript:void(0)" onclick="$j1_6('ul#product_thumbs_img li:first-child a').click()">
+		<?php
+		$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image').'"  height="395" width="475" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" style="width:475px" />';
+		echo $_helper->productAttribute($_product, $_img, 'watermark');
+	?>
+		</a>
+		<?php endif ?>
+		<?php if($_product->getData('shoutout')): ?>
+		<span class="product-tag" style="background:url(<?php echo($this->getSkinUrl()); ?>images/dinkus<?php echo $_product->getData('shoutout') ?>.png)"></span>
+		<?php endif ?>
+		<span class="img-zoom"><span class='icon'></span>Click Image to Zoom</span>
+	</div>
+	<div id="product_thumbs"><span class="instruction">More Images</span>
+		<ul id="product_thumbs_img" class="jcarousel-skin-godfreys">
+			<?php $_gallery = $_product->getMediaGalleryImages();?>
+			<?php foreach ($_gallery as $_galleryitem):?>
+			<li> 
+				<a	href="<?php echo $_galleryitem->url;?>"	id="l1" rel="fk-fancy">
+					<img src="<?php echo $_galleryitem->url;?>" width="56px" height="47px" alt=""> 
+				</a> 
+			</li>
+			<?php endforeach;?>
+		</ul>
+	</div>
+</div>

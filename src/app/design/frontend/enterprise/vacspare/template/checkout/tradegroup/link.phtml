@@ -1,0 +1,8 @@
+<?php if($this->helper('tradegroup')->_isCustomerGroupTrade()): ?>
+    <?php if ($this->isPossibleOnepageCheckout()):?>
+            <a onclick="jQuery('#btn-nostepcheckout-form-cart').click();" class="checkout-link-large" href="javascript:void(0)"><?php echo $this->__('SEND PURCHASE ORDER') ?></a>
+            </li>
+            <li class="or_checkout"><?php echo $this->__('OR') ?>
+            
+    <?php endif?>
+<?php endif?>

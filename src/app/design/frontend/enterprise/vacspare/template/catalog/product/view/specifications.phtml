@@ -1,0 +1,72 @@
+<?php 
+	$_helper = $this->helper('catalog/output');
+	$_product = Mage::getModel('catalog/product')->load(Mage::registry('product')->getId());
+	$attributebrand = Mage::getModel('catalog/product')
+		->load($_product->getId())
+		->getAttributeText('brand');
+	$attributemodel = Mage::getModel('catalog/product')
+		->load($_product->getId())
+		->getAttributeText('model');	
+?>
+<div id="box-specifications" class="box-collateral box-up-sell">
+	<div class="box-title">
+        <h2>Specifications</h2>
+		<span class="icon_specifications"></span>
+    </div>
+	<div class="content-box">
+		<ul class="specs">
+			<?php if($attributebrand != ''):?>
+				<li>
+					<span class="label">Brand</span>
+					<span class="value">
+						<?php 
+							if(count($attributebrand)>0 && count($attributebrand)<2) 
+								echo $attributebrand; 
+							else 
+								echo $attributebrand[0];
+						?>
+					</span>
+				</li>
+			<?php endif?>
+			<?php if($attributemodel != ''):?>
+				<li>
+					<span class="label">Model</span>
+					<span class="value">
+						<?php 
+							if(count($attributemodel)>0 && count($attributemodel)<2) 
+								echo $attributemodel; 
+							else 
+								echo $attributemodel[0];
+						?>
+					</span>
+				</li>
+			<?php endif?>
+				<li>
+					<span class="label">SKU</span>
+					<span class="value"><?php echo $_product->getSku(); ?></span>
+				</li>
+			<?php if($_product->getCapacity() != ''):?>
+				<li>
+					<span class="label">Capacity</span>
+					<span class="value"><?php echo $_product->getCapacity()?></span>
+				</li>
+			<?php endif?>
+			<?php if($_product->getWattage() != ''):?>
+				<li>
+					<span class="label">Wattage</span>
+					<span class="value"><?php echo $_product->getWattage()?></span>
+				</li>
+			<?php endif?>
+		</ul>
+	</div>
+</div>
+<script>
+	jQuery(document).ready(function() {
+		jQuery('#box-specifications .box-title').click(function() {
+			jQuery(this).next().slideToggle('fast');
+			jQuery(this).toggleClass('active');
+			return false;
+		});
+	})
+	decorateGeneric($$('ul.specs li'), ['odd','even','first','last'])
+</script>

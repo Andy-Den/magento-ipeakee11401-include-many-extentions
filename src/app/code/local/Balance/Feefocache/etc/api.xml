@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- magento api configuration -->
+<config>
+	<api>
+		<resources>
+			<feefocache_apiname translate="title" module="feefocache">
+				<title>Feefocache Test API</title>
+				<model>feefocache/api</model>
+				<acl>feefocache_apiname</acl>
+				<methods>
+					<myMethodName translate="title" module="feefocache">
+						<title>Says hi to this world</title>
+						<method>helloWorld</method>
+						<acl>feefocache_apiname/myMethodName</acl>
+					</myMethodName>
+				</methods>
+				<faults module="feefocache">
+					<myerror_code>
+						<code>101</code>
+						<message>Something went terribly wrong. :(</message>
+					</myerror_code>
+				</faults>
+			</feefocache_apiname>
+		</resources>
+		<resources_alias>
+			<feefocache_apiname>feefocache_apiname</feefocache_apiname>
+		</resources_alias>
+		<v2>
+			<resources_function_prefix>
+				<feefocache_apiname>feefocacheApiname</feefocache_apiname>
+			</resources_function_prefix>
+		</v2>
+		<acl>
+			<resources>
+				<feefocache_apiname translate="title"
+				module="feefocache">
+				<title>Feefocache Test API</title>
+				<myMethodName translate="title" module="feefocache">
+					<title>My Api Action</title>
+				</myMethodName>
+				</feefocache_apiname>
+			</resources>
+		</acl>
+	</api>
+</config>

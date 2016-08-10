@@ -1,0 +1,2265 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#rhs-links {
+	padding: 10px 0px 10px 8px;
+}
+
+.menu-sep {
+	color:#CCC;
+	padding:0px !important;
+	margin:0px !important;
+}
+
+#rhs-links a {
+	color:#666;
+}
+
+.mi {
+	display:none;
+}
+
+#Store-Container {
+    display: block !important;
+}
+
+#content {
+	width:650px;
+	margin-top: 50px;
+}
+
+#content-static {
+	width:650px;
+	padding:0px 20px;
+}
+
+#content-static h1 { 
+	color:#ed1c24;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:15px;
+}
+
+#content-static p, #content-static ol, ul {
+	color: #4D4D4D;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	line-height:20px;
+}
+
+#banner {
+	padding-top: 20px;
+	
+}
+
+.Float-Left {
+    float: left;
+}
+.Float-Right {
+    float: right;
+}
+.Wipe {
+    clear: both;
+    margin: 0 !important;
+    padding: 0 0 0 10px !important;
+}
+.pagewidth {
+    background-repeat: repeat-x;
+    float: left;
+    margin: 0 !important;
+    min-height: 1000px;
+    position: relative;
+    width: 100%;
+}
+* html .pagewidth {
+    float: none;
+    position: relative;
+    text-align: center;
+}
+.pageminwidth {
+    background-repeat: repeat-y;
+    float: left;
+    left: 50%;
+    margin: 0 0 0 -470px;
+    min-height: 1000px;
+    position: relative;
+    width: 940px;
+}
+* html .pageminwidth {
+    float: none;
+    left: auto;
+    margin: 0;
+    position: relative;
+    text-align: left;
+    width: 0;
+}
+.pagelayout {
+    background: none repeat scroll 0 0 transparent !important;
+    margin: 0 0 0 10px;
+    width: 920px;
+}
+* html .pagelayout {
+    float: left;
+    margin: 0 5px;
+    width: 0;
+}
+.pagecontainer {
+    background: none repeat scroll 0 0 transparent !important;
+    width: 922px;
+}
+* html .pagecontainer {
+}
+.pagecontainer table {
+}
+.pagecontainer table table {
+}
+.pagecontainer table table table {
+}
+.pagecontainer table table table table {
+}
+.pagecontainer table table table table table {
+}
+.pagecontainer table table table table table table {
+}
+.v4acpcont {
+    margin: 0 0 10px !important;
+}
+.v4mid {
+    border: 0 none;
+}
+.v4mid form {
+    float: left;
+    position: relative;
+}
+.v4mid form table {
+    border-bottom: 1px solid #D1D4D4;
+    float: left;
+    height: 60px;
+    position: relative;
+    width: 210px !important;
+}
+.v4mid form table td {
+    padding: 0 !important;
+}
+.v4mid form table input {
+    margin: 0 0 0 3px;
+}
+.v4mid form table .v4sbox {
+    margin: 0 0 0 5px;
+    width: 110px;
+}
+#LeftPanel .v4acp_head .v4accent {
+    display: none;
+}
+#LeftPanel .v4acp_head .v4title {
+	background: none;
+}
+.v4title h2 {
+	font-weight:normal !important;
+	font-size:14px !important;
+}
+#LeftPanel .v4acp_head .v4hspacer {
+    display: none;
+}
+.v4mid {
+    padding: 0 !important;
+}
+.v4clp {
+    border-bottom: 1px solid #D1D4D4;
+}
+.oc {
+    float: left;
+    padding: 0 !important;
+    position: relative;
+}
+.oc UL {
+    float: left;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+}
+.oc UL LI {
+    clear: both;
+    float: left;
+    list-style: none outside none !important;
+    margin: 0 !important;
+    padding: 8px 0 8px 25px !important;
+    position: relative;
+    width: 185px;
+}
+.oc UL LI a {
+    float: left;
+    padding: 0 8px 0 0 !important;
+    position: relative;
+}
+#TopPromoArea .v4acpcont .oc UL LI {
+    background: none repeat scroll 0 0 transparent !important;
+}
+#TopPromoArea .v4clp {
+    background-repeat: repeat-y;
+    border: 0 none !important;
+}
+.v4acpcont .ttl {
+    float: left;
+    margin: 0 !important;
+    padding: 8px 0 8px 25px !important;
+    position: relative;
+    width: 185px;
+}
+.all_cats {
+    border-bottom: 1px solid #D1D4D4;
+    float: left;
+    margin: -1px 0 0 !important;
+    padding: 8px 0 8px 25px;
+    position: relative;
+    width: 185px;
+}
+.lev1 li {
+    border-top: 1px dotted #D1D4D4;
+}
+.lcat .link {
+    float: left;
+    padding: 10px 0 9px 25px !important;
+    position: relative;
+    width: 185px;
+}
+.lcat .link {
+    display: none;
+}
+.lcat .link a {
+}
+.lcat UL {
+    float: left;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+}
+.lcat UL LI {
+    float: left;
+    list-style: none outside none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+    width: 210px;
+}
+.lcat UL LI a {
+    float: left;
+    padding: 8px 0 8px 25px;
+    position: relative;
+}
+.lcat UL LI span {
+    float: left;
+    font-weight: bold;
+    padding: 8px 0 8px 25px;
+    position: relative;
+	font-size:12px;
+}
+.lcat UL LI .cnt {
+    float: left;
+    font-weight: normal;
+    padding: 10px 0 0 5px !important;
+    position: relative;
+}
+.s_recat {
+    float: left;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+}
+.s_recat LI {
+    float: left;
+    list-style: none outside none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+    width: 210px;
+}
+.s_recat LI a {
+    float: left;
+    padding: 8px 0 8px 25px;
+    position: relative;
+}
+.s_recat LI span {
+    float: left;
+    font-weight: normal;
+    padding: 8px 0;
+    position: relative;
+}
+.s_recat LI .cnt {
+    float: left;
+    font-weight: normal;
+    padding: 10px 0 0 5px !important;
+    position: relative;
+}
+.lcat UL LI UL {
+    float: left;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+}
+.lev2 LI {
+
+}
+.lev2 LI a {
+    padding: 8px 0 8px 35px !important;
+}
+.lev2 LI span {
+    padding: 8px 0 8px 35px !important;
+}
+.lcat UL LI UL LI UL {
+    float: left;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+}
+.lev3 LI {
+
+}
+.lev3 LI a {
+    padding: 8px 0 8px 45px !important;
+}
+.lev3 LI span {
+    padding: 8px 0 8px 45px !important;
+}
+#LeftPanel .gallery {
+    float: left;
+    position: relative;
+}
+#LeftPanel .gallery .fixed {
+    background: none repeat scroll 0 0 transparent !important;
+}
+#LeftPanel .gallery .picture, #LeftPanel .gallery .camera {
+    padding: 10px 0 5px;
+}
+#LeftPanel .cd .cdactive .cd-n {
+    display: none;
+}
+#LeftPanel .cd .cdactive .cd-s {
+    display: none;
+}
+#LeftPanel .gallery .details .subtitle {
+    margin: 0 0 0 10px;
+    width: 190px !important;
+}
+#LeftPanel .gallery .details .fixed {
+    clear: both;
+    margin: 10px 0 10px 10px;
+}
+#LeftPanel .gallery .details .fixed .basics {
+    width: 190px;
+}
+#LeftPanel .cd .cdactive {
+    padding: 0 0 10px !important;
+}
+#LeftPanel .v4acp tr {
+    display: none;
+}
+#TopPromoArea .v4acp tr {
+    display: none;
+}
+#LeftPanel .v4acp .v4acp_head {
+    display: block;
+    width: 195px;
+}
+#LeftPanel .v4acp .v4acp_head .v4title {
+    display: block;
+    width: 195px;
+}
+#TopPromoArea .v4acp .v4acp_head {
+    display: block;
+}
+#TopPromoArea .v4acp .v4acp_head .v4title {
+    display: block;
+}
+#TopPromoArea .v4acp_head .v4accent {
+    display: none;
+}
+#TopPromoArea .v4acp_head .v4title {
+    background-color: #FFFFFF !important;
+}
+#TopPromoArea .v4toppromos .v4acp_head {
+}
+#TopPromoArea .v4toppromos .v4acp_head .v4title {
+    width: 327px !important;
+}
+#TopPromoArea .v4toppromos .v4topleft {
+    width: 342px !important;
+}
+#TopPromoArea .v4toppromos .v4topright {
+    width: 342px !important;
+}
+#TopPromoArea .v4toppromos table {
+    background: none repeat scroll 0 0 transparent;
+}
+#TopPromoArea .v4toppromos .gallery {
+    background-repeat: repeat-y;
+    height: 125px;
+}
+#TopPromoArea .v4toppromos .gallery .picture, #TopPromoArea .v4toppromos .gallery .camera {
+    padding: 0 10px 5px 5px;
+}
+#TopPromoArea .v4toppromos .gallery .fixed {
+    background: none repeat scroll 0 0 transparent;
+    clear: both;
+    width: 230px !important;
+}
+#TopPromoArea .v4toppromos .gallery .fixed .basics {
+    width: 230px !important;
+}
+#TopPromoArea .v4toppromos .gallery .details .ttl {
+    background: none repeat scroll 0 0 transparent;
+    clear: both;
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: auto;
+}
+#TopPromoArea .v4toppromos .gallery .details .ttl img {
+    clear: both;
+    float: left;
+    position: relative;
+}
+#TopPromoArea .v4toppromos .v4midBox {
+    border: 0 none !important;
+}
+#TopPromoArea .v4toppromos .v4footd {
+    border: 0 none !important;
+}
+#TopPromoArea .v4toppromos .cd {
+    padding: 0;
+}
+#TopPromoArea .v4toppromos .cd .cdactive {
+}
+#TopPromoArea .v4toppromos .cdactive .cd-n {
+    display: none;
+}
+#TopPromoArea .v4toppromos .cdactive .cd-s {
+    display: none;
+}
+#TopPromoArea .v4toppromos .cdactive .cd-mid {
+    height: 20px;
+    padding: 7px 0 0;
+}
+#CentralArea .r3_cm {
+    padding: 0 !important;
+}
+#CentralArea .rs-pview {
+    padding: 10px 0 10px 5px !important;
+}
+#CentralArea .gallery .details .ttl {
+    background: none repeat scroll 0 0 transparent;
+    clear: both;
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+#CentralArea .gallery .details .subtitle {
+    clear: both;
+    float: left;
+    position: relative;
+    width: 100%;
+}
+#CentralArea .grid {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#CentralArea .itemseparator {
+    display: none;
+}
+#CentralArea .grid table {
+    background-repeat: no-repeat;
+    height: 257px;
+    width: 223px;
+}
+#CentralArea .grid .hl table {
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+}
+#CentralArea .grid table table {
+    background-image: none !important;
+    height: auto;
+    width: auto;
+}
+#CentralArea .grid .gallery table table {
+    background: none repeat scroll 0 0 transparent !important;
+}
+#CentralArea .grid .gallery table table td {
+    background: none repeat scroll 0 0 transparent !important;
+}
+#CentralArea .grid .gallery table table table {
+    background: none repeat scroll 0 0 transparent !important;
+}
+#CentralArea .grid .gallery table table table td {
+    background: none repeat scroll 0 0 transparent !important;
+}
+#CentralArea .grid .gallery table .basics .basics {
+    padding: 5px 0 0;
+    text-align: right;
+    width: 200px;
+}
+#CentralArea .grid .gallery table .basics .basics .amount img {
+    float: left;
+}
+#CentralArea .grid .gallery table .basics .basics .prices {
+    padding: 0 0 5px;
+}
+#CentralArea .grid .gallery table .basics .basics .clearFullDiv span {
+    padding: 0 0 0 10px;
+}
+#CentralArea .grid .gallery table .basics .basics .clearFullDiv .label {
+    padding: 0;
+}
+#CentralArea .grid .gallery .details .fixed {
+    clear: both;
+}
+#CentralArea .gallery {
+    border: 0 none !important;
+}
+#CentralArea .gallery td {
+}
+#CentralArea .gallery .picture .gplus {
+    display: none;
+}
+#CentralArea .pview, .rs-pview {
+    background-color: #FFFFFF;
+    padding: 10px;
+}
+#CentralArea .cmpb {
+    margin: auto !important;
+}
+#CentralArea .cmpb .cmpb {
+    background: none repeat scroll 0 0 transparent;
+}
+#CentralArea .lview .nol {
+    height: 100px;
+    margin: 0;
+}
+#CentralArea .lview .hr {
+    display: none;
+}
+#CentralArea .lview .details {
+    width: 500px !important;
+}
+#CentralArea .dynpg {
+    padding: 12px 10px !important;
+}
+#CentralArea .dynpg .page {
+    padding: 3px 0 0;
+}
+#CentralArea .v4stabl {
+    padding: 30px 10px 5px 0 !important;
+}
+#CentralArea .dynpg table {
+    background: none repeat scroll 0 0 transparent !important;
+}
+#CentralArea .whiter-s {
+}
+#CentralArea .dynpg form {
+    margin: -2px 0 0;
+}
+.hdrCtr {
+    background-color: #FFFFFF !important;
+}
+.tb_v4bc .v4sem {
+    display: none;
+}
+.tb_v4bc {
+    height: 40px;
+}
+.hdrCtc .pnav {
+}
+.dynmenu {
+}
+#BrowseCategories-menu {
+}
+#Buy-menu {
+    display: none;
+}
+#Sell-menu {
+    display: none;
+}
+#MyEbay-menu {
+    display: none;
+}
+#Community-menu {
+    display: none;
+}
+#Help-menu {
+    display: none;
+}
+.stBadge {
+    margin: 10px auto auto;
+    width: 922px;
+}
+.stBadge .stBadge-accent {
+    height: 30px;
+    margin: 0 0 10px;
+}
+.stBadge .stBadge-accent td {
+    background: none repeat scroll 0 0 transparent !important;
+}
+#Store-Container {
+    float: left;
+    height: 6px;
+    position: relative;
+    width: 920px;
+	!top: -16px;
+}
+
+
+#Store-Header {
+    height: 10px;
+	top: -130px;
+	left: -1px;
+    position: absolute;
+    width: 922px;
+}
+.v4sname {
+    background-color: #FFFFFF;
+}
+#Copyright-Box {
+    height: auto;
+    position: absolute;
+    right: 10px;
+    top: -170px;
+    width: 167px;
+}
+#Copyright-Box p {
+    float: left;
+    margin: 0;
+    padding: 12px 10px 0 0;
+    position: relative;
+}
+#Copyright-Box img {
+    border: 0 none;
+    float: right;
+    position: relative;
+}
+#Store-Menu {
+    left: 0;
+    position: absolute;
+    width: 920px;
+}
+#Store-Menu-Left {
+    float: left;
+    margin: 0 0 0 10px;
+    padding: 0 !important;
+    position: relative;
+}
+* html #Store-Menu-Left {
+    margin: 0 0 0 5px;
+}
+#Store-Menu-Left LI {
+    float: left;
+    list-style: none outside none;
+    margin: 0 20px 0 0;
+    position: relative;
+}
+#Store-Menu-Right {
+    float: right;
+    margin: 0 18px 0 0;
+    position: relative;
+	padding-left: 0px !important;
+}
+* html #Store-Menu-Right {
+    margin: 0 5px 0 0;
+}
+#Store-Menu-Right LI {
+    float: left;
+    list-style: none outside none;
+    margin: 0 0 0 20px;
+    position: relative;
+}
+.Menu-Promotion-Container {
+    float: left;
+    position: relative;
+}
+.Menu-Advert {
+    margin: 0 0 8px !important;
+}
+.Header-Logo {
+    border: 0 none;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+#Content-Heading {
+	/*background-color:#002E5E;*/
+    height: 26px;
+    left: 209px;
+    padding: 0 !important;
+    position: absolute;
+    top: 69px;
+    width: 712px;
+}
+#Content-Heading h2 {
+    left: 0;
+    margin: 0;
+    padding: 5px 0 0 13px;
+    position: absolute;
+    top: 0;
+}
+#TopPromoArea .v4acpcont .fs2-fs {
+    margin: 10px 0 0 4px;
+}
+#LeftPanel .v4acpcont .fs2-fs {
+    margin: 14px 0 10px 6px;
+}
+#LeftPanel .gallery {
+}
+#LeftPanel .cd {
+    background-repeat: no-repeat;
+    float: left;
+    height: 24px;
+    position: relative;
+    text-align: center;
+    width: 210px;
+}
+#LeftPanel .cd .cdactive {
+    background: none repeat scroll 0 0 transparent;
+    position: relative;
+}
+#LeftPanel .cd .cd-mid {
+    padding: 0;
+}
+#LeftPanel .gallery .ttl, #LeftPanel .gallery .g-std {
+    background-image: none;
+    padding: 8px 10px !important;
+}
+#LeftPanel .v4acpcont .v4baccent {
+    display: none;
+}
+#LeftPanel .v4acpcont .v4midBox {
+    border: 0 none !important;
+}
+#LeftPanel .v4acpcont .v4midBox .v4acp_mid {
+    border: 0 none !important;
+}
+#LeftPanel .v4acpcont .v4mid {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none !important;
+}
+#LeftPanel .v4acpcont .v4footd {
+    border: 0 none !important;
+    float: left;
+    height: 24px;
+    padding: 5px 10px 5px 0;
+    position: relative;
+    width: 200px;
+}
+#LeftPanel .v4acpcont .v4footd a {
+    float: right;
+    margin: 4px 0 0;
+    position: relative;
+}
+body {
+    background-color: #FFFFFF !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#Custom-Content-Page {
+    float: left;
+    margin: -10px 0 0;
+    position: relative;
+}
+#custom-content-page {
+    float: left;
+    margin: -10px 0 0;
+    position: relative;
+}
+#TopPromoArea #Custom-Content-Page {
+    float: left;
+    margin: -10px 0 0;
+    padding: 0 0 10px;
+    position: relative;
+}
+.Content-Wide {
+    float: left;
+    height: auto;
+    margin: 10px 0 0;
+    position: relative;
+    width: 699px;
+}
+.Content-Wide-Base {
+    float: left;
+    height: 4px;
+    margin: 5px 0 0;
+    position: relative;
+    width: 699px;
+}
+.Content-Wide-Header {
+    float: left;
+    height: 26px;
+    margin: 0 0 15px;
+    position: relative;
+    width: 699px;
+}
+.Content-Wide-Button-Container {
+    float: left;
+    height: auto;
+    margin: 10px 0 0 10px;
+    padding: 0 0 10px;
+    position: relative;
+    width: 699px;
+}
+* html .Content-Wide-Button-Container {
+    margin: 10px 0 10px 5px;
+}
+.Content-Wide p {
+    clear: both;
+    margin: 0 !important;
+    padding: 5px 20px 10px;
+}
+.Content-Wide Table {
+}
+.Content-Table {
+    border-collapse: collapse;
+    margin: 10px 20px;
+}
+.content-table {
+    border-collapse: collapse;
+    margin: 10px 20px;
+}
+.Content-Table-Heading {
+    padding: 0 0 5px;
+    width: 130px;
+}
+.Content-Table td select {
+    border: 1px solid #BEBEBE;
+    margin: 0 0 5px;
+    width: 202px;
+}
+.Radio-Option {
+    float: left;
+}
+#subject {
+    width: 300px;
+}
+#message {
+    border: 1px solid #BEBEBE;
+    height: 100px;
+    margin: 5px 0;
+    width: 300px;
+}
+.Radio-Option {
+    float: left;
+}
+.Text-Input {
+    border: 1px solid #BEBEBE;
+    height: 15px;
+    margin: 0 0 5px;
+    width: 200px;
+}
+.smallText-Input {
+    border: 1px solid #BEBEBE;
+    height: 15px;
+    margin: 0 0 5px;
+    width: 75px;
+}
+.Radio-Option {
+}
+.ContentBlock-Value select {
+    border: 1px solid #BEBEBE;
+    margin: 5px 0;
+    width: 202px;
+}
+.Content-Wide UL {
+    list-style: disc outside none;
+    margin: 10px 20px 10px 40px;
+}
+.Content-Wide UL LI {
+    padding: 0 0 3px;
+}
+.Content-Wide OL {
+    list-style: decimal outside none;
+    margin: 10px 20px 10px 40px;
+}
+.Content-Wide OL LI {
+    padding: 0 0 3px;
+}
+.Content-Wide-Header H2 {
+    float: left;
+    margin: 5px 0 0 10px;
+    padding: 0;
+    position: relative;
+}
+* html .Content-Wide-Header H2 {
+    margin: 5px 0 0 5px;
+}
+.Content-Wide H3 {
+    clear: both;
+    margin: 0 0 0 20px;
+    padding: 0;
+    position: relative;
+}
+.Content-Wide H4 {
+    clear: both;
+    margin: 0 0 0 20px;
+    padding: 0;
+    position: relative;
+}
+.Content-Wide H5 {
+    clear: both;
+    margin: 0 0 0 20px;
+    padding: 0;
+    position: relative;
+}
+.Content-Wide H6 {
+    clear: both;
+    margin: 0 0 0 20px;
+    padding: 0;
+    position: relative;
+}
+.Content-Wide-Header .More-Button {
+    float: right;
+    margin: 8px 20px 0 0;
+    padding: 0;
+    position: relative;
+}
+* html .Content-Wide-Header .More-Button {
+    margin: 8px 10px 0 0;
+}
+.Content-Wide-Footer .More-Button {
+    float: right;
+    margin: 0 20px 0 0;
+    padding: 0;
+    position: relative;
+}
+* html .Content-Wide-Footer .More-Button {
+    margin: 0 10px 0 0;
+}
+.Content-Wide .More-Button img {
+    margin: 0 0 0 5px;
+}
+.Category-v4 {
+    float: left;
+    height: auto;
+    margin: 12px 6px 0;
+    position: relative;
+    width: 160px;
+}
+* html .Category-v4 {
+    margin: 12px 5px 0 6px;
+}
+.Category-Top-v4 {
+    float: left;
+    height: 4px;
+    line-height: 0;
+    position: relative;
+    width: 160px;
+}
+.Category-Base-v4 {
+    float: left;
+    height: 4px;
+    position: relative;
+    width: 160px;
+}
+.Category-IMG-v4 {
+    border: 0 none;
+    clear: both;
+    float: left;
+    height: 123px;
+    left: 1px;
+    position: relative;
+    width: 158px;
+}
+.Category-v4 .More-Button a {
+    float: left;
+    padding: 7px 0 0 10px;
+    position: relative;
+}
+.Category-v4 .More-Button {
+    display: block;
+    float: left;
+    height: 32px;
+    margin: 5px 0 2px;
+    position: relative;
+    width: 160px;
+}
+.Category-v5 {
+    float: left;
+    height: auto;
+    margin: 12px 6px 0;
+    position: relative;
+    width: 220px;
+}
+* html .Category-v5 {
+    margin: 12px 5px 0 6px;
+}
+.Category-Top-v5 {
+    float: left;
+    height: 4px;
+    line-height: 0;
+    position: relative;
+    width: 220px;
+}
+.Category-Base-v5 {
+    float: left;
+    height: 4px;
+    position: relative;
+    width: 220px;
+}
+.Category-IMG-v5 {
+    border: 0 none;
+    clear: both;
+    float: left;
+    height: 123px;
+    left: 1px;
+    position: relative;
+    width: 218px;
+}
+.Category-v5 .More-Button a {
+    float: left;
+    padding: 7px 0 0 10px;
+    position: relative;
+}
+.Category-v5 .More-Button {
+    display: block;
+    float: left;
+    height: 32px;
+    margin: 5px 0 2px;
+    position: relative;
+    width: 220px;
+}
+.v4acpcont .v4acp_head .v4title {
+    color: #ff3333 !important;
+}
+.v4acpcont .v4acp_head .v4title font {
+    color: #ff3333 !important;
+	text-transform:capitalize;
+}
+.lcat a {
+}
+.lcat a:hover {
+}
+.lcat UL LI a {
+}
+.lcat UL LI a:hover {
+}
+.lev2 LI a {
+}
+.lev2 LI a:hover {
+}
+.lev3 LI a {
+}
+.lev3 LI a:hover {
+}
+.s_recat LI a {
+}
+.s_recat LI a:hover {
+}
+.s_recat LI span {
+}
+.oc UL LI a {
+}
+.oc UL LI a:hover {
+}
+#CentralArea .gallery .details a {
+    color: #0D5397;
+}
+#CentralArea .gallery .details a:hover {
+    color: #0D5397;
+}
+#CentralArea .gallery .details a:visited {
+    color: #0D5397;
+}
+#CentralArea .nol .details a {
+    color: #0D5397;
+}
+#CentralArea .nol .details a:hover {
+    color: #0D5397;
+}
+#CentralArea .nol .details a:visited {
+    color: #0D5397;
+}
+#CentralArea .cmpb td a {
+    color: #0D5397;
+}
+#CentralArea .cmpb td a:hover {
+    color: #0D5397;
+}
+#CentralArea .bpmsg .lnk a {
+    color: #0D5397;
+}
+#CentralArea .bpmsg .lnk a:hover {
+    color: #0D5397;
+}
+.v4snexp UL LI a {
+    color: #0D5397;
+}
+.v4snexp UL LI a:hover {
+    color: #0D5397;
+}
+#CentralArea .dynpg {
+    color: #000000;
+}
+#CentralArea .dynpg .pager {
+    color: #000000;
+}
+#CentralArea .dynpg .pager a {
+    color: #0D5397;
+}
+#CentralArea .dynpg .pager a:hover {
+    color: #0D5397;
+}
+#CentralArea .dynpg .disabled {
+    color: #000000;
+}
+#Copyright-Box p {
+    color: #0D5398;
+}
+#storercp {
+}
+#storercp a {
+}
+#storercp a:hover {
+}
+#storercp .stBadge-text {
+}
+#storercp .mbg a {
+}
+#storercp .mbg a:hover {
+}
+
+/* 
+#Store-Header {
+}
+*/
+
+#Store-Header #Store-Menu-Left a {
+    color: #0D5397;
+}
+#Store-Header #Store-Menu-Left a:hover {
+    color: #0D5397;
+}
+#Store-Header #Store-Menu-Right a {
+    color: #0D5397;
+	
+}
+
+#Store-Menu-Right a {
+	font-size:10px !important;
+}
+
+#Store-Header #Store-Menu-Right a:hover {
+    color: #0D5397;
+}
+#Content-Heading h2 {
+    color: #FFFFFF;
+}
+#CentralArea .v4stabl {
+}
+#CentralArea .v4stabl a {
+    color: #0D5397;
+}
+#CentralArea .v4stabl a:hover {
+    color: #0D5397;
+}
+#CentralArea .fpcc .countClass {
+}
+#CentralArea .fpcc .matchClass {
+}
+#CentralArea .fpcc .keywordClass {
+}
+#CentralArea .cmpBr {
+}
+#CentralArea .cmpBr a {
+}
+#CentralArea .cmpBr a:hover {
+}
+#CentralArea .ctrlbr {
+}
+#CentralArea .ctrlbr a {
+}
+#CentralArea .ctrlbr a:hover {
+}
+#LeftPanel .v4acpcont .gallery a {
+    color: #0D5397;
+}
+#LeftPanel .v4acpcont .gallery a:hover {
+    color: #0D5397;
+}
+#LeftPanel .v4acpcont .v4footd a {
+    color: #0D5397;
+}
+#LeftPanel .v4acpcont .v4footd a:hover {
+    color: #0D5397;
+}
+#LeftPanel .v4acpcont .v4footd a {
+}
+#LeftPanel .v4acpcont .v4footd a:hover {
+}
+#TopPromoArea .v4acpcont .gallery a {
+    color: #0D5397;
+}
+#TopPromoArea .v4acpcont .gallery a:hover {
+    color: #0D5397;
+}
+#TopPromoArea .v4acpcont .v4footd a {
+    color: #0D5397;
+}
+#TopPromoArea .v4acpcont .v4footd a:hover {
+    color: #0D5397;
+}
+#LeftPanel .cdoringe {
+}
+#LeftPanel .cdtimeunit {
+}
+#TopPromoArea .cdoringe {
+}
+#TopPromoArea .cdtimeunit {
+}
+.Content-Wide-Header h2 {
+    color: #FFFFFF;
+}
+.Content-Wide .Content-Wide-Header .More-Button a {
+    color: #FFFFFF;
+}
+.Content-Wide .Content-Wide-Header .More-Button a:hover {
+    color: #FFFFFF;
+}
+.Content-Wide .Content-Wide-Footer .More-Button a {
+    color: #FFFFFF;
+}
+.Content-Wide .Content-Wide-Footer .More-Button a:hover {
+    color: #FFFFFF;
+}
+.Content-Wide a {
+    color: #2253B8;
+}
+.Content-Wide a:hover {
+    color: #0672EC;
+}
+.Content-Wide p a {
+    color: #2253B8;
+}
+.Content-Wide p a:hover {
+    color: #0672EC;
+}
+.Content-Wide Table a {
+    color: #2253B8;
+}
+.Content-Wide Table a:hover {
+    color: #0672EC;
+}
+.Content-Wide UL LI a {
+    color: #2253B8;
+}
+.Content-Wide UL LI a:hover {
+    color: #0672EC;
+}
+.Content-Wide OL LI a {
+    color: #2253B8;
+}
+.Content-Wide OL LI a:hover {
+    color: #0672EC;
+}
+.Category-v4 .More-Button a {
+    color: #FFFFFF;
+}
+.Category-v4 .More-Button a:hover {
+    color: #2258C6;
+}
+.Category-v5 .More-Button a {
+    color: #FFFFFF;
+}
+.Category-v5 .More-Button a:hover {
+    color: #2258C6;
+}
+.v4acpcont .v4acp_head .v4title font {
+    font-size: 1em;
+}
+#Content-Heading h2 {
+    font-family: verdana,tahoma,arial;
+    font-size: 13px;
+}
+#CentralArea .gallery .details a {
+}
+#CentralArea .gallery .details a:hover {
+}
+#Copyright-Box p {
+    font-size: 11px;
+    font-weight: bold;
+}
+.Content-Wide .More-Button {
+    font-size: 0.7em;
+    font-weight: normal;
+    text-align: right;
+}
+.Content-Wide .More-Button a {
+    text-decoration: none;
+}
+.Content-Wide H2 {
+    font-family: verdana,tahoma,arial;
+    font-size: 1em;
+}
+.Content-Wide H3 {
+    font-size: 1em;
+}
+.Content-Wide H4 {
+    font-size: 1em;
+}
+.Content-Wide H5 {
+    font-size: 1.2em;
+}
+.Content-Wide H6 {
+    font-size: 1.4em;
+}
+.Content-Wide p {
+    font-size: 1em;
+}
+.Content-Wide p a {
+    text-decoration: none;
+}
+.Content-Wide Table {
+    font-size: 1em;
+}
+.Content-Wide Table th {
+    text-align: left;
+}
+.Content-Wide Table td {
+    vertical-align: top;
+}
+.Content-Table-Heading {
+    font-weight: normal;
+}
+.Content-Wide Table p {
+    font-size: 1em;
+}
+.Content-Wide Table a {
+    text-decoration: none;
+}
+.Content-Wide UL {
+    font-size: 1em;
+}
+.Content-Wide UL LI {
+    line-height: 1em;
+    text-align: justify;
+}
+.Content-Wide UL LI a {
+    text-decoration: none;
+}
+.Content-Wide UL LI p {
+    font-size: 1em;
+}
+.Content-Wide OL {
+    font-size: 1em;
+}
+.Content-Wide OL LI {
+    line-height: 1em;
+    text-align: justify;
+}
+.Content-Wide OL LI a {
+    text-decoration: none;
+}
+.Content-Wide OL LI p {
+    font-size: 1em;
+}
+.Content-Wide-Header h2 {
+    font-weight: bold;
+}
+.Category-v4 H2 {
+    font-size: 1em;
+}
+.Category-v4 .More-Button {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: right;
+}
+.Category-v4 .More-Button a {
+    text-decoration: none;
+}
+.Category-v5 H2 {
+    font-size: 1em;
+}
+.Category-v5 .More-Button {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: right;
+}
+.Category-v5 .More-Button a {
+    text-decoration: none;
+}
+body {
+}
+.pagewidth {
+    background-image: url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/page-backgorund.png");
+    background-position: center 40px;
+    background-repeat: no-repeat;
+}
+.logobar {
+    padding: 0 10px 10px;
+}
+.pnav {
+    right: 10px !important;
+}
+.dynmenu {
+}
+#Buy-menu {
+    left: 691px !important;
+}
+#Sell-menu {
+    left: 693px !important;
+}
+#MyEbay-menu {
+    left: 729px !important;
+}
+#Community-menu {
+    left: 794px !important;
+}
+#Help-menu {
+    left: 800px !important;
+}
+.bbc-in {
+    padding: 0 0 0 10px;
+}
+#TopPromoArea {
+    background-repeat: repeat-y;
+    margin: 124px 0 0;
+}
+#CentralArea .v4stabl {
+    background-repeat: repeat-y;
+}
+.v4topleft {
+    padding: 26px 0 0;
+}
+.v4topright {
+    padding: 26px 0 0 !important;
+}
+.v4topright .v4acpcont {
+    background: none repeat scroll 0 0 transparent !important;
+}
+.stBadge-accent {
+    margin: 0 !important;
+}
+.pageminwidth {
+}
+#Store-Header {
+	top: 3px;
+}
+#Store-Container {
+    height: 25px;
+}
+.stBadge {
+    margin: 0;
+}
+.stBadge-accent {
+    height: 0 !important;
+}
+#Content-Heading {
+    height: 27px;
+    left: 199px;
+    top: 136px;
+    width: 722px;
+}
+.Content-Wide {
+    margin: -15px 0 0;
+}
+.Content-Wide .Advertisers {
+    margin-left: 1px;
+}
+.Content-Wide UL {
+    margin: 5px 0 0 20px !important;
+    padding: 5px 0 0;
+}
+.Content-Wide h3 {
+    margin: 10px 0 0 !important;
+    padding: 5px 0 0;
+}
+.Content-Wide p {
+    padding: 5px 0 0;
+}
+.Delivery-Table {
+    float: left;
+}
+#background-panel-left {
+    background-repeat: no-repeat;
+    height: 686px;
+    left: -184px;
+    position: absolute;
+    top: -251px;
+    width: 165px;
+}
+#background-panel-right {
+    background-repeat: no-repeat;
+    height: 686px;
+    left: 941px;
+    position: absolute;
+    top: -251px;
+    width: 165px;
+}
+#Search-Keywords {
+    background-repeat: no-repeat;
+    float: left;
+    height: 163px;
+    position: relative;
+    width: 455px;
+}
+#Search-Keywords UL {
+    float: left;
+    list-style: none outside none;
+    margin: 10px 0 0 10px;
+    padding: 0;
+    width: 450px;
+}
+#Search-Keywords UL LI {
+    float: left;
+    width: 150px;
+}
+#Search-Keywords UL LI {
+    font-size: 0.8em;
+    line-height: 13px;
+}
+#Search-Keywords UL LI b {
+    color: #929292;
+}
+#Search-Keywords UL LI a {
+    color: #000000;
+}
+#Search-Keywords UL LI a:hover {
+    color: #000000;
+}
+.Store-Search {
+    height: 36px;
+    position: relative;
+	/* Removed zindex to fix ebay menus floating under search box. LA 060911 */
+    /* z-index: 99999; */
+	width: 285px;
+	font-size:10px;
+	float:right;
+	margin:0px 300px 0 0;
+}
+
+.Store-Search p span{
+	color: #e12a2e;
+}
+.Store-Search h2 {
+    color: #FFFFFF;
+    font-size: 13px;
+    left: 10px;
+    position: absolute;
+    top: 5px;
+}
+#Search-UL {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#Search-UL LI {
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+#Search-UL LI p {
+    margin: 0;
+    padding: 7px 10px 0 0;
+}
+#Search-UL LI p {
+    color: #666;
+}
+#Search-UL LI p {
+    font-size: 10px;
+    font-weight: bold;
+}
+#Search-UL LI #Search-Query {
+    border: 1px solid #DADADA;
+    float: left;
+    height: 20px;
+    margin: 0;
+    width: 249px;
+}
+#Search-UL LI #Search-Submit {
+    border: 0 none;
+    color: #e12a2e;
+    cursor: pointer;
+    float: left;
+    height: 24px;
+    margin: 0;
+    width: 29px;
+}
+#Search-UL LI #Search-Query {
+    color: #898989;
+}
+#Search-UL LI #Search-Query {
+    font-size: 12px;
+    font-weight: normal;
+}
+#Copyright-Box {
+    top: -153px;
+    width: 170px;
+}
+#Copyright-Box p {
+    padding: 12px 0 0 10px;
+}
+.Header-Logo {
+    left: 7px;
+    top: -5px;
+}
+#Store-Menu {
+    position: absolute;
+    top: 86px;
+    width: 939px;
+	text-transform:uppercase;
+	margin:8px 0 0 -9px;
+}
+#Store-Header #Store-Menu-Left LI {
+    margin: 0;
+    padding: 0 15px 0 10px;
+}
+#Store-Header #Store-Menu-Right LI {
+    margin: 0;
+    padding: 0 0px 0 10px;
+}
+#Store-Header #Store-Menu-Right li.join-mail {
+    background-color:#E50F11; 
+	padding:8px 10px; 
+	margin:-7px 1px auto; 
+	right:-20px;
+}
+#Store-Header #Store-Menu-Right li.join-mail a img{
+    margin-right:10px #E50F11; 
+}
+#Store-Header #Store-Menu-Right li.join-mail a img{
+	vertical-align: middle !important;
+	border: none;
+}
+#Store-Header #Store-Menu-Right li.join-mail a{
+	color:#FFFFFF;
+}
+#Store-Header #Store-Menu-Right li.join-mail span {
+	color:#FFFFFF;
+}
+#Store-Header #Store-Menu-Right li.join-mail a img{
+    margin: 0;
+    padding: 0 5px
+}
+#LeftPanel {
+    background-repeat: repeat-y;
+	padding-top: 82px;
+	!padding-top: 67px;
+}
+#LeftPanel .v4mid {
+}
+#LeftPanel .v4acpcont .v4footd {
+    display: none;
+}
+#LeftPanel .v4mid .gallery .image {
+    padding: 15px 0 0;
+}
+#LeftPanel .v4mid .gallery .details {
+    padding-top: 0 !important;
+}
+#LeftPanel .v4mid .gallery .details .ttl {
+    padding-top: 0 !important;
+}
+.v4acpcont {
+    margin: 0 !important;
+}
+.lcat {
+    margin: 0;
+}
+.lcat .ttl {
+    padding: 7px 15px 5px 10px !important;
+}
+.lcat UL LI .cnt {
+    padding: 8px 0 5px 5px !important;
+}
+.lcat UL LI a {
+    padding: 7px 0 5px 10px;
+}
+.lev1 LI span {
+    padding: 7px 0 5px 10px !important;
+}
+.lev2 LI a {
+    padding: 7px 0 5px 20px !important;
+}
+.lev2 LI span {
+    padding: 7px 0 5px 20px !important;
+}
+.lev3 LI a {
+    padding: 7px 0 5px 20px !important;
+}
+.lev3 LI span {
+    padding: 7px 0 5px 20px !important;
+}
+.oc UL LI {
+    padding: 7px 15px 5px 10px !important;
+}
+.s_recat LI a {
+    padding: 7px 15px 5px 10px !important;
+}
+.s_recat LI span {
+    padding: 7px 0 5px 20px !important;
+}
+.v4acpcont .v4acp_head .v4title {
+    padding: 5px 5px 5px 10px !important;
+}
+#homepage {
+    float: left;
+    overflow-x: hidden;
+    padding: 25px 0 0;
+    position: relative;
+}
+#homepage img {
+    border: 0 none;
+    float: left;
+}
+#homepage .Advert {
+    padding: 0 10px 5px 0;
+}
+#central-panel {
+    float: left;
+    position: relative;
+}
+#central-adverts {
+    float: left;
+    position: relative;
+    width: 197px;
+}
+#central-adverts img {
+    float: left;
+}
+#central-rotator {
+    float: left;
+    padding: 0 0 0 12px;
+    position: relative;
+    width: 490px;
+}
+#base-panel {
+    background-repeat: no-repeat;
+    float: left;
+    height: 20px;
+    margin: 10px 0 0;
+    padding: 10px 0 0;
+    position: relative;
+    width: 700px;
+}
+#base-panel img {
+    padding: 0 6px 0 0;
+}
+#brands-box {
+    background-repeat: no-repeat;
+    float: left;
+    height: 160px;
+    padding: 17px 0 0 15px;
+    position: relative;
+    width: 681px;
+}
+#brands-box img {
+    float: left;
+    margin: 4px 8px 4px 0;
+}
+.Menu-Advert {
+    border: 0 none;
+    float: left;
+    position: relative;
+}
+.Content-Wide-Header h2 {
+    margin: 12px 0 0;
+}
+.v4acpcont .v4acp_head .v4title {
+    color: #ff3333 !important;
+}
+.v4acpcont .v4acp_head .v4title font {
+    color: red !important;
+}
+.lcat .ttl {
+    color: #666;
+}
+.lcat .cnt {
+    color: #666 !important;
+}
+.lcat span {
+    color: #666;
+}
+.lcat a {
+    color: #666;
+}
+.lcat a:hover {
+    color: #666;
+}
+.lev1 span {
+    color: #666 !important;
+}
+.lev1 .cnt {
+    color: #666 !important;
+}
+.lcat UL LI a {
+    color: #666;
+}
+.lcat UL LI a:hover {
+    color: #666;
+}
+.lev2 span {
+    color: #F82C2D !important;
+}
+.lev2 LI .cnt {
+    color: #F82C2D !important;
+}
+.lev2 LI a {
+    color: #F82C2D !important;
+}
+.lev2 LI a:hover {
+    color: #F82C2D !important;
+}
+.lev3 span {
+    color: #F82C2D !important;
+}
+.lev3 LI .cnt {
+    color: #F82C2D !important;
+}
+.lev3 LI a {
+    color: #F82C2D;
+}
+.lev3 LI a:hover {
+    color: #F82C2D;
+}
+.s_recat LI .cnt {
+    color: #666 !important;
+}
+.s_recat LI a {
+    color: #666;
+}
+.s_recat LI a:hover {
+    color: #666;
+}
+.oc UL LI .cnt {
+    color: #666;
+}
+.oc UL LI span {
+    color: #666 !important;
+}
+.oc UL LI a {
+    color: #666;
+}
+.oc UL LI a:hover {
+    color: #666;
+}
+#CentralArea .gallery .details a {
+    color: #333333;
+}
+#CentralArea .gallery .details a:hover {
+    color: #333333;
+}
+#CentralArea .gallery .details a:visited {
+    color: #333333;
+}
+#CentralArea .nol .details a {
+    color: #333333;
+}
+#CentralArea .nol .details a:hover {
+    color: #333333;
+}
+#CentralArea .nol .details a:visited {
+    color: #333333;
+}
+#CentralArea .cmpb td a {
+    color: #333333;
+}
+#CentralArea .cmpb td a:hover {
+    color: #333333;
+}
+#CentralArea .bpmsg .lnk a {
+    color: #333333;
+}
+#CentralArea .bpmsg .lnk a:hover {
+    color: #333333;
+}
+.v4snexp UL LI a {
+    color: #333333;
+}
+.v4snexp UL LI a:hover {
+    color: #333333;
+}
+#CentralArea .dynpg {
+    color: #333333;
+}
+#CentralArea .dynpg .pager {
+    color: #333333;
+}
+#CentralArea .dynpg .pager a {
+    color: #333333;
+}
+#CentralArea .dynpg .pager a:hover {
+    color: #333333;
+}
+#CentralArea .dynpg .disabled {
+    color: #919191 !important;
+}
+#Copyright-Box p {
+    color: #ABABAB;
+}
+#storercp {
+}
+#storercp a {
+}
+#storercp a:hover {
+}
+#storercp .stBadge-text {
+}
+#storercp .mbg a {
+}
+#storercp .mbg a:hover {
+}
+
+#Store-Header #Store-Menu-Left a {
+    color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Left a:hover {
+    color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Right a {
+    color: #FFFFFF;
+}
+#Store-Header #Store-Menu-Right a:hover {
+    color: #FFFFFF;
+}
+#CentralArea .v4stabl {
+}
+#CentralArea .v4stabl a {
+    color: #333333;
+}
+#CentralArea .v4stabl a:hover {
+    color: #333333;
+}
+#CentralArea .fpcc .countClass {
+	color:#F00;
+}
+#CentralArea .fpcc .matchClass {
+}
+#CentralArea .fpcc .keywordClass {
+}
+#CentralArea .cmpBr {
+}
+#CentralArea .cmpBr a {
+    color: #333333;
+}
+#CentralArea .cmpBr a:hover {
+    color: #333333;
+}
+#CentralArea .ctrlbr {
+    color: #333333;
+}
+#CentralArea .ctrlbr .cur {
+    color: #333333;
+}
+#CentralArea .ctrlbr a {
+}
+#CentralArea .ctrlbr a:hover {
+}
+#LeftPanel .v4acpcont .gallery a {
+    color: #333333;
+}
+#LeftPanel .v4acpcont .gallery a:hover {
+    color: #333333;
+}
+#LeftPanel .v4acpcont .v4footd a {
+}
+#LeftPanel .v4acpcont .v4footd a:hover {
+}
+#TopPromoArea .v4acpcont .gallery a {
+    color: #333333;
+}
+#TopPromoArea .v4acpcont .gallery a:hover {
+    color: #333333;
+}
+#TopPromoArea .v4acpcont .v4footd a {
+    color: #333333;
+}
+#TopPromoArea .v4acpcont .v4footd a:hover {
+    color: #333333;
+}
+#LeftPanel .cdoringe {
+}
+#LeftPanel .cdtimeunit {
+}
+#TopPromoArea .cdoringe {
+}
+#TopPromoArea .cdtimeunit {
+}
+.Content-Wide-Header h2 {
+    color: #FFFFFF;
+}
+.Content-Wide .Content-Wide-Header .More-Button a {
+    color: #FFFFFF;
+}
+.Content-Wide .Content-Wide-Header .More-Button a:hover {
+    color: #FFFFFF;
+}
+.Content-Wide .Content-Wide-Footer .More-Button a {
+    color: #FFFFFF;
+}
+.Content-Wide .Content-Wide-Footer .More-Button a:hover {
+    color: #FFFFFF;
+}
+.Content-Wide b {
+    color: #666;
+}
+.Content-Wide span b {
+    color: #000000;
+}
+.Content-Wide a {
+    color: #666;
+}
+.Content-Wide a:hover {
+    color: #666;
+}
+.Content-Wide p a {
+    color: #666;
+}
+.Content-Wide p a:hover {
+    color: #666;
+}
+.Content-Wide Table a {
+    color: #666;
+}
+.Content-Wide Table a:hover {
+    color: #666;
+}
+.Content-Wide UL LI a {
+    color: #666;
+}
+.Content-Wide UL LI a:hover {
+    color: #666;
+}
+.Content-Wide OL LI a {
+    color: #666;
+}
+.Content-Wide OL LI a:hover {
+    color: #666;
+}
+.Category-v4 .More-Button a {
+    color: #FFFFFF;
+}
+.Category-v4 .More-Button a:hover {
+    color: #F5FDCA;
+}
+.Category-v5 .More-Button a {
+    color: #FFFFFF;
+}
+.Category-v5 .More-Button a:hover {
+    color: #F5FDCA;
+}
+.Category-v5 img {
+    height: auto;
+}
+#Store-Menu UL LI a {
+    color: #666 !important;
+}
+#Store-Menu UL LI a:hover {
+    color: #e12a2e !important;
+}
+#Copyright-Box p {
+    font-style: italic;
+    font-weight: normal;
+}
+#Store-Container {
+    font-size: 11px;
+}
+
+.v4acpcont .v4acp_head .v4title font {
+    font-size: 14px;
+    font-weight: normal !important;
+	color:#cc3333 !important;
+	height:40px;
+}
+
+#Store-Menu UL LI a {
+    font-size: 12px !important;
+    font-weight: normal;
+}
+
+#Store-Menu UL LI a:hover {
+    text-decoration: underline;
+}
+#menu-header table td {
+    font-size: 11px;
+}
+#search-query-header {
+    font-size: 12px;
+}
+.lcat .ttl {
+    font-weight: normal;
+}
+.lcat .cnt {
+    font-size: 11px;
+    font-weight: normal !important;
+}
+.lev1 span {
+    font-weight: normal;
+}
+.lcat a {
+    font-size: 12px;
+    font-weight: normal;
+}
+.lev1 LI span {
+    font-weight: normal;
+}
+.lcat UL LI a {
+    font-weight: normal;
+}
+.lev2 LI span {
+    font-weight: normal;
+}
+.lev2 LI a {
+    font-weight: normal;
+}
+.lev3 LI span {
+    font-weight: normal;
+}
+.lev3 LI a {
+    font-weight: normal;
+}
+.s_recat LI span {
+    font-weight: normal;
+}
+.s_recat LI a {
+    font-weight: normal !important;
+}
+.oc LI span {
+    font-weight: normal;
+}
+.oc LI a {
+    font-weight: normal !important;
+}
+.Content-Wide a:hover {
+    text-decoration: underline;
+}
+.Content-Wide-Header h2 {
+    font-family: tahoma,arial,verdana;
+    font-weight: normal;
+}
+#Store-Menu * {
+    font-family: tahoma,arial,verdana !important;
+}
+.v4mid * {
+    font-family: tahoma,arial,verdana !important;
+}
+.Content-Wide * {
+    font-family: tahoma,arial,verdana !important;
+}
+.v4acp_head * {
+    font-family: tahoma,arial,verdana !important;
+}
+.Store-Search * {
+    font-family: tahoma,arial,verdana !important;
+}
+.gallery * {
+    font-family: tahoma,arial,verdana !important;
+}
+#CentralArea * {
+    font-family: tahoma,arial,verdana !important;
+}
+
+
+td#CentralArea span.pdmt {
+    font-size: 12px!important;
+    font-weight: normal!important;
+}
+.call_us_today span{
+	 color:#E91A20;
+	 font-size: 20px;
+}
+.call_us_today {
+    color: #333333;
+    float: right;
+    font-weight: 700;
+    margin: -33px 28px 0 400px;
+    text-align: right;
+    width: 223px;
+}
+.paypal_verified{
+	background:url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/PayPalSeal_68px.png");
+	width: 69px;
+	height: 68px;
+}
+.card_types_image{
+	background: url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/PaymentOptions.png");
+	width: 137px;
+	height: 25px;
+	float:right;
+}
+.need_help_group {
+    color: #4F4F4F;
+    float: right;
+    font-size: 11px;
+    font-weight: 700;
+    margin: -59px -23px 0 10px;
+    text-transform: uppercase;
+    width: 100%;
+}
+.page_title{
+	color:#EB0914;
+	border-bottom:1px solid #666;
+}
+.page_heading{
+	color:#666;
+}
+.page_content, .page_content p{
+	color:#666;
+}
+
+/* Home Page Banners */
+
+.banner {
+	margin-top:8px;
+}
+
+.banner a {
+	border:1px solid #ccc;
+	padding:8px 15px;
+	background : url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/banner_button.jpg") repeat;
+	color:#979797 !important;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+.banner a:hover  {
+	background : url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/banner_button_ro.jpg") repeat !important;
+	color:#fff !important;
+	text-decoration:none;
+}
+
+#hdr {
+background : url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/banner1.jpg") no-repeat;
+height : 228px;
+width : 100%;
+}
+
+.hdr1 {
+background : url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/banner1.jpg") no-repeat !important;
+height : 228px;
+width : 100%;
+}
+.hdr2 {
+background : url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/banner2.jpg") no-repeat !important;
+height : 228px;
+width : 100%;
+}
+.hdr3 {
+background : url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/banner3.jpg") no-repeat !important;
+height : 228px;
+width : 100%;
+}
+.hdr4 {
+background : url("http://www.godfreys.com.au/skin/frontend/base/default/images/ebay_images/banner4.jpg") no-repeat !important;
+height : 228px;
+width : 100%;
+}
+
+#link {
+	display: block;
+    height: 223px;
+    width: 683px;
+}
+#gh-title {
+    display: none;
+}

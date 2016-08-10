@@ -1,0 +1,214 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+/* @var $this Mage_Catalog_Block_Product_Compare_List
+   @var $list Mage_Catalog_Block_Product_List
+ */
+
+$currentUrl = Mage::helper('core/url')->getCurrentBase64Url();
+$parentUrl = $this->getRequest()->getParam('url');
+$list = Mage::getBlockSingleton('catalog/product_list');
+?>
+<div class="page-title title-buttons">
+    <h1><?php echo $this->__('Compare Products') ?></h1>
+</div>
+<?php $_total=$this->getItems()->getSize();$_total_item = count($this->getItems()); ?>
+<?php if($_total): ?>
+    <table class="data-table compare-table" id="product_comparison">
+        <tbody>
+        <tr class="product-shop-row">
+            <?php
+            $_i=0;
+            $countItem = 0;
+            ?>
+            <?php foreach($this->getItems() as $_item): ?>
+                <td colspan="2">
+                    <a class="product-image" href="#" onclick="setLocation('<?php echo $this->getProductUrl($_item) ?>', true)" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(200, 200); ?>" width="200" height="200" alt="<?php echo $this->stripTags($_item->getName(), null, true) ?>" /></a>
+                    <h2 class="product-name"><a href="#" onclick="setLocation('<?php echo $this->getProductUrl($_item) ?>', true)" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></a></h2>
+                    <?php echo $this->getReviewsSummaryHtml($_item, 'short') ?>
+                    <?php if (!$_item->isSaleable() && $_item->getPrice() == 0): ?>
+                        <div class="no-price">
+                            <?php echo $this->getPriceHtml($_item, true, '-compare-list-bottom') ?>
+                        </div>
+                    <?php else: ?>
+                        <?php echo $this->getPriceHtml($_item, true, '-compare-list-bottom') ?>
+                    <?php endif; ?>
+
+                    <?php if (!$_item->isSaleable() && $_item->getPrice() == 0): ?>
+                        <p class="avaibility visit-store-info">
+                            <span><?php echo $this->__('Please visit stores for pricing information') ?></span></p>
+                    <?php else: ?>
+                        <?php if ($_item->isSaleable()): ?>
+                            <p>
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                        class="button btn-cart"
+                                        onclick="setLocation('<?php echo $this->helper('catalog/product_compare')->getAddToCartUrl($_item) ?>', true)">
+                                    <span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                            </p>
+                        <?php else: ?>
+                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span>
+                            </p>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                        <ul class="add-to-links">
+                            <li><a href="<?php echo $this->getAddToWishlistUrl($_item) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                        </ul>
+                    <?php endif; ?>
+                </td>
+                <?php
+                $countItem++;
+                if($countItem < $_total_item){
+                    ?>
+                    <td class="between-space"></td>
+                <?php
+                }endforeach; ?>
+				<td class="between-space last-space"></td>
+        </tr>
+        </tbody>
+        <tbody class="body-att">
+        <?php foreach ($this->getAttributes() as $_attribute): ?>
+            <tr class="tr-att">
+                <?php
+                $_i=0;
+                $countItem = 0;
+                $is_description = false;
+                ?>
+                <?php foreach($this->getItems() as $_item):
+                    if($_attribute->getAttributeCode() == 'short_description')
+                        $is_description = true;
+
+                    if(!$is_description){
+                    ?>
+                        <td class=""><span class="nobr"><?php echo $_attribute->getStoreLabel() ?></span></td>
+                    <?php
+                    }
+                    ?>
+                    <td <?php echo ($is_description ? 'colspan="2" class="short-desc"' : '') ?>>
+                        <?php switch ($_attribute->getAttributeCode()) {
+                            case "price": ?>
+                                <?php echo $this->getPriceHtml($_item, true, '-compare-list-' . $_attribute->getCode()) ?>
+                                <?php break;
+                            case "small_image": ?>
+                                <img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(200, 200); ?>" width="200" height="200" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" />
+                                <?php break;
+                            case "date":
+                                echo substr($this->getProductAttributeValue($_item, $_attribute),0,10);
+                                break;
+                            default: ?>
+                                <div class="std">
+                                    <?php $value = $this->helper('catalog/output')->productAttribute($_item, $this->getProductAttributeValue($_item, $_attribute), $_attribute->getAttributeCode()) ?>
+                                    <?php echo $value == 'No' ? 'N/A' : $value; ?>
+                                </div>
+                            <?php break;
+                        } ?>
+                    </td>
+                <?php
+                $countItem++;
+                if($countItem < $_total_item){
+                ?>
+                <td class="between-space"></td>
+                <?php
+                }
+                endforeach;
+                ?>
+				<td class="between-space last-space"></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+        <tbody>
+        <tr class="add-to-row">
+            <?php $_i=0;
+            $countItem = 0;
+            ?>
+            <?php foreach($this->getItems() as $_item): ?>
+                <td colspan="2">
+                    <?php
+                    $_product = Mage::getModel('catalog/product')->load($_item->getProductId());?>
+                        <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                    <?php if (!$_item->isSaleable() && $_item->getPrice() == 0): ?>
+                        <div class="no-price">
+                            <?php echo $this->getPriceHtml($_item, true, '-compare-list-bottom') ?>
+                        </div>
+                    <?php else: ?>
+                        <?php echo $this->getPriceHtml($_item, true, '-compare-list-bottom') ?>
+                    <?php endif; ?>
+
+                    <?php if (!$_item->isSaleable() && $_item->getPrice() == 0): ?>
+                        <p class="avaibility visit-store-info">
+                            <span><?php echo $this->__('Please visit stores for pricing information') ?></span></p>
+                    <?php else: ?>
+                        <?php if ($_item->isSaleable()): ?>
+                            <p>
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                        class="button btn-cart"
+                                        onclick="setLocation('<?php echo $this->helper('catalog/product_compare')->getAddToCartUrl($_item) ?>', true)">
+                                    <span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                            </p>
+                        <?php else: ?>
+                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span>
+                            </p>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                        <ul class="add-to-links">
+                            <li><a href="<?php echo $this->getAddToWishlistUrl($_item);?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                        </ul>
+                    <?php endif; ?>
+                </td>
+                <?php
+                $countItem++;
+                if($countItem < $_total_item){
+                    ?>
+                    <td class="between-space"></td>
+                <?php
+                }endforeach; ?>
+				<td class="between-space last-space"></td>
+        </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        decorateTable('product_comparison');
+
+        /**
+         * Send remove item request, after that reload windows
+         */
+        function removeItem(url)
+        {
+            new Ajax.Request(url, {
+                parameters: {isAjax: 1, method: 'POST'},
+                onLoading: function(){$('compare-list-please-wait').show();},
+                onSuccess: function(transport) {
+                    $('compare-list-please-wait').hide();
+                    window.location.reload();
+                    window.opener.location.reload();
+                }
+            });
+        }
+    </script>
+<?php else: ?>
+<!--    <script type="text/javascript">window.close();</script>-->
+    <?php echo $this->__('You have no items to compare.');?>
+<?php endif; ?>

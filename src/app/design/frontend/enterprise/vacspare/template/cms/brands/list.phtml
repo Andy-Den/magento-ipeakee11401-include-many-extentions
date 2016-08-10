@@ -1,0 +1,16 @@
+<?php if(Mage::getStoreConfig('vacspare_optionimages/general/enabled_images')): ?>
+<?php $_optionValue = $this->getAllOptionValue(); ?>
+<?php if(is_array($_optionValue) && count($_optionValue) > 0): ?>
+<ul class="brands">
+	<?php $i=0; foreach($_optionValue as $_value): $i++ ?>
+		<li class="item <?php if($i==1): ?>first<?php endif ?><?php if($i==count($_optionValue)): ?> last<?php endif ?>">
+			<div>
+				<a href="<?php echo $this->getUrl('catalogsearch/advanced/result'); ?>?<?php echo $this->getAttributeCode() ?>=<?php echo $_value['option_id'] ?>">
+					<img width="73" alt="" src="<?php echo Mage::getBaseUrl('media').DS.'image_color'.DS.$_value['filename'] ?>" />
+				</a>
+			</div>
+		</li>
+	<?php endforeach; ?>           
+</ul>
+<?php endif; ?>
+<?php endif; ?>

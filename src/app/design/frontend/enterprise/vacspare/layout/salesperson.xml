@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Celebros Qwiser - Magento Extension
+ *
+ * @category    Celebros
+ * @package     Celebros_Qwiser
+ * @author		Omniscience Co. - Dan Aharon-Shalom (email: dan@omniscience.co.il)
+ *
+ */
+-->
+<layout version="2.0.0">
+
+    <!--
+	<cms_index_index translate="label">
+
+		<reference name="head">
+        	<action method="addCss"><stylesheet>css/salesperson-style.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/jquery-ui-1.8.16.custom.css</stylesheet></action>			
+			<action method="addJs"><script>jquery-1.8.2.min.js</script></action>
+			<action method="addJs"><script>jquery-ui-1.9.1.custom.min.js</script></action>
+			<action method="addJs"><script>jquery-noconflict.js</script></action>
+		</reference>
+
+        <reference name="content">
+		    <block type="salesperson/giftfinder_view" name="salesperson.giftfinder" before="-" as="giftfinder">
+				<action method="setTemplate">
+					<template helper="salesperson/data/getGiftfinderTemplate"/> 
+				</action>
+				<block type="salesperson/giftfinder_view" name="giftfinder.price.question" as="giftfinder_price_question">
+					<action method="setTemplate">
+						<template>salesperson/giftfinder/price-question.phtml</template> 
+					</action>
+				</block>				
+			</block>			
+		</reference>
+    </cms_index_index>
+	-->
+
+    <default>
+	<reference name="head">
+	    <action method="addCss">
+	        <stylesheet>css/AutoComplete.css</stylesheet>
+	    </action>
+	</reference>
+	<reference name="header">
+		<block type="core/template" name="salesperson.top.search" as="salesperson_top_search" template="salesperson/form.mini.phtml">
+            <block type="partsfinder/form" name="partsfinder.form_mini" as="accessory.mini.search" template="partsfinder/form_mini.phtml"/>
+        </block>
+		<action method="unsetChild" ifconfig="salesperson/general_settings/search_enabled"><as>topSearch</as></action>
+		<action method="setChild" ifconfig="salesperson/general_settings/search_enabled"><as>topSearch</as><name>salesperson.top.search</name></action>
+	</reference>
+	<reference name="before_body_end">
+		<block type="core/template"  name="salesperson.autocomplete" as="salesperson_autocomplete" after="-">
+			<action method="setTemplate" ifconfig="salesperson/autocomplete_settings/autocomplete_enabled">
+				<template>salesperson/autocomplete/view.phtml</template>
+			</action>
+		</block>	
+		<block type="core/template" name="livesight.footer" as="livesight_footer" after="-">
+			<action method="setTemplate" ifconfig="salesperson/livesight_settings/livesight_enabled">
+				<template>salesperson/livesight/tracking.footer.phtml</template> 
+			</action>
+		</block>		
+	</reference>		
+    </default>
+	<checkout_onepage_success>		
+		<reference name="before_body_end">		
+			<block type="core/template" name="livesight.thankyoupage" as="livesight_thankyoupage" after="-">
+				<action method="setTemplate" ifconfig="salesperson/livesight_settings/livesight_enabled">
+					<template>salesperson/livesight/tracking.thank.you.page.phtml</template> 
+				</action>
+			</block>
+		</reference>
+	</checkout_onepage_success>
+	<catalog_product_view>
+		<reference name="before_body_end">
+			<block type="salesperson/analytics_view" name="celebros.analytics.product.click" as="celebros_analytics_product_click" after="-">
+				<action method="setTemplate">
+					<template>salesperson/analytics/tracking.product.click.phtml</template> 
+				</action>
+			</block>		
+		</reference>
+		<reference name="content">
+			<block type="salesperson/checkout_cart_crosssell" name="salesperson.crosssell" as="crosssell"  after="product.info">
+				<action method="setTemplate" ifconfig="salesperson/crosssell_settings/crosssell_enabled">
+					<template>salesperson/crossell/upsell.phtml</template> 
+				</action>
+			</block>
+		</reference>	
+	</catalog_product_view>
+	<checkout_cart_index>
+		<remove name="checkout.cart.crosssell"/>
+		<reference name="checkout.cart">
+			<action method="unsetChild" ifconfig="salesperson/crosssell_settings/crosssell_enabled"><as>crosssell</as></action>
+			<block type="salesperson/checkout_cart_crosssell" name="salesperson.crosssell" as="crosssell">
+				<action method="setTemplate" ifconfig="salesperson/crosssell_settings/crosssell_enabled">
+					<template>checkout/cart/crosssell.phtml</template> 
+				</action>
+			</block>
+		</reference>
+	</checkout_cart_index>
+    <salesperson_result_index>
+    	<label>Qwiser Search Form</label>
+        <remove name="right.newsletter" />
+        <remove name="right.reports.product.viewed" />
+        <reference name="head">
+        	<action method="addCss"><stylesheet>css/salesperson-style.css</stylesheet></action>
+			<!--<action method="addCss"><stylesheet>css/jquery-ui-1.8.16.custom.css</stylesheet></action>-->
+            <action method="addJs"><script>fk/layered-nav-menu.js</script></action>
+			<action method="addJs"><script>jquery-1.8.2.min.js</script></action>
+			<action method="addJs"><script>jquery-ui-1.9.1.custom.min.js</script></action>
+			<action method="addJs"><script>jquery-noconflict.js</script></action>
+			<action method="addItem" ifconfig="sales/msrp/enabled"><type>skin_js</type><name>js/msrp.js</name></action>
+        </reference>
+		<reference name="before_body_end">
+			<block type="salesperson/analytics_view" name="celebros.analytics.search" as="celebros_analytics_search" after="-">
+				<action method="setTemplate">
+					<template>salesperson/analytics/tracking.search.phtml</template> 
+				</action>
+			</block>		
+		</reference>
+        <reference name="root">
+           	<block type="salesperson/layer_view" name="salesperson.nonleadquestions.top" as="nonleadquestions_top">
+				<action method="setTemplate" iftop="salesperson/display_settings/display_non_lead">
+					<template>salesperson/layer/non-lead-top.phtml</template> 
+				</action>
+				 <block type="salesperson/layer_view" name="price.question" as="price_question">
+					<action method="setTemplate">
+						<template>salesperson/layer/price-question.phtml</template> 
+					</action>
+				</block>				
+			</block>
+			<block type="salesperson/layer_view" name="salesperson.leadquestion.top" as="leadquestion_top">
+				<action method="setTemplate" ifconfig="salesperson/display_settings/display_lead_top">
+					<template>salesperson/layer/lead-top.phtml</template> 
+				</action>
+			</block>
+        </reference>
+        <reference name="left">
+        	<block type="salesperson/layer_view" name="salesperson.nonleadquestions.left" as="nonleadquestions_left" before="-">
+				<action method="setTemplate" ifleft="salesperson/display_settings/display_non_lead">
+					<template>salesperson/layer/non-lead.phtml</template> 
+				</action>
+				 <block type="salesperson/layer_view" name="price.question" as="price_question">
+					<action method="setTemplate">
+						<template>salesperson/layer/price-question.phtml</template> 
+					</action>
+				</block>
+			</block>
+            <block type="catalog/product_compare_sidebar" after="-" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml">
+				<action method="addPriceBlockType">
+					<type>bundle</type>
+					<block>bundle/catalog_product_price</block>
+					<template>bundle/catalog/product/price.phtml</template>
+				</action>
+			</block>
+        </reference>
+        <reference name="right">
+        	<block type="salesperson/layer_view" name="salesperson.nonleadquestions.right" as="nonleadquestions_right" before="-">
+				<action method="setTemplate" ifright="salesperson/display_settings/display_non_lead">
+					<template>salesperson/layer/non-lead.phtml</template> 
+				</action>
+				 <block type="salesperson/layer_view" name="price.question" as="price_question">
+					<action method="setTemplate">
+						<template>salesperson/layer/price-question.phtml</template> 
+					</action>
+				</block>				
+			</block>
+		</reference>
+        <reference name="content">
+            <block type="salesperson/result" name="salesperson.result" as="result" template="salesperson/result.phtml">
+                <block type="salesperson/product_list" name="search_result_list" template="salesperson/product/list.phtml">
+                    <block type="salesperson/product_list_toolbar" name="product_list_toolbar" template="salesperson/product/list/toolbar.phtml">
+                        <block type="salesperson/product_list_toolbar_pager" name="product_list_toolbar_pager" />
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/> 
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="reports/product_viewed" before="right.permanent.callout" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+        </reference>
+    </salesperson_result_index>
+    <salesperson_result_change>
+    	<label>Qwiser Search Form</label>
+        <update handle="salesperson_result_index"/>
+    </salesperson_result_change>
+    <salesperson_giftfinder_index>
+    	<label>Qwiser Gift Finder Form</label>	
+        <remove name="right.newsletter" />
+        <remove name="right.reports.product.viewed" />
+        <reference name="head">
+        	<action method="addCss"><stylesheet>css/salesperson-style.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/jquery-ui-1.8.16.custom.css</stylesheet></action>			
+			<action method="addJs"><script>jquery-1.8.2.min.js</script></action>
+			<action method="addJs"><script>jquery-ui-1.9.1.custom.min.js</script></action>
+			<action method="addJs"><script>jquery-noconflict.js</script></action>	
+			<action method="addItem" ifconfig="sales/msrp/enabled"><type>skin_js</type><name>js/msrp.js</name></action>
+        </reference>
+        <reference name="root">
+           	<block type="salesperson/layer_view" name="salesperson.nonleadquestions.top" as="nonleadquestions_top">
+				<action method="setTemplate" iftop="salesperson/display_settings/display_non_lead">
+					<template>salesperson/layer/non-lead-top.phtml</template> 
+				</action>
+				 <block type="salesperson/layer_view" name="price.question" as="price_question">
+					<action method="setTemplate">
+						<template>salesperson/layer/price-question.phtml</template> 
+					</action>
+				</block>				
+			</block>
+			<block type="salesperson/layer_view" name="salesperson.leadquestion.top" as="leadquestion_top">
+				<action method="setTemplate" ifconfig="salesperson/display_settings/display_lead_top">
+					<template>salesperson/layer/lead-top.phtml</template> 
+				</action>
+			</block>
+        </reference>
+        <reference name="left">
+        	<block type="salesperson/layer_view" name="salesperson.nonleadquestions.left" as="nonleadquestions_left" before="-">
+				<action method="setTemplate" ifleft="salesperson/display_settings/display_non_lead">
+					<template>salesperson/layer/non-lead.phtml</template> 
+				</action>
+				 <block type="salesperson/layer_view" name="price.question" as="price_question">
+					<action method="setTemplate">
+						<template>salesperson/layer/price-question.phtml</template> 
+					</action>
+				</block>				
+			</block>
+        </reference>
+        <reference name="right">
+        	<block type="salesperson/layer_view" name="salesperson.nonleadquestions.right" as="nonleadquestions_right" before="-">
+				<action method="setTemplate" ifright="salesperson/display_settings/display_non_lead">
+					<template>salesperson/layer/non-lead.phtml</template> 
+				</action>
+				 <block type="salesperson/layer_view" name="price.question" as="price_question">
+					<action method="setTemplate">
+						<template>salesperson/layer/price-question.phtml</template> 
+					</action>
+				</block>				
+			</block>
+		</reference>
+        <reference name="content">
+           	<block type="salesperson/giftfinder_view" name="salesperson.giftfinder.view" before="-" as="giftfinder">
+				<action method="setTemplate">
+					<template helper="salesperson/data/getGiftfinderTemplate"/> 
+				</action>
+				 <block type="salesperson/giftfinder_view" name="giftfinder.price.question" as="giftfinder_price_question">
+					<action method="setTemplate">
+						<template>salesperson/giftfinder/price-question.phtml</template> 
+					</action>
+				</block>				
+			</block>
+            <block type="salesperson/result" name="salesperson.result" as="result" template="salesperson/result.phtml">
+                <block type="salesperson/product_list" name="search_result_list" template="salesperson/product/list.phtml">
+                    <block type="salesperson/product_list_toolbar" name="product_list_toolbar" template="salesperson/product/list/toolbar.phtml">
+                        <block type="salesperson/product_list_toolbar_pager" name="product_list_toolbar_pager" />
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/> 
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="reports/product_viewed" before="right.permanent.callout" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+        </reference>
+    </salesperson_giftfinder_index>
+	<salesperson_giftfinder_change>
+    	<label>Qwiser Gift Finder Form</label>
+		<update handle="salesperson_giftfinder_index"/>
+    </salesperson_giftfinder_change>
+</layout>

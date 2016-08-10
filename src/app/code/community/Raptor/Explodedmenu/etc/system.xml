@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<explodedmenu translate="label" module="explodedmenu">
+			<label>Raptor</label>
+			<sort_order>301</sort_order>
+		</explodedmenu>
+	</tabs>
+	<sections>
+		<explodedmenu translate="label" module="explodedmenu">
+			<label>Explodedmenu</label>
+			<tab>explodedmenu</tab>
+			<sort_order>130</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<home_link translate="label">
+					<label>Home Link</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enable translate="label comment">
+							<label>Generate home link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<default>3</default>
+							<disabled>true</disabled>
+						</enable>
+					</fields>
+				</home_link>
+				<columns translate="label">
+					<label>Columns</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<num_columns translate="label comment">
+							<label>Number of columns</label>
+							<comment><![CDATA[Max number of dropdown columns]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<default>2</default>
+						</num_columns>
+					</fields>
+				</columns>
+			<general translate="label">
+            <label>Layout</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>3</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            	<fields>
+                	<chunk_type translate="label">
+                     <label>Layout style</label>
+                     <comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]></comment>
+                     <frontend_type>select</frontend_type>
+                     <source_model>
+                        explodedmenu/chunktype
+                     </source_model>
+                     <sort_order>1</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                  </chunk_type>
+               </fields>
+            </general>         
+			<debug translate="label">
+            <label>Debug</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>4</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            	<fields>
+                	<enabled translate="label">
+                     <label>Log transient xml</label>
+                     <comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]></comment>
+                     <frontend_type>select</frontend_type>
+                     <source_model>
+                        adminhtml/system_config_source_yesno
+                     </source_model>
+                     <sort_order>1</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                  </enabled>
+               </fields>
+            </debug>            
+            <categories translate="label">
+               <label>Product categories</label>
+               <frontend_type>text</frontend_type>
+               <sort_order>5</sort_order>
+               <show_in_default>1</show_in_default>
+               <show_in_website>1</show_in_website>
+               <show_in_store>1</show_in_store>
+               <fields>
+				  <show_categories translate="label">
+                     <label>Enable menu</label>
+                     <comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu.html">supermenu</a> only]]></comment>
+                     <frontend_type>select</frontend_type>
+                     <source_model>
+                        adminhtml/system_config_source_yesno
+                     </source_model>
+                     <sort_order>1</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>
+                        Set this to no if you dont want to render the product category menus
+                     </comment>
+                  </show_categories>
+                  <show_third_level translate="label">
+                     <label>Display 3rd+ level catagories</label>
+                     <comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu.html">supermenu</a> only]]></comment>
+                     <frontend_type>select</frontend_type>
+                     <source_model>
+                        adminhtml/system_config_source_yesno
+                     </source_model>
+                     <sort_order>2</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                  </show_third_level>                  
+				  <shop_categories translate="label">
+                     <label><![CDATA[Display "Shop by category"]]></label>
+                     
+                     <frontend_type>select</frontend_type>
+                     <source_model>
+                        adminhtml/system_config_source_yesno
+                     </source_model>
+                     <sort_order>3</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>
+                     	<![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]>
+                     </comment>
+                  </shop_categories>                  
+                  <column_width translate="label comment">
+                     <label>Column width</label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>5</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+					<comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]></comment>
+                  </column_width>
+                  <brand_columns translate="label comment">
+                     <label>Number of "Shop by brand" columns</label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>6</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+					 <comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]></comment>
+                  </brand_columns>                  
+               </fields>
+            </categories>
+			<brands translate="label">
+               <label>Brands</label>
+               <frontend_type>text</frontend_type>
+               <sort_order>6</sort_order>
+               <show_in_default>1</show_in_default>
+               <show_in_website>1</show_in_website>
+               <show_in_store>1</show_in_store>
+               <fields>
+				  <enabled translate="label">
+                     <label>Enable brands menu</label>
+                     <frontend_type>select</frontend_type>
+                     <source_model>
+                        adminhtml/system_config_source_yesno
+                     </source_model>
+                     <sort_order>1</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]></comment>
+                  </enabled>
+                  <columns translate="label comment">
+                     <label>Dropdown columns</label>
+                     <comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]></comment>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>2</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                  </columns>
+                  <column_width translate="label comment">
+                     <label>Column width</label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>3</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment><![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]></comment>
+                  </column_width>
+                  <attribute_code translate="label comment">
+                     <label>"Brand" attribute code</label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>4</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>
+                        <![CDATA[<a href="http://www.raptorcommerce.com/supermenu-pro.html">supermenu pro</a> only]]>
+                     </comment>
+                  </attribute_code>
+               </fields>
+            </brands>            
+			</groups>
+		</explodedmenu>
+	</sections>
+</config>

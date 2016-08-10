@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.confirm .magento_buttons				{text-align:center;}
+.dialog  .magento_buttons				{text-align:center;}
+.confirm-message						{margin:10px;text-align:center;}
+.associations .order img					{cursor:pointer;margin-right:3px;}
+.associations .enabled img				{cursor:pointer;}
+.associations .order,
+.associations .enabled					{text-align:center;}
+
+.tabs-edit								{margin:10px;}
+.tabs-edit .content-header				{margin-bottom:5px;}
+.tabs-edit .alias-content input[type="text"],
+.tabs-edit .alias-content select 		{margin-right:15px;}

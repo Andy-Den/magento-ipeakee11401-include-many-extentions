@@ -1,0 +1,95 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @see Mage_Catalog_Block_Layer_View
+ */
+?>
+<?php $_questions = $this->getNonLeadQuestions();?>
+<?php $moreQuestions = $this->getMoreNonLeadQuestions();?>
+<?php if(count($_questions) > 0 || $this->stateHasFilters()):?>
+<div id="salesperson_nonleadquestions" class="block block-layered-nav block-salesperson-non-lead-top">
+	<?php echo $this->getStateHtml() ?>
+	<div class="block-content salesperson-content-non-lead-top">
+		<?php foreach ($_questions as  $key=>$_filter)://filter=question?>
+			<dl id="narrow-by-list" class="salesperson-top-non-lead">
+				<dt>
+					<a href="<?php echo $this->forceLeadQuestion($_filter->Id) ?>"><?php echo $this->__($this->getFilterText($_filter, "nonlead")); ?>
+					</a>
+				</dt>
+				<dd class="salesperson-top-non-lead">
+					<?php if($this->isPriceQuestion($_filter)):?>
+						<?php echo $this->getChildHtml('price_question');?>
+					<?php else:?>
+						<?php $answers = $this->getNonLeadAnswers($_filter); ?>
+						<?php if(count($answers)):?>
+							<ul class="salesperson-top-non-lead">
+								<?php $bIsHierarchical = $this->isHierarchical($_filter);
+								foreach ($answers as $answer):?>
+									<li>
+										<?php echo $this->getAnswerHtml($answer, $bIsHierarchical);?>
+									</li>
+								<?php endforeach;?>
+							</ul>
+							<?php $moreAnswers =$this->getMoreNonLeadAnswers($_filter);
+							if(count($moreAnswers)):?>
+								<div class="salesperson-accordion">
+									<div class="salesperson-accordmore salesperson-accordmoreclose">More answers</div>
+									<div class="salesperson-accordmore-content" style="display:none;">
+										<ul class="salesperson-top-non-lead">
+											<?php foreach ($moreAnswers as $answer):?>
+												<li>
+													<?php echo $this->getAnswerHtml($answer, $bIsHierarchical);?>
+												</li>
+											<?php endforeach;?>
+										</ul>
+									</div>
+								</div>
+							<?php endif;?>
+						<?php endif;?>
+					<?php endif;?>
+				</dd>
+			</dl>
+		<?php endforeach;?>
+		
+		<?php if(count($moreQuestions)):?>
+			<select id="questionsList" onchange="celebrosSetLocation(this.value)">
+				<option>More Questions</option>
+				<?php foreach ($moreQuestions as $question):?>
+				<option value="<?php  echo $this->forceLeadQuestion($question->Id);?>">
+					<?php echo $question->SideText;?>
+				</option>
+				<?php endforeach;?>
+			</select>		
+		<?php endif;?>
+		
+		<script type="text/javascript">decorateDataList('narrow-by-list')</script>
+	</div>
+</div>
+<?php endif;?>

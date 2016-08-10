@@ -1,0 +1,87 @@
+<?php
+/**
+ * Accessory search mini form
+ *
+ * @see Balance_Accessory_Block_Search_Form_Mini
+ */
+?>    
+<span id='filter-or'>Or</span>
+	<form id="filter_mini_form" action="<?php echo $this->getUrl('catalogsearch/advanced/result'); ?>" method="get">
+            <?php $i=0; foreach ($this->getSearchAttributes() as $_attribute):  $i++?>
+            <?php $_code = $_attribute->getAttributeCode(); ?>
+		<div class='items <?php if($i==1):?>first <?php elseif($i==2): echo "last"; endif; ?>'>
+			<label for="<?php echo $_code; ?>"><?php echo $this->__('Select VACUUM %s',$_attribute->getFrontendLabel()); ?></label>
+			
+			<?php switch ($this->getAttributeInputType($_attribute)):
+				case 'select': ?>
+				<div class='selectstylesheild'>
+					<span class="selectstylesheild-text">
+						<?php if($i==1):?>Select Brand <?php elseif($i==2): echo "Select Model"; endif; ?>
+					</span>
+						<?php echo '<div id="'.$_attribute->getAttributeCode().'_container">'.$this->getAttributeSelectElement($_attribute).'</div>'; ?> 
+					<span class="selectstylesheild-icon">&nbsp;</span>
+				</div>
+				
+				<?php break; ?>
+			<?php endswitch; ?>
+		</div>
+		<div class='add-script'>
+		</div>
+            <?php endforeach; ?>
+		<button type="button" title="<?php echo $this->__('Go') ?>" class="go-button" onclick="submitForm()"><span><span><?php echo $this->__('Go') ?></span></span></button>
+	</form>
+
+<script type="text/javascript">
+    //<![CDATA[
+	function submitForm(){
+		if($('accessory_brands').value==''){
+			$('accessory_brands').addClassName('required');
+			return false;
+		}
+		else{
+			$('accessory_brands').removeClassName('required');
+			document.getElementById("filter_mini_form").submit();
+		}
+	}
+    
+    var form = $('filter_mini_form');
+    var brandDropDown = form['accessory_brands'];
+    Event.observe(brandDropDown, 'change', function()
+    {
+		/* if($('accessory_brands').value==''){
+			$('accessory_brands').addClassName('required');
+		}
+		else{
+			$('accessory_brands').removeClassName('required');
+		} */
+		
+        //Element.show('accessory-please-wait');
+        $('accessory_models_container').innerHTML = "<img src=\"<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>\" alt=\"\" class=\"v-middle\" />";
+        
+        var actionurl = '<?php echo $this->getUrl('accessory/filter/byBrand') ?>';
+        var form = $('filter_mini_form');
+        var selectedBrand = form['accessory_brands'];
+        new Ajax.Request(actionurl, {
+            method: 'post',
+            parameters: "accessory_brands=" + selectedBrand.getValue(),
+            onComplete: function(transport) {
+                //Element.hide('accessory-please-wait');
+                $('accessory_models_container').innerHTML = "";
+                $('accessory_models_container').innerHTML = transport.responseText;
+				jQuery('#filter_mini_form .last .selectstylesheild-text').text('Select Model')
+				jQuery('.selectstylesheild #accessory_models_container select').change(function(){
+					jQuery('.selectstylesheild #accessory_models_container select option').each(function()
+					{
+						if(jQuery(this).is(":checked"))
+						{
+							var srt=jQuery(this).text();
+							jQuery(this).parent().parent().prev('.selectstylesheild-text').text(srt);
+						}
+					});
+				});
+            }
+        });
+    });
+    
+    //]]>
+</script>

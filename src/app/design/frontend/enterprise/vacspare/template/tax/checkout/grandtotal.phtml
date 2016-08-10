@@ -1,0 +1,28 @@
+<?php if ($this->includeTax() && $this->getTotalExclTax()>=0):?>
+<tr class="grand-total">
+    <td style="<?php echo $this->getStyle() ?>" colspan="<?php echo $this->getColspan(); ?>">
+        <strong><span><?php echo $this->helper('tax')->__('Grand Total Excl. Tax:')?></span></strong>
+    </td>
+    <td>
+        <b><?php echo $this->helper('checkout')->formatPrice($this->getTotalExclTax()) ?></b>
+    </td>
+</tr>
+<?php echo $this->renderTotals('taxes', $this->getColspan()); ?>
+<tr class="grand-total">
+    <td style="<?php echo $this->getStyle() ?>" colspan="<?php echo $this->getColspan(); ?>">
+        <strong><span><?php echo $this->helper('tax')->__('Grand Total Incl. Tax:')?></span></strong>
+    </td>
+    <td>
+        <b><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></b>
+    </td>
+</tr>
+<?php else:?>
+<tr class="grand-total">
+    <td style="<?php echo $this->getStyle() ?>" class="a-left"  colspan="<?php echo $this->getColspan(); ?>">
+        <strong><span><?php echo $this->getTotal()->getTitle() ?>: </span></strong>
+    </td>
+    <td class="a-right">
+        <b><label><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></label></b>
+    </td>
+</tr>
+<?php endif;?>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Pronto product price extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Godfreys Ajax module to newer versions in the future.
+ * If you wish to customize the Godfreys Ajax module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   Godfreys
+ * @package    Godfreys_Ajax
+ * @copyright  Copyright (C) 2012 Balance Internet (http://balanceinternet.com.au)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+	<modules>
+        <Godfreys_Ajax>
+            <version>0.0.1</version>
+        </Godfreys_Ajax>
+    </modules>
+    <global>
+    	<models>
+	    	<ajax>
+	            <class>Godfreys_Ajax_Model</class>
+	        </ajax>
+	    </models>
+	    <events>
+	    	<balance_ajax_dispatch_before>
+	    		<observers>
+	    			<godfreys_ajax_shoppingcart>
+	    				<type>singleton</type>
+	    				<class>Godfreys_Ajax_Model_Observer</class>
+						<method>ajaxShoppingCart</method>
+	    			</godfreys_ajax_shoppingcart>
+	    			<godfreys_ajax_globalmessage>
+	    				<type>singleton</type>
+	    				<class>Godfreys_Ajax_Model_Observer</class>
+						<method>ajaxGlobalMessage</method>
+	    			</godfreys_ajax_globalmessage>
+	    			<godfreys_ajax_name>
+	    				<type>singleton</type>
+	    				<class>Godfreys_Ajax_Model_Observer</class>
+						<method>ajaxName</method>
+	    			</godfreys_ajax_name>
+	    			<godfreys_ajax_account_links>
+	    				<type>singleton</type>
+	    				<class>Godfreys_Ajax_Model_Observer</class>
+	    				<method>ajaxAccountLinks</method>
+	    			</godfreys_ajax_account_links>
+	    			<godfreys_ajax_compare_sidebar>
+	    				<type>singleton</type>
+	    				<class>Godfreys_Ajax_Model_Observer</class>
+	    				<method>ajaxCompareSidebar</method>
+	    			</godfreys_ajax_compare_sidebar>
+                                <godfreys_ajax_topbar>
+	    				<type>singleton</type>
+	    				<class>Godfreys_Ajax_Model_Observer</class>
+	    				<method>ajaxTopBar</method>
+	    			</godfreys_ajax_topbar>
+                                
+	    		</observers>
+	    	</balance_ajax_dispatch_before>
+	    </events>
+    </global>
+</config>

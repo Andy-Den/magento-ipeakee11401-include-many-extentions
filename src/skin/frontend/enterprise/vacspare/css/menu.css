@@ -1,0 +1,236 @@
+#nav-menu{    position: absolute;    right: 0;    top: 45px;} 
+#nav-menu .level0{   border-left: 1px solid #FFFFFF;    display: inline;    float: left;    width: auto;} 
+#nav-menu .submenu{    display:none; width:auto;} 
+#nav-menu .level0:hover .submenu{display:block;}
+#nav-menu ul {list-style: none outside none;margin: 0;padding: 0;}
+#nav-menu > ul > li {background: url("../images/menuline.png") no-repeat scroll right bottom transparent;float: left;   }
+#nav-menu > ul > li:last-child { background: none repeat scroll 0 center transparent;}
+#nav-menu > ul > li > a {background: none repeat scroll 0 0 #EEEEEE;  cursor: pointer;display: block;color: #787878;float: left;font-size: 13px;height: 28px;font-family: 'Avenir-lt-std-85-Heavy', arial, tahoma; font-size: 12px;font-weight: 700;position: relative;text-decoration: none;text-align: center;text-transform: uppercase;padding: 7px 6px; width: 105px; font-weight:normal}
+#nav-menu > ul > li > a:hover {background: none repeat scroll 0 0 #F67C32;color:#fff }
+#nav-menu > ul > li > a span {bottom: 0; left: 0;padding: 10px; position: absolute;}
+#nav-menu li ul.submenu {background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #F67C32; border-radius: 0 0 3px 3px;margin-left: -1px;padding:24px 0px 14px 2px;position: absolute;right: 0;top: 44px;width: 975px;}
+#nav-menu li ul.submenu li a{  width: 165px; border-bottom: 1px solid #E2E2E2;  font-family: arial;  height: 16px;  line-height: 16px; text-transform: uppercase;}
+#nav-menu li ul.submenu li a:hover{color: #f67d33; border-bottom: 1px solid #f67d33;}
+#nav-menu li:hover ul.submenu, #nav li.sfhover ul.submenu {left: auto; z-index: 100;}
+#nav-menu ul.submenu li.col {float: left; padding-right: 25px; width: 165px;}
+#nav-menu ul.submenu li.col:first-child{margin-left: 22px;}
+ul.submenu a {
+    text-decoration: none;
+}
+ul.submenu li.col.noborder {
+    border: 0 none;
+}
+ul.submenu li.col dl {
+    margin: 0;
+    padding: 0 0 10px;
+}
+ul.submenu li.col dt {
+    margin: 0;
+    padding: 0;
+}
+ul.submenu li.col a {
+    display: block;
+}
+ul.submenu li.col dt a {
+    color: #787878;
+    padding: 4px 0px;
+}
+ul.submenu li.col dt span {
+    padding: 4px 0;
+}
+ul.submenu li.col a:hover {
+    color: #787878;
+}
+ul.submenu li.col dd {
+    margin: 0;
+    padding: 0;
+}
+ul.submenu li.col dd a {
+    color: #787878;
+    padding: 4px 10px;
+}
+ul.submenu li.aside {
+    float: right;
+    text-align: right;
+    width: 140px;
+}
+ul.submenu li.aside p {
+    color: #787878;
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+}
+ul.submenu li.aside p b {
+    color: #000000;
+    display: block;
+    font-size: 12px;
+}
+ul.submenu li.aside p b a {
+    color: #787878;
+    text-decoration: none;
+}
+ul.submenu li.aside .product-image {
+    clear: both;
+    display: block;
+    float: right;
+    margin-bottom: 10px;
+}
+ul.submenu li.aside .product-link {
+    background: url("../images/arrow.png") no-repeat scroll left center transparent;
+    clear: both;
+    color: #000000;
+    display: block;
+    float: right;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    padding-left: 12px;
+    text-align: left;
+    text-transform: uppercase;
+}
+ul.submenu li.aside .product-desc {
+    clear: both;
+    color: #858383;
+    font-size: 10px;
+}
+
+
+.wufoo-form-block {
+    float: right;
+    height: 50px;
+    
+    margin-top: 15px;
+    width: 100%;
+}
+.join_vacspare_trade .join_text{
+    background: url("../images/bkg-arrow.png") no-repeat scroll right 0 #2675DB;
+    color: white;
+    float: left;
+    font-family: Avenir-lt-std-85-Heavy;
+    font-size: 16px;
+    height: 49px;
+    line-height: 49px;
+    padding-left: 15px;
+    text-transform: uppercase;
+    width: 210px;
+    margin-top: 3px;
+}
+.join_vacspare_trade .input-text{
+    float: left;
+    margin-left: 40px;
+    width: 320px;
+    position: relative;
+}
+.join_vacspare_trade .input-text label{
+    display: block;
+    font-family: Avenir-lt-std-85-Heavy;
+    font-size: 11px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+.join_vacspare_trade .input-text label span{
+     color: #2675DB;
+}
+.join_vacspare_trade .input-text #text_vecspare_trade{
+    width: 273px;
+    border: 1px solid #858585;
+    color: #9B9B9B;
+    font-size: 14px;
+    height: 33px; line-height: 33px; 
+    width: 273px;
+	padding-left: 10px;
+}
+#lightboxbutton{
+    margin-left: 0;
+    margin-top: 0;
+    position: absolute
+}
+.enquire_vacspare span.or{
+    display: block;
+    float: left;
+    height: 51px;
+    line-height: 63px;
+    padding: 0 20px;
+    width: 20px;
+}
+#lightboxbutton-non{
+    background: none repeat scroll 0 0 #EEEEEE;
+    margin-left: 0;
+    margin-top: 17px;
+    width: 140px;
+}
+#lightboxbutton-non span span{  color: #787878; }
+span.why_join{color: #2675DB;font-family: avenir_medium;font-size: 12px;padding-left: 18px; padding-top: 25px; position: absolute;text-transform: uppercase;}
+
+
+#containerDiv {
+    height: 475px;
+    width: 490px;
+    border:none;
+}
+#closeLink{
+     background: url("../images/btn_close.jpg") no-repeat scroll right center transparent;
+    float: right;
+    height: 32px;
+    text-indent: -9999px;
+    width: 32px;
+}
+#containerDiv .lgtitle{
+     clear: both;
+}
+#containerDiv .ligbox-container{
+    padding:30px;
+    
+}
+#containerDiv .lgtitle h3{
+    color: #2675DB;
+    font-family: Avenir95Black;
+    font-size: 27px;
+    text-transform: uppercase;
+}
+
+#containerDiv p {
+    font-size: 13px;
+    position: relative;
+    text-align: left;
+    z-index: 99999;
+    height: auto;
+    padding:0;
+}
+
+
+div#test-accordion{
+    border: 1px solid #343230;
+	background-color:#21201f;
+	padding:10px;
+        float:left;
+}
+
+div.accordion {
+	position: relative; /* required for bounding */
+	width: 465px;
+}
+
+div.accordion-toggle{
+    position: relative; /* required for effect */
+    z-index: 10;		/* required for effect */
+	background:white;
+	color:#ffffff;   
+    cursor: pointer;
+	margin-bottom:1px;
+	padding:9px 14px 6px 14px;
+	border-top:1px solid #5d5852;	
+}
+div.accordion-toggle:hover, div.accordion-toggle-active{
+	background-color:#eeeeee;
+	border-top:1px solid #a06b55;
+}
+
+div.accordion-content{
+    overflow: hidden;	
+    background: white;
+    padding:9px 24px 6px 24px;
+    color:#c4bab1;
+    border-bottom:1px solid #000000;
+}

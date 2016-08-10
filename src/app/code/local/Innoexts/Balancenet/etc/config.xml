@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Innoexts
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Balancenet
+ * @copyright   Copyright (c) 2012 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+-->
+<config>
+    <modules>
+        <Innoexts_Balancenet>
+            <version>1.0.1</version>
+        </Innoexts_Balancenet>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Innoexts_Balancenet before="Innoexts_Warehouse">Innoexts_Balancenet_Adminhtml</Innoexts_Balancenet>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <translate>
+            <modules>
+                <Innoexts_Balancenet>
+                    <files>
+                        <default>Innoexts_Balancenet.csv</default>
+                    </files>
+                </Innoexts_Balancenet>
+            </modules>
+        </translate>
+        <layout>
+              <updates>
+                  <balancenet>
+                      <file>balancenet.xml</file>
+                  </balancenet>
+              </updates>
+        </layout>
+    </frontend>
+    <global>
+        <blocks>
+            <balancenet>
+                <class>Innoexts_Balancenet_Block</class>
+            </balancenet>
+            <!--<adminhtml>-->
+                <!--<rewrite>-->
+                    <!--<catalog_product_grid>Innoexts_Balancenet_Block_Adminhtml_Catalog_Product_Grid</catalog_product_grid>-->
+                <!--</rewrite>-->
+            <!--</adminhtml>-->
+        </blocks>
+    </global>
+</config>

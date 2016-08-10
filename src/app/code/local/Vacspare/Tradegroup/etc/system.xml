@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <tradegroups translate="label" module="tradegroup">
+            <label>Customer Group</label>
+            <tab>customer</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>57</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Trade Group</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <defaul_shipping_method translate="label">
+                            <label>Default Shipping Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_allowedmethods</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Just for customer trade group. Make sure this shipping method was enabled</comment>
+                         
+                        </defaul_shipping_method>
+                        <defaul_payment_method translate="label">
+                            <label>Default Payment Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allowedmethods</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Just for customer trade group. Make sure this Payment method was enabled</comment>
+                        </defaul_payment_method>
+                     </fields>
+                </general>
+                 <setting translate="label">
+                    <label>Customer Group</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>11</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <trade translate="label">
+                            <label>Please Select Customer Group for Trade Group</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_customer_group</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+			    <comment>This is customer trade group</comment>
+                        </trade>
+                      </fields>
+                </setting>
+            </groups>
+        </tradegroups>
+    </sections>
+</config>

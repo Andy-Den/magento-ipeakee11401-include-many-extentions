@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function check() {
+        new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+            method:     'post',
+            parameters: {'file_path':$('sitemap_generate_file_path').value},
+            onSuccess: function(transport)
+            {
+                var json = transport.responseText.evalJSON();                               
+                if (json.code == '0'){              
+                    $('sitemap_generate_file_path_message').update('<span style="color: green">'+json.message+'</span>');
+                }
+                else{
+                    $('sitemap_generate_file_path_message').update('<span style="color: red">'+json.message+'</span>');
+                }    
+            }
+            
+        });
+        
+    }
+    //]]>
+</script>
+<div style='clear: both;margin-top: 5px'></div>
+<div style='clear: both;margin-top: 5px' id='sitemap_generate_file_path_message'></div>
+<?php echo $this->getButtonHtml() ?>

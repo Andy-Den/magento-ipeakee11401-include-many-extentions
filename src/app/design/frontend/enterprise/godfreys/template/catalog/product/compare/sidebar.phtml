@@ -1,0 +1,70 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+/* @var $this Mage_Catalog_Block_Product_Compare_Sidebar */
+?>
+<?php 
+$_helper = $this->helper('catalog/product_compare');
+$_items = $_helper->getItemCount() > 0 ? $_helper->getItemCollection() : null;
+?>
+<div id="compare-items" class="sidebar-box ajax-reload" rel="catalog.compare.sidebar" mode="replace">
+    <h4><?php echo $this->__('Compare items') ?></h4>
+     <?php if($_helper->getItemCount() > 0): ?>
+        <ul>
+        <?php foreach($_items as $_index => $_item): ?>
+            <li>
+             	<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>"><img alt="<?php echo $this->htmlEscape($_item->getName()) ?>" src="<?php echo $this->helper('catalog/image')->init($_item, 'image')->resize(42)?>" width="42" height="42">
+                <input type="hidden" class="compare-item-id" value="<?php echo $_item->getId() ?>" />
+                <small><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></small>
+                <b><?php echo ($_item->getPrice())?$this->getPriceHtml($_item, true, '-widget-new-grid'):'<div style="height:14px;"></div>' ?></b></a>
+                <a  href="<?php echo $_helper->getRemoveUrl($_item) ?>" title="<?php echo $this->__('Remove This Item') ?>" class="remove" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove this item from the compare products?') ?>');"><?php echo $this->__('remove') ?></a>
+           </li>
+        <?php endforeach; ?>
+        </ul>
+        <script type="text/javascript">decorateList('compare-items')</script>
+        <div class="buttons">
+        	<a class="clear-all" href="<?php echo $_helper->getClearListUrl() ?>" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove all products from your comparison?') ?>');"><?php echo $this->__('Clear all') ?></a>
+            <a href="#" title="<?php echo $this->__('Compare') ?>" onclick="popWin('<?php echo $_helper->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')" class="comparebutton"><?php echo $this->__('Compare') ?></a>
+         </div>
+        <?php else: ?>
+         <ul><li style="border: none"><?php echo $this->__('You have no items to compare.') ?></li></ul>
+      <?php endif; ?>
+        <div class="box-foot"></div>
+    <script type="text/javascript">
+        $j1_6(".sidebar-box .price-box .old-price .price-label").css({'display':'none'});
+        $j1_6(".sidebar-box .price-box .old-price .price").css({'font-size':'13px'});
+        $j1_6(".sidebar-box .price-box .special-price .price-label").css({'display':'none'});
+        $j1_6(".sidebar-box .price-box .special-price .price").css({'display':'none'});
+        
+        AntiVarnish.addCallBack('compare-items', function(){
+            Cufon.replace('.sidebar-box h4',{fontFamily: 'Avenir'});
+            $j1_6(".sidebar-box .price-box .old-price .price-label").css({'display':'none'});
+            $j1_6(".sidebar-box .price-box .old-price .price").css({'font-size':'13px'});
+            $j1_6(".sidebar-box .price-box .special-price .price-label").css({'display':'none'});
+            $j1_6(".sidebar-box .price-box .special-price .price").css({'display':'none'});
+        });
+    </script>
+    
+</div>

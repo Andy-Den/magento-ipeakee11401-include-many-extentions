@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Balance_ContentSetup>
+            <version>0.1.0</version>
+        </Balance_ContentSetup>
+    </modules>
+    <global>
+        <helpers>
+            <balance_contentsetup>
+                <class>Balance_ContentSetup_Helper</class>
+            </balance_contentsetup>
+        </helpers>
+        <resources>
+            <balance_contentsetup_setup>
+                <setup>
+                    <module>Balance_ContentSetup</module>
+                </setup>
+            </balance_contentsetup_setup>
+        </resources>
+    </global>
+</config>

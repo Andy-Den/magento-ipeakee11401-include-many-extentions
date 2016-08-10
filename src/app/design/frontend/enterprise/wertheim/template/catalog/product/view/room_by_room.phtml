@@ -1,0 +1,33 @@
+<?php 
+	$_product = $this->getProduct(); 
+	$groupCollection    = Mage::getResourceModel('eav/entity_attribute_group_collection');
+	
+	$groupId = 0;
+	foreach ($groupCollection as $group) {
+		if($group->getAttributeGroupName() == 'Room by Room'){
+			$groupId = $group->getId();
+			break;
+		}
+	}
+
+	$attributesCollection = Mage::getResourceModel('catalog/product_attribute_collection');
+	$attributesCollection->setAttributeGroupFilter($groupId);
+?>
+<?php if(count($attributesCollection)>0): ?>
+		<?php $i=0; foreach ($attributesCollection as $attribute): $i++?>
+			<?php if($_product->getData($attribute->getAttributeCode())!=''): ?>
+                <?php if($i%2 == 1): ?>
+			<div class="room_by_room_in">
+    					<div class="room_by_room_in_l">
+                            <h4><?php echo $attribute->getFrontendLabel() ?></h4>
+    						<?php echo $_product->getData($attribute->getAttributeCode()) ?>
+    					</div>
+                    <?php else: ?>
+                        <div class="room_by_room_in_r">
+                            <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) ?>wysiwyg/<?php echo $_product->getData($attribute->getAttributeCode()) ?>" />
+                        </div>
+                    	</div>
+		<?php endif; ?>
+			<?php endif ?>
+		<?php endforeach ?>
+<?php endif ?>

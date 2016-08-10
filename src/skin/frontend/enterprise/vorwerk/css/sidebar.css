@@ -1,0 +1,45 @@
+.sidebarRight > div + div {
+    margin-top: 24px;
+}
+
+
+.shopSubNav {
+    width: 216px;
+    margin: 20px 24px 0;
+    padding-top: 20px;
+    background: url('../images/vorwerk/nav/trennlinie.png') top repeat-x;
+}
+.shopSubNav ul,
+.shopSubNav ul.productsNav,
+.shopSubNav li {
+    margin: 0;
+    padding: 0;
+}
+.productsNav .level-top a.level-top {
+    display: none;
+}
+.productsNav li.level2 {
+    margin-bottom: 20px;
+}
+.productsNav ul.level2 {
+    margin-top: 5px;
+}
+.productsNav .level2 > a,
+.productsNav .level2 > a:link {
+    padding-left: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: none;
+}
+
+
+.sidebar-boxed {
+    padding: 16px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 5px #ccc;
+       -moz-box-shadow: 0 0 5px #ccc;
+           box-shadow: 0 0 15px #ccc;
+}
+.sidebar-boxed h3 {
+    margin-bottom: 16px;
+}

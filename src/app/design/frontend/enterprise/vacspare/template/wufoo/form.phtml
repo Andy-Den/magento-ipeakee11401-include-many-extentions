@@ -1,0 +1,44 @@
+<?php if(!$this->helper('tradegroup')->_isCustomerGroupTrade()) :?>
+<div class="wufoo-form-block" id="wufoo-form-block">
+    <div class="join_vacspare_trade">
+        <div class="join_vacspare left">
+            <div class="join_text"><?php echo $this->__('Join Vacspare Trade'); ?></div>
+            <div class="input-text">
+                <label for="text_vecspare_trade"><?php echo $this->__('Enter your <span>ABN</span> to get started'); ?></label>
+                <input type="text" name="text_vecspare_trade" id="text_vecspare_trade" />
+                 <a id="lightboxbutton" class="iframelightbox go-button" href="https://godfreysvacuums.wufoo.com/embed/m7p4k1/" title="Go" ><span><span><?php echo $this->__('Go'); ?></span></span></a>
+            </div>
+			<script>
+				var searchForm = new Varien.searchForm('wufoo-form-block', 'text_vecspare_trade', 'Enter ABN');
+				jQuery("#text_vecspare_trade").change(function() {
+					var valueABN = jQuery("#text_vecspare_trade").val();
+					jQuery("#lightboxbutton").attr('href','https://godfreysvacuums.wufoo.com/embed/m7p4k1/def/Field4='+valueABN);
+				});
+			</script>
+        </div>
+        <div class="enquire_vacspare left">
+            <span class="or"><?php echo $this->__('OR'); ?></span>
+            <!-- <button id="lightboxbutton-non" class="iframelightbox go-button" title="Enquire Now" type="button"><s href="https://godfreysvacuums.wufoo.com/embed/m7p4k1/"pan><span><?php echo $this->__('Enquire Now'); ?></span></span></button> -->
+            <a id="lightboxbutton-non" class="iframelightbox go-button" href="https://godfreysvacuums.wufoo.com/embed/m7p4k1/" title="Enquire Now"><span><span><?php echo $this->__('Enquire Now'); ?></span></span></a>
+            <a href='<?php echo Mage::getBaseUrl()."why_join_vacspare_trade" ?>'><span class="why_join"><?php echo $this->__('Why join vacspare trade?'); ?></span>
+			</a>
+        </div>
+    </div>
+</div>
+
+<div class="ligbox">
+    <div id="containerDiv" style="display:none">
+      <a id="closeLink" href="javascript:void(0);">Click here</a>
+      <div class="ligbox-container">
+        <div class="lgtitle"><h3><?php  echo $this->__('Vacspare trade Application'); ?> </h3></div>             
+        <p><?php  echo $this->__('Please fill out the form below with any questions, comments or feedback you have and we will contact you shortly.'); ?></p> 
+        <div class="ligbox_form">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('wufoo-form-block')->toHtml(); ?>
+        </div>
+    </div>
+   </div>
+</div>
+
+
+<?php endif; ?>
+<p>

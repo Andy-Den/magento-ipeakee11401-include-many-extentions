@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+<default>
+	<reference name="header">
+		<block type="page/html_header" name="header.nearestbranch" as="header.nearestbranch" template="balance/nearestbranch/header_nearestbranch.phtml" />
+	</reference>
+</default>
+<nearestbranch_index_index>
+	  <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+       </reference>
+       <reference name="content">
+            <block type="core/template" name="nearestbranch" template="balance/nearestbranch/map.phtml" />
+        </reference>
+      <reference name="left">
+      	<block type="core/template" name="left.nearestbranch" template="balance/nearestbranch/sidebar_nearestbranch.phtml" />
+      </reference>
+</nearestbranch_index_index>
+</layout>	   

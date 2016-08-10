@@ -1,0 +1,78 @@
+.apDivProductBanner {
+  float: none;
+  height: auto;
+}
+.apDivProductBanner .InnerContent {
+  float: none;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 25px;
+}
+.pageTitle {
+    margin-bottom: 25px;
+}
+.pageTitle h1 {
+  padding-bottom: 20px;
+  border-bottom: solid 6px #009a3d;
+  font: bold 36px/1.2 Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: #113c2b;
+}
+.pageTitle h1 span {
+  color: #009a3d;
+}
+
+
+.category-view {
+  margin: 0;
+}
+
+
+.products-grid {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.products-grid li.item {
+  width: 202px;
+  margin: 0 0 0 21px;
+}
+.products-grid li.item.first {
+  margin-left: 0;
+}
+.products-grid li.item h3 {
+  margin: 10px;
+  font: 14px Arial, Helvetica, sans-serif;
+  text-transform:uppercase;
+  color:#113C2B;
+}
+.products-grid li.item .body2 {
+  margin: 0 10px;
+}
+.products-grid li.item .product-link {
+  margin: 10px;
+}
+.mainContent{float:left;}
+.left-vorwerk-content{
+    width:26%;
+}
+.right-vorwerk-content{
+    width:74%;
+}
+.right-vorwerk-content h3{padding-top:8px;color:#666666;}
+.right-vorwerk-content h5{font-size:17px;font-weight: normal;color:#666666;}
+.right-vorwerk-content, .left-vorwerk-content{float:left;min-height: 400px;display:block;}
+.list-option-following{margin-top:15px;padding-left:0!important;}
+.list-option-following li {
+    list-style: inside decimal;
+    padding-left:3px;
+    font-size:13px;
+    color:#666666;
+}
+.list-option-following li a {
+    background-image: url("../images/vorwerk/nav/link_intern.png");
+    background-position: 0 4px;
+    background-repeat: no-repeat;
+    margin-left: 3px;
+    padding-left: 10px;
+}

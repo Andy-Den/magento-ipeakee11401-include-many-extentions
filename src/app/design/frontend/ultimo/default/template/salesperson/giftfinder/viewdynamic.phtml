@@ -1,0 +1,44 @@
+<?php
+/**
+ * Celebros Qwiser - Magento Extension
+ *
+ * @category    Celebros
+ * @package     Celebros_Salesperson
+ * @author		Celebros - Pavel Feldman (email: MagentoSupport@celebros.com)
+ *
+ */
+?>
+
+
+<div id='salesperson_giftfinder_view' class="cel_ddlZone">
+	<?php $_bHasAnsweredQuestion = false;?>
+	<?php $_filters = $this->getOrderedFilters();?>
+	<?php foreach ($_filters as  $_filter):?>
+		<?php 
+		$bPriceQuestion = $this->isPriceQuestion($_filter);
+		$priceSliderDivClass = $bPriceQuestion ? "priceSliderDiv" : "";
+		?>	
+		<div class="cel_selectBlock <?php echo $priceSliderDivClass?>">
+			<div class="cel_selectBlockL"><?php echo $_filter->SideText ?>:</div>
+			<div class="cel_selectBlockR">
+				<?php if ($this->isAnsweredQuestion($_filter)):?>
+					<?php $_bHasAnsweredQuestion = true;?>
+					<?php $_searchPathAnsweredAnswer = $this->getSearchPathAnsweredAnswer($_filter);?>
+					<?php echo $this->getAnsweredAnswerHtmlSelect($_searchPathAnsweredAnswer);?>
+				<?php elseif($this->isPriceQuestion($_filter) && !$this->isDisabledFilter($_filter)):?>
+					<?php echo $this->getChildHtml('giftfinder_price_question');?>
+				<?php else:?>
+					<?php if($this->isRadioButtonsQuestion($_filter)):?>
+						<?php echo $this->getFilterHtmlRadioButtons($_filter);?>					
+					<?php else:?>
+						<?php echo $this->getFilterHtmlSelect($_filter);?>
+					<?php endif;?>
+				<?php endif;?>
+			</div>
+		</div>
+	<?php endforeach;?>
+	
+	<?php if($_bHasAnsweredQuestion):?>
+		<a onclick="celebrosSetLocation('<?php echo $this->getClearAllFiltersUrl() ?>');" style="cursor: pointer;"><?php echo $this->__('Clear All') ?></a>
+	<?php endif; ?>	
+ </div>

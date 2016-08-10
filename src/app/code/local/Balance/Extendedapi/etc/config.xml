@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+		<modules>
+				<Balance_Extendedapi>
+						<version>1.0.0</version>
+				</Balance_Extendedapi>
+		</modules>
+    <global>
+	<helpers>
+		<extendedapi>
+				<class>Balance_Extendedapi_Helper</class>
+		</extendedapi>
+	</helpers>
+    <models>
+        <extendedapi>
+             <class>Balance_Extendedapi_Model</class>
+        </extendedapi>
+		<sales>
+			<rewrite>
+				<order_shipment_api>Balance_Extendedapi_Model_Sales_Order_Shipment_Api</order_shipment_api>
+			</rewrite>
+		</sales>
+    </models>
+   </global>
+</config>

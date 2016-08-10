@@ -1,0 +1,89 @@
+<?php
+$_product = $this->getProduct();
+?>
+<form action="<?php echo $this->getSubmitUrl($_product) ?>" id="product_nostepcheckout_form" method="post">
+    <?php echo $this->getBlockHtml('formkey') ?>
+    <div class="no-display">
+        <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+    </div>    
+
+    <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+
+        <?php if ($this->shareOptionSelector()) : ?>
+        <div class="container3 share-option-selector" style="display:none;"><?php echo $this->getChildChildHtml('container3', '', true, true); ?></div>
+        <?php else: ?>
+        <div class="container3"><?php echo $this->getChildChildHtml('container3', '', true, true); ?></div>
+        <?php endif; ?>
+
+
+    <?php endif; ?>
+    <button type="button" title="Place Order" class="button btn-cart" onclick="productNoStepCheckoutForm.submit(this);"><span><span>Place Order</span></span></button>
+</form>
+
+<script type="text/javascript">    
+    var productNoStepCheckoutForm = new VarienForm('product_nostepcheckout_form');
+        <?php if ($this->shareOptionSelector()) : ?>
+            jQuery(document).ready(function(){
+                jQuery('#product-options-wrapper select.super-attribute-select').bind('change', function(e){            
+                    var elementId = jQuery(this).attr('id');                    
+                    jQuery('#nostepcheckout-product-options-wrapper #'+elementId).val(jQuery(this).val());
+                });
+                jQuery('#product-options-wrapper textarea.product-custom-option').bind('blur', function(e){            
+                    var elementId = jQuery(this).attr('id');                    
+                    jQuery('#nostepcheckout-product-options-wrapper #'+elementId).val(jQuery(this).val());
+                });      
+                jQuery('#product-options-wrapper select.product-custom-option').bind('change', function(e){            
+                    var elementId = jQuery(this).attr('id');                    
+                    jQuery('#nostepcheckout-product-options-wrapper #'+elementId).val(jQuery(this).val());
+                });
+                jQuery('#product-options-wrapper input[type=text].product-custom-option').bind('blur', function(e){            
+                    var elementId = jQuery(this).attr('id');                    
+                    jQuery('#nostepcheckout-product-options-wrapper #'+elementId).val(jQuery(this).val());
+                }); 
+                
+                jQuery('#product-options-wrapper input[type=checkbox].product-custom-option').bind('click', function(e){            
+                    var elementId = jQuery(this).attr('id');                   
+                    if(jQuery(this).is(':checked')){
+                        jQuery('#nostepcheckout-product-options-wrapper #'+elementId).prop('checked', true);
+                    }else {
+                        jQuery('#nostepcheckout-product-options-wrapper #'+elementId).prop('checked', false);
+                    }
+                }); 
+                }
+            
+            );
+       
+      
+        <?php endif; ?>
+        productNoStepCheckoutForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                    form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+            
+        }.bind(productNoStepCheckoutForm);
+</script>
+
+<div id="nostepcheckout-dialog">
+    <div class="nostepcheckout-loader"></div>
+    <div class="nostepcheckout-error"></div>
+    <div class="nostepcheckout-content"></div>
+</div>

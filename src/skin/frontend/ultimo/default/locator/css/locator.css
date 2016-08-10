@@ -1,0 +1,650 @@
+.locator-location-index .col-main,.locator-search-index .col-main{padding-top: 0}
+.locator-location-index .header-container3, .locator-search-index .header-container3{padding-bottom: 15px}
+.locator-location-index .main , .locator-search-index .main{width: 100%}
+
+/* Base style for location map */
+.locator-search-index .footer-container{padding-top: 100px}
+.loc-map{
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+    .loc-infowindow-loader.is-loading{
+        width: 100%; height:50px;
+    }
+
+/* Base style for location teasers */
+.loc-teaser{
+    -webkit-transition: .5s background ease-in; padding: 0 0 10px 0;
+}
+    .loc-teaser.is-hidden{
+        display:none;
+    }
+    .loc-teaser:hover{
+        /*background: #efefef;*/
+    }
+
+    .loc-teaser h3{
+        margin-top: 0; margin-bottom: 0.6em;
+    }
+
+/* Locator search form */
+.loc-srch{
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #CACACA;
+    padding-bottom: 19px;
+    margin-bottom: 29px;
+}
+    .loc-srch h4{
+        margin: 0;
+    }
+
+    .loc-srch-form{
+
+    }
+        .loc-srch-s{
+            width: 200px; padding: 5px;
+        }
+
+        .loc-srch-dis{
+            width: 40px; padding: 5px;
+        }
+
+
+/* Locator search results */
+.loc-srch-res{
+
+}
+    /* hide no results page by default */
+    .loc-srch-res-noresults{
+        display:none;
+    }
+
+    /* when no results are shown show no results and hide search; */
+    .loc-srch-res.is-no-results .loc-srch-res-list, .loc-srch-res.is-no-results .loc-srch-res-map{
+        display:none;
+    }
+    .loc-srch-res.is-no-results .loc-srch-res-noresults{
+        display:block;
+        clear: both;
+    }
+
+    /* Map */
+    .loc-srch-res-map-wrap{
+        float:left;
+        background: #fefefe; border: #ccc 1px solid; padding: 5px; margin-right: -10px;
+        width:65.5% ;
+    }
+    .loc-srch-res-map-wrap.is-fixed{
+        position:fixed; top:0; margin-left: 298px;
+    }
+        .loc-srch-res-map{
+            width: 100%; height: 584px;
+        }
+
+    .is-no-results .loc-srch-res-map-wrap {
+        border: none;
+    }
+
+    .locator-index-index .loc-srch-res {display: none;}
+    /* Teaser List */
+    .loc-srch-res-list{
+        float: left; width: 32.5%;  padding: 0 0 0;margin-right: 2%;margin-top: -5px;
+    }
+    .loc-ls-item{border-bottom: 1px solid #dadada;margin-bottom: 25px;padding-bottom: 14px;}
+    .loc-ls-item a{margin-right: 17px;display: inline-block;margin-top: 7px}
+    .locations .loc-ls-item:last-of-type{border-bottom: none}
+/* Individual Location Page */
+.loc-page{
+    float:left; width: 100%; clear:both;
+    margin-bottom: 0
+}
+
+    .loc-page-data{
+        float: left;  width: 32.2%;  padding: 0 0 0;margin-right: 2%;margin-top: -15px;
+    }
+        .loc-page-data h2{
+            margin-bottom: 10px;
+        }
+    .loc-page-map-right{float:left; width: 65.7%}
+    .loc-page-map-wrap{
+         background: #fefefe; border: #ccc 1px solid; padding: 5px;
+    }
+        .loc-page-map{
+            width: 100%; height: 584px;
+        }
+
+/* Nearby Locations */
+.loc-nearby{
+    float:left; margin-top: 20px;
+}
+    .loc-nearby-item{
+        display:inline-block; position: relative; vertical-align: top;
+        width: 207px; margin-right: 20px; margin-bottom: 10px;
+    }
+        .loc-nearby-item .loc-teaser{
+            padding-right: 20px;
+        }
+    .loc-nearby-item:nth-child(4n){
+        margin-right:0;
+    }
+
+/* Loader styles */
+.loader { display: none; width: 24px; height: 24px; text-indent: -9999px;}
+.loader.is-loading { display: inline-block; background: url(../images/loader/loader-med.gif) center no-repeat; }
+.loader-tiny { width: 10px; height: 10px; }
+.loader-tiny.is-loading { background-image: url(../images/loader/loader-tiny.gif); }
+.loader-sml { width: 16px; height: 16px; }
+.loader-sml.is-loading { background-image: url(../images/loader/loader-sml.gif); }
+.loader-lrg { width: 48px; height: 48px; }
+.loader-lrg.is-loading { background-image: url(../images/loader/loader-lrg.gif); }
+.loc-loader{margin-top: 3px;position: absolute}
+
+/* store locator view */
+.locator-view-title h1{color: #333;font-family: "proxima_nova_bold";font-size: 24px;padding-bottom: 7px;margin-bottom: 16px;border-bottom: #dadada 1px solid}
+.locator-view-title{padding-bottom: 9px}
+.store-view-attr{padding-bottom: 9px}
+.store-view-attr h2{font-family: "proxima_nova_bold";font-size: 18px;color: #333;border-bottom: 1px solid #dadada;margin-top: 20px;padding-bottom: 13px;margin-bottom: 14px;}
+.info-content{width: 320px}
+.store_hours_weekday,.store_hours{display: inline-block;line-height: 24px}
+.store_hours_weekday{width: 100px}
+.store_hours{text-align: right;width: 182px}
+.store_description{padding-bottom: 0}
+.store_description p{margin-bottom: 20px;line-height: 20px}
+.link-detail-locator {padding-top: 20px;float: right}
+.link-detail-locator a.button{
+    padding: 0 21px;margin-left: 5px;
+    height: 40px;
+    line-height: 40px;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: 'proxima_nova_bold';
+    color: #fff;
+    background: #999;
+    line-height: 40px;height: 40px;display: inline-block;
+    border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;
+}
+.link-detail-locator a.button:hover{background: #808080}
+.locator-search{position: relative}
+
+
+
+/* Copy frome Store Locator */
+
+
+ul.list-item li {
+    display:list-item;
+    text-align:left;
+    list-style: none outside none;
+    border-top:1px solid #dadada;
+    margin-bottom:30px;
+    padding-top:30px;
+}
+ul.list-item li p:nth-child(2) a {display:inline-block;color:#666;}
+ul.list-item li.first {
+    border-top:none;
+    padding-top:0;
+}
+.mid-contain { float:left;}
+.rightmappart {
+    margin-top:0px;
+}
+.rightmappart .map {
+    background:none;
+    height:500px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.search-store input,.mapbtn a {
+    border-radius: 5px;
+    background-color: #999999;
+    color: #ffffff;
+    font-family: 'proxima_nova_bold';
+    font-size: 14px;
+    font-weight: normal;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+    text-align: center;
+    text-transform: uppercase;
+    min-width: 114px;
+    display: block;
+    cursor: pointer;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-appearance: none;-moz-appearance: none;appearance: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;
+}
+.direction-locator{margin-left: 10px;width: 154px;float: right;}
+.continue-locator{float: left;}
+.continue-locator{width: 187px;}
+.store-autocomplete {
+    background-color:white;
+    border:1px solid #82B7E1;
+    padding:0 2px;
+    z-index:9999;
+    display:none;
+}
+.store-autocomplete li:hover {
+    background-color:#69F;
+    color:white;
+    cursor:pointer;
+}
+.store-view,
+.category-view, .results-view {
+    background-color:transparent;
+    padding:-18px 0 2px !important;
+    width:100%;
+    font-size:14px;
+    font-family:Arial;
+    color:#766f6e;
+}
+.store-view p,
+.category-view p,
+.results-view p { /*margin-bottom:7px;*/ }
+.bluetitle {
+    color: #181C8E;
+    font-size:13px;
+    font-weight:bold;
+}
+.location {
+    width:250px;
+    float:left;
+}
+.location-info {
+    padding-right:30px;
+    color: #181C8E;
+}
+.store-image {
+    float:left;
+    padding-right:11px;
+}
+.fw-icon {
+    float:left;
+    padding-right:4px;
+}
+.store-name {
+    padding-bottom:0;
+    margin-bottom: 2px;
+    font-family: "proxima_nova_bold";
+    font-size: 18px;
+}
+.toolbar-bottom {
+    background:none !important;
+    width:675px!important;
+    margin-left:20px;
+    font-size:11px;
+}
+/*----------- GODFREYS SPECIFIC -------------*/
+h2.store-name a {
+    font-size:18px !important;
+    color:#333333;
+    text-decoration:none;
+    font-style:normal;
+    font-family: 'proxima_nova_bold';
+    text-transform: uppercase;
+}
+.store-cell {
+    float:left;
+    font-size:11px;
+    width:110px !important;
+    margin:0 20px 0 0;
+    color:#5b5b5b;
+    line-height:17px;
+}
+.store-cell-address {
+    float:left;
+    font-size:11px;
+    width:163px !important;
+    color:#5b5b5b;
+    line-height:17px;
+    margin-right:31px;
+}
+.store-locator-list-header .store-cell-address {
+    color: #4B565F;
+    font-size: 14px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.store-cell-mapinfo {
+    float:left;
+    font-size:11px;
+    width:74px !important;
+    color:#5b5b5b;
+    line-height:17px;
+}
+.store-locator-list-header .store-cell-mapinfo {
+    color: #4B565F;
+    font-size: 14px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.toolbar {
+    background:none !important;
+    display:none;
+}
+#map {
+    background: none !important;
+    font-size:11px;
+    width: 100% !important;
+    height: 590px !important;
+    border: 1px solid #dadada;
+}
+.store-locator-list-header .store-cell {
+    font-size:14px !important;
+    text-transform:uppercase;
+    font-weight:bold;
+    color:#4b565f;
+}
+.store-locator-list-header .store-name {
+    margin-left:2px;
+    color:#4b565f !important;
+}
+#store-locator-left-container {
+    float:left;
+    width:100%;
+}
+#store-locator-left-container-details {
+}
+#store-locator-left-container h4 {
+    line-height:25px;
+    font-size:15px;
+    font-weight:normal;
+    color:#0055a5;
+}
+
+#tab1{
+    width:38%;
+    float:left;
+
+}
+.leftmap-con {float: left;width: 31.5%}
+#tab2 {
+    width:60%;
+    float:right;
+}
+.rightmap{float: right;width: 66%}
+.storelist {
+    width:100%;
+    clear:both;
+    display:inline-block;
+    margin-top:10px
+}
+.storelist iframe { display:none}
+/*------------- Francis -------------*/
+
+
+.rightmap {
+    float:right;
+    text-align:right;
+    padding-top:0;
+    position:relative;
+    margin-top: 29px;
+}
+.rightmap .map {
+    width: 100%;
+    height:590px;
+    position: relative;
+}
+.leftmap-con {
+    float:left;
+    color:#666666;
+    font-size: 14px;
+}
+.storemainpart {
+    float:left;
+    color:#5B5B5B;
+}
+.storemainpart a, .storemainpart h2 {
+    color:#5B5B5B;
+}
+.leftmap {
+    float:left;
+    width:334px;
+}
+.leftmap .map {
+    float:left;
+    width:320px;
+    background:url(../images/map-bg.jpg) no-repeat;
+    padding:5px 7px;
+}
+.leftmap .mapbtn {
+    float:left;
+}
+.rightmap .mapbtn {
+    float: right;
+    position: relative;
+    right: 0;
+    top:5px;
+}
+.rightmap-con {
+    float:left;
+    margin-left:15px;
+    color:#666;
+    line-height:16px;
+}
+.rightmap-con h1 {
+    margin:0px;
+    padding:0px;
+    font-size:22px;
+    color:#00346f;
+    line-height:24px;
+    margin-bottom:10px;
+}
+.rightmap-con h2 {
+    margin:0px;
+    padding:0px;
+    font-size:18px;
+    color:#00346f;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+.rightmap-con ul {
+    float:left;
+}
+.rightmap-con .bluetext {
+    color:#308dd0;
+}
+/*.catalog-product-view .col-main,*/
+/*.col-main ,.catalog-product-view .col1-layout .col-main{*/
+    /*padding:15px 0 10px 0;*/
+    /*max-width: 1200px;*/
+    /*min-height:500px;*/
+    /*margin: 0 auto;*/
+    /*float: none;*/
+    /*width: 96%;*/
+/*}*/
+.leftmap-con h2 {
+    width:100%;
+    margin-bottom:12px;
+}
+.leftmap-con h2.title {
+    font-size: 24px;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom:4px;
+    padding:17px 0 3px 3px;
+    margin-left:-4px;
+    font-family: 'proxima_nova_bold';
+    color: #333333;
+}
+.leftmap-con h2.tradingHours {
+    color: #333;
+    font-family: 'proxima_nova_bold';
+    font-size: 18px;
+    font-style: normal;
+    margin-bottom: 16px;
+    text-align: left;
+    text-transform: uppercase;
+    padding-bottom: 11px;
+}
+/* Hide pagination stuff */
+ul.limitSelect {
+    display:none;
+}
+.bmXtext {
+    display:none;
+}
+#bmXi_0 img {
+    display:none !important;
+}
+#bmXi_0 {
+    display: block;
+    height: 32px;
+    width: 144px;
+    background: url(/media/btn-sms-details.png) no-repeat;
+}
+.mapbtn {
+    float:left;
+}
+#smsme {
+    float:right;
+    position:relative;
+    left:3px;
+}
+#tab2.tab_content {
+    margin:50px 0 0 -17px;
+    padding:0 47px 0 19px;
+    min-height:594px;
+}
+.paging_digit {
+    display:none;
+}
+.directions {
+    margin-left:27px!important;
+    margin-top:-32px;
+}
+.fb_edge_widget_with_comment {
+    float:left;
+    left:27px;
+    position:absolute;
+}
+.contain-details {
+    padding: 27px 0 19px 18px !important;
+    margin-right:-25px;
+}
+.view-storeaddress {
+    font-size:14px;
+    padding-bottom:30px;
+    text-align:left;
+}
+
+.storelocator-header {
+    border-bottom: 1px solid #CACACA;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+
+.page_content {
+    width:736px!important;
+}
+.page_wrap {
+    width:738px!important;
+}
+.category-view {
+}
+
+.store-banner-area {
+    float:right;
+}
+
+.storelocator-header h2 {
+    float: left;
+    color: #232323;
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.page_inner {
+    height: auto;
+}
+
+.storelocator-description {
+    margin-top:20px;
+    padding-top: 16px;
+}
+
+.storelocator-description h4 {
+    font-size:18px;
+    font-family: 'proxima_nova_bold';
+}
+
+.storelocator-serviced {
+    margin-top:15px;
+    border-top:1px dotted #7b7b7b;
+    padding-top: 15px;
+}
+.locator-form { width:100%; display: inline-block; border-bottom:1px solid #CACACA; padding-bottom:18px}
+.breadcrumbs {
+    position: static;
+    text-align: left;
+    width: 100%;
+    margin-bottom:5px;
+}
+.breadcrumbs ul li a { text-decoration:none}
+.showmap { float:right; width:600px;}
+.locator-search {text-align:left;width: 100%}
+.locator-state { float:right;  text-align:left;width: 40.6%;line-height: 40px;height: 40px;}
+.locator-state .OR{margin-right: 26px}
+.locator-static { float: right;}
+h1.locator-h1 { text-align:left; border-bottom: 1px solid #CACACA;
+    margin-bottom:19px;
+    padding-bottom: 10px;}
+.map { width:100%; height:595px;}
+.locator-state .selectbox { background:url(../images/bkg-drop.gif) no-repeat left center; height:25px; width:184px; overflow:hidden;  }
+.locator-state .selectbox select{ background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    float: none;
+    padding: 4px;
+    width: 205px; }
+/* p.more-link { width:100%; clear:both;} */
+/* p.more-link li { display:inline-block; float:left; border:none} */
+p.more-link a{ color:#1170ca;font-size: 14px; /* text-decoration:none; border-bottom:1px solid #c92127 */}
+.mapbtn { margin-top:16px}
+.store-info td:first-child { padding-right:30px; text-align:left}
+.btn-red {
+    background:url(../images/btn-red.png) no-repeat left top;
+    color: #fff;
+    font: italic bold 10px arial,sans-serif;
+    text-transform: uppercase;
+    padding: 7px 45px;
+    margin-top: 20px;
+    display: block;
+    text-decoration: none;
+}
+
+
+
+@media  screen and (max-width:1023px) {
+    .locator-search,.locator-state{width: 100%;}
+}
+@media  screen and (max-width:767px) {
+    .locator-location-index .container,.locator-search-index .container{width: 96%;padding-left: 2%;padding-right: 2%}
+    .locator-search input, .locator-search p,#tab1,#tab2,.leftmap-con,.rightmap,.search-store{width: 100%}
+    .locator-search .mid-contain{width: 70%;margin-right: 0}
+    .locator-distance{width: 12%}
+    .locator-search .mid-contain,.locator-distance,.km-locator{display: inline-block}
+    .locator input{width: 100%}
+    .km-locator{width: 7%}
+    .search-store{border-top: 1px solid #dadada;padding-top: 10px;margin-top: 20px;}
+    .locator-state{text-align: center}
+    p.more-link a,.more-link span{color: #e50b14}
+    .locator-search .km-locator{margin-left: 10px;margin-top: 40px;margin-right: 0}
+
+    .loc-page-data,.loc-page-map-right,.loc-srch-res-list{float: none;width: 100%;clear: both}
+    .locator-view-title h1{font-size: 18px}
+    .download_free_voucher, .back-link,.loc-srch-res-map-wrap{display: none}
+
+
+
+}
+
+/* End copy from Store Locator  */

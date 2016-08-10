@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg_Twitterconnect
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+   */-->
+
+<config>
+    <sections>
+        <twitter translate="label">
+            <label>Twitter</label>
+            <tab>belvg</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+                                              <![CDATA[
+                                                            <div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
+                                                            This module was developed by <a href="http://www.belvg.com" target="_blank">www.BelVG.com</a>.
+                                                            For docs & examples refer to the BelVG <a href="http://www.belvg.com" target="_blank">web site</a>.
+                                                            <br/>We have the largest selections of  <a href="http://store.belvg.com/extensions.html" target="_blank">extensions</a> and <a href="http://store.belvg.com/themes.html" target="_blank">themes</a> on Magento.
+                                                            </div>
+                                                      ]]>
+                    </comment>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enabled</label>
+							<!-- <comment><![CDATA[]]></comment> -->
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>		  
+                    </fields>
+                </settings>
+                <tweetbtn translate="label">
+                    <label>Tweet Button Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+                                              <![CDATA[
+                                                      ]]>
+                    </comment>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enabled</label>
+							<!-- <comment><![CDATA[]]></comment> -->
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <type translate="label comment">
+                            <label>Button type</label>
+							<!-- <comment><![CDATA[]]></comment> -->
+                            <frontend_type>select</frontend_type>
+                            <source_model>twitter/source_btntype</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </type>
+                        <recommend translate="label comment">
+                            <label>Recommend people to follow</label>
+                            <comment><![CDATA[
+                                                        Recommend  Twitter account for user to follow after they share content from your website.
+                                                        ]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+<!--							<source_model>twitter/source_btntype</source_model>-->
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </recommend>
+                        <ttext translate="label comment">
+                            <label>Tweet text</label>
+                            <comment><![CDATA[
+                                                        This is the text that people will include in their Tweet when they share from your website.If you want to use the title of the page the button is on ,leave this field empty.
+                                                        ]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+<!--							<source_model>twitter/source_btntype</source_model>-->
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ttext>
+                        <lang translate="label comment">
+                            <label>Language</label>
+                            <comment><![CDATA[
+                                                        ]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>twitter/source_langtype</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </lang>
+
+                    </fields>
+                </tweetbtn>
+                <userauth translate="label">
+                    <label>User Login Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>120</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+                                              <![CDATA[
+                                                      ]]>
+                    </comment>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enabled</label>
+							<!-- <comment><![CDATA[]]></comment> -->
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <conskey translate="label comment">
+                            <label>Consumer key</label>
+							<!-- <comment><![CDATA[]]></comment> -->
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </conskey>
+                        <conssecret translate="label comment">
+                            <label>Consumer secret</label>
+							<!-- <comment><![CDATA[]]></comment> -->
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </conssecret>
+                        <oauthcallback translate="label comment">
+                            <label>oAuth callback</label>
+							<!-- <comment><![CDATA[]]></comment> -->
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </oauthcallback>                                                
+                    </fields>
+                </userauth>
+            </groups>
+        </twitter>
+    </sections>
+</config>

@@ -1,0 +1,36 @@
+<?php
+   $_helper    = $this->helper('catalog/output');
+   $_category  = $this->getCurrentCategory(); 
+?>
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('sitewide-banner-desk')->toHtml(); ?>
+<div class="page-title category-title">
+    <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+        <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+    <?php endif; ?>
+    <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+</div>
+
+<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+    <div class="category-description std">
+        <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+    </div>
+<?php endif; ?>
+
+
+
+<div class="category-view">
+<div id="contents" class="page">
+       <div id="content-col">
+            <?php if($this->isContentMode()): ?>
+                <?php echo $this->getCmsBlockHtml() ?>
+            <?php elseif($this->isMixedMode()): ?>               
+               <?php echo $this->getProductListHtml() ?>
+               <div class="static-block-category">
+                    <?php echo $this->getCmsBlockHtml() ?>
+               </div>
+           <?php else: ?>                   
+               <?php echo $this->getProductListHtml() ?>
+           <?php endif; ?>    
+       </div>
+    </div>   
+</div>

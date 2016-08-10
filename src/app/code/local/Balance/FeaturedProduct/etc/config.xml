@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<config>
+
+	<!-- ecomdev phpunit config -->
+	<phpunit>
+		<suite>
+			<modules>
+				<Balance_FeaturedProduct />
+			</modules>
+		</suite>
+	</phpunit>
+
+	<!-- define the module, version and dependencies -->
+	<modules>
+		<Balance_FeaturedProduct>
+		<version>0.0.1</version>
+		<!-- <depends> <Mage_Adminhtml /> <Balance_MyModul2 /> </depends> -->
+		</Balance_FeaturedProduct>
+	</modules>
+
+	<global>
+		<!-- model configuration -->
+		<models>
+			<featuredproduct>
+			<class>Balance_FeaturedProduct_Model</class>
+			<resourceModel>featuredproduct_mysql4</resourceModel>
+			</featuredproduct>
+			<featuredproduct_mysql4>
+			<class>Balance_FeaturedProduct_Model_Mysql4</class>
+			<entities>
+				<featuredproduct>
+					<table>bi_featuredproduct</table>
+                                </featuredproduct>
+                                <featuredproduct_index>        
+                                        <table>bi_featuredproduct_index</table>
+                                </featuredproduct_index>
+			</entities>
+			</featuredproduct_mysql4>
+                        <catalog_resource>
+                            <rewrite>
+                                <category>Balance_FeaturedProduct_Model_Mysql4_Category</category>
+                            </rewrite>
+                        </catalog_resource>
+                        <catalog>
+                            <rewrite>
+                                <category>Balance_FeaturedProduct_Model_Category</category>
+                            </rewrite>
+                        </catalog>
+		</models>
+
+		<!-- resource model configuration -->
+		<resources>
+			<featuredproduct_setup>
+			<setup>
+				<module>Balance_FeaturedProduct</module>
+				<class>Balance_FeaturedProduct_Model_Entity_Setup</class>
+			</setup>
+			<connection>
+				<use>core_setup</use>
+			</connection>
+			</featuredproduct_setup>
+			<featuredproduct_write>
+			<connection>
+				<use>core_write</use>
+			</connection>
+			</featuredproduct_write>
+			<featuredproduct_read>
+			<connection>
+				<use>core_read</use>
+			</connection>
+			</featuredproduct_read>
+		</resources>
+
+		<!-- block path -->
+		<blocks>
+			<featuredproduct>
+			<class>Balance_FeaturedProduct_Block</class>
+			</featuredproduct>
+                        <adminhtml>
+                            <rewrite>
+                                <catalog_category_edit_form>Balance_FeaturedProduct_Block_Adminhtml_Category_Edit_Form</catalog_category_edit_form>
+                            </rewrite>
+                        </adminhtml>
+		</blocks>
+
+		<!-- helper classes -->
+		<helpers>
+			<featuredproduct>
+			<class>Balance_FeaturedProduct_Helper</class>
+			</featuredproduct>
+		</helpers>
+              
+                <index>
+                    <indexer>
+                        <featuredproduct>
+                            <model>featuredproduct/indexer_featuredproduct</model> 
+                        </featuredproduct>                      
+                    </indexer>
+                </index>
+              
+	</global>
+
+	<!-- backend routing -->
+	<admin>
+		<routers>
+			<!--
+                        <adminhtml>
+				<args>
+					<modules>
+						<featuredproduct before="Mage_Adminhtml">Balance_FeaturedProduct_Adminhtml</featuredproduct>
+					</modules>
+				</args>
+			</adminhtml>
+                        -->
+                        <adminhtml>
+                            <args>
+                                <modules>
+                                    <featuredproduct before="Mage_Adminhtml">Balance_FeaturedProduct_Adminhtml</featuredproduct>
+                                </modules>
+                            </args>
+                        </adminhtml>
+		</routers>
+	</admin>
+
+	<adminhtml>
+		<!-- access control list, aka permissions -->
+		<acl>
+                    <resources>
+                        <admin>
+                            <children>
+                                <system>
+                                    <children>
+                                        <config>
+                                            <children>
+                                                <featuredproduct translate="title" module="featuredproduct">
+                                                    <title>Featured Product</title>
+                                                    <sort_order>50</sort_order>
+                                                </featuredproduct>
+                                            </children>
+                                        </config>
+                                    </children>
+                                </system>                              
+                            </children>
+                        </admin>
+                    </resources>
+                </acl>
+		
+		<!-- locale files -->
+		<translate>
+			<modules>
+				<featuredproduct>
+				<files>
+					<default>Balance_FeaturedProduct.csv</default>
+				</files>
+				</featuredproduct>
+			</modules>
+		</translate>
+		<!-- layout files -->
+		<layout>
+			<updates>
+				<featuredproduct>
+				<file>balance/featuredproduct.xml</file>
+				</featuredproduct>
+			</updates>
+		</layout>
+                 <events>
+                    <adminhtml_catalog_category_tabs>
+                        <observers>
+                            <adminhtml_featuredproduct_catalog_category_tabs>
+                                <class>featuredproduct/observer</class>
+                                <method>createFeaturedProductTab</method>
+                            </adminhtml_featuredproduct_catalog_category_tabs>
+                        </observers>
+                    </adminhtml_catalog_category_tabs>
+                    <catalog_category_prepare_save>
+                        <observers>
+                            <featuredproduct_catalog_category_prepare_save>
+                                <class>featuredproduct/observer</class>
+                                <method>prepareFeaturedProductForSave</method>
+                            </featuredproduct_catalog_category_prepare_save>    
+                        </observers>                            
+                    </catalog_category_prepare_save>
+                </events>                
+	</adminhtml>
+	<!-- crontab configuration -->
+	<!-- <crontab> <jobs> <featuredproduct> <schedule><cron_expr>*/15 
+		* * * *</cron_expr></schedule> <run><model>featuredproduct/myModel::cronMethod</model></run> 
+		</featuredproduct> </jobs> </crontab> -->
+        <default>            
+            <featuredproduct>
+                <settings>
+                    <max_products>1</max_products>
+                </settings>
+            </featuredproduct>
+    </default>        
+</config>

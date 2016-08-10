@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AHT_Tradeprice>
+            <version>0.1.0</version>
+        </AHT_Tradeprice>
+    </modules>
+    <global>
+		<events>
+            <catalog_product_get_final_price>  <!--Here Event Name as per your Requirement -->
+                <observers>   
+                    <AHT_Tradeprice_Model_Observer>              
+                        <type>singleton</type>
+                        <class>AHT_Tradeprice_Model_Observer</class>
+                        <method>saveCmsPageObserve</method>
+                    </AHT_Tradeprice_Model_Observer>                  
+                </observers>
+            </catalog_product_get_final_price> 
+			<checkout_cart_product_add_after>
+				<observers>
+					<aht_add_product>
+					<type>singleton</type>
+						<class>tradeprice/observer</class>
+						<method>modifyPrice</method>
+					</aht_add_product>
+				</observers>
+			</checkout_cart_product_add_after>
+        </events>
+        <models>
+            <tradeprice>
+                <class>AHT_Tradeprice_Model</class>
+            </tradeprice>
+        </models>
+    </global>
+</config>

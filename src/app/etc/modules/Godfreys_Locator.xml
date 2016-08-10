@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Godfreys_Locator>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Ak_Locator/>
+            </depends>
+        </Godfreys_Locator>
+    </modules>
+</config>

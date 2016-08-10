@@ -1,0 +1,23 @@
+<section class="loc-page" itemscope itemtype="http://data-vocabulary.org/Place">
+  <div class="loc-page-data"><?php echo $this->getChildHtml('info') ?></div>
+  <div class="loc-page-map-right">
+
+        <?php echo $this->getChildHtml('map') ?>
+
+    <div class="link-detail-locator">
+        <?php $loc = $this->getLocations()->getFirstItem(); ?>
+        <a itemprop="url" href="/" class="button">CONTINUE SHOPPING</a>
+        <a href="<?php echo $loc->directions_link; ?>" target="_blank"  class="button desktop">GET DIRECTIONS</a>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="loc-nearby">
+  <?php echo $this->getChildHtml('others') ?>
+</section>
+-->
+<script type="text/javascript">
+    jQuery(".locator-location-index .loc-srch form").removeClass( "loc-srch-form" );
+</script>
+

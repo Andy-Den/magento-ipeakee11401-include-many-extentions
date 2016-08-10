@@ -1,0 +1,142 @@
+<!-- Warehouse -->
+<?php $warehouseHelper = Mage::helper('warehouse') ?>
+<?php $warehouseConfig = $warehouseHelper->getConfig() ?>
+<!-- End Warehouse -->
+
+<div id="top">
+<?php $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+		  $breadcrumbs->addCrumb('home', array('label'=>Mage::helper('cms')->__('Home'), 'title'=>Mage::helper('cms')->__('Home Page'), 'link'=>Mage::getBaseUrl()));
+		  $breadcrumbs->addCrumb('shoppingcart', array('label'=>'Shopping Cart', 'title'=>'Shopping Cart'));
+		  echo $this->getLayout()->getBlock('breadcrumbs')->toHtml();?>
+
+<div class="wide_page_wrap">
+	<div class="wide_page_content" id="shoppingcart">
+        <h2 class="page_title page_title_gray">SHOPPING CART
+        <?php if(!$this->hasError()): ?>
+        <ul class="checkout-types">
+        <?php foreach ($this->getMethods('top_methods') as $method): ?>
+            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+            <li><?php echo $methodHtml; ?></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+        </h2>
+        <?php endif; ?>
+    
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    <div class="shopping-cart-table-prior"></div>
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post" name="shopping_cart_form">
+        <fieldset>
+            <table id="shopping-cart-table" cellpadding="0" cellspacing="0" border="0">
+                <col width="1" />
+                <col />
+                
+                <!-- Warehouse -->
+                <?php if ($warehouseConfig->isInformationVisible()) : ?>
+                <col />
+                <?php endif; ?>
+                <!-- End Warehouse -->
+                
+                <col width="1" />
+            <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                <col width="1" />
+            <?php endif ?>
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+                <col width="1" />
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+                <col width="1" />
+
+            <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                <thead>
+                    <tr class="th-row">
+                        <th class="th-img" rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+                        <th class="th-description" rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Description') ?></span></th>
+                        
+                        <!-- Warehouse -->
+                        <?php if ($warehouseConfig->isInformationVisible()) : ?>
+                        <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $warehouseHelper->__('Warehouse') ?></span></th>
+                        <?php endif; ?>
+                        <!-- End Warehouse -->
+                        
+                        <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
+                        <?php endif ?>
+                        <th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Price') ?></span></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
+                        <th class="a-center" colspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Subtotal') ?></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('') ?></th>
+                    </tr>
+                    <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <tr>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                    </tr>
+                    <?php endif; ?>
+                </thead>
+                <tbody>
+                <?php foreach($this->getItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+       </div>
+    <div class="wide_page_foot"></div>
+    <div class="table_buttons">
+    <?php if($this->getContinueShoppingUrl()): ?>		
+   		<a href="javascript:void(0)" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')" title="<?php echo $this->__('Continue Shopping') ?>" class="cont-shopping"><?php echo $this->__('Continue Shopping') ?></a>
+    <?php endif; ?>
+    	<a href="javascript: submitform()" class="update-cart">Update cart</a>
+    </div>
+    </form>
+    
+    <div id="sidebar">
+
+        <?php echo $this->getChildHtml('crosssell') ?>	
+        <?php echo $this->getLayout()->createBlock('accessory/search_form_mini')->setTemplate('accessory/search/form/mini.phtml')->toHtml(); ?>
+				
+    </div>
+    
+
+  	
+  	<div id="shoppingcart-right">
+    	<?php echo $this->getChildHtml('totals'); ?>
+       	<?php if(!$this->hasError()): ?>
+        <ul class="checkout-types">
+        <?php foreach ($this->getMethods('methods') as $method): ?>
+            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+            <li><?php echo $methodHtml; ?></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>       
+    </div>
+
+</div>
+</div>
+ <script type="text/javascript">
+ 	$j1_6(".breadcrumb").css({'background':'url(<?php echo $this->getSkinUrl()?>images/topshadow.png) no-repeat bottom center'});
+ 	$j1_6("#shopping-cart-table").css({'width':'100%'});
+ 	$j1_6(".page_title .checkout-link-large").css({'position':'relative','top':'8px'});
+ 	$j1_6("#shopping-cart-table th").css({'padding-right':'10px'});
+
+ 	function submitform()
+ 	{
+ 	  document.shopping_cart_form.submit();
+ 	}
+ 	 	
+ </script>

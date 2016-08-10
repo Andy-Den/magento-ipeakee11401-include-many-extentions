@@ -1,0 +1,154 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product description template
+ *
+ * @see Mage_Catalog_Block_Product_View_Description
+ * @var $this Mage_Catalog_Block_Product_View_Description
+ *
+ * Product additional attributes template
+ * @see Mage_Catalog_Block_Product_View_Attributes
+ * @var $attr Mage_Catalog_Block_Product_View_Attributes
+ */
+?>
+
+<?php
+$attr = $this->getLayout()->getBlock('product.attributes');
+$_helper = $this->helper('catalog/output');
+$_product = Mage::registry('product');
+$_coreHelper = $this->helper('core');
+
+/* @var $_coreHelper Mage_Core_Helper_Data */
+?>
+<?php $_description = $this->getProduct()->getDescription(); ?>
+<div class="tab-desc-spec">
+<div class="left-content">
+    <?php if ($_description): ?>
+        <h2><?php echo $this->__('Key Features') ?></h2>
+        <div class="std" id="full-featured">
+            <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_description, 'description') ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- START show badges (fk) -->
+    <dl class="product_features">
+        <?php if($_product->getData('warranty') == '80'): ?>
+            <dd class="warranty-1yr"><img src="/js/spacer.gif" width="60" height="60" title="1 Year Warranty" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('warranty') == '81'): ?>
+            <dd class="warranty-2yr"><img src="/js/spacer.gif" width="60" height="60" title="2 Year Warranty" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('warranty') == '82'): ?>
+            <dd class="warranty-3yr"><img src="/js/spacer.gif" width="60" height="60" title="3 Year Warranty" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('warranty') == '83'): ?>
+            <dd class="warranty-4yr"><img src="/js/spacer.gif" width="60" height="60" title="4 Year Warranty" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('warranty') == '84'): ?>
+            <dd class="warranty-5yr"><img src="/js/spacer.gif" width="60" height="60" title="5 Year Warranty" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('anti_allergy') == '92'): ?>
+            <dd class="allergies"><img src="/js/spacer.gif" width="60" height="60" title="Anti-Allergy" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('asthma') == '94'): ?>
+            <dd class="asthma"><img src="/js/spacer.gif" width="60" height="60" title="Asthma Specialty" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('pet_hair') == '111'): ?>
+            <dd class="pets"><img src="/js/spacer.gif" width="60" height="60" title="Pet Hair Specialty" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('level_of_clean') == '32'): ?>
+            <dd class="single-action"><img src="/js/spacer.gif" width="60" height="60" title="Single Action" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('level_of_clean') == '33'): ?>
+            <dd class="double-action"><img src="/js/spacer.gif" width="60" height="60" title="Double Action" /></dd>
+        <?php endif ?>
+        <?php if($_product->getData('level_of_clean') == '34'): ?>
+            <dd class="triple-action"><img src="/js/spacer.gif" width="60" height="60" title="Triple Action" /></dd>
+        <?php endif ?>
+    </dl>
+    <!-- END show badges -->
+</div>
+
+<div class="right-content">
+    <?php if ($_additional = $attr->getAdditionalData()):
+        $attrs =
+            array('sku',
+                'brand',
+                'model',
+                'capacity',
+                'wattage',
+                'voltage',
+                'warranty',
+                'cord_length',
+                'pet_hair',
+                'anti_allergy',
+                'hepa_filter',
+                'lightweight',
+                'compact',
+                'whats_in_the_box',
+                'suits_floor_types',
+                'run_time',
+                'items_per_pack',
+                'wet_use'
+        );
+        $attributes = array();
+        foreach($attrs as $at){
+            if(array_key_exists($at,$_additional)){
+                $attributes[$at] = $_additional[$at];
+            }
+        }
+        ?>
+        <h2><?php echo $attr->__('Additional Information') ?></h2>
+        <table class="data-table" id="product-attribute-specs-table">
+            <col width="25%"/>
+            <col/>
+            <tbody>
+            <?php foreach ($attributes as $_data):
+                if(empty($_data) || $_helper->productAttribute($_product, $_data['value'], $_data['code']) == 'No')
+                    continue;
+                ?>
+                <tr>
+                    <th class="label"><?php echo $attr->escapeHtml($attr->__($_data['label'])) ?></th>
+                    <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+    <?php endif; ?>
+</div>
+    <?php if ($_product->isSaleable() && !$_product->getData('online_only')): ?>
+        <div class="bottom-content">
+            <div class="add-to-cart">
+                <span class="bottom-price" id="product-bottom-price"><?php echo Mage::helper('core')->currency($_product->getFinalPrice(), true, false) ?></span>
+                <button type="button" title="<?php echo $this->__('Add to cart') ?>" class="button btn-cart v-center allajax-product-view-button-hack"
+                        onclick="productAddToCartForm.submit(this)">
+                    <span><span><?php echo $this->__('Add to cart') ?></span></span></button>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

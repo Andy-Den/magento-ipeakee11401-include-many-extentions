@@ -1,0 +1,167 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+
+// Mage::getSingleton('core/session')->setYourVariable('data');
+// $Data = Mage::getSingleton('core/session')->getYourVariable();
+?>
+<?php
+	$urlCurrentHistory=Mage::helper('core/url')->getCurrentUrl();
+	Mage::getSingleton('core/session')->setUrlCurrentHistory($urlCurrentHistory);
+	$urlShopping='';
+	$productSessionId='';
+	if(Mage::registry('current_category')){
+		$urlShopping=Mage::registry('current_category')->getUrl();
+	}
+	if(Mage::registry('current_product')){
+		$productSessionId= Mage::registry('current_product');
+		$categoryIds = $productSessionId -> getCategoryIds();
+		if(is_array($categoryIds) and count($categoryIds) > 1){
+            $cat = Mage::getModel('catalog/category')->load($categoryIds[0]);
+        }else{
+			$cat = Mage::getModel('catalog/category')->load($categoryIds);
+		}
+		if(Mage::getSingleton('core/session')->getUrlSessionShopping()=='')
+		{
+			Mage::getSingleton('core/session')->setUrlSessionShopping($cat->getUrl());
+		}
+	}
+	if($urlShopping!='') 
+	{
+		Mage::getSingleton('core/session')->setUrlSessionShopping($urlShopping);
+	}
+?>
+ <?php if($this->helper('tradegroup')->_isCustomerGroupTrade()):?>
+<div class="header-container">
+    <div class="header-panel">
+        <div class="quick-access">
+              <?php echo $this->getChildHtml('topCart') ?>
+                <div class='wishlist-count'>
+                        <a href='<?php echo $this->helper('wishlist')->getListUrl(); ?>'>
+                                <span class='wishlist-icon'></span>
+                                <small><?php echo Mage::helper('wishlist')->getItemCount();?></small>
+                        </a>
+						<div class='memo_pad_popup'>
+							<a class='item_memopad_count'>You have <?php echo Mage::helper('wishlist')->getItemCount(); ?> items on your memo pad</a>
+							<a href='<?php echo $this->helper('wishlist')->getListUrl(); ?>' class='item_memopad_view'>VIEW MEMO PAD</a>
+						</div>
+                </div>
+				<div class='login-popup'>
+						<a href="<?php echo $this->getUrl('customer/account') ?>">
+								<small><?php echo $this->__('My Account') ?></small>
+						</a>
+				</div>
+         </div>
+    </div>
+    <div class="header">
+        <div class="branding">
+        <?php if ($this->getIsHomePage()):?>
+              <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getSkinUrl('images/logo_trade.png') ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+            <?php else:?>
+                    <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getSkinUrl('images/logo_trade.png') ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <?php endif?>
+            <?php echo $this->getChildHtml('headerCallout') ?>
+        </div>
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_banner_trade')->toHtml() ?>
+        <div class='welcome-div'>
+               
+                <label class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?></label>
+				<ul class="links">
+                        <li class="first"><a title="<?php echo $this->__('My Account'); ?>" href="<?php echo $this->getUrl('customer/account') ?>"><?php echo $this->__('My Account'); ?></a></li>
+                        <li class="last"><span><?php echo $this->__('or');?></span><a title="<?php echo $this->__('Logout'); ?>" href="<?php echo $this->getUrl('customer/account/logout') ?>"><?php echo $this->__('Logout'); ?></a></li>
+                </ul>
+         </div>  
+            <?php echo $this->getChildHtml('topMenu') ?>
+    </div>
+  
+
+</div>
+<div class="trade_hompage">
+		<div class="trade_hompage_container">
+			<?php echo $this->getChildHtml('topSearch') ?>
+			<?php echo $this->getLayout()->CreateBlock('cms/block')->setBlockId('global_promo_1')->toHtml(); ?>
+			<?php echo $this->getChildHtml('topContainer') ?>
+		</div>
+</div>
+
+
+
+<?php else: ?>
+<div class="header-container">
+    <div class="header-panel">
+        <div class="quick-access">
+            <?php echo $this->getChildHtml('topCart') ?>
+			<div class='wishlist-count'>
+				<a href='<?php echo $this->helper('wishlist')->getListUrl(); ?>'>
+					<span class='wishlist-icon'></span>
+					<small><?php echo Mage::helper('wishlist')->getItemCount();?></small>
+				</a>
+				<div class='memo_pad_popup'>
+							<a class='item_memopad_count'>You have <?php echo Mage::helper('wishlist')->getItemCount(); ?> items on your memo pad</a>
+							<a href='<?php echo $this->helper('wishlist')->getListUrl(); ?>' class='item_memopad_view'>VIEW MEMO PAD</a>
+						</div>
+			</div>
+			<?php if(!Mage::helper('customer')->isLoggedIn()):?>
+				<div class='login-popup'>
+					<a>
+						<small>Login</small>
+						<span class='wishlist-icon'></span>
+					</a>
+					<?php echo $this->getChildHtml('mini_login') ?>
+				</div>
+			<?php endif?>
+        </div>
+    </div>
+    <div class="header">
+        <div class="branding">
+        <?php if ($this->getIsHomePage()):?>
+            <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+            <?php else:?>
+            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <?php endif?>
+            <?php echo $this->getChildHtml('headerCallout') ?>
+        </div>
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_banner')->toHtml() ?> 
+		<div class='welcome-div'>
+			<label class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?></label>
+			<?php if(!Mage::helper('customer')->isLoggedIn()):?>
+				<?php echo $this->getChildHtml('accountLinks');?>
+			<?php else:?>
+				<ul class="links">
+                        <li class="first"><a title="<?php echo $this->__('My Account'); ?>" href="<?php echo $this->getUrl('customer/account') ?>"><?php echo $this->__('My Account'); ?></a></li>
+                        <li class="last"><span><?php echo $this->__('or');?></span><a title="<?php echo $this->__('Logout'); ?>" href="<?php echo $this->getUrl('customer/account/logout') ?>"><?php echo $this->__('Logout'); ?></a></li>
+                </ul>
+			<?php endif;?>
+        </div>
+		<?php echo $this->getChildHtml('topMenu') ?>
+    </div>
+	<?php echo $this->getChildHtml('topSearch') ?>
+    <?php echo $this->getLayout()->CreateBlock('cms/block')->setBlockId('global_promo_1')->toHtml(); ?>
+    <?php echo $this->getChildHtml('topContainer') ?>
+</div>
+<?php endif; ?>

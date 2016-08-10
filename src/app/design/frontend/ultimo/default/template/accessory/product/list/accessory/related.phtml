@@ -1,0 +1,19 @@
+<?php
+/**
+ * Uses the related block to add suits the following models
+ */
+?>
+<?php $attributeTexts = $this->sortAttribute();?>
+<?php /* @var $this Balance_Accessory_Block_Catalog_Product_List_Accessory_Related */ ?>
+<?php if ($this->isAccessoryProduct()): ?>
+	<?php if(count($attributeTexts)>0): ?>
+	    <div class="short-description key-features suits-models">
+	        <h2><?php echo $this->__('Suits The Following Models:') ?></h2>
+	        <div class="std">
+	            <ul class="product-features-top3">	        
+	            	<?php echo $this->combination($attributeTexts) ?>
+	            </ul>
+	        </div>
+	    </div>
+	<?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,128 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Catalog advanced search form
+ *
+ * @see Mage_CatalogSearch_Block_Advanced_Form
+ */
+?>
+<script type="text/javascript" src="/js/tal/shopby/categories-shopby-menus.js"></script>
+<script type="text/javascript">
+
+// PARSE QUERYSTRING BEFORE SENDING (FK)
+
+function beforeSubmit() {
+  var p = '';
+  
+  if($j1_6('#ft1').attr('checked')) p += ',85';
+  if($j1_6('#ft2').attr('checked')) p += ',86';
+  if($j1_6('#ft3').attr('checked')) p += ',87';
+  if($j1_6('#ft4').attr('checked')) p += ',88';
+  p = p.substring(1); // strip the , at 0
+
+  $j1_6('#suits_floor_types').val(p);
+  return true;
+}
+</script>
+
+<div id="vac-finder">
+	<h2>Vac Finder</h2>
+	<p>Let us help you make the right choice</p>
+	<form action="/vacuum-cleaners/" method="get" onsubmit="return beforeSubmit()">
+		<input type="hidden" id="suits_floor_types" name="suits_floor_types" />
+		<div class="sidebar-box" id="categories">
+		<div id="categories_list">
+			<h3 class="floor-type title">Floor Type<span>Start Now
+				<div class="arrow-right"></div>
+				</span></h3>
+			<div class="dark">
+				<dd class="area-size odd" style="display: block; ">
+					<ol>
+						<li>
+							<input id="ft1" type="checkbox" value="85" />
+							Carpet </li>
+						<li>
+							<input id="ft2" type="checkbox" value="86" />
+							Hard Floors </li>
+						<li>
+							<input id="ft3" type="checkbox" value="87" />
+							Tiles </li>
+						<li>
+							<input id="ft4" type="checkbox" value="88" />
+							Stairs </li>
+						<li class="next-step"><a href="javascript:void(0);" id="next-step">Next Step ></a> </li>
+					</ol>
+				</dd>
+			</div>
+			<h3 class="health title">Health</h3>
+			<div class="dark">
+				<dd class="area-size odd" style="display: block; ">
+					<ol>
+						<li>
+							<input name="asthma" type="checkbox" value="94" />
+							Asthma Sufferer </li>
+						<li>
+							<input name="anti_allergy" type="checkbox" value="92" />
+							Allergy Sufferer </li>
+						<li class="next-step"> <a href="javascript:void(0);" id="next-step">Next Step ></a> </li>
+					</ol>
+				</dd>
+			</div>
+			<h3 class="home-size title">Home Size</h3>
+			<div class="dark">
+				<dd class="area-size odd" style="display: block; ">
+					<ol>
+						<li>
+							<input name="area_size" type="radio" value="78" />
+							Small </li>
+						<li>
+							<input name="area_size" type="radio" value="77" />
+							Small & Medium </li>
+						<li>
+							<input name="area_size" type="radio" value="75" />
+							Small, Medium & Large </li>
+						<li class="next-step"> <a href="javascript:void(0);" id="next-step">Next Step ></a> </li>
+					</ol>
+				</dd>
+			</div>
+			<h3 class="special-considerations title">Special Considerations</h3>
+			<div class="dark">
+				<dd class="area-size odd" style="display: block; ">
+					<ol>
+						<li>
+							<input name="pet_hair" type="checkbox" value="111" />
+							Have Pets </li>
+					</ol>
+				</dd>
+			</div>
+		</div>
+		<a class="find-vac" href="javascript:void(0)">
+		<button type="submit" title="<?php echo $this->__('FIND MY VAC!') ?>"><span><span><?php echo $this->__('FIND MY VAC!') ?></span></span></button>
+		</a>
+	</form>
+</div>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="before_body_end">
+            <block type="versatag/versatag" name="versatag"
+                   as="versatag" template="balance/versatag/versatag.phtml"/>
+        </reference>
+    </default>
+
+    <checkout_onepage_progress>
+        <reference name="before_body_end">
+            <block type="versatag/versatag" name="versatag"
+                   as="versatag" template="balance/versatag/versatag.phtml"/>
+        </reference>
+    </checkout_onepage_progress>
+    <checkout_multishipping_success>
+        <reference name="before_body_end">
+            <block type="versatag/versatag" name="versatag"
+                   as="versatag" template="balance/versatag/versatag.phtml"/>
+        </reference>
+    </checkout_multishipping_success>
+</layout>

@@ -1,0 +1,21 @@
+<?php $layer = Mage::getSingleton('catalog/layer') ?>
+<div class="block-title">
+    <h3><?php echo $layer->getCurrentCategory()->getName() ?></h3>
+</div>
+<p><?php  $cat_id = $layer->getCurrentCategory()->getId() ?></p>
+<p><?php //var_dump($layer->getCurrentCategory()->getAllChildren(true)) ?></p>
+<?php $category = new Mage_Catalog_Model_Category() ?>
+<?php $category->load($cat_id); ?>
+<?php $collection = $category->getProductCollection() ?>
+<ul>
+    <?php $count = count($collection) ?>
+    <?php $i=0; foreach ($collection as $product): ?>
+    <?php $i++ ?>
+    <?php //var_dump($product->load($product->getId())); die() ?>
+    <?php $product->load($product->getId()) ?>
+    <li class="<?php if ($count == $i): ?>last <?php endif ?><?php if ($product->getId() == $this->getProduct()->getId()): ?>current<?php endif ?>">
+        <a href="<?php echo $this->getProductUrl($product) ?>"><?php echo $product->getName() ?></a>
+        <img src="<?php echo $product->getSmallImageUrl(60, 60)?>" width="60" height="60"/>
+    </li>
+    <?php endforeach ?>
+</ul>

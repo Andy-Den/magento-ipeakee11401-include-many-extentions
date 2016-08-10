@@ -1,0 +1,38 @@
+<?php
+/**
+ * Location extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @copyright   Copyright (c) 2013 Andrew Kett. (http://www.andrewkett.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<?php
+  $locations = $this->getLocations()->getItems();
+  $location = reset($locations);
+?>
+<div class="loc-page-map-wrap">
+    <div class="loc-map loc-page-map"></div>
+</div>
+<!--
+<?php //if($location->getGeocoded()): ?>
+  <div class="loc-map loc-page-map"></div>
+<?php //endif; ?>
+-->
+
+<?php
+//$loc = $this->getLocations()->getFirstItem();
+?>
+<!--<div class="store-view-attr store_description mobile">
+    <h2 ><?php /*echo $this->__("Description")*/?></h2>
+    <div class="info-content"><p class=""><?php /*echo $loc->store_description;*/?></p></div>
+</div>
+
+-->

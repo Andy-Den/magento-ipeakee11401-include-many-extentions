@@ -1,0 +1,181 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_iphone
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
+
+
+<div id="messages_product_view"><?php echo $this->getChildHtml('ajax_global_messages'); ?></div>
+
+
+<div class="category-title page-title">
+	<div class="back-button">
+		<a onclick="history.go(-1); return false" href="#">
+			<img src="<?php echo $this->getSkinUrl('images/back.png') ?>" alt="<?php echo $this->__('Back')?>"/>
+		</a>
+	</div>
+	<div class="product-title">
+        <h1>
+    		<!--<span class="attribute">
+    			<?php echo implode(', ', $_product->getAttributeText('accessory_brands')) ?>
+    		</span>-->
+    		<span>
+    			<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+    		</span>
+        </h1>
+    </div>
+</div>
+
+<div class="product-view">
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        <div class="product-essential">
+			<div class="product-img-box">
+				<?php echo $this->getChildHtml('media') ?>
+			</div>
+        </div>
+	
+        
+    </form>
+	<a name="review-form-flag" id="review-form-flag">&nbsp;</a>
+	<div class="product-collateral">
+		<dl id="enterprise-tabs" class="collateral-tabs">
+			<dt class="tab first"><span>Overview</span></dt>
+			<dd class="tab-container">
+				<div class="tab-content"> 
+					<div class="text"><?php echo nl2br($_product->getDescription()) ?></div>
+					
+					<?php echo $this->getChildHtml('room_by_room') ?>
+					
+					<div class="find-stock-list">
+						<a href="<?php echo $this->getBaseUrl() ?>stores"><?php echo $this->__('Find a stockist') ?></a>
+					</div>
+				</div>
+			</dd>
+			
+			<dt class="tab"><span>Reviews</span></dt>
+			<dd class="tab-container">
+				<div class="tab-content"> 
+					<?php echo $this->getChildHtml('product.reviews') ?>
+				</div>
+			</dd>
+		</dl>
+		
+		
+	</div>
+	<script type="text/javascript">
+		var collateralTabs = new Enterprise.Tabs('enterprise-tabs');
+		Event.observe(window, 'load', function() {
+			collateralTabs.select();
+		});
+	</script>
+    <?php echo $this->getChildHtml('upsell_products') ?>
+    <?php echo $this->getChildHtml('productTagList') ?>
+    <?php echo $this->getChildHtml('product_additional_data') ?>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+               form.action = url;
+            }
+            var e = null;
+            try {
+                var transformValue = {};
+
+                if ( Modernizr.csstransforms3d ) {
+                    transformValue[Modernizr.prefixed('transform')] = 'translate3d(-82px, -106px, 2px) scale(0) rotate(200deg)';
+                } else if ( Modernizr.csstransforms ) {
+                    transformValue[Modernizr.prefixed('transform')] = 'translate(-82px, -106px) scale(0) rotate(200deg)';
+                } else {
+                    this.form.submit();
+                    return false;
+                }
+
+                var originalImg = $$('.product-image-wrap .product-image img')[0];
+                originalImg.up('.product-image-wrap').insert(originalImg.clone().addClassName('cloned'));
+
+                setTimeout(function () {
+                    $$('.cloned')[0].setStyle(transformValue);
+                }, 1);
+                $$('.product-image-wrap .cloned')[0].observe(transEndEventName, function(e) {
+                    this.form.submit();
+                }.bind(this));
+
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+	
+	function toggleContent(el){
+		alert(el.up('.room_by_room_in_l').getHeight());
+	}
+//]]>
+</script>

@@ -1,0 +1,132 @@
+<?php
+/**
+ * Webtex
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.webtexsoftware.com/LICENSE.txt
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@webtexsoftware.com and we will send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.webtexsoftware.com for more information, 
+ * or contact us through this email: info@webtexsoftware.com.
+ *
+ * @category   design_default
+ * @package    MagExt_Tips
+ * @copyright  Copyright (c) 2011 Webtex Solutions, LLC (http://www.webtexsoftware.com/)
+ * @license    http://www.webtexsoftware.com/LICENSE.txt End-User License Agreement
+ */
+ 
+?>
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct()
+?>
+
+<?php
+	$sSwitcher = Mage::getStoreConfig('magext_mgxtips/mgxtips/switcher');
+?>
+
+<?php if($_additional = $this->getAdditionalData()): ?>
+
+<?php
+ $product = $this->getProduct();
+        $attributes = $product->getAttributes();
+        foreach ($attributes as $attribute) 
+        {
+            $excludeAttr = array();
+            if ($attribute->getIsVisibleOnFront() && !in_array($attribute->getAttributeCode(), $excludeAttr)) {
+
+                $value = $attribute->getFrontend()->getValue($product);
+
+                // TODO this is temporary skipping eco taxes
+                if (is_string($value)) {
+                    if (strlen($value) && $product->hasData($attribute->getAttributeCode())) {
+                        if ($attribute->getFrontendInput() == 'price') {
+                            $value = Mage::app()->getStore()->convertPrice($value,true);
+                        } elseif (!$attribute->getIsHtmlAllowedOnFront()) {
+                            $value = $this->htmlEscape($value);
+                        }
+                    }
+                }
+                
+                $mainDescription = $attribute->getData('mgxtips');
+                $atributeId = $attribute->getAttributeId();
+                $store = Mage::app()->getStore()->getId();
+                        
+                $labels = Mage::getModel('mgxtips/mgxtips')->getCollection()
+                ->addFieldToFilter('attribute_id', $atributeId)
+                ->addFieldToFilter('store_id', $store)
+                ->load()
+                ->toArray();
+                        
+                if($labels['totalRecords'])
+                {
+                    $_additional[$attribute->getAttributeCode()]['mgxtips'] = $labels['items'][0]['value'];
+                }
+                else
+                {
+                    $_additional[$attribute->getAttributeCode()]['mgxtips'] = $mainDescription;
+                }
+            }
+        }    
+?>
+<div class="box-collateral box-additional">
+    <h2><?php echo $this->__('Additional Information') ?></h2>
+    <table class="data-table" id="product-attribute-specs-table">
+        <col width="25%" />
+        <col />
+        <tbody>
+        <?php foreach ($_additional as $_data): ?>
+            <tr>
+                <th class="label"><?php echo $this->htmlEscape($this->__($_data['label'])) ?>
+        
+        <?php if(isset($_data['mgxtips']) && $this->htmlEscape($this->__($_data['mgxtips'])) != "" && ($sSwitcher == 'all' || $sSwitcher == 'product-page')) : ?>       
+            <img class="tipsyicon" src="<?php echo Mage::getModel('mgxtips/mgxtips')->getImageSrc(); ?>" original-title="<?php echo $this->htmlEscape($this->__($_data['mgxtips'])) ?>" />
+         <?php endif; ?>   
+                </th>
+                <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">  
+    (function($) {
+        $('.tipsyicon').each(function() {
+            $(this).qtip({
+                show: { effect: { length: <?php echo Mage::getModel('mgxtips/mgxtips')->getFageEffect(); ?> } },
+                content: $(this).attr('original-title'),
+                position: {
+                    corner: {
+                        target: 'center',
+                        tooltip: <?php echo Mage::getModel('mgxtips/mgxtips')->getPositionTips(); ?>
+                    }
+                },
+                hide: {
+                    fixed: true
+                },
+                style: {
+                    border: {
+                        width: 1,
+                        color: '#9fa7aa'
+                    },
+                    background: '#ffffff',
+                    color: '#000000',
+                    padding: '10px 10px',
+                    opacity: <?php echo Mage::getModel('mgxtips/mgxtips')->getOpacity(); ?>
+                }
+            });
+        });
+    })(mgxjQuery);
+    </script>
+    <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+</div>
+<?php endif;?>

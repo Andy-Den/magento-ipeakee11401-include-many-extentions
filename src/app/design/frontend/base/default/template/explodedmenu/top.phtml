@@ -1,0 +1,73 @@
+<?php
+/**
+ * Raptor
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Raptor
+ * @copyright  Copyright (c) 2010 Raptor Commerce (http://www.raptorcommerce.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+	<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/explodedmenu.js') ?>"></script>
+    <div id="nav-menu">
+        <h4 class="no-display"><?php echo $this->__('Category Navigation:') ?></h4>
+        <ul>
+        <?php $ij = 1; foreach ($this->getStoreCategories() as $_category): ?>
+            <?php echo $this->drawItem($_category, $ij) ?>
+        <?php $ij++; endforeach ?>
+        </ul>
+    </div>
+    <?php echo $this->getChildHtml('topLeftLinks') ?>
+    <script type="text/javascript">
+		$j1_6('#nav-menu ul li .level0').last().css({'color':'#49494b'});
+		function changeImage(url,name, menunum){				
+			if(url){				
+				$j1_6("#category_image_"+ menunum).css({'display':'block'});//to show image in sub sub categories
+				document.getElementById("category_image_"+menunum).src = url;
+				$j1_6("ul.submenu li.aside .product-image").css({'display':'block'});							
+			}
+			else{
+				$j1_6("#category_image_"+ menunum).css({'display':'none'});
+				$j1_6("ul.submenu li.aside .product-image").css({'display':'none'});	
+			}
+			$j1_6("#sub_category_name_"+menunum).css({'display':'block'});
+			$j1_6(".product-desc").css({'display':'block'});			
+			$j1_6("#sub_category_name_"+menunum).text(name);
+		}
+
+		function changeUrl(menuurl, menunum,imageurl){
+			$j1_6("ul.submenu li.aside .product-image").attr({'href':menuurl});
+			$j1_6("#sub_category_name_"+menunum).attr({'href':menuurl});			
+		}
+
+		function changeInfo(menunum, children){
+				$j1_6("#category_image_"+ menunum).css({'display':'none'});//to remove image in sub categories
+				$j1_6("#sub_category_name_"+menunum).css({'display':'none'});
+				$j1_6(".product-desc").css({'display':'none'});
+				$j1_6("ul.submenu li.aside .product-image").css({'display':'none'});	
+		}
+		
+    </script>

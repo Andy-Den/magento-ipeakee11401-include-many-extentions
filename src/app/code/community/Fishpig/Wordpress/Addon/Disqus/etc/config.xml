@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Fishpig_Wordpress_Addon_Disqus>
+			<version>1.2.0.0</version>
+			<fishpig>
+				<id>disqus</id>
+				<name>Disqus</name>
+				<url>http://fishpig.co.uk/wordpress-integration-disqus-comments.html</url>
+			</fishpig>
+		</Fishpig_Wordpress_Addon_Disqus>
+	</modules>
+	<global>
+		<blocks>
+			<wp_addon_disqus>
+				<class>Fishpig_Wordpress_Addon_Disqus_Block</class>
+			</wp_addon_disqus>
+			<wordpress>
+				<rewrite>
+					<post_view_comment_wrapper>Fishpig_Wordpress_Addon_Disqus_Block_Comments</post_view_comment_wrapper>
+					<page_view_comments>Fishpig_Wordpress_Addon_Disqus_Block_Comments</page_view_comments>
+				</rewrite>
+			</wordpress>
+		</blocks>
+	</global>
+	<default>
+		<wordpress>
+			<extend>
+				<disqus>1</disqus>
+			</extend>
+		</wordpress>
+	</default>
+</config>

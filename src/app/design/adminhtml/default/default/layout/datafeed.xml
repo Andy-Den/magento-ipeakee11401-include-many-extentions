@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<adminhtml_datafeed_datafeed_index>
+        <reference name="content">
+            <block type="datafeed/adminhtml_datafeed" name="datafeed" />
+        </reference>
+    </adminhtml_datafeed_datafeed_index>
+    <adminhtml_datafeed_datafeed_edit>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>datafeed/datafeed.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>datafeed/datafeed.css</name></action>
+        </reference>
+    </adminhtml_datafeed_datafeed_edit>
+</layout>

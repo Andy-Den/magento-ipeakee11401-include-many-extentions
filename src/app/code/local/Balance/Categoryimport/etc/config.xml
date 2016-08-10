@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Balance_Categoryimport>
+			<version>0.1.0</version>
+        </Balance_Categoryimport>
+  	</modules>
+  	<global>
+        <models>
+        	<balance_categoryimport>
+        		<class>Balance_Categoryimport_Model</class>
+        		<rewrite>
+                    <convert_adapter_category>Balance_Categoryimport_Model_Convert_Adapter_Category</convert_adapter_category>
+                </rewrite>
+        	</balance_categoryimport>
+        </models>
+  	</global>
+</config>

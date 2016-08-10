@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+<!--
+Warranty Registration Layout
+-->
+    <warranty_registration_index translate="label">
+        <label>Warranty Registration</label>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="warranty/registration" name="warranty.registration" template="warranty/registration.phtml">
+                <block type="warranty/registration_progress" name="warrantyProgress" before="-" template="warranty/registration/progress.phtml"/>
+                <block type="warranty/registration_login" name="warranty.registration.login" as="login" template="warranty/registration/login.phtml">
+                    <block type="page/html_wrapper" name="checkout.onepage.login.before" as="login_before" translate="label">
+                        <label>Login/Registration Before</label>
+                        <action method="setMayBeInvisible"><value>1</value></action>
+                    </block>
+                    <block type="warranty/registration_login_register" name="registration_form" template="warranty/registration/login/register.phtml">
+                        <action method="append"><block>customer.form.register.fields.before</block><alias>form_fields_before</alias></action>
+                        <action method="append"><block>customer_form_user_attributes</block></action>
+                        <action method="append"><block>customer_form_address_user_attributes</block></action>
+                    </block>
+                </block>
+                <block type="warranty/registration_product" name="product" as="product" template="warranty/registration/product.phtml"/>
+                <block type="warranty/registration_contact" name="contact" as="contact" template="warranty/registration/contact.phtml"/>
+                <block type="warranty/registration_confirmation" name="confirmation" as="confirmation" template="warranty/registration/confirmation.phtml"/>
+            </block>
+        </reference>
+    </warranty_registration_index>
+<!--
+One page checkout progress block
+-->
+
+
+    <warranty_registration_progress>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="warranty/registration_progress" name="root" output="toHtml" template="warranty/registration/progress.phtml"></block>
+    </warranty_registration_progress>
+
+<!--
+Customer account page
+-->
+<warranty_list_index>
+        <update handle="customer_account"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="warranty/list" name="customer.account.warranty.list" template="warranty/list.phtml"/>
+        </reference>
+</warranty_list_index>
+
+<customer_account>
+        <reference name="customer_account_navigation" >
+            <action method="addLink" translate="label"><name>warranty_list</name><path>warranty/list/</path><label>Warranties</label></action>
+        </reference>
+</customer_account>
+
+
+</layout>

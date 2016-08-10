@@ -1,0 +1,6 @@
+<?php  $magentoVersion = Mage::getVersion();
+       if (version_compare($magentoVersion, '1.13', '>=')){ ?>
+                <script type="text/javascript" src="<?php echo $this->getSkinUrl('balance/allajax/js/allajax_13.js');?>"></script>
+<?php  }else{ ?>
+               <script type="text/javascript" src="<?php echo $this->getSkinUrl('balance/allajax/js/allajax.js');?>"></script>
+ <?php  }?>

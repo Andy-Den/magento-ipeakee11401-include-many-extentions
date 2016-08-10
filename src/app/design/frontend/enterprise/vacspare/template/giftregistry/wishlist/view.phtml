@@ -1,0 +1,203 @@
+<div class="dashboard">
+<?php $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+		  $breadcrumbs->addCrumb('home', array('label'=>Mage::helper('cms')->__('Home'), 'title'=>Mage::helper('cms')->__('Home Page'), 'link'=>Mage::getBaseUrl()));
+		  $breadcrumbs->addCrumb('my-wishlist', array('label'=>'Memo Pad', 'title'=>'Memo Pad'));
+		  echo $this->getLayout()->getBlock('breadcrumbs')->toHtml();?>
+		  
+<?php $entityValues = $this->getEntityValues() ?>
+<div class="page_wrap ext-giftregistry-view" >
+<div class="page_content" >
+<div class="my-wishlist">
+    
+        <?php if ($this->helper('wishlist')->isRssAllow() && $this->hasWishlistItems()): ?>
+            <a href="<?php echo $this->helper('wishlist')->getRssUrl(); ?>" class="link-rss"><?php echo $this->__('RSS Feed') ?></a>
+        <?php endif; ?>
+        <h2 class="page_title page_title_gray"><?php echo $this->__('Memo Pad') ?></h2>
+    
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	
+    <?php if ($this->hasWishlistItems()): ?>
+    <form id="wishlist-view-form" action="<?php echo $this->getUrl('*/*/update') ?>" method="post">
+        <fieldset>
+            <?php echo $this->getBlockHtml('formkey')?>
+            <table class="data-table" id="wishlist-table">
+            <col width="1" />
+            <col />
+            <?php if ($this->getEnabled()): ?>
+            <col width="1" />
+            <?php endif; ?>
+            <col width="1" />
+            <col width="1" />
+            <col width="1" />
+                <thead>
+                    <tr>
+                        <th colspan="2"><?php echo $this->__('Product Details & Comments') ?></th>
+                        <!-- <th><?php echo $this->__('Comment') ?></th> -->
+                        <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                        <th class="a-center"><span class="nobr"><?php echo $this->__('Subtotal') ?></span></th>
+                        <?php if ($this->getEnabled() && $entityValues): ?>
+                            <th class="a-center"><span class="nobr"><?php echo $this->__('Add to Gift Registry') ?></span></th>
+                        <?php endif; ?>
+                        <th class="a-center">&nbsp;</th>
+                    </tr>
+                </thead>
+                <?php foreach ($this->getWishlistItems() as $item): ?>
+                    <?php
+                        $product = $item->getProduct();
+                        $isVisibleProduct = $product->isVisibleInSiteVisibility();
+                    ?>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a class="product-image" href="<?php echo $this->getProductUrl($item) ?>" title="<?php echo $this->htmlEscape($product->getName()) ?>"><img src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(78, 78); ?>" width="78" height="78" alt="<?php echo $this->htmlEscape($product->getName()) ?>" /></a>
+                                
+                            </td>
+                            <td>
+								<h2 class="product-name"><a href="<?php echo $this->getProductUrl($item) ?>"><?php echo $this->htmlEscape($product->getName()) ?></a></h2>
+                                
+                                <?php echo $this->getDetailsHtml($item) ?>
+								<textarea name="description[<?php echo $item->getWishlistItemId() ?>]" rows="3" cols="5" onfocus="focusComment(this)" onblur="focusComment(this)" title="<?php echo $this->__('Comment') ?>"><?php echo $this->getCommentValue($item); ?></textarea>
+								<a href="<?php echo $this->getItemRemoveUrl($item) ?>" title="<?php echo $this->__('Remove Item') ?>" onclick="return confirmRemoveWishlistItem();" class="btn-remove btn-remove2"><?php echo $this->__('Remove item')?></a>
+							</td>
+							<td>
+							<?php if ($item->canHaveQty() && $isVisibleProduct): ?>
+                                <p><input type="text" class="input-text qty" name="qty[<?php echo $item->getId() ?>]" value="<?php echo $this->getAddToCartQty($item) * 1 ?>" /></p>
+                            <?php endif; ?>
+							</td>
+							<td>
+								<?php if($this->getAddToCartQty($item) <= 1):?>
+									<?php echo $this->getPriceHtml($product) ?>
+								<?php else:?>
+									<?php $subtotal = $this->getAddToCartQty($item) * $product->getFinalPrice(); ?>
+									<div class="price-box"><span class="regular-price"><span class="price"><?php echo Mage::helper('core')->currency($subtotal, true, false);?></span></span></div>
+								<?php endif;?>
+							</td>
+                            <?php if ($this->getEnabled() && $entityValues):?>
+                            <td>
+                                <?php if ($this->checkProductType($product)): ?>
+                                <div class="btn-gift-registry">
+                                    <div class="input-box">
+                                        <select id="giftregistry_entity_<?php echo $item->getId() ?>" name="entity" title="<?php echo $this->__('Gift Registry') ?>" >
+                                            <?php foreach ($entityValues as $_entity):?>
+                                                <option value="<?php echo $_entity->getValue()?>" title="<?php echo $this->escapeHtml($_entity->getTitle())?>"><?php echo $this->escapeHtml($this->helper('core/string')->truncate($_entity->getTitle(), 40))?></option>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                    <button type="button" onclick="addProductToGiftregistry('<?php echo $item->getId() ?>')" class="button btn-cart"><span><span><?php echo $this->__('Add to Gift Registry') ?></span></span></button>
+                                </div>
+                                <?php endif;?>
+                            </td>
+                            <?php endif;?>
+                            <td class="a-center">
+                            
+                            <?php if ($product->isSaleable()): ?>
+                                <?php if ($isVisibleProduct): ?>
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>" onclick="addWItemToCart(<?php echo $item->getId(); ?>)" class="button btn-cart"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                                <?php endif ?>
+                            <?php else: ?>
+                                <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                            <?php endif; ?>
+                                <?php if (0 && $isVisibleProduct): ?>
+                                <p><a href="<?php echo $this->getItemConfigureUrl($item) ?>"><?php echo $this->__('Edit') ?></a></p>
+                                <?php endif ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                <?php endforeach ?>
+            </table>
+            <script type="text/javascript">decorateTable('wishlist-table', {'tbody' : ['odd', 'even', 'first', 'last'], 'tbody tr' : ['first', 'last']})</script>
+            <div class="buttons-set buttons-set2">
+				<button type="submit" title="<?php echo $this->__('Update Wishlist') ?>" onclick="this.name='do'" class="button btn-update"><span><span><?php echo $this->__('Update Wishlist') ?></span></span></button>
+                <button type="submit" onclick="this.name='save_and_share'" title="<?php echo $this->__('Share Wishlist') ?>" class="button btn-share"><span><span><?php echo $this->__('Share Wishlist') ?></span></span></button>
+                <?php if($this->isSaleable()):?>
+                    <button type="button" title="<?php echo $this->__('Add All to Cart') ?>" onclick="addAllWItemsToCart()" class="button btn-add"><span><span><?php echo $this->__('Add All to Cart') ?></span></span></button>
+                <?php endif;?>
+            </div>
+            <div class="save-on-credit">
+                <?php echo $this->__('Save 5% on all credit card transactions'); ?>
+            </div>
+        </fieldset>
+    </form>
+    <?php else: ?>
+        <p style="padding-left:20px; padding-top:10px"><?php echo $this->__('You have no items in your wishlist.') ?></p>
+    <?php endif ?>
+    <form action="<?php echo $this->getAddUrl();?>" method="post" id="giftregistry-form">
+        <div class="no-display">
+            <input type="hidden" name="item" value="" />
+            <input type="hidden" name="entity" value="" />
+        </div>
+    </form>
+
+    <script type="text/javascript">
+    //<![CDATA[
+    function addProductToGiftregistry(itemId) {
+        giftregistryForm = $('giftregistry-form');
+        var entity = $('giftregistry_entity_' + itemId);
+        entity.addClassName('required-entry');
+        if (Validation.validate($('giftregistry_entity_' + itemId))) {
+            giftregistryForm.entity.value = entity.value;
+            giftregistryForm.item.value = itemId;
+            giftregistryForm.submit();
+        }
+        entity.removeClassName('required-entry');
+    }
+
+    function confirmRemoveWishlistItem() {
+        return confirm('<?php echo $this->__('Are you sure you want to remove this product from your wishlist?') ?>');
+    }
+
+    function focusComment(obj) {
+        if( obj.value == '<?php echo $this->helper('wishlist')->defaultCommentString() ?>' ) {
+            obj.value = '';
+        } else if( obj.value == '' ) {
+            obj.value = '<?php echo $this->helper('wishlist')->defaultCommentString() ?>';
+        }
+    }
+
+    function updateAction(addAction) {
+        viewForm = $('wishlist-view-form');
+        viewForm.action = addAction;
+        viewForm.submit();
+    }
+
+    function addWItemToCart(itemId) {
+        var url = '<?php echo $this->getItemAddToCartUrl('%item%') ?>';
+        url = url.gsub('%item%', itemId);
+        var form = $('wishlist-view-form');
+        if (form) {
+            var input = form['qty[' + itemId + ']'];
+            if (input) {
+                var separator = (url.indexOf('?') >= 0) ? '&' : '?';
+                url += separator + input.name + '=' + encodeURIComponent(input.value);
+            }
+        }
+        setLocation(url);
+    }
+
+    function addAllWItemsToCart() {
+        var url = '<?php echo $this->getUrl('*/*/allcart') ?>';
+        var separator = (url.indexOf('?') >= 0) ? '&' : '?';
+        $$('#wishlist-view-form .qty').each(
+            function (input, index) {
+                url += separator + input.name + '=' + encodeURIComponent(input.value);
+                separator = '&';
+            }
+        );
+        setLocation(url);
+    }
+    //]]>
+    </script>
+</div>
+</div>
+<div class="page_foot"></div>
+
+</div>
+</div>
+<script type="text/javascript">
+//$j1_6(".col-main").css({'padding-right':'20px','padding-left':'0'});;
+$j1_6(".page_content").css({'float':'none'});
+$j1_6(".special-price .price").css({'left':'-510px','top':'-18px'});
+$j1_6(".special-price .price-label").text('Save:');
+$j1_6(".old-price .price-label").css({'display':'none'});
+$j1_6(".special-price .price-label").css({'position':'relative','left':'-5px'});
+</script>

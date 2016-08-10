@@ -1,0 +1,177 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php	
+function GetLatLong($postcode){
+	  $myKey = 'ABQIAAAANDnT32yFw46mKW-0RPSWZBTop3L0U0tVHIrHSAvrgbrLtmXRDhQ94OqQId6-2wIjnRa5U4f4rhVRAg';
+	  $URL = "http://maps.google.com/maps/geo?q=".urlencode($postcode)."&output=xml&oe=utf8\
+&sensor=true_or_false&key=ABQIAAAANDnT32yFw46mKW-0RPSWZBTop3L0U0tVHIrHSAvrgbrLtmXRDhQ94OqQId6-2wIjnRa5U4f4rhVRAg";
+	  
+	 $data = file($URL);
+	 $SubStr = explode('<coordinates>',$data[13]);
+	 $Coords = explode(",",$SubStr[1]);	
+	  if($Coords){
+		return array('Latitude'=>$Coords[0],'Longitude'=>$Coords[1]);
+	  }else return false;
+	
+}
+
+
+$Values = GetLatLong($this->getRequest()->getParam('address'));
+		$num = (int)Mage::getStoreConfig('storelocator/general/num_results');
+        $units = Mage::getStoreConfig('storelocator/general/distance_units');
+        $collection = Mage::getModel('storelocator/location')->getCollection()
+                ->addAreaFilter($Values['Latitude'],$Values['Longitude'],25,$units);
+				
+				
+			
+		$QUERY = "SELECT `main_table`.entity_id, (3959*acos(cos(radians('".$Values['Latitude']."'))*cos(radians(`latitude`))*cos(radians(`longitude`)-radians('".$Values['Longitude']."'))+sin(radians('".$Values['Latitude']."'))*sin(radians(`latitude`)))) AS `distance` FROM `catalog_product_flat_1` AS `main_table` WHERE (`latitude` is not null and `latitude`<>0 and `longitude` is not null and `longitude`<>0 and (3959*acos(cos(radians('".$Values['Latitude']."'))*cos(radians(`latitude`))*cos(radians(`longitude`)-radians('".$Values['Longitude']."'))+sin(radians('".$Values['Latitude']."'))*sin(radians(`latitude`))))<='25') ORDER BY `distance` ASC";
+		
+		
+		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$readresult=$write->query($QUERY);
+		
+		while ($row = $readresult->fetch() ) {
+			$proIDS[]=$row['entity_id'];
+		}
+		echo "<pre>";
+		print_r($proIDS);
+    $_helper = $this->helper('catalog/output');
+?>
+
+<?php if(!$collection->count()): ?>
+<p class="note-msg" style="font-weight:bold; margin:10px 0;"><?php echo $this->__('There isn\'t any store available matching this search criteria.') ?></p>
+<?php else: ?>
+
+<?php //echo $this->getAdditionalHtml() ?>
+<div class="category-products">
+<?php 
+	$toolbar = $this->getLayout()->createBlock('catalog/product_list_toolbar', microtime());
+	$toolbar->setCollection($collection);
+	echo $toolbar->toHtml();
+?>
+    <?php // List mode ?>
+    <?php if($this->getMode()!='grid'): ?>
+    <?php $_iterator = 0; ?>
+    <ol class="products-list" id="products-list">
+    <?php foreach ($collection as $location): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
+            <?php // Product Image ?>
+            <a href="<?php echo $this->helper('core/url')->getCurrentUrl()."&amp;location_id=".$location->getLocationId(); ?>" title="<?php echo $location->getTitle() ?>" class="product-image"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$location->getStoreimage()?>" width="166" height="166" alt="<?php echo $location->getTitle() ?>" /></a>
+            <?php // Product description ?>
+            <div class="product-shop">
+                <div class="f-fix">
+                  
+                    <h2 class="product-name"><a href="<?php echo $this->helper('core/url')->getCurrentUrl()."&amp;location_id=".$location->getLocationId(); ?>" ><?php echo $location->getTitle() ?></a></h2>
+					
+					<table class="location">
+						<tr>
+							<td><?php echo $this->__('Location'); ?></td>
+							<td><?php echo  $location->getAddressDisplay();?></td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td><?php $location->getPhone()?></td>
+						</tr>
+						<tr>
+							<td>Fax</td>
+							<td><?php echo $location->getFax(); ?></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td><?php echo $location->getEmail() ?></td>
+						</tr>
+					</table>
+                  
+                </div>
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+
+<?php else: ?>
+
+<?php // Grid Mode ?>
+
+<?php $_collectionSize = $collection->count() ?>
+<?php $_columnCount = $this->getColumnCount(); ?>
+<?php $i=0; foreach ($collection as $location): ?>
+    <?php if ($i++%$_columnCount==0): ?>
+    <ul class="products-grid">
+    <?php endif ?>
+        <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+            <a href="<?php echo $this->helper('core/url')->getCurrentUrl()."&amp;location_id=".$location->getLocationId(); ?>" title="<?php echo $location->getTitle() ?>" class="product-image"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$location->getStoreimage()?>" width="135" height="135" alt="<?php echo $this->getMediaUrl($location->getTitle())?>" /></a>
+			
+            <h2 class="product-name"><a href="<?php echo $this->helper('core/url')->getCurrentUrl()."&amp;location_id=".$location->getLocationId(); ?>"><?php echo $location->getTitle() ?></a></h2>
+						
+			<table class="location">
+						<tr>
+							<td><?php echo $this->__('Location'); ?></td>
+							<td><?php echo  $location->getAddressDisplay();?></td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td><?php $location->getPhone()?></td>
+						</tr>
+						<tr>
+							<td>Fax</td>
+							<td><?php echo $location->getFax(); ?></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td><?php echo $location->getEmail() ?></td>
+						</tr>
+					</table>
+			
+        </li>
+    <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+    </ul>
+    <?php endif ?>
+    <?php endforeach ?>
+    <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+<?php endif; ?>
+</div>
+
+<div style="float:right;">	
+
+<div id="map_canvas" style="width:330px; height:254px; margin:25px 0 0;"></div>
+		<script type="text/javascript">
+			geocoder = new GClientGeocoder();
+            map = new GMap2(document.getElementById("map_canvas"));
+            map.addControl(new GSmallMapControl());
+            map.addControl(new GMapTypeControl());
+            map.setCenter(new GLatLng(-25.274398, 133.775136), 4);
+		</script>
+</div>
+<?php endif; ?>

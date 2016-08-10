@@ -1,0 +1,25 @@
+<?php if(Mage::getSingleton('core/session')->getMobileFullSize()):?>
+    <style>
+        .mobile-full-size-wp {
+            position: fixed;
+            left: 0px;
+            bottom: 0px;	
+            width: 100%;
+            text-align: center;
+            background: #0A263C;
+            border-top: 1px solid #415966;	
+            z-index: 10000;
+        }
+        .mobile-full-size-wp a {
+            color: #FF822F;
+            font-weight:bold;
+            font-size:11px;
+            text-decoration: none;
+            padding-left: 8px;
+            padding-right: 8px;	
+        }
+    </style>
+    <div class="mobile-full-size-wp" >
+        <a href="<?php echo $this->getUrl('mobilefullsize/index/index',array('enabled'=>0)) ?>"><?php echo $this->__('Back to mobile theme');?></a>
+    </div>
+<?php endif;?>

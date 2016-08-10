@@ -1,0 +1,5 @@
+
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<h2 class="room-title"><?php echo $this->__('Bagless 3rd generation cyclonic technology');?></h2>
+<?php echo $_helper->productAttribute($_product, $_product->getRoomByRoom(), 'room_by_room') ?>

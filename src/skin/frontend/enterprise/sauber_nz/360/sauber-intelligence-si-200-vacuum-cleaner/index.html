@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery.threesixty.js"></script>
+</head>
+<body>
+
+<script language="javascript">
+$(function() { 
+var arr = []; for (var x=0; x<= 15; x++) arr.push("sauber-body-360-" +x + ".jpg");
+$("#sauber360").threesixty({images:arr, method:'mousemove', 'cycle':2, direction:"backward"});
+});
+</script>
+
+<div>
+<img src="sauber-body-360-0.jpg" id="sauber360" width="640" height="406"/>
+</div>
+
+</body>
+</html>

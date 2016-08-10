@@ -1,0 +1,36 @@
+.nostepcheckout-loader {background: url(loader_32x32.gif) center no-repeat; height: 50px; display:none; }
+#nostepcheckout-dialog {width:730px;  display: none;}
+
+.nostepcheckout-content button.button,
+#nostepcheckout_checkout_form button.checkout-link-large {
+    border: 0px;
+}
+.nostepcheckout-content button.button span,
+#nostepcheckout_checkout_form button.checkout-link-large span{
+    font-size: 22px;
+    font-family: Avenir_medium;
+    background: #2675DB;
+    padding: 5px 20px;
+    display: block;
+    color: #fff;
+}
+
+#nostepcheckout_checkout_form .right-total-popup {
+    float: right;
+width: 280px;
+padding: 15px 0px;
+font-size: 14px;
+}
+#nostepcheckout_checkout_form .right-total-popup table {
+    width: 100%;
+}
+#nostepcheckout_checkout_form .right-total-popup table td span.price {
+    text-align: right;
+}
+
+.nostepcheckout-content button.button span {
+    height: auto !important;
+}
+.nostepcheckout-content button.continue {
+    float: none;
+}

@@ -1,0 +1,29 @@
+<?php // RICH SNIPPETS UPDATE ?>
+<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <?php
+    $_product = $this->getProduct();
+    $_helper = Mage::helper('feefocache');
+    $_average = $_product->getFeefoReviewsAverage();
+    $_count = $_product->getFeefoReviewsCount();
+    ?>
+    <?php if ($_average != "" && $_average != 0): ?>
+        <?php // RICH SNIPPETS UPDATE ?>
+        <meta itemprop="ratingValue" content="<?php echo $_average; ?>"/>
+        <meta itemprop="reviewCount" content="<?php echo $_count; ?>" />
+        <meta itemprop="bestRating" content="100"/>
+        <meta itemprop="worstRating" content="0"/>
+        <?php
+        $backgroundPos = $_helper->getRatingsBackground($_average);
+        ?>
+        <div class="ratings">
+            <div class="rating-box">
+                <div class="rating" style="background-position:<?php echo $backgroundPos ?>;"></div>
+            </div>
+        </div>
+    <?php else: ?>
+    <div class="ratings">
+        <div class="rating-box">
+        </div>
+    </div>
+    <?php endif; ?>
+</span>

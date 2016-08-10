@@ -1,0 +1,9 @@
+##
+# Disqus Comments
+#
+# Author: FishPig Limited (Ben Tideswell)
+# Docs: http://fishpig.co.uk/magento/wordpress-integration/disqus/
+##
+
+15/07/2103 - 1.2.0.0
+- Added support for Disqus Single Sign-On (SSO)

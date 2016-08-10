@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webtex
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.webtexsoftware.com/LICENSE.txt
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@webtexsoftware.com and we will send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.webtexsoftware.com for more information, 
+ * or contact us through this email: info@webtexsoftware.com.
+ *
+ * @category   design_default
+ * @package    MagExt_Tips
+ * @copyright  Copyright (c) 2011 Webtex Solutions, LLC (http://www.webtexsoftware.com/)
+ * @license    http://www.webtexsoftware.com/LICENSE.txt End-User License Agreement
+ */
+-->
+<layout version="0.1.0">
+    <default>
+    </default>
+    <catalog_product_view>
+        <reference name="head">
+          <!--<action method="addJs"><script>mgxtips/jquery-1.4.2.js</script></action>-->
+          <action method="addJs"><script>mgxtips/jquery.qtip-1.0.0-rc3.min.js</script></action>
+          <action method="addCss"><stylesheet>css/mgxtips/tipsy.css</stylesheet></action>
+        </reference>
+        <reference name="product.info">
+            <block type="catalog/product_view_attributes" name="product.attributes_new" as="additional" template="mgxtips/catalog/product/view/attributes.phtml">
+                <action method="setTitle" translate="value"><value>Additional Information</value></action>
+            </block> 
+        </reference>
+        <reference name="content">
+            <reference name="product.info.options">
+                <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>mgxtips/catalog/product/view/options/type/text.phtml</template></action>
+                <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>mgxtips/catalog/product/view/options/type/file.phtml</template></action>
+                <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>mgxtips/catalog/product/view/options/type/select.phtml</template></action>
+                <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>mgxtips/catalog/product/view/options/type/date.phtml</template></action>
+            </reference> 
+        </reference>
+    </catalog_product_view>
+    <catalog_category_layered>
+        <reference name="left">
+            <reference name="enterprisecatalog.leftnav">
+                <action method="setTemplate"><template>mgxtips/catalog/layer/view.phtml</template></action>
+            </reference>
+        </reference>
+   </catalog_category_layered>
+	<catalog_category_view>
+        <reference name="head">
+          <!--<action method="addJs"><script>mgxtips/jquery-1.4.2.js</script></action>-->
+          <action method="addJs"><script>mgxtips/jquery.qtip-1.0.0-rc3.min.js</script></action>
+          <action method="addCss"><stylesheet>css/mgxtips/tipsy.css</stylesheet></action>
+        </reference>
+    </catalog_category_view>
+	
+    <PRODUCT_TYPE_configurable translate="label" module="catalog">
+        <reference name="product.info.options.configurable">
+            <action method="setTemplate"><template>mgxtips/catalog/product/view/type/options/configurable.phtml</template></action>
+        </reference>
+    </PRODUCT_TYPE_configurable>
+</layout> 

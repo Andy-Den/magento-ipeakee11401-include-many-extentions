@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Balance_FeaturedProduct>
+            <active>true</active>
+            <codePool>local</codePool>
+	      <depends>
+                <Mage_Adminhtml/>
+                <Mage_Catalog/>
+            </depends>            
+        </Balance_FeaturedProduct>
+    </modules>
+</config> 

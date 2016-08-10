@@ -1,0 +1,23 @@
+<div class="col2_container">
+<h3 class="page_section_title"><?php echo $this->__('Address Book') ?></h3>
+    <div class="col2">
+        <dl>
+            <dt><?php echo $this->__('Default Billing Address') ?> </dt>
+            <dd>
+                <?php echo $this->getPrimaryBillingAddressHtml() ?>
+            </dd>
+        </dl>
+        <a class="edit-link" href="<?php echo $this->getPrimaryBillingAddressEditUrl() ?>"><?php echo $this->__('Edit') ?></a>
+    </div>
+    <div class="col2 right">
+        <dl>
+            <dt><?php echo $this->__('Default Shipping Address') ?></dt>
+            <dd>
+                <?php echo $this->getPrimaryShippingAddressHtml() ?>
+            </dd>
+        </dl>
+        <a class="edit-link" href="<?php echo $this->getPrimaryShippingAddressEditUrl() ?>"><?php echo $this->__('Edit') ?></a>
+    </div>
+</div>   
+                 
+                           

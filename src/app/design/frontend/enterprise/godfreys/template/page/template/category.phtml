@@ -1,0 +1,34 @@
+		<div class="nav-col">
+		
+	    	<ul>
+			 <?php $helper = $this->helper('catalog/category') ?>
+			 <?php foreach ($helper->getStoreCategories() as $_category): ?>
+			 <?php 
+			 $products = Mage::getModel('catalog/product')
+    										->getCollection()
+    										->addCategoryFilter(Mage::getModel('catalog/category')->setData($_category->getData()))
+    										->load();
+    										if(count($products)>0){
+    											echo '<h4>'.$_category->getName() .'</h4>';									
+    										}
+    		?>
+			 	<?php foreach (Mage::getModel('catalog/category')->load($_category->getId())->getChildrenCategories() as $childCategory):?>
+			 		<?php foreach(Mage::getModel('catalog/category')->load($childCategory->getId())->getChildrenCategories() as $childCategoryItem):?>
+			 			<?php $products = Mage::getModel('catalog/product')
+    										->getCollection()
+    										->addCategoryFilter($childCategoryItem)
+    										->load();
+    										//print_r(count($products));
+    										if(count($products)>0){
+    											echo '<li><a href="'.$childCategoryItem->getUrl().'">'.$childCategoryItem->getName() .'</a></li>';									
+    										}
+    					?>
+			 		<?php endforeach;?>
+    			<?php endforeach;?>
+			 <?php endforeach ?>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			// $j1_6("#bottom-nav .nav-col li:first a").css({'border-top':'1px solid #d7d7d7','margin-top':'4px'});
+		</script>

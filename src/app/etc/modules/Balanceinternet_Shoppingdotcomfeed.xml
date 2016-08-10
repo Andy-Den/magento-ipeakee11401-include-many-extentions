@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Balanceinternet_Shoppingdotcomfeed>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Balanceinternet_Shoppingdotcomfeed>
+    </modules>
+</config>

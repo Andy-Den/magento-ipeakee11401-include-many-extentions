@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+
+	<itoris_producttabsslider_admin_index_index>
+		<reference name="content">
+			<block type="itoris_producttabsslider/admin" name="itoris_producttabsslider_admin"></block>
+		</reference>
+	</itoris_producttabsslider_admin_index_index>
+	
+	<adminhtml_catalog_product_edit>
+		<reference name="head">
+			<action method="addJs"><js>mage/adminhtml/wysiwyg/tiny_mce/setup.js</js></action>
+			<action method="setCanLoadTinyMce"><l>true</l></action>
+		</reference>
+	</adminhtml_catalog_product_edit>
+	
+</layout>

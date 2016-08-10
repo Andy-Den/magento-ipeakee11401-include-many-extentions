@@ -1,0 +1,181 @@
+<?php
+
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+?>
+
+<?php // Display tracking code based on store code ?>
+<?php $_storecode = Mage::app()->getStore()->getCode(); ?>
+<?php if($_storecode == "godfreys_au"):?>
+<script type='text/javascript'>
+var ebRand = Math.random()+'';
+ebRand = ebRand * 1000000;
+//<![CDATA[ 
+document.write('<scr'+'ipt src="//bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=177645&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+//]]>
+</script>
+<noscript>
+<img width="1" height="1" style="border:0" src="//bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=177645&amp;ns=1"/>
+</noscript>
+<?php endif; ?>
+
+
+<?php if($_storecode == "godfreys_nz"):?>
+<script type='text/javascript'>
+var ebRand = Math.random()+'';
+ebRand = ebRand * 1000000;
+document.write('<scr'+'ipt src="//bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=219461&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+</script>
+<noscript>
+<img width="1" height="1" style="border:0" src="//bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=219461&amp;ns=1"/>
+</noscript>
+<?php endif; ?>
+
+<?php
+
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+
+?>
+<?php
+
+    $_helper    = $this->helper('catalog/output');
+
+    $_category  = $this->getCurrentCategory();
+
+    $_imgHtml   = '';
+
+    if ($_imgUrl = $_category->getImageUrl()) {
+
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+
+    }
+
+	$SearchText = Mage::getStoreConfig('storelocator/general/search_text');
+
+	if(isset($_REQUEST['enlarge']) && $_REQUEST['enlarge']=1){
+		$is_enlarged = true;
+	} else {
+		$is_enlarged = false;
+	}
+
+	//Rebuild Query String
+	$query_string = "";
+	$cnt = 0;
+	foreach($_GET as $variable => $value) {
+		if ($variable != "address"&&$variable != "distance"&&$variable != "x"&&$variable != "y") {
+			$query_string = $query_string.'<input type="hidden" name="'.$variable.'" value="'.$value.'" />'."\n";
+		}
+	}
+
+?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<h1 class="locator-h1"><?php echo $_category->getName() ?></h1>
+<div class="category-view locator">
+	<div class="locator-form">
+		<?php if($_imgUrl): ?>
+		<div class="catimg"><?php echo $_imgHtml ?></div>
+		<?php endif; ?>
+		
+		<div id="store-locator-left-container">
+		    <div class="locator-search">
+				<p><?php echo $this->__('Please input your suburb name or Postcode') ?></p>
+				<form id="store_locator_form" name="store_locator_form" action="<?php echo $this->getUrl('store-locator/results') ?>" method="get">
+					<div class="mid-contain">
+						<input name="address" type="text" class="textfield" id="address" autocomplete="off" value="<?php echo isset($_REQUEST['address']) ? $_REQUEST['address'] : '';?>" />
+					</div>
+					<div class="distance" style="display:none;">
+						<span class="bluetitle">Distance (km): </span><br />
+						<?php 
+							$Dist = Mage::getStoreConfig('storelocator/general/default_radius');
+							$AvialDist = explode(",",$Dist);
+						?>
+						<select name="distance" id="distance" style="margin-top: 6px; width: 80px; border: 2px solid rgb(164, 165, 239);">
+						  <?php foreach($AvialDist  as $avail){?>
+						  <option value="<?php echo $avail;?>" <?php if(isset($_REQUEST['distance']) && $_REQUEST['distance']==$avail){?> selected="selected"<?php }?>><?php echo $avail;?></option>
+						  <?php }?>
+						</select>
+					</div>
+					<div class="search-store">
+						<input type="image" src="<?php echo $this->getSkinUrl('images/btn-search.gif');?>" class="img">
+					</div>
+				</form>
+				<?php echo ($is_enlarged)?'<input type="hidden" name="enlarge" value="1" />':''; ?>
+				<?php if($query_string) {echo $query_string; } ?>
+				<?php 
+					//$state_block = $this->getLayout()->createBlock("catalog/layer_view");
+					//echo $state_block->getStateHtml(); 
+				?>
+				  <div class="catdata">
+					<div id="store_autocomplete" class="store-autocomplete" ></div>
+					<script type="text/javascript">
+						  //<![CDATA[
+						  var LocatorForm = new Varien.searchForm('store_locator_form', 'address', '<?php echo $this->__('Enter Postcode') ?>');
+						  LocatorForm.initAutocomplete('<?php echo $this->getUrl('storelocator/index/suggest') ?>', 'store_autocomplete');
+						  //]]>
+						</script> 
+				  </div>
+			  
+			</div>
+			<div class="locator-state">
+				<?php $_currentUrl = Mage::helper("core/url")->getCurrentUrl(); ?>
+				<p><?php echo $this->__('Find a Hoover Service Agent by State') ?></p>
+				<div class="selectbox">
+				<select name="sl-state" onchange="window.location.href=this.value">
+					<option value="#"><?php echo $this->__('Choose State / Territory') ?></option>
+					<option value="<?php echo $this->getUrl('store-locator/victoria') ?>"<?php if($_currentUrl == $this->getUrl('store-locator/victoria')): ?> selected="selected"<?php endif; ?>>VIC</option>
+					<option value="<?php echo $this->getUrl('store-locator/new-south-wales') ?><?php if($_currentUrl == $this->getUrl('store-locator/new-south-wales')): ?> selected="selected"<?php endif; ?>">NSW</option>
+					<option value="<?php echo $this->getUrl('store-locator/queensland') ?>"<?php if($_currentUrl == $this->getUrl('store-locator/queensland')): ?> selected="selected"<?php endif; ?>>QLD</option>
+					<option value="<?php echo $this->getUrl('store-locator/western-australia') ?>"<?php if($_currentUrl == $this->getUrl('store-locator/western-australia')): ?> selected="selected"<?php endif; ?>>WA</option>
+					<option value="<?php echo $this->getUrl('store-locator/south-australia') ?>"<?php if($_currentUrl == $this->getUrl('store-locator/south-australia')): ?> selected="selected"<?php endif; ?>>SA</option>
+					<option value="<?php echo $this->getUrl('store-locator/northern-territory') ?>"<?php if($_currentUrl == $this->getUrl('store-locator/northern-territory')): ?> selected="selected"<?php endif; ?>>NT</option>
+					<option value="<?php echo $this->getUrl('store-locator/tasmania') ?>"<?php if($_currentUrl == $this->getUrl('store-locator/tasmania')): ?> selected="selected"<?php endif; ?>>TAS</option>
+					<option value="<?php echo $this->getUrl('store-locator/australian-capital-territory') ?>"<?php if($_currentUrl == $this->getUrl('store-locator/australian-capital-territory')): ?> selected="selected"<?php endif; ?>>ACT</option>
+				</select>
+				</div>
+			</div>	
+		</div>
+		<div class="locator-static">
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('hoover_storelocator_info')->toHtml() ?>
+		</div>
+	</div>
+	<div class="storelist">
+    <?php if($this->isContentMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+    <?php elseif($this->isMixedMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?> <?php echo $this->getProductListHtml() ?>
+    <?php else: ?>
+    <?php echo $this->getProductListHtml() ?>
+    <?php endif; ?>
+	</div>
+	<div class="clear"></div>
+</div>
+	

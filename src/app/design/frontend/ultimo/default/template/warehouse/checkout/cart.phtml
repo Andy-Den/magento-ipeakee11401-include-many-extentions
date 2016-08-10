@@ -1,0 +1,255 @@
+<?php
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_Warehouse
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+?>
+
+<?php
+
+/**
+ * @see Idev_OneStepCheckout_Block_Checkout_Cart
+ * @var $this Idev_OneStepCheckout_Block_Checkout_Cart
+ * @var $helper Innoexts_Warehouse_Helper_Data (encoded)
+ */
+?>
+
+
+<!-- Warehouse -->
+<?php $helper = Mage::helper('warehouse') ?>
+<?php $config = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<span class="please-wait" id="ajax-please-wait" style="display:none;">
+          <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading...') ?>" title="<?php echo $this->__('Loading...') ?>" class="v-middle" /> <?php echo $this->__('Loading...') ?>
+</span>
+<div id="allajax-cart">
+
+<div class="cart">
+    
+    <!-- Warehouse -->
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/warehouse/checkout/cart.js') ?>"></script>
+    <!-- End Warehouse -->
+    
+    <div class="page-title title-buttons">
+        <h1><?php echo $this->__('Shopping Cart') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+        
+        <?php if ($helper->getVersionHelper()->isGe1810()) : ?>
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <?php endif ?>
+        
+        <fieldset>
+            <table id="shopping-cart-table" class="data-table cart-table">
+                <col width="1" />
+                <col />
+                
+                <!-- Warehouse -->
+                <?php if ($config->isInformationVisible()) : ?>
+                <col />
+                <?php endif ?>
+                <!-- End Warehouse -->
+                
+                <col width="1" />
+            <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                <col width="1" />
+            <?php endif ?>
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()) : ?>
+                <col width="1" />
+            <?php endif ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()) : ?>
+                <col width="1" />
+            <?php endif ?>
+                <col width="1" />
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()) : ?>
+                <col width="1" />
+            <?php endif ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()) : ?>
+                <col width="1" />
+            <?php endif ?>
+                <col width="1" />
+
+            <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1) ?>
+                <thead>
+                    <tr>
+                        <th rowspan="<?php echo $mergedCells ?>">&nbsp;</th>
+                        <th rowspan="<?php echo $mergedCells ?>"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                        
+                        
+                        <!-- Warehouse -->
+                        <?php if ($config->isInformationVisible()) : ?>
+                        <th rowspan="<?php echo $mergedCells ?>"><span class="nobr"><?php echo $helper->__('Warehouse') ?></span></th>
+                        <?php endif ?>
+                        <!-- End Warehouse -->
+
+                        <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                        <th rowspan="<?php echo $mergedCells ?>" class="a-center"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
+                        <?php endif ?>
+                        <th class="a-center" colspan="<?php echo $mergedCells ?>"><span class="nobr"><?php echo $this->__('Price') ?></span></th>
+                        <th rowspan="<?php echo $mergedCells ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
+                        <th class="a-center" colspan="<?php echo $mergedCells ?>"><?php echo $this->__('Subtotal') ?></th>
+                        <th rowspan="<?php echo $mergedCells ?>" class="a-center">&nbsp;</th>
+                    </tr>
+                    <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <tr>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                    </tr>
+                    <?php endif ?>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="50" class="a-right">
+                            
+                            <?php if($this->getContinueShoppingUrl()): ?>
+                            <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                            <?php endif ?>
+                               
+                            <?php if ($helper->getVersionHelper()->isGe1700()) : ?>
+                            <button type="button" onclick="allajax.updateCart(this)" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Cart') ?>" class="button btn-update"><span><span><?php echo $this->__('Update Shopping Cart') ?></span></span></button>
+                            
+                            <!--[if lt IE 8]>
+                            <input type="hidden" id="update_cart_action_container" />
+                            <![endif]-->
+                            <?php else : ?>
+                            
+                            <button type="button" onclick="allajax.updateCart(this)" title="<?php echo $this->__('Update Shopping Cart') ?>" class="button btn-update"><span><span><?php echo $this->__('Update Shopping Cart') ?></span></span></button>
+                            
+                            <!-- Warehouse -->
+                            <button type="submit" name="update_cart_action" value="reset_cart" title="<?php echo $this->__('Reset Cart') ?>" class="button button-reset-cart"><span><span><?php echo $this->__('Reset Cart') ?></span></span></button>
+                            <!-- End Warehouse -->
+                            
+                            <?php endif ?>
+                                
+                            
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                <?php foreach($this->getItems() as $_item): ?>
+                <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+    </form>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('cart_message')->toHtml() ?>
+    <div class="cart-collaterals">
+        <div class="col2-set">
+            <div class="col-2">
+                <div class="totals">
+                    <div class="bg-totals"><?php echo $this->getChildHtml('totals') ?></div>
+                    <?php if(!$this->hasError()): ?>
+                        <ul class="checkout-types">
+                            <?php $paymentMethods =  $this->getMethods('methods');
+                                    $paymentMethods = array_reverse($paymentMethods);
+                            ?>
+                            <?php foreach ($paymentMethods as $method): ?>
+                                <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                    <li><?php echo $methodHtml ?></li>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        </ul>
+                    <?php endif ?>
+                </div>
+            </div>
+			<div class="col-1">
+                <?php echo $this->getChildHtml('crosssell') ?>
+            </div>
+        </div>
+
+        <div class="coupon">
+            <?php echo $this->getChildHtml('coupon') ?>
+        </div>
+    </div>
+</div>
+
+
+<!-- template adding products to cart -->
+<a style="display: none;" id="various1" href="#allajax-content" >Inline</a>
+
+
+<div style="display: none;">
+    <div id="inline1" style="width:300px;height:100px;overflow:auto;">
+
+        <div id="allajax-content" class="allajax-content bbb" >
+            <div class="allajax-preload" id="allajax-prestep">
+                <a id="ajax-loading-lightbx-pro-image" href="#" title=" " class="product-image" id="">
+                    <img src="#" width="128" height="128" alt=" ">
+                </a>
+                <div class="product-info">
+                    <h2 class="product-name" id="ajax-loading-lightbx-pro-name">
+                        <a href="#" title=" "> </a>
+                    </h2>
+                    <div class="ratings" id="ajax-loading-lightbx-pro-rating">
+
+                    </div>
+                    <div class="product-type-data"><div class="price-box" id="ajax-loading-lightbx-pro-price-box">
+
+                        </div></div>
+                </div>
+                <div class="allajax-loading" id="">
+                    <img alt="Loading..." src="<?php echo $this->getSkinUrl('balance/allajax/images/loading.gif'); ?>">
+                    <span id="add_to_cart">Loading...</span>
+                </div>
+                <div class="allajax-configurations" id="allajax-configurations-append">
+
+                </div>
+
+            </div>
+            <div id="allajax-poststeps">
+                <div class="allajax-respond-msg">
+
+                </div>
+                <a id="ajax-loading-lightbx-pro-image-respond" href="#" title=" " class="product-image" id="">
+                    <img src="#" width="160" height="160" alt=" ">
+                </a>
+
+                <div class="product-info">
+                    <h2 class="product-name" id="ajax-loading-lightbx-pro-name-respond">
+                    </h2>
+                    <div class="product-type-data"><div class="price-box" id="ajax-loading-lightbx-pro-price-box-respond">
+
+                        </div></div>
+                </div>
+
+                <div class="actions clearer">
+                    <button type="button" title="View all items in your shopping cart" class="button btn-inline button-view" id="allajax_view_cart" onclick="jQuery.fancybox.close();"><span><span>View cart & checkout</span></span></button>
+                    <button type="button" title="View all items in your compare" class="button btn-inline button-view" id="allajax_view_compare" style="display: none" onclick="jQuery.fancybox.close();popWin('<?php echo Mage::helper('catalog/product_compare')->getListUrl(); ?>','compare','top:0,left:0,width=750,height=600,resizable=yes,scrollbars=yes')"><span><span><?php echo $this->__('Go to compare') ?></span></span></button>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+</div>
+

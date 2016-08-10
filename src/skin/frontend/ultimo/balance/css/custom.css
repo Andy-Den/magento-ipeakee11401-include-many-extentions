@@ -1,0 +1,117 @@
+
+/***
+
+    This file is a demo of a custom css file. It is used for the balance respond demo site but could be completely removed on a custom theme.
+    It should be used to customize any code that nee
+
+***/
+
+
+/** In the default respond the menu doesn't have a background so bring the first item in to align with content **/
+#nav-home a.level-top {
+    padding-left: 0;
+}
+
+
+/** stop hover affect on icons **/
+.icon {
+transition: color 300ms ease-in-out, background-color 300ms ease-in-out!important;
+-webkit-transition: color 300ms ease-in-out, background-color 300ms ease-in-out!important;
+-moz-transition: color 300ms ease-in-out, background-color 300ms ease-in-out!important;
+}
+
+/** make the background of add to links transparent **/
+.category-products .add-to-links .icon, .category-products .add-to-links .icon:hover {
+    background-color: transparent;
+}
+
+
+.sorter .view-mode .grid, .sorter .view-mode .list, .sorter .sort-by .category-asc, .sorter .sort-by .category-desc, .buttons-set .back-link small, .add-to-links.addto-icons a, .accordion-style1 .opener, .accordion-style1 .opener:hover, .collapsible .opener, #scroll-to-top {
+    transition: background-color 300ms ease-in-out;
+    -moz-transition: background-color 300ms ease-in-out;
+    -webkit-transition: background-color 300ms ease-in-out;
+    -o-transition: background-color 300ms ease-in-out;
+}
+
+/** override back to top colours **/
+#scroll-to-top {
+    background-color: #ee1918;
+}
+#scroll-to-top:hover {
+    background-color: #da1312; background-position: -200px -100px;
+}
+
+
+
+/** Product page **/
+.product-view .btn-cart:hover span, button.btn-checkout:hover span {
+    background-color: #da1312;
+    color: #ffffff;
+}
+
+
+.custom-sidebar-right .inner {
+    border-width: 0;
+}
+
+
+
+
+/** Registration Page **/
+.account-create .fieldset {
+    padding-left: 0;
+}
+.account-create .legend {
+    padding-left: 0; margin-left: 0;
+}
+
+.account-create .buttons-set {
+    padding-left: 0; margin-left: 0;
+}
+
+
+.account-create button.button, .buttons-set .back-link {
+    float:none;
+}
+
+
+/** fix up sign up form on mobile **/
+@media only screen and (max-width: 639px) {
+    .account-create .form-list input.input-text, .account-create .form-list .field, .customer-account-forgotpassword .form-list input.input-text {
+        width: 100%;
+    }
+
+    .account-create button.button, .customer-account-forgotpassword button.button {
+        width: 100%;
+    }
+    .account-create button.button span, .customer-account-forgotpassword button.button span  {
+        float:none;
+    }
+
+}
+
+/** Password Reset Page **/
+
+.account-create .fieldset, .customer-account-forgotpassword .fieldset{
+    padding-left: 0;
+}
+.account-create .legend, .customer-account-forgotpassword .legend{
+    padding-left: 0; margin-left: 0;
+}
+
+.account-create .buttons-set, .customer-account-forgotpassword .buttons-set {
+    padding-left: 0; margin-left: 0;
+}
+
+
+.account-create button.button, .customer-account-forgotpassword button.button, .buttons-set .back-link, .customer-account-forgotpassword .back-link {
+    float:none;
+}
+
+.account-create .back-link small, .account-create .back-link:hover small, .customer-account-forgotpassword .back-link small, .customer-account-forgotpassword .back-link:hover small{
+    background-color: transparent; background-position: -107px -107px;
+}
+
+.reset-instructions {
+    margin-bottom: 10px;
+}

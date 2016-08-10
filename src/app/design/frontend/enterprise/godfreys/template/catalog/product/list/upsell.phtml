@@ -1,0 +1,49 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php if(count($this->getItemCollection()->getItems())): ?>
+<div id="similar-products" class="sidebar-box">
+        <h2><?php echo $this->__('Similar Products') ?></h2>
+    <ul>
+    <?php  $this->setColumnCount(1); // uncomment this line if you want to have another number of columns. also can be changed in layout ?>
+    <?php $this->resetItemsIterator() ?>
+    <?php for($_i=0;$_i<$this->getRowCount();$_i++): ?>
+        <?php for($_j=0;$_j<$this->getColumnCount();$_j++): ?>
+            <?php if($_link=$this->getIterableItem()): ?>
+            <li>
+                <a href="<?php echo $_link->getProductUrl() ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(42) ?>" width="42" height="42" alt="<?php echo $this->htmlEscape($_link->getName()) ?>" title="<?php echo $this->htmlEscape($_link->getName()) ?>" />
+                <small><?php echo $this->htmlEscape($_link->getName()) ?></small>
+                <?php //echo $this->getReviewsSummaryHtml($_link) ?>
+                <b><?php echo $this->getPriceHtml($_link, true, '-widget-new-grid') ?></b></a>
+            </li>
+            <?php endif; ?>
+        <?php endfor; ?>
+    <?php endfor; ?>
+    </ul>
+    <!--<script type="text/javascript">decorateList('upsell-product-list', 'none-recursive')</script>-->
+	 <div class="box-foot"></div>
+</div>
+<?php endif ?>

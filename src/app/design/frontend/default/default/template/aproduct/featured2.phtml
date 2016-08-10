@@ -1,0 +1,140 @@
+<?php if (($_productCollection =  $this->_getIsFeaturedProductCollection(12)) && count($_productCollection)): ?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $classActive = "tv-current";?>
+<?php $_columnCount = 4; ?>
+<?php $countItems = ceil(count($_productCollection)/$_columnCount);?>
+<?php $_collectionSize = count($_productCollection); ?>
+<div id="list-xadvertising">
+    <div  id="imageBox">
+       <div class="w-cat-fet-title"><h3><?php echo $this->__('Featured '); echo Mage::registry('current_category')->getName(); ?></h3></div>
+      <div id="imageBoxInside">
+        <?php $i=0; foreach ($_productCollection as $_product): ?>
+            <?php if ($i++%$_columnCount==0): ?>
+                <div id="item-xadvertising" rel="<?php echo $i;?>">
+                    <ul class="products-grid">
+            <?php endif ?>
+                        <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(145, 185); ?>" width="145" height="185" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                            <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+                            <?php //if($_product->getRatingSummary()): ?>
+                            <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                            <?php //endif; ?>
+                            
+                            <?php $_product = Mage::getModel('catalog/product')->load($_product->getId()); ?>
+                            <div class="actions">
+                                <button type="button" title="<?php echo $this->__('More Info') ?>" class="button btn-cart" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><span><span><?php echo $this->__('More Info') ?></span></span></button>
+                            </div>
+                        </li>
+            <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+                </ul>
+            </div>
+            <?php endif ?>
+        <?php endforeach ?>
+        </div>    
+    
+        <div id="slide_page">
+            <ul class="listpage">
+                <li style="display: none; "><span id="btn-play" class="btn pause">Stop</span></li>
+                <li class="first"><span id="btn-prev" class="prev">&nbsp;</span></li>
+                <?php 
+                  for($i = 1;$i <= $countItems;$i++)
+                  {
+                    $tmpClass = "";
+                    if($i == 1)
+                    {
+                      $tmpClass = $classActive;
+                    }
+                    echo '<li><a href="javascript:void(0);" class="'.$tmpClass.'" id="xp'.$i.'">&nbsp;</a></li>';
+                  }
+                ?>
+                <li class="last"><span id="btn-next" class="next">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+//<![CDATA[
+    var Ahtjsc_Slidenewproduct = {
+        curPage : 1,
+        delay : 4000,
+        width : 758,
+        classActive : '<?php echo $classActive;?>',
+        totalPage : <?php echo isset($countItems) && $countItems >0?$countItems:1;?>,
+        timer : null,
+        lock : false,
+        state : 'play',
+
+        initialize : function(){
+            Event.observe(window, 'load', Ahtjsc_Slidenewproduct.start);
+            $("slide_page").select("a").each(function(item){
+                $(item).observe('click', function(){ Ahtjsc_Slidenewproduct.moveToPage(item.id.replace(/^xp(\d+)$/, '$1'), true); } );
+            });
+            $('btn-next').observe('click', function(){ Ahtjsc_Slidenewproduct.moveToPage(Ahtjsc_Slidenewproduct.curPage + 1, true); } );
+            $('btn-prev').observe('click', function(){ Ahtjsc_Slidenewproduct.moveToPage(Ahtjsc_Slidenewproduct.curPage - 1, true); } );
+        },
+
+        start : function(){
+            Ahtjsc_Slidenewproduct.state = 'play';
+            Ahtjsc_Slidenewproduct.removeAllClassName($("btn-play").update("Stop")).addClassName("btn pause").stopObserving('click').observe('click', Ahtjsc_Slidenewproduct.stop );
+            Ahtjsc_Slidenewproduct.timer = setTimeout(Ahtjsc_Slidenewproduct.next, Ahtjsc_Slidenewproduct.delay );
+        },
+
+        stop : function(){
+            Ahtjsc_Slidenewproduct.state = 'stop';
+            clearTimeout(Ahtjsc_Slidenewproduct.timer);
+            Ahtjsc_Slidenewproduct.removeAllClassName($("btn-play").update("Play")).addClassName("btn play").stopObserving('click').observe('click', Ahtjsc_Slidenewproduct.start );
+        },
+
+        next : function(){
+            Ahtjsc_Slidenewproduct.moveToPage(Ahtjsc_Slidenewproduct.curPage + 1);
+            if( Ahtjsc_Slidenewproduct.state == 'play' ){
+                Ahtjsc_Slidenewproduct.timer = setTimeout(Ahtjsc_Slidenewproduct.next, Ahtjsc_Slidenewproduct.delay );
+            }
+        },
+            
+        prev : function(){
+            Ahtjsc_Slidenewproduct.moveToPage(Ahtjsc_Slidenewproduct.curPage - 1);
+            if( Ahtjsc_Slidenewproduct.state == 'play' ){
+                Ahtjsc_Slidenewproduct.timer = setTimeout(Ahtjsc_Slidenewproduct.prev, Ahtjsc_Slidenewproduct.delay );
+            }
+        },
+
+        moveToPage : function(page, resetTimer){
+            if( Ahtjsc_Slidenewproduct.lock ){
+                setTimeout(function(){ Ahtjsc_Slidenewproduct.moveToPage(page, resetTimer ); }, 50 );
+                return false;
+            }
+            Ahtjsc_Slidenewproduct.lock = true;
+            if( resetTimer ){
+                if( Ahtjsc_Slidenewproduct.state == 'play' ){
+                    clearTimeout(Ahtjsc_Slidenewproduct.timer);
+                    Ahtjsc_Slidenewproduct.timer = setTimeout(Ahtjsc_Slidenewproduct.next, Ahtjsc_Slidenewproduct.delay );
+                }
+            }
+
+            if(page > Ahtjsc_Slidenewproduct.totalPage){
+                page = 1;
+            }
+            if(page < 1){
+                page = Ahtjsc_Slidenewproduct.totalPage;
+            }
+            var curObj = $("xp"+page);
+            Ahtjsc_Slidenewproduct.removeAllClassName($("xp"+Ahtjsc_Slidenewproduct.curPage));
+            Ahtjsc_Slidenewproduct.removeAllClassName($(curObj)).addClassName(Ahtjsc_Slidenewproduct.classActive);
+            range = (page - Ahtjsc_Slidenewproduct.curPage) * Ahtjsc_Slidenewproduct.width;
+            new Effect.Move('imageBoxInside', { x: -range, y: 0, transition: Effect.Transitions.sinoidal, afterFinish : function(){ Ahtjsc_Slidenewproduct.lock = false; } });
+            Ahtjsc_Slidenewproduct.curPage = page;
+        },
+
+        removeAllClassName : function(item){
+            var arr = item.classNames();
+            arr.each(function(className){
+                item.removeClassName(className);
+            });
+            return item;
+        }
+    }
+    Ahtjsc_Slidenewproduct.initialize();
+//]]>
+</script>
+<?php endif;?>

@@ -1,0 +1,1 @@
+<?php//  Install Entities - references the Setup file for the entities//  Namespace_Modulename_Model_Resource_Eav_Mysql4_Setup$this->installEntities();

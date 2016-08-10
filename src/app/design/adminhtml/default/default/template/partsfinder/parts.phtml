@@ -1,0 +1,287 @@
+<?php
+/**
+ * Parts relation selector
+ *
+ * @see Godfreys_Partsfinder_Block_Adminhtml_Catalog_Product_Edit_Tab_Parts
+ */
+?>
+<div>
+<ul class="messages">
+    <li class="notice-msg">
+        <ul>
+            <li><?php echo Mage::helper('catalog')->__('Update notes later.') ?></li>
+        </ul>
+    </li>
+</ul>
+</div>
+
+<div class="entity-edit" id="matage-options-panel">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Manage Relations (machines this accessory fit)') ?></h4>
+    </div>
+    <div class="box"><?php echo $this->getSaveButtonHtml();?><br/>
+        <div class="hor-scroll">
+            <table class="dynamic-grid part_relations" cellspacing="0"  cellpadding="0">
+                <tr>
+                	<th>Brand: </th>
+                	<th>Model: </th>
+                	<th>Product Name: </th>
+                	<th> </th>
+                </tr>
+                <tr id="part-relations-table">
+                	<th><select id="parts_brand" name="parts_brand">
+                	<option>Please Select</option>
+                	<?php foreach ($this->getBrands() as $brand) :?>
+                	<option value="<?php echo $brand['id']?>"><?php echo $brand['name']?></option>
+					 <?php endforeach;?></select></th>
+                	<th><select id="parts_model" name="parts_model"></select></th>
+                	<th><input name="parts_product_name" id="parts_product_name" value="" class="input-text" type="text"/></th>
+                    <th><input name="parts_product_id" id="parts_product_id" value="" type="hidden" />
+                    <input name="parts_sku" id="parts_sku" value="" type="hidden" />
+                    <?php echo $this->getAddNewButtonHtml() ?></th>
+                </tr>
+                    <tr class="no-display template" id="row-template">
+                        <td>{{brand}}<input name="option[{{id}}][brand_id]" value="{{brand_id}}" type="hidden" class="brand_id parts"/></td>
+                        <td>{{model}}<input name="option[{{id}}][model_id]" value="{{model_id}}" type="hidden" class="model_id parts"/></td>
+                        <td><input name="option[{{id}}][product_name]" value="{{product_name}}" class="input-text required-option parts" type="text" />
+                        <input name="option[{{id}}][product_id]" value="{{product_id}}" type="hidden" class="parts"/>
+                    	<input name="option[{{id}}][sku]" value="{{sku}}" type="hidden" class="parts"/>
+                        </td>
+                        <td class="a-left">
+                        <input type="hidden" class="delete-flag parts" name="option[{{id}}][delete]" value="" />
+                                <?php echo $this->getDeleteButtonHtml() ?>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+        <input type="hidden" id="option-count-check" value="" />
+    </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+
+// IE removes quotes from element.innerHTML whenever it thinks they're not needed, which breaks html.
+var templateText =
+        '<tr class="option-row">'+
+            '<td>{{brand}}<input name="option[{{id}}][brand_id]" value="{{brand_id}}" class="brand_id parts" type="hidden"/><\/td>'+
+            '<td>{{model}}<input name="option[{{id}}][model_id]" value="{{model_id}}" class="model_id parts" type="hidden"/><\/td>'+
+            '<td><input name="option[{{id}}][product_name]" value="{{product_name}}" class="input-text required-option parts" type="text" />'+
+            '<input name="option[{{id}}][product_id]" value="{{product_id}}" type="hidden" class="parts"/>'+
+            '<input name="option[{{id}}][sku]" value="{{sku}}" type="hidden" class="parts"/>'+
+            '<\/td>'+            
+            '<td class="a-left">'+
+                '<input type="hidden" class="delete-flag parts" name="option[{{id}}][delete]" value="" />'+
+                    '<?php echo $this->getDeleteButtonHtml() ?>'+
+            '<\/td>'+
+        '<\/tr>';
+
+var partRelation = {
+    table : $('part-relations-table'),
+    templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
+    templateText : templateText,
+    itemCount : 0,
+    totalItems : 0,
+    add : function(data) {
+        this.template = new Template(this.templateText, this.templateSyntax);
+        if(!data.id){
+            data = {};
+            data.id  = ''+this.itemCount;
+        }
+        if(!data.brand){
+            data.brand = jQuery('#parts_brand option:selected').text();
+            data.brand_id = jQuery('#parts_brand').val();
+        }
+        if(!data.model){
+            data.model = jQuery('#parts_model option:selected').text();
+            data.model_id = jQuery('#parts_model').val();
+        }
+        if (!data.product_name) {
+        	data.product_name = jQuery('#parts_product_name').val();
+        }
+        
+        if (data.model_id == '' || data.brand_id =='' || data.product_name == '') return;
+
+        var already = false;
+        jQuery('tr.option-row').each(function(index, e){
+            if(data.brand_id == jQuery(e).find('input.brand_id').val() 
+                    && data.model_id == jQuery(e).find('input.model_id').val()) {
+                already = true;
+                return;
+            }
+        });
+        if (already) return;
+        data.product_id = jQuery('#parts_product_id').val();
+        data.sku = jQuery('#parts_sku').val();
+        
+        Element.insert(this.table, {after: this.template.evaluate(data)});
+        this.bindRemoveButtons();
+        this.itemCount++;
+        this.totalItems++;
+        this.updateItemsCountField();
+    },
+    remove : function(event){
+        var element = $(Event.findElement(event, 'tr')); // !!! Button already
+                                                               // have table parent in safari
+        // Safari workaround
+        element.ancestors().each(function(parentItem){
+           if (parentItem.hasClassName('option-row')) {
+               element = parentItem;
+               throw $break;
+           } else if (parentItem.hasClassName('box')) {
+               throw $break;
+           }
+        });
+
+
+        if(element){
+            var elementFlags = element.getElementsByClassName('delete-flag');
+            if(elementFlags[0]){
+                elementFlags[0].value=1;
+            }
+
+            element.addClassName('no-display');
+            element.addClassName('template');
+            element.hide();
+            this.totalItems--;
+            this.updateItemsCountField();
+        }
+    },
+    updateItemsCountField: function() {
+        if (this.totalItems > 0) {
+            $('option-count-check').value = '1';
+        } else {
+            $('option-count-check').value = '';
+        }
+    },
+    bindRemoveButtons : function(){
+        var buttons = $$('.delete-option');
+        for(var i=0;i<buttons.length;i++){
+            if(!$(buttons[i]).binded){
+                $(buttons[i]).binded = true;
+                Event.observe(buttons[i], 'click', this.remove.bind(this));
+            }
+        }
+    }
+
+}
+if($('row-template')){
+    $('row-template').remove();
+}
+partRelation.bindRemoveButtons();
+
+if($('add_new_relation_button')){
+    Event.observe('add_new_relation_button', 'click', partRelation.add.bind(partRelation));
+}
+
+Validation.addAllThese([
+    ['required-option', '<?php echo Mage::helper('catalog')->__('Failed') ?>', function(v) {
+        return !Validation.get('IsEmpty').test(v);
+}]]);
+Validation.addAllThese([
+    ['required-options-count', '<?php echo Mage::helper('catalog')->__('Options is required') ?>', function(v) {
+        return !Validation.get('IsEmpty').test(v);
+}]]);
+<?php foreach ($this->getRelations() as $_value): ?>
+partRelation.add(<?php echo Mage::helper('core')->jsonEncode($_value); ?>);
+<?php endforeach; ?>
+
+jQuery('#save_relation_button').click(function(){
+	var error = false;
+	jQuery('table.part_relations input.required-option').each(function(i,e){
+		if (jQuery(e).val() == '') {
+			
+			jQuery(e).addClass('error');
+			jQuery('messages').html('<ul class="messages"><li class="error-msg"><ul><li>' 
+					+'<?php echo Mage::helper('catalog')->__('Product Name to display can not be empty.')?>'
+					+'</li></ul></li></ul>');
+			error = true;
+		}
+	});
+	
+	if (error) return;
+	Element.show('loading-mask');
+	jQuery.ajax({
+		url: '<?php echo $this->getUrl('*/partsfinder/saverelation', array('_current' => true)); ?>',
+		data: jQuery('table.part_relations input.parts').serialize(),
+		success:function(response){
+			Element.hide('loading-mask');
+			console.log(response);
+			if (response) {
+				var type = 'error';
+				if (response.success){
+					type = 'success';
+				}
+				alert(response.message);
+				jQuery('messages').html('<ul class="messages"><li class="'+ type + '-msg"><ul><li>' + response.message + '</li></ul></li></ul>');
+			}
+		},
+		dataType:'json'
+	});
+});
+
+jQuery('#parts_brand').live('change', function(){
+	jQuery('#parts_model').empty();
+	jQuery('#parts_product_name').val('');
+	jQuery('#parts_product_id').val('');
+	jQuery('#parts_sku').val('');
+	Element.show('loading-mask');
+	jQuery.ajax({
+	    url: '<?php echo $this->getUrl('*/partsfinder/ajax', array('_current' => true));?>',
+	    data: {
+	    	brand: jQuery('#parts_brand').val()
+	    },
+	    success: function(response) {
+	    	Element.hide('loading-mask');
+		    var options = [];
+
+	        if (response) {
+	        	//var obj = jQuery.parseJSON(response);
+	        	var obj = response;
+	        	options.push('<option>Please Select</option>');
+	        	
+				for(var i =0;i < obj.length;i++)
+				{
+				  options.push('<option value="'+obj[i].id+'">'+obj[i].name+'</option>');
+				}
+				
+				jQuery('#parts_model').html(options.join(''));
+				
+				if (2==options.length){
+					jQuery('#parts_model option').first().attr('selected', 'selected');
+				}
+	        }
+	    },
+	    dataType: 'json'
+	}); 
+});
+
+jQuery('#parts_model').live('change', function(){
+	if (jQuery('#parts_model').val() == 0 || jQuery('#parts_model').val() == '') return;
+	jQuery('#parts_product_name').val('');
+	jQuery('#parts_product_id').val('');
+	jQuery('#parts_sku').val('');
+	Element.show('loading-mask');
+	jQuery.ajax({
+		url: '<?php echo $this->getUrl('*/partsfinder/ajax', array('_current' => true));?>',
+		data: {
+			brand: jQuery('#parts_brand').val(),
+			model: jQuery('#parts_model').val()
+		},
+		success: function(response) {
+			Element.hide('loading-mask');
+			if (response) {
+				var obj = response;
+				if (0 == obj.id || '' == obj.id) return;
+				
+				jQuery('#parts_product_name').empty();
+				jQuery('#parts_product_name').val(obj.product_name);
+				jQuery('#parts_product_id').val(obj.id);
+				jQuery('#parts_sku').val(obj.sku);
+			}
+		},
+		dataType: 'json'
+	}
+	);
+});
+//]]>
+</script>

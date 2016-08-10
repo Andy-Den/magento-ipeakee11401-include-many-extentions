@@ -1,0 +1,123 @@
+#aw-afptc-popup {
+    position: fixed;
+    border: 1px #999999 solid;
+    text-align: center !important;
+    padding: 10px;
+    background-color: #ffffff;
+    z-index: 9999;
+    color: #888888;
+    overflow:  auto;
+    min-height:240px;
+    max-width: 450px;
+    width: auto;
+    height: auto;    
+} 
+
+#aw-afptc-overlay
+{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:#000;
+    -moz-opacity: 0.3;
+    opacity:.50;
+    filter: alpha(opacity=30);
+    z-index: 100;
+}
+
+.aw-afptc-promo-message {
+    font-size:16px;
+}
+
+#aw-afptc-popup .product-name {
+    font-size:14px;
+    text-align: left;
+}
+
+#aw-afptc-popup .product-name a {
+    color:#e30c14;
+}
+
+#aw-afptc-popup .product-image{
+    margin-right:10px;
+}
+
+#aw-afptc-popup #gf-special-price {
+    color: #5e5e5e!important;
+}
+
+#aw-afptc-popup .save-price {
+    color:#46aa0c;
+}
+
+#aw-afptc-popup .save-price .price {
+    color:#46aa0c;
+}
+
+#aw-afptc-popup .accept-buttons {
+    width: 175px;
+    position: relative;
+    left: 185px;
+    top: -10px;
+}
+
+#aw-afptc-popup .msg-box{
+    width: 204px;
+    position: relative;
+    left: 181px;
+    top: 0px;
+    font-size: 12px;
+}
+
+#aw-afptc-popup .msg-box input {
+    margin: 0 6px 3px 0;
+}
+
+div#aw-afptc-popup div.block-content ul.free-products-list{
+    max-height:300px;
+    overflow-y:hidden;
+    overflow-x:hidden;
+    width: 390px;
+    margin-left:20px;
+}
+
+div#aw-afptc-popup div.block-content ul.product-details li{
+    float:left;
+}
+
+div#aw-afptc-popup div.block-content ul.product-details li div.product-details{
+    padding:10px;
+    width:210px;
+}
+
+div#aw-afptc-popup div.block-content ul.product-details li div.product-details div.price-box{
+    float:left;
+    text-align:left;
+}
+
+div#aw-afptc-popup div.block-content ul.product-details li:first-child {
+    width:80px;
+}
+div#aw-afptc-popup div.block-content ul.product-details li input{
+    float:left;
+}
+
+div#aw-afptc-popup div.block-content ul.product-details div.validation-advice{
+    width:60px;
+    text-align:left;
+}
+
+.aw-afptc-popup .block-title {
+    height: 25px;
+    border-bottom: 1px solid #cccccc;
+    padding: 0 0px 0px 0px;
+    margin: 5px 20px 17px 20px;
+    text-transform: uppercase;
+}
+
+.aw-afptc-popup .block-title strong span {
+    font-weight:normal;
+    font-size: 12px;
+}

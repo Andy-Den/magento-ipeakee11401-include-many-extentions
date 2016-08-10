@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Tal_Tabs>
+			<version>0.0.1</version>
+		</Tal_Tabs>
+	</modules>
+	<global>
+		<helpers>
+			<tal_tabs>
+				<class>Tal_Tabs_Helper</class>
+			</tal_tabs>
+		</helpers>
+		<blocks>
+			<tal_tabs>
+				<class>Tal_Tabs_Block</class>
+			</tal_tabs> 
+						
+		</blocks>
+		<models>
+			<tal_tabs>
+				<class>Tal_Tabs_Model</class>
+			</tal_tabs>
+		</models>
+	</global>
+	<frontend>
+		<layout>
+			<updates>
+				<tal_storelocator>
+					<file>tal/tabs.xml</file>
+				</tal_storelocator>
+			</updates>
+		</layout>
+	</frontend>
+</config>

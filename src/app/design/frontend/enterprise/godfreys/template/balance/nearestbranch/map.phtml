@@ -1,0 +1,265 @@
+<?php
+/**
+ * Unirgy_StoreLocator extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   Unirgy
+ * @package    Unirgy_StoreLocator
+ * @copyright  Copyright (c) 2008 Unirgy LLC
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * @category   Unirgy
+ * @package    Unirgy_StoreLocator
+ * @author     Boris (Moshe) Gurevich <moshe@unirgy.com>
+ */
+?>
+
+<style type="text/css">
+#sidebar a { cursor:pointer; margin-bottom:5px; background-color:#fff; display:block; }
+#sidebar a:hover { background-color:#eee; }
+#storelocator-container { width:410px; font-family:Arial, sans-serif; font-size:11px; border:1px solid black; background:white; }
+#sidebar { overflow: auto; height: 380px; padding:10px; font-size: 11px; color: #000; }
+#map { overflow: hidden; width:410px; height:400px; }
+</style>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+
+function UnirgyStoreLocator(config) {
+    var map;
+    var markers = [];
+    var infoWindow;  
+
+    function clearLocations() {
+    	infoWindow.close();
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers.length = 0;
+    }
+
+    function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request.responseText, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+    function createMarker(latlng, name, address) {
+        var html = "<b>" + name + "</b> <br/>" + address;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: latlng
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infoWindow.setContent(html);
+          infoWindow.open(map, marker);
+        });
+        markers.push(marker);
+      }
+    function parseXml(str) {
+        if (window.ActiveXObject) {
+          var doc = new ActiveXObject('Microsoft.XMLDOM');
+          doc.loadXML(str);
+          return doc;
+        } else if (window.DOMParser) {
+          return (new DOMParser).parseFromString(str, 'text/xml');
+        }
+      }
+        
+    function searchLocationsNear(params,mode) {
+        clearLocations(); 
+        var searchUrl = config.searchUrl; 
+        if (mode == 'postcode'){
+         searchUrl += '?postcode='+params;
+        }
+        else if(mode == 'address'){
+        	searchUrl += '?lat='+params.lat()+'&lng='+params.lng();
+        }
+        downloadUrl(searchUrl, function(data) {
+
+          var xml = parseXml(data);
+          var markerNodes = xml.documentElement.getElementsByTagName("marker");
+          var bounds = new google.maps.LatLngBounds();
+          for (var i = 0; i < markerNodes.length; i++) {
+            var name = markerNodes[i].getAttribute("title");
+            var address = markerNodes[i].getAttribute("city");
+            var latlng = new google.maps.LatLng(
+                 parseFloat(markerNodes[i].getAttribute("latitude")),
+                 parseFloat(markerNodes[i].getAttribute("longitude")));
+
+            createMarker(latlng, name, address);
+            bounds.extend(latlng);
+          }
+          map.fitBounds(bounds);
+          
+         });
+       }
+
+    
+    function escapeUserText(text) {
+        if (text === undefined) {
+            return null;
+        }
+        text = text.replace(/@/, "@@");
+        text = text.replace(/\\/, "@\\");
+        text = text.replace(/'/, "@'");
+        text = text.replace(/\[/, "@[");
+        text = text.replace(/\]/, "@]");
+        return encodeURIComponent(text);
+    };
+
+    function createLabeledMarkerIcon(m) {
+        var opts = config.iconOpts || {};
+
+        var primaryColor = opts.primaryColor || "#DA7187";
+        var strokeColor = opts.strokeColor || "#000000";
+        var starPrimaryColor = opts.starPrimaryColor || "#FFFF00";
+        var starStrokeColor = opts.starStrokeColor || "#0000FF";
+        var label = escapeUserText(opts.label) || "";
+        var labelColor = opts.labelColor || "#000000";
+        var addStar = m.star || false;
+
+        var pinProgram = (addStar) ? "pin_star" : "pin";
+        var baseUrl = "http://chart.apis.google.com/chart?cht=d&chdp=mapsapi&chl=";
+        var iconUrl = baseUrl + pinProgram + "'i\\"
+            + "'[" + m.marker_label +  "'-4'f\\"  + "hv'a\\]" + "h\\]o\\"
+            + primaryColor.replace("#", "")  + "'fC\\"
+            + labelColor.replace("#", "")  + "'tC\\"
+            + strokeColor.replace("#", "")  + "'eC\\";
+        if (addStar) {
+            iconUrl += starPrimaryColor.replace("#", "") + "'1C\\"
+                + starStrokeColor.replace("#", "") + "'0C\\";
+        }
+        iconUrl += "Lauto'f\\";
+
+        var icon = new GIcon(G_DEFAULT_ICON);
+        icon.image = iconUrl + "&ext=.png";
+        icon.iconSize = (addStar) ? new GSize(23, 39) : new GSize(21, 34);
+        return icon;
+    }
+
+    
+    return {
+        load: function () {
+        	map = new google.maps.Map(document.getElementById("map"), 
+              {
+                center: new google.maps.LatLng(-33, 151),
+                zoom: 4,
+                mapTypeId: 'roadmap',
+                mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
+              });
+        	 infoWindow = new google.maps.InfoWindow();
+        },
+        search: function(address) {
+			if (address == ''){
+				searchLocationsNear(address,'default');
+			}	 
+			else if (isNaN(parseInt(address)))
+			{	
+	        	var geocoder = new google.maps.Geocoder();
+	            geocoder.geocode({'address': address,'region':'au'}, function(results, status) {
+	              if (status == google.maps.GeocoderStatus.OK) {
+					   alert(results[0].geometry.location);
+		               searchLocationsNear(results[0].geometry.location,'address');
+	              } else {
+	                alert(address + ' not found');
+	              }
+	            });
+			}
+			else{
+				searchLocationsNear(address,'postcode');
+			}	 
+        }
+    };
+}
+function doNothing() {}
+
+//]]>
+</script>
+
+<div class="page-title">
+	<h2><?php echo $this->__('Find a store')?></h2>
+</div>
+
+<form id="store_locator_form" onsubmit="return false">
+	<fieldset class="group-select">
+		<ul>
+			<li>
+                <label for="address"><?php echo $this->__('Address')?></label><br/>
+			    <input type="text" class="input-text" id="address" name="address" style="width:300px;"/>
+            </li>
+			<li>
+				<div class="input-box" style="width:95px;">
+				    <label for="radius"><?php echo $this->__('Radius')?></label><br/>
+				    <select id="radius" name="radius" style="width:80px;">
+				        <option value="25" selected>25</option>
+				        <option value="100">100</option>
+				        <option value="200">200</option>
+				    </select>
+                </div>
+            </li>
+        </ul>
+        <br/>
+        <input type="submit" class="form-button" value="<?php echo $this->__('Submit')?>" />
+        <input type="reset" class="form-button" value="<?php echo $this->__('Reset')?>" />
+    </fieldset>
+</form>
+
+
+<div id="storelocator-results" >
+	<div id="storelocator-container">
+		
+			<div id="map"></div>
+		 
+	</div>
+</div>
+
+<script type="text/javascript">
+var ex;
+(function(){
+    var storeLocator = new UnirgyStoreLocator({
+        mapEl: $('map'),
+        searchUrl: '<?php echo $this->getUrl('nearestbranch/index/search')?>'
+    });
+
+    Event.observe(window, 'load', function () {
+        storeLocator.load();
+        //$('storelocator-results').style.visibility = 'visible';
+        storeLocator.search('');
+       
+    });
+
+    //Event.observe(window, 'unload', GUnload);
+
+
+    Event.observe($('store_locator_form'), 'submit', function() {
+        $('storelocator-results').style.visibility = 'visible';
+        storeLocator.search($('address').value)
+           
+            /*, type: $('product_type').value*/
+        });
+ 
+
+
+})();
+</script>

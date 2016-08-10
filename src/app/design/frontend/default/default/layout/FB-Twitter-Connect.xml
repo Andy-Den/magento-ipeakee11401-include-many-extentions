@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg-FB-Twitter-Connect
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                <type>skin_css</type>
+                <name>css/belvg/facebookall.css</name>
+                <params />
+            </action>
+        </reference>
+        <reference name="top.links">
+            <action method="setTemplate" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                <template>FB-Twitter-Connect/top.links.phtml</template>
+            </action>
+        </reference>
+      <reference name="top.links">
+            <action method="setTemplate" ifconfig="twitter/settings/enabled" ifvalue="1">
+                <template>FB-Twitter-Connect/top.links.phtml</template>
+            </action>
+        </reference>
+        
+        <reference name="before_body_end">
+            <block type="facebookall/active" name="belvg.facebookall.block">
+                <action method="setTemplate" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                    <template>FB-Twitter-Connect/block.phtml</template>
+                </action>
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="facebookall/active" name="fb.activity" template="FB-Twitter-Connect/activity.phtml" />
+            <block type="twitter/twitter" name="twitter" template="FB-Twitter-Connect/twitter_sidebar.phtml" />
+        </reference>
+        <reference name="left">
+            <block type="twitter/twitter" name="twitter_left" template="FB-Twitter-Connect/twitter_sidebar_left.phtml" />
+        </reference>
+        <reference name="content">
+            <block type="twitter/twitter" name="twitter_content" after="cms.wrapper" template="FB-Twitter-Connect/twitter_sidebar_content.phtml" />
+        </reference>
+        <reference name="footer">
+            <block type="twitter/twitter" name="twitter_footer" template="FB-Twitter-Connect/twitter_sidebar_footer.phtml" />
+        </reference>
+        <reference name="header">
+            <block type="twitter/twitter" name="twitter_header" template="FB-Twitter-Connect/twitter_sidebar_header.phtml" />
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/twitter-page.css</stylesheet>
+            </action>
+        </reference>        
+    </default>
+    
+    <twitter_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="twitter/twitter" name="twitter" template="FB-Twitter-Connect/twitter.phtml" />
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/twitter-page.css</stylesheet>
+                <params>media=""</params>
+            </action>
+        </reference>
+    </twitter_index_index> 
+    
+    <twitter_index_ipad>
+		<!--<reference name="root">
+			<action method="setTemplate"><template>twitter/ipad.phtml</template></action>
+		</reference>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/twitter-page.css</stylesheet><params>media=""</params></action>
+		</reference>-->
+    </twitter_index_ipad>    
+
+    <catalog_product_view>
+        <reference name="head">
+            <block type="facebookall/active" name="facebookall_meta" before="-">
+                <action method="setTemplate" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                    <template>FB-Twitter-Connect/like/head.phtml</template>
+                </action>
+            </block>
+        </reference>
+        <reference name="product.info.addto">
+            <action method="setTemplate" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                <template>FB-Twitter-Connect/like/product/view/addto.phtml</template>
+            </action>
+        </reference>
+        <reference name="product.info">
+            <block type="facebookall/active" name="fb.comments" template="FB-Twitter-Connect/comments.phtml" before="-">
+                <action method="addToParentGroup">
+                    <group>detailed_info</group>
+                </action>
+            </block>
+        </reference>
+        <reference  name="product.info.addtocart" >
+            <block type="twitter/twitterbtn"  as="twitter.btn" name="twitter.btn" template="FB-Twitter-Connect/twitter_button.phtml"/>
+        </reference>        
+    </catalog_product_view>
+
+
+    <checkout_multishipping_success translate="label">
+        <reference name="checkout_success">
+            <action method="setTemplate" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                <template>FB-Twitter-Connect/success.phtml</template>
+            </action>
+        </reference>
+    </checkout_multishipping_success>
+
+    <checkout_onepage_success translate="label">
+        <reference name="checkout.success">
+            <action method="setTemplate" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                <template>FB-Twitter-Connect/success.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_success>
+
+    <customer_account_login translate="label">
+        <reference name="customer_form_login">
+            <block type="customer/form_login" name="customer_form_login" template="customer/form/login.phtml">
+                <action method="setTemplate" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                    <template>FB-Twitter-Connect/login.phtml</template>
+                </action>
+                <action method="setTemplate" ifconfig="twitter/settings/enabled" ifvalue="1">
+                    <template>FB-Twitter-Connect/login.phtml</template>
+                </action>
+            </block>
+        </reference>        
+    </customer_account_login>
+
+    <checkout_onepage_index translate="label">
+        <reference name="checkout.onepage">
+            <block type="checkout/onepage_login" name="checkout.onepage.login" as="login" template="checkout/onepage/login.phtml">
+                <action method="setTemplate" ifconfig="facebookall/settings/enabled" ifvalue="1">
+                    <template>FB-Twitter-Connect/checkoutlogin.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+</layout>

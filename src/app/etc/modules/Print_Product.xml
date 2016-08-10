@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+         <modules>
+                <Print_Product>
+                        <active>true</active>
+                        <codePool>local</codePool>
+                </Print_Product>
+         </modules>
+</config>

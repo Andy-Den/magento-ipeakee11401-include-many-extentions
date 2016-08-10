@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout>
+    
+<!-- TOP LAYOUT START -->
+    <default>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>magazento/megamenu2/css/ie6.css</name><params/><if>lt IE 7</if></action>
+            <action method="addCss"><stylesheet>magazento/megamenu2/css/megamenu.css</stylesheet></action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>magazento/jquery-1.5.1.min.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>magazento/megamenu2/megamenu.js</name>
+                <params/>
+            </action>
+        </reference>
+        <reference name="top.menu">
+            <remove name="catalog.topnav" />
+            <block type="megamenu2/navigation" name="megamenu2.navigation" template="magazento/megamenu2/navigation.phtml"/>
+        </reference>
+    </default>
+<!-- TOP LAYOUT END -->
+</layout>
+
+
+
+

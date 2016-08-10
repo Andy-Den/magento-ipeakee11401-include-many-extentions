@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <wordpress>
+            <groups>
+            	<extend>
+            		<fields>
+		            	<disqus translate="label" module="wordpress">
+		            		<label>Disqus Comment System</label>
+		            		<sort_order>48</sort_order>
+            				<frontend_type>select</frontend_type>
+            				<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+		            	</disqus>
+                        <!-- Balance Addition - Added shortname for disqus comments on category,home and search results pages -->
+                        <disqus_shortname translate="label" module="wordpress">
+                            <label>Disqus Shortname</label>
+                            <sort_order>49</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disqus_shortname>
+                        <disqus_publickey translate="label" module="wordpress">
+                            <label>Disqus Public Key</label>
+                            <sort_order>49</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disqus_publickey>
+            		</fields>
+            	</extend>
+            </groups>
+        </wordpress>
+    </sections>
+</config>

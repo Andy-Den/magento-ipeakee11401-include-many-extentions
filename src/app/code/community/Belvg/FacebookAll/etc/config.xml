@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg_FacebookAll
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+-->
+<config>
+    <modules>
+        <Belvg_FacebookAll>
+            <version>1.0.2</version>
+        </Belvg_FacebookAll>
+    </modules>
+    <frontend>
+        <routers>
+            <facebookall>
+                <use>standard</use>
+                <args>
+                    <module>Belvg_FacebookAll</module>
+                    <frontName>facebookall</frontName>
+                </args>
+            </facebookall>
+        </routers>
+        <layout>
+            <updates>
+                <facebookall>
+                    <file>FB-Twitter-Connect.xml</file>
+                </facebookall>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <models>
+            <facebookall>
+                <class>Belvg_FacebookAll_Model</class>
+                <resourceModel>facebookall_mysql4</resourceModel>
+            </facebookall>
+            <facebookall_mysql4>
+                <class>Belvg_FacebookAll_Model</class>
+                <entities>
+                    <facebookall>
+                        <table>belvg_facebook_customer</table>
+                    </facebookall>
+                </entities>
+            </facebookall_mysql4>
+        </models>
+        <resources>
+            <facebookall_setup>
+                <setup>
+                    <module>Belvg_FacebookAll</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </facebookall_setup>
+            <facebookall_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </facebookall_write>
+            <facebookall_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </facebookall_read>
+        </resources>
+        <blocks>
+            <facebookall>
+                <class>Belvg_FacebookAll_Block</class>
+            </facebookall>
+        </blocks>
+        <helpers>
+            <facebookall>
+                <class>Belvg_FacebookAll_Helper</class>
+            </facebookall>
+        </helpers>
+        <rewrite>
+            <Belvg_FacebookAll_Wishlist_Index>
+                <from><![CDATA[#^/wishlist/index/#]]>
+                </from>
+                <to>/facebookall/wishlist_index/</to>
+            </Belvg_FacebookAll_Wishlist_Index>
+        </rewrite>
+    </global>
+    <default>
+        <facebookall>
+            <like>
+                <enabled>0</enabled>
+                <faces>0</faces>
+                <width>450</width>
+                <color>light</color>
+                <layout>standart</layout>
+                <enabled>0</enabled>
+            </like>           
+            <share>
+                <enabled>0</enabled>
+                <color>light</color>
+                <font>arial</font>
+            </share>
+            <comments>
+                <enabled>0</enabled>    
+                <color>light</color>                
+                <posts>5</posts>                
+                <width>500</width>                
+            </comments>
+            <activity>
+                <enabled>0</enabled>
+                <width>200</width>
+                <height>300</height>  
+                <header>1</header>                        
+                <color>light</color>   
+                <font>arial</font>   
+                <recommendations>1</recommendations> 
+                <maxage>0</maxage>                
+            </activity>
+            <wishlist>
+                <note>I have added {product} to my wishlist.</note>
+            </wishlist>
+        </facebookall>
+    </default>
+</config> 

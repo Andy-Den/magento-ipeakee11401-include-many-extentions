@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config>
+	<acl>
+	    <resources>
+	      <admin>
+		    <children>
+		        <system>
+		            <children>
+		                <config>
+		                    <children>
+		                        <mailchimp translate="title" module="mailchimp">
+		                            <title>MailChimp Configuration</title>
+		                        </mailchimp>
+		                    </children>
+		                </config>
+		            </children>
+		        </system>
+		    </children>
+		</admin>
+	    </resources>
+	</acl>
+	<menu>
+    	<newsletter>
+        	<children>
+            	<mailchimp translate="title" module="mailchimp">
+                	<title>MailChimp</title>
+                    <sort_order>50</sort_order>
+                    <depends><module>Ebizmarts_mailchimp</module></depends>
+					<action>adminhtml/mailchimp_webHooks</action>
+	                <children>
+                        <help translate="title" module="mailchimp">
+                            <title>HELP</title>
+                            <action>adminhtml/mailchimp_help</action>
+                        </help>
+                        <sts translate="title" module="mailchimp">
+                            <title>STS</title>
+                            <action>adminhtml/mailchimp_sts</action>
+                        </sts>
+	                    <webhooks translate="title" module="mailchimp">
+	                        <title>WebHooks</title>
+	                        <action>adminhtml/mailchimp_webHooks</action>
+	                    </webhooks>
+	                    <ecomm360 translate="title" module="mailchimp">
+	                        <title>Ecommerce 360</title>
+	                        <action>adminhtml/mailchimp_ecomm360</action>
+	                    </ecomm360>
+	                    <ctemplate translate="title" module="mailchimp">
+	                        <title>Campaign templates</title>
+	                        <action>adminhtml/mailchimp_ctemplate</action>
+	                    </ctemplate>
+	                    <bulksync translate="title" module="mailchimp">
+	                        <title>Bulk synchronization</title>
+	                        <action>adminhtml/mailchimp_bulkSync</action>
+	                    </bulksync>
+	                    <subscribers translate="title" module="mailchimp">
+	                        <title>Synchronized subscribers</title>
+	                        <action>adminhtml/mailchimp_subscribers</action>
+	                    </subscribers>
+	                </children>
+                </mailchimp>
+            </children>
+        </newsletter>
+    </menu>
+</config>

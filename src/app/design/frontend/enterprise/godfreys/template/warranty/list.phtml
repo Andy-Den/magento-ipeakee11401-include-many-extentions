@@ -1,0 +1,49 @@
+<?php /* @var $this Balance_Warranty_Block_Link */ ?>
+
+<?php $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+		  $breadcrumbs->addCrumb('home', array('label'=>Mage::helper('cms')->__('Home'), 'title'=>Mage::helper('cms')->__('Home Page'), 'link'=>Mage::getBaseUrl()));
+		  $breadcrumbs->addCrumb('warranty', array('label'=>'Warranties', 'title'=>'Warranties'));
+		  echo $this->getLayout()->getBlock('breadcrumbs')->toHtml();?>
+
+<div class="page_wrap">
+<div class="page_content">
+        <h2 class="page_title page_title_gray"><?php echo $this->__('Warranty Registration') ?></h2>
+</div>
+
+<div class="warranty-registration">
+    <?php $warranties = $this->getWarranties(); ?>
+    <?php if (count($warranties) > 0): ?>
+    <p class="intro"><?php echo $this->__('Below are the products you have registered')?></p>
+    
+    <a href="<?php echo Mage::getUrl('warranty/registration'); ?>">
+        <button type="button" title="<?php echo $this->__('Register Products') ?>" class="button"><span><span><?php echo $this->__('Register Products') ?></span></span></button>
+    </a>
+    <div class="warranty-list">
+    <?php foreach($warranties as $_warranty): ?>
+    <div class="warranty-wrapper">
+        <div class="warranty-image">
+            <img src="<?php echo $this->getWarrantyImage($_warranty); ?>" />
+        </div>
+        <div class="warranty-info">
+            <h4><?php echo ucwords($_warranty->getModel()); ?></h4>
+            <p><span class="bold"><?php echo $this->__('Make'); ?>:</span> <?php echo ucwords($_warranty->getMake()); ?></p>
+            <p><span class="bold"><?php echo $this->__('Model'); ?>:</span> <?php echo ucwords($_warranty->getModel()); ?></p>
+            <p><span class="bold"><?php echo $this->__('Serial'); ?>:</span> <?php echo ucwords($_warranty->getSerial()); ?></p>
+            <p><span class="bold"><?php echo $this->__('Date of Purchase'); ?>:</span> <?php echo ucwords($_warranty->getDateOfPurchase()); ?></p>
+        </div>
+        <div class="warranty-time-left">
+            <p><?php echo $this->__('Time left on warranty:'); ?> <span><?php echo $_warranty->getTimeLeft(); ?> <?php echo $this->__('Months'); ?></span></p>
+        </div>
+    </div>
+    <?php endforeach; ?>
+    </div>
+    <?php else: ?>
+        <p class="intro"><?php echo $this->__('You have not yet registered any warranties')?></p>
+				<p class="intro"><a href="<?php echo Mage::getUrl('warranty/registration'); ?>">
+			        <button type="button" title="<?php echo $this->__('Register Products') ?>" class="button"><span><span><?php echo $this->__('Register Products') ?></span></span></button>
+			    </a></p><br /><br />
+		
+    <?php endif; ?>
+</div>
+</div>
+<div class="page_foot"></div>

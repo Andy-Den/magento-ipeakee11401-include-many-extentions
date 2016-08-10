@@ -1,0 +1,8 @@
+<?php    $_helper    = $this->helper('catalog/output'); 
+         $_category  = $this->getCurrentCategory();
+?>
+<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+    <div class="category-description std bottom">
+        <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+    </div>
+    <?php endif; ?>

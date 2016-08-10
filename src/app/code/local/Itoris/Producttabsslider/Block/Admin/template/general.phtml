@@ -1,0 +1,123 @@
+<?php /* @var $this Itoris_Producttabsslider_Block_Admin_General */ ?>
+<?php if($this->isGlobalAndStore()) { ?>
+    		<?php $block = Mage::app()->getLayout()->createBlock('adminhtml/store_switcher');
+    			echo $block->toHtml(); 
+    		?>
+<?php }?>
+<?php if($this->getScope()) {?>
+<div class="entry-edit" >
+<?php }?>
+<div class="entry-edit-head">
+	<?php if($this->getScope()){?>
+		<h4 class="icon-head head-edit-form fieldset-legend">Tabs Configuration</h4>
+	<?php }else{?>
+    	<h4 class="icon-head head-edit-form fieldset-legend">Brick to Tab association</h4>
+    <?php }?>
+    
+    <div class="form-buttons">
+    	<?php if($this->getScope()){?>
+    	<span style="line-height:18px; color:white;margin-right:10px;">
+    		<input type="checkbox" onchange="tabs.toogleGlobal(this);" style="position:relative; top:-2px;" name="tabs_use_global" 
+    			id="tabs_use_global" <?php if($this->isUseGlobal()){ echo 'checked="checked"';}?>/>
+    		<label for="tabs_use_global" style="color:white;">
+    			<?php if($this->getScope() == Itoris_Producttabsslider_Block_Admin_General::SCOPE_PRODUCT){?>
+    				Use Global
+    			<?php }
+    			if($this->getScope() == Itoris_Producttabsslider_Block_Admin_General::SCOPE_STORE){?>
+    				Use Default
+    			<?php }?>
+    		</label>
+    	</span>
+    	<?php } ?>
+    	<button id="addNewTabButton" <?php if($this->isUseGlobal()){ echo 'disabled="disabled" class="disabled"';}?> onclick="return tabs.edit();">Add New</button>
+    	<?php if(!$this->getScope()){?>
+    	<button id="addNewTabButton" onclick="return tabs.edit(null, 'custom');">Add Custom</button>
+    	<?php }?>
+    </div>
+</div>
+
+<div class="fieldset " id="base_fieldset" style="padding:0">
+    <div class="hor-scroll grid">
+    	<table cellspacing="0" class="data associations" style="border:0;">
+        <thead>
+			<tr class="headings">
+				<?php if(!$this->getScope()){?>
+				<th class=" no-link"><span class="nobr">Brick Alias</span></th>
+				<?php }?>
+				<th class=" no-link"><span class="nobr">Brick Title</span></th>
+				<th class=" no-link" style="width:40px; text-align:center;"><span class="nobr">Order</span></th>
+				<th class=" no-link" style="width:40px; text-align:center;"><span class="nobr">Enabled</span></th>
+				<th class=" no-link last" style="text-align:center;"><span class="nobr">Action</span></th>
+			</tr>
+		</thead>
+
+        <tbody>
+        	<?php
+				$tabs = array();
+        		foreach($this->getItems() as $key => $tab){
+        			$tabs[$key] = $tab;
+        		}
+        		if(count($tabs) > 0){
+	        		$prev = null;
+	        		$cur = reset($tabs);
+	        		$next = next($tabs);
+	        		while($cur !== false){?>
+	        		<tr id="association-no-<?php echo $cur->getId() ?>">
+	        			<?php if(!$this->getScope()){?>
+		        		<td><div class="alias"><?php echo htmlspecialchars($cur->getAlias() == '{{custom_global_alias}}' ? '' : $cur->getAlias());?></div></td>
+		        		<?php }?>
+		        		<td><div class="title"><?php echo htmlspecialchars($cur->getTitle());?></div></td>
+		        		<td style="text-align:center;"><div class="order">
+		        			</div>
+		 				</td>
+		 				<td style="text-align:center;"><div class="enabled">
+		 					<?php if($cur->getEnabled()){?>
+		 						<img onclick="tabs.toogleEnabled(<?php echo $cur->getId() ?>)" src="<?php echo Mage::getBaseUrl('skin')?>adminhtml/default/default/images/accordion_open.png"  />
+		 					<?php }else{?>
+		 						<img onclick="tabs.toogleEnabled(<?php echo $cur->getId() ?>)" src="<?php echo Mage::getBaseUrl('skin')?>adminhtml/default/default/images/accordion_close.png"  />
+		 					<?php }?>
+		 				</div></td>
+		        		<td style="width:1px;" class="nobr">
+		        		    <button onclick="return tabs.edit(<?php echo $cur->getId() ?>)">Edit</button>
+		        		    <?php if(!$cur->getInh()){ ?>
+		        				<button onclick="return deleteDialot.confirm(<?php echo $cur->getId() ?>)">Delete</button>
+		        			<?php }else{?>
+		        				<button disabled="disabled" class="disabled" onclick="return deleteDialot.confirm(<?php echo $cur->getId() ?>)">Delete</button>
+		        			<?php }?>
+		        		</td>
+		            </tr>
+	        		<?php
+	        			$prev = $cur;
+	        			$cur = $next;
+	        			$next = next($tabs); 
+	        		} 
+        		}?>
+        </tbody>
+     
+    </table>
+    <script type="text/javascript">
+    	Event.observe(window, 'load', function() {
+			tabs.skinUrl = '<?php echo Mage::getBaseUrl('web') ?>skin/adminhtml/default/default/';
+			
+    		tabs.setOrder('<?php echo $this->getOrders();?>'.evalJSON());    	
+    		tabs.setCallUrl('<?php echo $this->getCallUrl();?>');  
+    		tabs.setScope('<?php echo $this->getScope();?>');
+    		tabs.setProductId(<?php echo $this->getProductId();?>);
+    		tabs.setStoreId(<?php echo $this->getStoreId();?>);
+			<?php if(method_exists('Mage', 'getVersionInfo')){ ?>
+				tabs.setEditorParams(<?php echo Mage::getSingleton('cms/wysiwyg_config')->getConfig()->toJson()?>);
+				tabs.editorParams.files_browser_window_url = '<?php echo Mage::getModel('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index'); ?>';
+			<?php } else { ?>
+				tabs.setEditorParams(false);
+			<?php } ?>
+    	});
+    </script>
+   	<div style="display:none;"><div id="buttonsshort_description_editor"></div></div>
+    </div>
+</div>
+<?php if($this->getScope()) {?>
+</div>
+<?php }?>
+<style type="text/css">
+	.itoris-producttabsslider-admin-index-index .icon-head{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAxBJREFUeNqUVElMU1EUPe/9/9vSFmwYFDUKgoKAaKJEjRqHhe4MJBLCQlATpxXGjTujJkZd6YIlJo6JiZI4xkQX6tYooqQMggyFllCLlFJa6J+e97c1SCRNvM1Nbu9w3r3n3ffZcNiArgPvfcYDAE1lHo59pRL+V+QvfeOYmk1gIOLYXV66vKdzwqjLtqPfITE4bYDLzmCXAYUDEimjnyIvAeQdDOLzkPFtS03pOZnjhcvBvn8OmBAMwxT/KQCTkZI9SNpJ1p3mrXIky8YWAbGSxof26k1lH1VNryqvXDNXvjY/2+aQkuNa5eLfw2eFwM36avlSvnMBTCqoaOhvPLTGH4iZG4LjM3Zvvx+hSAKTU7OYnpmHZ5kTksLALdBUnY0x7OueMNcvd7GnnqyUk5U3PwkYqlqwqmSVsnJFHtSEBs00qZASiBOrJbfbiXVF+Sgq9CRn/NMmpbXsLZZaqwo5OBdoUxSbEhyZwNfOXkTDcWQRWZwI5YTFCCwaj8PbO4pP3lEI3bQYTwrnuPF6QM9L2qQ/koYkgxscYz4/erxDCIyFEI3GafhUkiU/g9P40ueHZDWb6sopS2j9A/T0byYtQNMgRqdnEfAF4fseQGJOSzVB2RPBMIb94TBLr5qDs7qeIFHx7NrBGP1/tdSSWcWJeRVjIwQ2r5GDSCft7BqxKRLctFdtNN7Im379AM/NsVs1ZzJtrWkI+IbGwYwUP7KNux497zhModME1kHYQ9xpl/CprXacnMczgQm6olAoQh1ZN8QtkmrToSa3g/m4Ikn0BGR03T1yj5wnMoH9Ck7GTCHeEj9xVcPBkzXKAg2C1pSCaU4Yqo61F5N5mdQ60bOoK9oiYZj7N2/b2B2aUjveX91etAjo3zmsEoZNx9pr013WLoTMrorNG7bQQ8/5cGXnTEYgYZ1NK6CbAqqmYcfZl6vJ/ZiY2aULI8wYy73eshd1NYXI3FFa5hI6EpqBGO1RhK6//uK787Ho3Cmny1bZe79hUS7PRG4WfYg8bnvy7amaidsX9tzSdXF0qdzfAgwADvFCQ1em+qAAAAAASUVORK5CYII=);}
+</style>

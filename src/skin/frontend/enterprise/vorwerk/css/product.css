@@ -1,0 +1,110 @@
+.product-title {
+    padding: 24px 24px 50px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 5px #ccc;
+    -moz-box-shadow: 0 0 5px #ccc;
+    box-shadow: 0 0 15px #ccc;
+}
+.product-view {
+    width: auto;
+    margin: 0;
+    float: none;
+    border: 0 none;
+    background: none;
+}
+.product-view .product-shop .add-to-box {
+    margin: 40px 0;
+    padding-bottom: 25px;
+    background: url('../images/vorwerk/nav/trennlinie.png') bottom repeat-x;
+}
+.product-view .product-shop .add-to-cart {
+    padding: 0;
+}
+.product-view .description * + h3 {
+    margin-top: 30px;
+}
+.product-view .product-img-box,
+.product-view .product-shop,
+.product-view .product-collateral {
+    float: none;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+.product-view .product-collateral {
+    margin-top: 40px;
+    padding-top: 25px;
+    background: url('../images/vorwerk/nav/trennlinie.png') 0 0 no-repeat;
+}
+.product-view .product-collateral h2 {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+
+.box-collateral {
+    background: none;
+}
+.box-related h3 {
+    margin-bottom: 15px;
+}
+.box-related .item {
+    margin-bottom: 30px;
+}
+.box-related .product-details {
+    margin-left: 83px;
+}
+#MainContentContainer .box-related h4 {
+    margin: 0;
+    text-transform: none;
+    font-size: 11px;
+}
+.box-related h4 a,
+.box-related h4 a:hover,
+.box-related h4 a:focus {
+    color: #595552;
+    text-decoration: none;
+}
+.box-related .product-short-description {
+    margin-bottom: 10px;
+}
+
+
+.product-video a {
+    position: relative;
+    display: block;
+}
+.product-video a:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    background: url('../images/play.png') no-repeat;
+}
+.product-video img {
+    display: block;
+    width: 100%;
+}
+
+
+.product-sidebar-content-item {
+    overflow: hidden;
+}
+.product-sidebar-content-item + .product-sidebar-content-item {
+    margin-top: 20px;
+    padding-top: 25px;
+    background: url('../images/vorwerk/nav/trennlinie.png') top repeat-x;
+}
+.product-sidebar-content-item p + p {
+    margin-top: 10px;
+}
+.sub-description{margin-bottom: 30px;float:left;}
+.image-description{width:33%;float:left;}
+.image-description img{margin-top:5px; max-width: 100%;padding:3px 3px 3px 3px;-moz-box-shadow: 3px 3px 3px 3px #ccc;-webkit-box-shadow: 3px 3px 3px 3px #ccc; box-shadow: 3px 3px 3px 3px #ccc;}
+.content-description{width: 64%;float:left;padding-left: 3%;}
+
+

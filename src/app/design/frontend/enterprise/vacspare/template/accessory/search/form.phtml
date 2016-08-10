@@ -1,0 +1,75 @@
+<?php
+/**
+ * Accessory search mini form
+ *
+ * @see Balance_Accessory_Block_Search_Form
+ */
+?>
+
+<div class="accessory-search accessory-search-large">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+    <form id="accessory-search-form" action="<?php echo $this->getUrl('catalogsearch/advanced/result'); ?>" method="get">
+        <div class="fieldset">
+            <ul class="form-list">
+                <?php foreach ($this->getSearchAttributes() as $_attribute): ?>
+                    <?php $_code = $_attribute->getAttributeCode(); ?>
+                    <li>
+                        <label for="<?php echo $_code; ?>">
+							<?php echo "Select Vacuum ".$_attribute->getFrontendLabel(); ?>
+						</label>
+                        <?php switch ($this->getAttributeInputType($_attribute)):
+								case 'select': ?>
+									<div class="input-box selectstylesheild" id="select-wrapper-<?php echo $_code; ?>">
+										<span class="selectstylesheild-text"> </span>
+										<?php echo $this->getAttributeSelectElement($_attribute); ?>
+										<span class="selectstylesheild-icon"> </span>
+									</div>
+                                <?php break; ?>
+                        <?php endswitch; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <button type="submit" title="<?php echo $this->__('Search') ?>" class="button"><span><span><?php echo $this->__('GO') ?></span></span></button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    
+    var form = $('accessory-search-form');
+    var brandDropDown = form['accessory_brands'];
+    Event.observe(brandDropDown, 'change', function()
+    {
+        //Element.show('accessory-please-wait');
+        $('select-wrapper-accessory_models').innerHTML = "<img src=\"<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>\" alt=\"\" class=\"v-middle\" />";
+        
+        var actionurl = '<?php echo $this->getUrl('accessory/filter/byBrand') ?>';
+        var form = $('accessory-search-form');
+        var selectedBrand = form['accessory_brands'];
+        new Ajax.Request(actionurl, {
+            method: 'post',
+            parameters: "accessory_brands=" + selectedBrand.getValue(),
+            onComplete: function(transport) {
+                //Element.hide('accessory-please-wait');
+                $('select-wrapper-accessory_models').innerHTML = "";
+                $('select-wrapper-accessory_models').innerHTML = "<span class='selectstylesheild-text'> </span>"+transport.responseText+"<span class='selectstylesheild-icon'> </span>";
+				jQuery('#select-wrapper-accessory_models .selectstylesheild-text').text('Select Model');
+				jQuery('.selectstylesheild select').change(function()
+				{
+					jQuery('.selectstylesheild select option').each(function()
+					{
+						if(jQuery(this).is(":checked"))
+						{
+							var srt=jQuery(this).text();
+							jQuery(this).parent().prev('.selectstylesheild-text').text(srt);
+						}
+					});
+				});
+            }
+        });
+    });
+    
+    //]]>
+</script>

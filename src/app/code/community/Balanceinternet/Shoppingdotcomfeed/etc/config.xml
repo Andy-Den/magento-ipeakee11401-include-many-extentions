@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Balanceinternet_Shoppingdotcomfeed>
+            <version>0.1.1</version>
+        </Balanceinternet_Shoppingdotcomfeed>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+				<args>
+					<modules>
+						<shoppingdotcomfeed before="Mage_Adminhtml">Balanceinternet_Shoppingdotcomfeed_Adminhtml</shoppingdotcomfeed>
+					</modules>
+				</args>
+			</adminhtml>   
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <catalog module="catalog">
+                <children>
+                    <shoppingdotcomfeed translate="title" >
+                        <title>Shopping.com</title>
+                        <sort_order>71</sort_order>         
+                        <children>
+                            <add_feed module="shoppingdotcomfeed">
+                                <title>Add Feeds</title>
+                                <sort_order>1</sort_order>
+                                <action>adminhtml/shoppingdotcomfeed_shoppingdotcomfeed/new</action>
+                            </add_feed>
+                            <manage_feeds module="shoppingdotcomfeed">
+                                <title>Manage Feeds</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/shoppingdotcomfeed_shoppingdotcomfeed/index</action>
+                            </manage_feeds>  
+                            <help_support module="shoppingdotcomfeed">
+                                <title>Help / Support</title>
+                                <sort_order>3</sort_order>
+                                <action>adminhtml/shoppingdotcomfeed_shoppingdotcomfeed/support</action>
+                            </help_support>
+                        </children>
+                    </shoppingdotcomfeed>
+                </children>
+            </catalog>
+        </menu>
+        <!--
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <Balanceinternet_Shoppingdotcomfeed>
+                            <title>Shopping.com Feed Module</title>
+                            <sort_order>10</sort_order>
+                        </Balanceinternet_Shoppingdotcomfeed>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        -->
+        <layout>
+            <updates>
+                <shoppingdotcomfeed>
+                    <file>shoppingdotcomfeed.xml</file>
+                </shoppingdotcomfeed>
+            </updates>
+        </layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <shoppingdotcomfeed>
+                <class>Balanceinternet_Shoppingdotcomfeed_Model</class>
+                <resourceModel>shoppingdotcomfeed_mysql4</resourceModel>
+            </shoppingdotcomfeed>
+            <shoppingdotcomfeed_mysql4>
+                <class>Balanceinternet_Shoppingdotcomfeed_Model_Mysql4</class>
+                <entities>
+                    <feedportal>
+                        <table>sdc_feedportal</table>
+                    </feedportal>
+                    <feed>
+                        <table>sdc_feed</table>
+                    </feed>                    
+                    <feedproducts>
+                        <table>sdc_feedproducts</table>
+                    </feedproducts>
+                    <updatefrequency>
+                        <table>sdc_updatefrequency</table>
+                    </updatefrequency>
+                    <shoppingdotcomfeed>
+                        <table>sdc_feed</table>
+                    </shoppingdotcomfeed>
+                </entities>
+            </shoppingdotcomfeed_mysql4>
+
+        </models>
+        <resources>
+            <shoppingdotcomfeed_setup>
+                <setup>
+                    <module>Balanceinternet_Shoppingdotcomfeed</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </shoppingdotcomfeed_setup>
+            <shoppingdotcomfeed_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </shoppingdotcomfeed_write>
+            <shoppingdotcomfeed_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </shoppingdotcomfeed_read>
+        </resources>
+        <blocks>
+            <shoppingdotcomfeed>
+                <class>Balanceinternet_Shoppingdotcomfeed_Block</class>
+            </shoppingdotcomfeed>
+        </blocks>
+        <helpers>
+            <shoppingdotcomfeed>
+                <class>Balanceinternet_Shoppingdotcomfeed_Helper</class>
+            </shoppingdotcomfeed>
+        </helpers>
+    </global>
+    <crontab>
+        <jobs>       
+            <balanceinternet_shoppingdotcomfeed_send_daily>
+                <schedule>
+                    <cron_expr>0 0 * * *</cron_expr><!-- Midnight -->
+                </schedule>
+                <run>
+                    <model>shoppingdotcomfeed/observer::processCronDaily</model>
+                </run>
+            </balanceinternet_shoppingdotcomfeed_send_daily>
+            <balanceinternet_shoppingdotcomfeed_send_weekly>
+                <schedule>
+                    <cron_expr>0 0 * * 0</cron_expr><!-- Sunday Midnight -->
+                </schedule>
+                <run>
+                    <model>shoppingdotcomfeed/observer::processCronWeekly</model>
+                </run>
+            </balanceinternet_shoppingdotcomfeed_send_weekly>
+        </jobs>
+    </crontab>    
+</config>

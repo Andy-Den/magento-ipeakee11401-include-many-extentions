@@ -1,0 +1,36 @@
+<?php
+/**
+ * Celebros Qwiser - Magento Extension
+ *
+ * @category    Celebros
+ * @package     Celebros_Salesperson
+ * @author		Celebros - Pavel Feldman (email: MagentoSupport@celebros.com)
+ *
+ */
+?>
+<form action="<?php echo $this->answerQuestionsUrl()?>" id="giftFinderForm" method="post">	
+    <div id="cel_ddlZone" class="cel_ddlZone">
+    	<?php if($this->hasSearchResults()):?>
+	        <?php $_filters = $this->getFilters();?>
+			<?php foreach ($_filters as  $_filter):?>
+				<?php 
+				$bPriceQuestion = $this->isPriceQuestion($_filter);
+				$priceSliderDivClass = $bPriceQuestion ? "priceSliderDiv" : "";
+				?>
+				<div class="cel_selectBlock <?php echo $priceSliderDivClass?>">
+					<div class="cel_selectBlockL"><?php echo $_filter->SideText?>:</div>
+					<div class="cel_selectBlockR">
+					<?php if($this->isPriceQuestion($_filter)):?>
+						<?php echo $this->getChildHtml('giftfinder_price_question');?>	
+					<?php elseif($this->isRadioButtonsQuestion($_filter)):?>
+						<?php echo $this->getFilterHtmlRadioButtons($_filter);?>					
+					<?php else:?>
+						<?php echo $this->getFilterHtmlSelect($_filter);?>
+					<?php endif;?>	
+					</div>
+				</div>
+			<?php endforeach;?>	
+		<button type="submit" title="<?php echo Mage::helper('salesperson')->__('Go Now!') ?>" class="button"><span><span><?php echo Mage::helper('salesperson')->__('Go Now!') ?></span></span></button>
+		<?php endif;?>
+    </div>
+</form>

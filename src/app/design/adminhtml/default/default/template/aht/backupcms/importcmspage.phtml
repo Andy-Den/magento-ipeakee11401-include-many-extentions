@@ -1,0 +1,23 @@
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody><tr>
+            <td style="width:50%;"><h3 class="icon-head head-adminhtml-backupcms">Import CMS Page</h3></td>
+            <td class="form-buttons"></td>
+        </tr>
+    </tbody>
+	</table>
+</div>
+<div class="import-content">
+	<form action="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/backupcms_backup/importcmspage')?>" name="importcmspage" method="POST" enctype="multipart/form-data">
+		<div style="margin:10px 0">
+			<label style="display:block;margin: 0 0 5px;">Select Store Import</label>
+			<?php echo $this->getStores();?>
+		</div>
+		<input type="file" name="csvimport" />
+		<input type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey()?>" name="form_key"/>
+		<button class="scalable" type="submit" title="Submit">
+			<span><span><span>Import</span></span></span>
+		</button>
+		<p class="notice">Only CSV File!</p>
+	</form>
+</div>

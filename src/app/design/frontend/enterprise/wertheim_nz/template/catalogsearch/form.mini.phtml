@@ -1,0 +1,16 @@
+<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+    <div class="form-search">
+        <input value="Search products here..." id="keywords" type="text" onkeyup="lookup(this.value);" onfocus="if (this.value == 'Search products here...') {this.value = '';}" onblur="if (this.value == '') {this.value ='Search products here...';}" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" class="input-text" />
+        <button type="submit" title="<?php echo $this->__('Go') ?>" class="go-button"><span><span>&nbsp;<?php // echo $this->__('Go') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    jQuery('#search_mini_form').submit(function (e) {
+        if (jQuery('#keywords').val() == 'Search products here...') {
+            e.preventDefault();
+            return false;
+        }
+    });
+    //]]>
+</script>

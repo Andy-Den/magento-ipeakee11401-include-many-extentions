@@ -1,0 +1,103 @@
+<?php
+/**
+ * IDEALIAGroup srl
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.idealiagroup.com/magento-ext-license.html
+ *
+ * @category   IG
+ * @package    IG_LightBox2
+ * @copyright  Copyright (c) 2011-2012 IDEALIAGroup srl (http://www.idealiagroup.com)
+ * @license    http://www.idealiagroup.com/magento-ext-license.html
+ */
+?>
+<div id='product_pictures'>
+<?php
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/output');
+
+$imageUrl = $this->helper('catalog/image')->init($_product, 'image');
+if ($this->getMaxWidth() || $this->getMaxHeight())
+{
+	$imageUrl
+		->keepAspectRatio(true)
+		->keepFrame(false)
+		->constrainOnly(true)
+		->resize($this->getMaxWidth(), $this->getMaxHeight());
+}
+
+?>
+<div id="product_large_picture">
+	<a class="ig_lightbox2" rel="ig_lightbox2[gal]" href="<?php echo $imageUrl ?>" title="<?php echo $this->htmlEscape($this->getLabel()) ?>">
+		<img
+			id="image"
+			src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($this->getImageWidth(), $this->getImageHeight())->keepFrame($this->getImageFrame()) ?>"
+			alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>"
+			title="<?php echo $this->htmlEscape($this->getImageLabel()) ?>"
+		/>
+	</a>
+	<span class="img-zoom"><span class='icon'></span>Click Image to Zoom</span>
+</div>
+
+<?php if (count($this->getGalleryImages()) > 1): ?>
+<div id="product_thumbs" class="more-views">
+	<span class="instruction">More Images</span>
+    <div id="carousel-wrapper-thumb" class="carousel-thumb ">
+		<div class='container-carousel' id="container-carousel">
+			<ul id="carousel-content-thumb" class="carousel-thumb ">
+			<?php foreach ($this->getGalleryImages() as $_image): ?>
+			<?php
+				if ($_product->getImage() ==  $_image->getFile())
+					continue;
+			
+				$imageUrl = $this->helper('catalog/image')
+					->init($this->getProduct(), 'thumbnail', $_image->getFile());
+				
+				if ($this->getMaxWidth() || $this->getMaxHeight())
+				{
+					$imageUrl
+						->keepAspectRatio(true)
+						->keepFrame(false)
+						->constrainOnly(true)
+						->resize($this->getMaxWidth(), $this->getMaxHeight());
+				}
+			?>
+				<li class='item'>
+					<a onclick="addImageToView('<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize($this->getImageWidth(), $this->getImageHeight()); ?>')" class="ig_lightbox2" rel="ig_lightbox2[gal]" href="<?php echo $imageUrl ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>">
+						<img  src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($this->getThumbnailWidth(), $this->getThumbnailHeight())->keepFrame($this->getThumbnailFrame()); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+					</a>
+				</li>
+			<?php endforeach; ?>
+			</ul>
+		</div>
+		<div class="controls">
+			<a href="javascript:" class="carousel-control ico-next" rel="next" style="float: right">&nbsp;</a>
+			<a href="javascript:" class="carousel-control ico-prev" rel="prev">&nbsp;</a>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+
+<script type="text/javascript">
+	function addImageToView(img)
+	{
+		jQuery('#image').attr('src',img);
+	}
+	new Carousel($('container-carousel'),
+		$('container-carousel').select('.item'),
+			$('product_thumbs').select('.controls a'),
+		{ wheel: false ,visibleSlides:6 }
+	);
+</script>
+<script type="text/javascript">
+//<![CDATA[
+jQuery('.ig_lightbox2').lightBox(<?php echo json_encode($this->getParams()) ?>);
+//]]>
+
+</script>
+
+</div>

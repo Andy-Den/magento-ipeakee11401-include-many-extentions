@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * PageCache powered by Varnish
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the PageCache powered by Varnish License
+ * that is bundled with this package in the file LICENSE_VARNISH_CACHE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.phoenix-media.eu/license/license_varnish_cache.txt
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to support@phoenix-media.eu so we can send you a copy immediately.
+ *
+ * @category   Phoenix
+ * @package    Phoenix_VarnishCacheEnterprise
+ * @copyright  Copyright (c) 2011 PHOENIX MEDIA GmbH & Co. KG (http://www.phoenix-media.eu)
+ * @license    http://www.phoenix-media.eu/license/license_varnish_cache.txt
+ */
+-->
+<config>
+    <modules>
+        <Phoenix_VarnishCacheEnterprise>
+            <version>3.1.1</version>
+        </Phoenix_VarnishCacheEnterprise>
+    </modules>
+    <global>
+        <blocks>
+            <varnishcacheenterprise>
+                <class>Phoenix_VarnishCacheEnterprise_Block</class>
+            </varnishcacheenterprise>
+            <varnishcache>
+                <rewrite>
+                    <adminhtml_system_config_fieldset_versioninfo>Phoenix_VarnishCacheEnterprise_Block_Adminhtml_System_Config_Fieldset_Versioninfo</adminhtml_system_config_fieldset_versioninfo>
+                </rewrite>
+            </varnishcache>
+        </blocks>
+        <helpers>
+            <varnishcacheenterprise>
+                <class>Phoenix_VarnishCacheEnterprise_Helper</class>
+            </varnishcacheenterprise>
+        </helpers>
+        <models>
+            <varnishcacheenterprise>
+                <class>Phoenix_VarnishCacheEnterprise_Model</class>
+                <resourceModel>varnishcacheenterprise_mysql4</resourceModel>
+            </varnishcacheenterprise>
+            <varnishcacheenterprise_mysql4>
+                <class>Phoenix_VarnishCacheEnterprise_Model_Mysql4</class>
+            </varnishcacheenterprise_mysql4>
+        </models>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Phoenix_VarnishCacheEnterprise before="Mage_Adminhtml">Phoenix_VarnishCacheEnterprise_Adminhtml</Phoenix_VarnishCacheEnterprise>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <events>
+            <core_config_backend_design_exception_save_commit_after>
+                <observers>
+                    <varnishcacheenterprise>
+                        <class>varnishcacheenterprise/observer</class>
+                        <method>showVclUpdateMessage</method>
+                    </varnishcacheenterprise>
+                </observers>
+            </core_config_backend_design_exception_save_commit_after>
+        </events>
+        <translate>
+            <modules>
+                <Phoenix_VarnishCacheEnterprise>
+                    <files>
+                        <default>Phoenix_VarnishCacheEnterprise.csv</default>
+                    </files>
+                </Phoenix_VarnishCacheEnterprise>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <system>
+            <varnishcache>
+                <version>3.0</version>
+                <admin_port>6082</admin_port>
+            </varnishcache>
+            <varnishcache_crawler>
+                <enabled>0</enabled>
+                <design_exceptions>0</design_exceptions>
+                <multicurrency>0</multicurrency>
+                <threads_num>1</threads_num>
+                <cron_expr>30 1 * * *</cron_expr>
+            </varnishcache_crawler>
+         </system>
+    </default>
+    <crontab>
+        <jobs>
+            <varnishcache_crawler>
+                <run><model>varnishcacheenterprise/crawler::run</model></run>
+            </varnishcache_crawler>
+        </jobs>
+    </crontab>
+</config>

@@ -1,0 +1,178 @@
+<?php
+//Criteo OneTag
+$ctoObserver = 'criteo_onetag_parameters/observer';
+$ctoMage = Mage::getSingleton($ctoObserver);
+
+//General settings
+$ctoCurrentPartnerId 	= $ctoMage->ctoPartnerID();
+$ctoIdType 				= $ctoMage->ctoProductID();
+$ctoEmail 				= $ctoMage->ctoCrossDevice();
+
+//Tag settings
+$ctoIsHomePage          = $ctoMage->ctoIsHomePage();
+$ctoIsCategoryPage      = $ctoMage->ctoIsCategoryPage();
+$ctoIsSearchPage        = $ctoMage->ctoIsSearchPage();
+$ctoIsProductPage       = $ctoMage->ctoIsProductPage();
+$ctoIsBasketPage        = $ctoMage->ctoIsBasketPage();
+$ctoIsCheckoutPage      = $ctoMage->ctoIsCheckoutPage();
+$ctoIsConfirmationPage  = $ctoMage->ctoIsConfirmationPage();
+$ctoUserId              = $ctoMage->ctoGetUserId();
+$ctoSearchQuery         = $ctoMage->ctoGetSearchQuery();
+$ctoTransactionId       = $ctoMage->ctoGetTransactionId();
+$ctoProductSku          = $ctoMage->ctoGetProductSku();
+$ctoProductId           = $ctoMage->ctoGetProductId();
+$ctoProductList         = $ctoMage->ctoGetProductList();
+
+
+
+if($ctoIdType == 0) {
+	$ctoProductIdType = $ctoProductId;
+	$ctoProductIdTypeName = "id";
+} else {
+	$ctoProductIdType = $ctoProductSku;
+	$ctoProductIdTypeName = "sku";
+}
+
+$ctoLoader='<script>(function(d,s){var js=d.getElementsByTagName(s)[0];var r=d.createElement(s);r.async=true;r.src=("https:"==location.protocol?"https:":"http:")+"//static.criteo.net/js/ld/ld.js";js.parentNode.insertBefore(r,js)})(document,"script")</script>'
+
+?>
+
+<!-- Criteo OneTag Start -->
+<?php if($ctoCurrentPartnerId != 0 && $ctoCurrentPartnerId != "") {?>
+ <?php if ($ctoIsConfirmationPage) :?>
+
+<!-- Confirmation page tag -->
+<?php echo $ctoLoader; ?>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+ { event: "setAccount", account: <?php echo $ctoCurrentPartnerId; ?> },
+ <?php if ($ctoUserId != NULL && $ctoEmail == 1) :?>
+ { event: "setHashedEmail", email: "<?php echo $ctoUserId; ?>" },
+ <?php endif;?>
+ { event: "setSiteType", type: (/iPad/.test(navigator.userAgent) ? "t" : (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile/.test(navigator.userAgent) ? "m" : "d"))},
+ { event: "trackTransaction" , id: 
+<?php echo json_encode($ctoTransactionId); ?>,
+ item: [
+ <?php $item_number = 0 ?>
+ <?php while (isset($ctoProductList[$item_number])) :?>
+ { id: 
+<?php echo json_encode($ctoProductList[$item_number]['product'][$ctoProductIdTypeName]); ?>, 
+price:
+ <?php echo json_encode($ctoProductList[$item_number]['product']['unit_final_price']); ?>, 
+quantity:
+ <?php echo json_encode($ctoProductList[$item_number]['quantity']); ?>
+ }
+ <?php $item_number++ ?>
+ <?php if (isset($ctoProductList[$item_number])) :?>
+ ,
+ <?php endif;?>
+ <?php endwhile;?>
+ ]});
+ </script>
+ <?php elseif ($ctoIsHomePage) :?>
+
+<!-- Home page tag -->
+<?php echo $ctoLoader; ?>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+ { event: "setAccount", account: <?php echo $ctoCurrentPartnerId; ?> },
+ <?php if ($ctoUserId != NULL && $ctoEmail == 1) :?>
+ { event: "setHashedEmail", email: "<?php echo $ctoUserId; ?>" },
+ <?php endif;?>
+ { event: "setSiteType", type: (/iPad/.test(navigator.userAgent) ? "t" : (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile/.test(navigator.userAgent) ? "m" : "d"))},
+ { event: "viewHome" }
+);
+</script>
+ <?php elseif ($ctoIsCategoryPage) :?>
+
+<!-- Listing page tag -->
+<?php echo $ctoLoader; ?>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+ { event: "setAccount", account: <?php echo $ctoCurrentPartnerId; ?> },
+ <?php if ($ctoUserId != NULL && $ctoEmail == 1) :?>
+ { event: "setHashedEmail", email: "<?php echo $ctoUserId; ?>" },
+ <?php endif;?>
+ { event: "setSiteType", type: (/iPad/.test(navigator.userAgent) ? "t" : (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile/.test(navigator.userAgent) ? "m" : "d"))},
+ { event: "viewList",
+ item: [
+<?php $item_number = 0 ?>
+<?php while (isset($ctoProductList[$item_number]) && $item_number < 3) :?>
+<?php echo json_encode($ctoProductList[$item_number][$ctoProductIdTypeName]); ?>
+<?php $item_number++ ?>
+<?php if (isset($ctoProductList[$item_number]) && $item_number < 3) :?>
+,
+<?php endif;?>
+<?php endwhile;?>
+]});
+</script>
+ <?php elseif ($ctoIsSearchPage) :?>
+
+<!-- Listing page tag -->
+<?php echo $ctoLoader; ?>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+ { event: "setAccount", account: <?php echo $ctoCurrentPartnerId; ?> },
+ <?php if ($ctoUserId != NULL && $ctoEmail == 1) :?>
+ { event: "setHashedEmail", email: "<?php echo $ctoUserId; ?>" },
+ <?php endif;?>
+ { event: "setSiteType", type: (/iPad/.test(navigator.userAgent) ? "t" : (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile/.test(navigator.userAgent) ? "m" : "d"))},
+ { event: "viewList",
+ item: []
+<?php if ($ctoSearchQuery != NULL) :?>
+, keywords: <?php echo json_encode($ctoSearchQuery); ?> 
+<?php endif;?>
+}
+);
+</script>
+ <?php elseif ($ctoIsProductPage) :?>
+
+<!-- Product page tag -->
+<?php echo $ctoLoader; ?>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+ { event: "setAccount", account: <?php echo $ctoCurrentPartnerId; ?> },
+ <?php if ($ctoUserId != NULL && $ctoEmail == 1) :?>
+ { event: "setHashedEmail", email: "<?php echo $ctoUserId; ?>" },
+ <?php endif;?>
+ { event: "setSiteType", type: (/iPad/.test(navigator.userAgent) ? "t" : (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile/.test(navigator.userAgent) ? "m" : "d"))},
+ { event: "viewItem", item: <?php echo json_encode($ctoProductIdType); ?>}
+);
+</script>
+ <?php elseif ($ctoIsBasketPage or $ctoIsCheckoutPage) :?>
+
+<!-- Basket page tag -->
+<?php echo $ctoLoader; ?>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+ { event: "setAccount", account: <?php echo $ctoCurrentPartnerId; ?> },
+ <?php if ($ctoUserId != NULL && $ctoEmail == 1) :?>
+ { event: "setHashedEmail", email: "<?php echo $ctoUserId; ?>" },
+ <?php endif;?>
+ { event: "setSiteType", type: (/iPad/.test(navigator.userAgent) ? "t" : (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile/.test(navigator.userAgent) ? "m" : "d"))},
+ { event: "viewBasket", item: [
+ <?php $item_number = 0 ?>
+ <?php while (isset($ctoProductList[$item_number])) :?>
+ { id: 
+<?php echo json_encode($ctoProductList[$item_number]['product'][$ctoProductIdTypeName]); ?>, 
+price:
+ <?php echo json_encode($ctoProductList[$item_number]['product']['unit_final_price']); ?>, 
+quantity:
+ <?php echo json_encode($ctoProductList[$item_number]['quantity']); ?>
+ }
+ <?php $item_number++ ?>
+ <?php if (isset($ctoProductList[$item_number])) :?>
+ ,
+ <?php endif;?>
+ <?php endwhile;?>
+	 ]});
+ </script>
+ <?php endif;?>
+<?php }?>
+<!-- Criteo OneTag End -->

@@ -1,0 +1,39 @@
+<?php
+    $reviews = Mage::getModel('review/review')
+    ->getResourceCollection()
+    ->addStoreFilter(Mage::app()->getStore()->getId())
+    ->addStatusFilter(Mage_Review_Model_Review::STATUS_APPROVED)
+    ->setDateOrder()
+    ->addRateVotes();
+?>
+
+<div class="review-wrapper">
+    <div class="reviews-title">REVIEWS</div>
+    <ul id="review-carousel" class="jcarousel-skin2-tango">
+        <?php
+         $count = 1;
+         if (count($reviews) > 0) {
+             foreach ($reviews->getItems() as $review): ?>
+                <?php $product = Mage::getModel('catalog/product')->load($review->getentity_pk_value()); ?>
+                 <li class="review-item">
+                     <div class="product-name"><?php echo $productName = $product->getName(); ?></div>
+                     <div class="title">"<?php echo $review->getTitle(); ?>"</div>
+                         <?php foreach ($review->getRatingVotes() as $vote): ?>
+                            <div class="rating-box"><div class="rating" style="width:<?php echo $vote->getPercent(); ?>%;"></div></div>
+                         <?php endforeach; ?>
+                     <br />
+                     <?php if(strlen($review->getDetail())> 200): ?>
+			<div class="description"><?php echo substr($review->getDetail(),0,200); ?>...<a href="<?php echo $product->getProductUrl() ?>?review-count=<?php echo $count ?>#review<?php echo $count ?>"> Read more...</a></div>
+		    <?php else: ?>
+                        <div class="description"><?php echo $review->getDetail(); ?><a href="<?php echo $product->getProductUrl() ?>?review-count=<?php echo $count ?>#review<?php echo $count ?>"> Read more...</a></div>
+		    <?php endif; ?>
+                     <a href="<?php echo $product->getProductUrl() ?>#review1">Read all Reviews</a>
+                 </li>
+                 <?php $count++ ?>
+             <?php endforeach;
+         } ?>
+    </ul>
+</div>
+<div class="clear">&nbsp;</div>
+
+

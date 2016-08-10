@@ -1,0 +1,43 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+
+<?php if (Mage::getStoreConfigFlag('wordpress/extend/disqus') && $this->helper('wordpress')->isPluginEnabled('disqus')): ?>
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = '<?php echo Mage::getStoreConfig("wordpress/extend/disqus_shortname"); ?>'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+
+<?php endif; ?>
+
+<div class="block block-blog block-blog-search sidebar-box">
+	<?php if ($title = $this->getTitle()): ?>
+		<h4>
+			<?php echo $this->__('The Godfreys Blog') ?>
+		</h4>
+	<?php endif; ?>
+    <div class="block-content-sidebar">
+        <form method="get" action="<?php echo $this->getFormActionUrl() ?>" id="blog-search-form">
+            <div class="blog-search">
+                <input type="text" name="s" class="input-text" title="<?php echo $this->__('Search Posts') ?>" value="<?php echo $this->escapeHtml($this->getSearchTerm()) ?>"/>
+                <button class="btn-blog-search" title="<?php echo $this->__('Search') ?>" type="submit"><span><span><?php echo $this->__('Go') ?></span></span></button>
+                <script type="text/javascript">new fishpig.WP.Search.Form('blog-search-form');</script>
+            </div>
+        </form>
+    </div>
+	<div class="box-foot"></div>
+</div>

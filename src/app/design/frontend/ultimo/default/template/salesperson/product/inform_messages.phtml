@@ -1,0 +1,27 @@
+<?php $_product = Mage::getModel('core/session')->getProductToShoppingCart(); ?>
+<?php if ($_product && $_product->getId()): ?>
+    <ul class="messages">
+        <li class="success-msg">
+            <ul>
+                <li>
+                    <span><?php echo $_product->getName(); ?> was added to your shopping cart.</span>
+                    <?php Mage::getModel('core/session')->unsProductToShoppingCart(); ?>
+                </li>
+            </ul>
+        </li>
+    </ul>
+<?php endif; ?>
+
+<?php $_product = Mage::getSingleton('core/session')->getProductToCompare(); ?>
+<?php if ($_product): ?>
+    <ul id="show-mess-cmp" class="messages">
+        <li class="success-msg">
+            <ul>
+                <li>
+                    <span><?php echo $_product['name']; ?> has been added to comparison list.</span>
+                    <?php Mage::getSingleton('core/session')->unsProductToCompare(); ?>
+                </li>
+            </ul>
+        </li>
+    </ul>
+<?php endif; ?>

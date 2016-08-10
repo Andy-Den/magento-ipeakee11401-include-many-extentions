@@ -1,0 +1,96 @@
+.flint_logo_home { 
+    padding-bottom: 10px;
+}
+
+.flint_logo_category {
+    padding-bottom: 10px;
+}
+
+.flint_logo_product {
+    
+}
+
+.product-reviews h2,
+.service-reviews h2 {
+	color: #505050;
+	font-weight: bold;
+}
+
+.product-reviews .reviews-title p,
+.service-reviews .reviews-title p {
+	font-size: 12px;
+	color: #505050;
+}
+
+.star-rating {
+    display: inline-block;
+    background:url(../images/star-ratings.png) no-repeat;
+    height:12px;
+    width: 65px;
+    margin: 2px 3px 0;
+}
+
+.box-tags.product-reviews .std,
+.box-tags.service-reviews .std {
+	border: none !important;
+	padding: 10px 0 !important;
+	width: 100% !important;
+}
+
+.product-reviews #feefo_product_reviews_block table.data-table,
+.service-reviews #feefo_service_reviews_block table.data-table {
+	border-bottom: #cdcdcd 1px solid;
+}
+
+.product-reviews #feefo_product_reviews_block table.data-table thead,
+.service-reviews #feefo_service_reviews_block table.data-table thead {
+	background-color: #fff;
+}
+
+.product-reviews #feefo_product_reviews_block table.data-table tr.even,
+.service-reviews #feefo_service_reviews_block table.data-table tr.even {
+	background-color: #fff;
+}
+
+.product-reviews #feefo_product_reviews_block table.data-table th,
+.service-reviews #feefo_service_reviews_block table.data-table th {
+	border-top: #cdcdcd 1px solid;
+	border-bottom: #cdcdcd 1px solid;
+	padding: 10px 0px;
+	text-transform: none;
+	font-weight: normal;
+	color: #505050;
+	background-color: #fff;
+}
+
+.product-reviews #feefo_product_reviews_block table.data-table td,
+.service-reviews #feefo_service_reviews_block table.data-table td,
+.product-reviews .read-all-reviews,
+.service-reviews .read-all-reviews {
+	border: none;
+    padding: 8px 10px 8px 0px;
+}
+
+.product-reviews #feefo_product_reviews_block table.data-table .first td,
+.service-reviews #feefo_service_reviews_block table.data-table .first td {
+    padding-top: 15px;
+}
+
+.product-reviews #feefo_product_reviews_block .star-ratings,
+.service-reviews #feefo_service_reviews_block .star-ratings {
+    width: 65px;
+    height: 13px;
+}
+
+.service-reviews .read-all-reviews {
+    display: block;
+    font-size: 10px;
+    color: #e50b14;
+    text-decoration: none;
+}
+
+.reviewDate {
+    color: #ABAAAA;
+    margin-top: 5px;
+    font-size: 11px;
+}

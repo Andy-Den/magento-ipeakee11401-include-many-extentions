@@ -1,0 +1,12 @@
+<section class="block block-locator">
+  <header class="block-title">
+    <h3>Find a Store</h3>
+  </header>
+  <div class="block-content">
+    <form id='locator-search' action="<?php echo Mage::getURL('') ?>locator/search/">
+      <a><?php echo $this->__('Enter Postcode or Suburb') ?></a>
+      <input name="s" type="text" class="input-text required-entry" placeholder="<?php echo $this->__('Enter a postcode or suburb') ?>" />
+      <button class="btn" type="submit">SEARCH</button>
+    </form>
+  </div>
+</section>

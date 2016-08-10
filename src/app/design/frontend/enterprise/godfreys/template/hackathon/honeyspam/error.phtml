@@ -1,0 +1,34 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category  Hackathon
+ * @package   Hackathon_HoneySpam
+ * @author    Andreas Emer <honeyspam@emdec.de>
+ * @author    Fabian Blechschmidt <hackathon@fabian-blechschmidt.de>
+ * @author    Sascha Wohlgemuth <sascha.wohlgemuth@gmail.com>
+ * @author    Bastian Ike <bastian.ike@gmail.com>
+ * @author    Peter Ukener <peterukener@gmail.com>
+ * @copyright 2012 Magento Hackathon
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magento-hackathon.de/
+ */
+?>
+<h2>Our apologies, we could not submit this form because we detected it as spam</h2>
+<br />
+<p>To keep our website as quick and efficient as possible for our customers we put these security measures in place. Never fear if this is not the case though, please try again & if you are still having trouble please contact our customer service team for support as they will be more than happy to help</p>
+<br />
+<?php
+  $url = htmlspecialchars($_SERVER['HTTP_REFERER']);
+  echo "<p><a href='$url'>Go back to the previous page</a></p>"; 
+?>

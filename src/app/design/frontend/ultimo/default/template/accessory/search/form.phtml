@@ -1,0 +1,71 @@
+<?php
+/**
+ * Accessory search mini form
+ *
+ * @see Balance_Accessory_Block_Search_Form
+ */
+?>
+
+<div class="accessory-search accessory-search-large">
+    <!--<div class="accessory-title">
+        <h4><?php echo $this->__('Accessory Search'); ?></h4>
+    </div>-->
+    <?php //echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+    <form id="accessory-search-form" action="<?php echo $this->getMiniSearchPostUrl(); ?>" method="get">
+        <div class="fieldset">
+            <p class="instructions">Select a brand or model to search</p>
+            <!--<h5 class="legend"><?php echo $this->__('Search Settings'); ?></h5>-->
+            <ul class="form-list">
+                <?php 
+				//echo '<pre>'; print_r($this->getSearchAttributes());die('***************');
+				foreach ($this->getSearchAttributes() as $_attribute): ?>
+                    <?php $_code = $_attribute->getAttributeCode(); ?>
+                    <li>
+                        <label for="<?php echo $_code; ?>"><?php echo $this->getAttributeLabel($_attribute); ?></label>
+                        <?php switch ($this->getAttributeInputType($_attribute)):
+                            case 'select': ?>
+                                <div class="input-box" id="select-wrapper-<?php echo $_code; ?>">
+                                    <?php echo $this->getAttributeSelectElement($_attribute); ?>
+                                </div>
+                                <?php break; ?>
+                        <?php endswitch; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <button type="submit" title="<?php echo $this->__('Search') ?>" class="button"><span><span><?php echo $this->__('Search') ?></span></span></button>
+        </div>
+    </form>
+    
+
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    
+    var form = $('accessory-search-form');
+    var brandDropDown = form['accessory_brands'];
+    Event.observe(brandDropDown, 'change', function()
+    {
+        //Element.show('accessory-please-wait');
+        $('select-wrapper-accessory_models').innerHTML = "<img src=\"<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>\" alt=\"\" class=\"v-middle\" />";
+        
+        var actionurl = '<?php echo $this->getUrl('accessory/filter/byBrand') ?>';
+        var form = $('accessory-search-form');
+        var selectedBrand = form['accessory_brands'];
+        new Ajax.Request(actionurl, {
+            method: 'post',
+            parameters: "accessory_brands=" + selectedBrand.getValue(),
+            onComplete: function(transport) {
+                //Element.hide('accessory-please-wait');
+                $('select-wrapper-accessory_models').innerHTML = "";
+                $('select-wrapper-accessory_models').innerHTML = transport.responseText;
+                jQuery('select').uniform();
+            }
+        });
+    });
+    jQuery('#accessory_models').val(<?php echo isset($_GET['accessory_models']) ? $_GET['accessory_models'] : '';?>);
+    jQuery('#accessory_brands').val(<?php echo isset($_GET['accessory_brands']) ? $_GET['accessory_brands'] : '';?>);
+    
+    //]]>
+</script>

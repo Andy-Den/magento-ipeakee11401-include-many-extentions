@@ -1,0 +1,58 @@
+<?php
+$_productCollection = Mage::getModel('catalog/product')->getCollection()->addAttributeToSelect('*')->addAttributeToFilter('show_in_carousel', "1");
+$temp=0;
+foreach ($_productCollection as $_product)
+{
+    if($temp<3)
+    {
+        $my_collection[$temp] = $_product;
+        $temp++;
+    }
+    else{break;}
+}
+//print_r($my_collection[1]->getData());
+?>
+
+<div id="wrap">
+    <div id="mycarousel" class="jcarousel-skin-tango">
+        <div id="mycarousel-prev" class="jcarousel-prev jcarousel-prev-horizontal" style="display: block; z-index: 500;"></div>
+        <div id="mycarousel-next" class="jcarousel-next jcarousel-next-horizontal" style="display: block; z-index: 500;"></div>
+        <?php  ?>
+        <ul>
+            <?php for($i=0; $i<3; $i++): ?>
+            <?php if (isset($my_collection[$i])):?>
+                <li>
+                    <div class="main-container"><img src="<?php echo Mage::getModel('catalog/product_media_config')->getMediaUrl( $my_collection[$i]->getImage() );?>" alt="si-200" /><br />
+                        <div class="description">
+                        <?php if($my_collection[$i]->getData('sauber_carousel_title') && $my_collection[$i]->getData('description_in_carousel')): ?>
+                            <p><?php echo $my_collection[$i]->getData('sauber_carousel_title')?></p>
+                            <span><?php echo $my_collection[$i]->getData('description_in_carousel')?></span>
+                        <?php endif; ?>
+                            <br />
+                            <?php if($my_collection[$i]->getData('sauber_carousel_link')): ?>
+                                <a href="<?php echo $my_collection[$i]->getData('sauber_carousel_link') ?>">Find out more</a>
+                            <?php else: ?>
+                                <a href="<?php echo $my_collection[$i]->getUrlKey()?>">Find out more</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </li>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </ul>
+
+        <div class="jcarousel-control">
+            <div class="central-block">
+                <?php for($i=0; $i<3; $i++): ?>
+                <?php if (isset($my_collection[$i])):?>
+                    <a class="central-block-item first" href="#"><?php echo $i+1; ?>
+                        <img src="<?php echo $my_collection[$i]->getImageUrl();?>" height="80" alt="" />
+                        <p class="central-title"><?php echo $my_collection[$i]->getData('name')?></p>
+                        <p class="central-description"><?php echo $my_collection[$i]->getData('short_description_in_carousel')?></p>
+                    </a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+            </div>
+        </div>
+    </div>
+</div>

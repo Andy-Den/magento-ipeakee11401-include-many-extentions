@@ -1,0 +1,214 @@
+<?xml version="1.0" ?>
+<layout>
+    <default>
+        <reference name="head">
+
+        </reference>
+        <reference name="header">
+            <block type="cms/block" name="topNavLink">
+                <action method="setBlockId">
+                    <block_id>top_nav_links</block_id>
+                </action>
+            </block>
+        </reference>
+
+        <reference name="root">
+            <block type="cms/block" name="topTitles">
+                <action method="setBlockId">
+                    <block_id>middle_titles</block_id>
+                </action>
+            </block>
+        </reference>
+
+        <reference name="content">
+            <block type="page/html_breadcrumbs" name="breadcrumbs"/>
+        </reference>
+
+        <reference name="rigth">
+            <remove name="catalog.compare.sidebar"/>
+            <remove name="right.reports.product.viewed"/>
+            <remove name="accessory.mini.search"/>
+            <remove name="right.poll"/>
+            <remove name="paypal.partner.right.logo"/>
+            <remove name="left.reports.product.viewed"/>
+        </reference>
+
+        <reference name="left">
+            <remove name="customer.address"/>
+        </reference>
+    </default>
+
+    <cms_index_index>
+        <remove name="global_notices"/>
+        <remove name="below_menu"/>
+        <remove name="global_messages"/>
+        <remove name="before_body_end"/>
+        <remove name="footer_before"/>t
+    </cms_index_index>
+
+    <catalog_category_view>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_view>
+
+    <catalog_product_view>
+        <!-- JQuery LightBox -->
+        <reference name="head">
+            <!--remove-->
+            <action method="removeItem">
+                <type>skin_js</type>
+                <name>js/jqzoom/jquery-1.3.1.min.js</name>
+            </action>
+            <action method="removeItem">
+                <type>skin_js</type>
+                <script>js/coll-slider.js</script>
+            </action>
+            <action method="removeItem">
+                <type>skin_js</type>
+                <script>js/jqzoom/jquery.jqzoom1.0.1.js</script>
+            </action>
+            <action method="removeItem">
+                <type>skin_js</type>
+                <script>js/enterprise/catalogevent.js</script>
+            </action>
+            <!--remove default-->
+            <action method="removeItem">
+                <type>js</type>
+                <script>mgxtips/jquery.qtip-1.0.0-rc3.min.js</script>
+            </action>
+            <!--<action method="removeItem"><type>js</type><script>mgxtips/jquery-1.4.2.js</script></action>-->
+            <!--<action method="removeItem"><type>js</type><script>prototype/prototype.js</script></action>-->
+            <!--<action method="removeItem"><type>js</type><script>prototype/validation.js</script></action>-->
+            <action method="removeItem">
+                <type>js</type>
+                <script>scriptaculous/builder.js</script>
+            </action>
+            <!--<action method="removeItem"><type>js</type><script>scriptaculous/effects.js</script></action>-->
+            <action method="removeItem">
+                <type>js</type>
+                <script>scriptaculous/dragdrop.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>scriptaculous/controls.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>scriptaculous/slider.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>lib/ccard.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>tal/tabs/tabs.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>varien/product.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>varien/configurable.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>calendar/calendar.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>calendar/calendar-setup.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>mage/translate.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>mage/cookies.js</script>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <script>itoris/producttabsslider/producttabsslider.js</script>
+            </action>
+            <!--Jquery-->
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/jquery-1.7.2.min.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/noconflict.js</script>
+            </action>
+            <!--lightbox-->
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/jquery-ui-1.8.18.custom.min.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/jquery.smooth-scroll.min.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/lightbox.js</script>
+            </action>
+            <!--preatyPhoto-->
+            <action method="addCss">
+                <stylesheet>css/prettyPhoto.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/coll-pp.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/jquery.prettyPhoto.js</script>
+            </action>
+            Star Rating
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/star-rating.js</script>
+            </action>
+        </reference>
+
+        <!-- references -->
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>
+        </reference>
+        <reference name="left">
+            <block type="catalog/product_new" name="leftListProduct" template="catalog/product/left_list.phtml"/>
+        </reference>
+        <reference name="product.info">
+                <block type="cms/block" name="wtb_3_blocks">
+                    <action method="setBlockId">
+                        <block_id>wtb_3_blocks</block_id>
+                    </action>
+                </block>
+                <block type="review/product_view_list" name="product.info.product_additional_data" as="reviews"
+                       template="review/product/view/list.phtml">
+                    <block type="review/form" name="product.review.form" as="product_review_form">
+                        <block type="page/html_wrapper" name="product.review.form.fields.before"
+                               as="form_fields_before">
+                            <action method="setMayBeInvisible">
+                                <value>1</value>
+                            </action>
+                        </block>
+                    </block>
+                </block>
+        </reference>
+        <reference name="product.info.media">
+        	<block type="cms/block" name="rightBannerItem">
+        		<action method="setBlockId">
+        			<block_id>right_item_banner</block_id>
+        		</action>
+        	</block>
+        </reference>
+    </catalog_product_view>
+</layout>

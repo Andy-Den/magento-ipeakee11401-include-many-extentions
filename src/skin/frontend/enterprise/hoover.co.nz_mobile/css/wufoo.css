@@ -1,0 +1,9 @@
+form li { padding:0; } 
+
+.info { display: none; }
+
+.wufoo input.btTxt {
+    width: 100px !important;
+    height: 35px !important;
+    background: url('../images/contact_submit.png') top left no-repeat !important;
+}

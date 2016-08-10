@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+
+	<cms_index_index>
+		<reference name="header">
+			<block type="cms/block" name="carousel">
+				<action method="setBlockId">
+					<block_id>carousel</block_id>
+				</action>
+			</block>
+		</reference>
+
+		<refrence name="content">
+			<block type="review/product/view_list" name="review_product_view_list" template="review/product/view/list.phtml"/>
+		</refrence>
+	</cms_index_index>
+
+	<catalog_product_view>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+         <reference name="head">
+
+                <!-- Remove JS we don't need -->
+                <action method="removeItem"><type>js</type><name>mgxtips/jquery-1.4.2.js</name></action>
+                <action method="removeItem"><type>js</type><name>mgxtips/jquery.qtip-1.0.0-rc3.min.js</name></action>
+                <action method="removeItem"><type>css</type><name>css/mgxtips/tipsy.css</name></action>
+                
+                <action method="removeItem"><type>js</type><name>jqzoom/jquery-1.3.1.min.js</name></action>
+                <action method="removeItem"><type>js</type><name>jqzoom/jquery.jqzoom1.0.1.js</name></action>
+                <action method="removeItem"><type>js</type><name>varien/configurable.js</name></action>
+                <action method="removeItem"><type>js</type><name>fk/view-more.js</name></action>
+                <action method="removeItem"><type>js</type><name>calendar/calendar.js</name></action>
+                <action method="removeItem"><type>js</type><name>calendar/calendar-setup.js</name></action>
+
+                <action method="removeItem"><type>skin_js</type><name>js/enterprise/catalogevent.js</name></action>
+                <action method="removeItem"><type>skin_js</type><name>js/jqzoom/jquery-1.3.1.min.js</name></action>
+                <action method="removeItem"><type>skin_js</type><name>js/jqzoom/jquery.jqzoom1.0.1.js</name></action>
+
+        </reference>
+
+    </catalog_product_view>
+
+    <catalog_category_view>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_view>
+
+    <catalog_product_view>
+
+        <reference name="product.info">
+            <block type="review/product_view_list" name="product.review" as="product_review" template="catalog/product/view/review.phtml" />
+                <!--<block type="review/product_view_list" name="product.info.product_additional_data" as="reviews" template="review/product/view/list.phtml" />-->
+
+        </reference>
+
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+    </catalog_product_view>
+
+    <catalogsearch_result_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <storelocator_index_index>
+        <reference name="content">
+            <block type="storelocator/storelocator" name="storelocator" template="storelocator/storelocator.phtml" />
+        </reference>
+    </storelocator_index_index>
+
+<default>
+<!--<reference name="content">-->
+    <!--<block type="review/product_view_list" name="product.review" as="product_review" template="catalog/product/view/review.phtml">-->
+<!--</reference>-->
+
+</default>
+
+</layout>

@@ -1,0 +1,31 @@
+<?php if (Mage::getStoreConfig('facebooklb/general/enabled')) : ?>
+    <?php if (!Mage::getStoreConfig('facebooklb/opengraph/enabled_op')) :
+    $facebookUrl = 'http://www.facebook.com/plugins/like.php?' .
+        'api_key = ' . Mage::getStoreConfig('facebooklb/general/appkey') .
+        '&href=' .  $this->helper('core/url')->getCurrentUrl() .
+        '&layout=' . Mage::getStoreConfig('facebooklb/general/layout') .
+        '&node_type=link&sdk=joey' .
+        '&show_faces=' . Mage::getStoreConfig('facebooklb/general/showfaces') .
+        '&action=' . Mage::getStoreConfig('facebooklb/general/verb') .
+        '&font=' . Mage::getStoreConfig('facebooklb/general/font') .
+        '&colorscheme="' . Mage::getStoreConfig('facebooklb/general/color') . '" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:' . Mage::getStoreConfig('facebooklb/general/width') . 'px; height:' . Mage::getStoreConfig('facebooklb/general/height') . 'px">'
+        ;
+    ?>
+
+    <iframe src="<?php echo $facebookUrl; ?>" </iframe>
+
+    <?php else: ?>
+    
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=<?php echo Mage::getStoreConfig('facebooklb/general/appkey'); ?>";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <fb:like href="<?php echo Mage::helper('core/url')->getCurrentUrl(); ?>" send="true" layout="<?php echo Mage::getStoreConfig('facebooklb/general/layout'); ?>" width="<?php echo Mage::getStoreConfig('facebooklb/general/width')?>"  height="<?php echo Mage::getStoreConfig('facebooklb/general/height')?>" show_faces="<?php echo Mage::getStoreConfig('facebooklb/general/showfaces'); ?>" action="<?php echo Mage::getStoreConfig('facebooklb/general/verb'); ?>"></fb:like>
+    <?php endif; ?>
+
+<?php endif; ?>

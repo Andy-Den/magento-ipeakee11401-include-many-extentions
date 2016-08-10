@@ -1,0 +1,61 @@
+<?php
+   $_helper    = $this->helper('catalog/output');
+   $_category  = $this->getCurrentCategory();
+   $_imgHtml   = '';
+   if ($_imgUrl = $_category->getImageUrl()) {
+       $_imgHtml = '<img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" />';
+       $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+   }
+?>
+<div class="ajax-reload" id="session-messages" rel="messages"><?php //echo $this->getMessagesBlock()->toHtml() ?></div>
+<script type="text/javascript">
+//    AntiVarnish.addMessagesInit('catalog');
+</script>
+<div class="category-view">
+<div id="contents" class="page">
+<div id="sidebar">
+       <?php echo $this->getChildHtml('category.sidebar') ?>
+       <?php echo $this->getChildHtml('catalog.compare.sidebar') ?>
+       <?php echo $this->getChildHtml('catalog.sidebar.rest') ?>
+</div>
+       <?php echo $this->getLayout()->getBlock('breadcrumbs')->toHtml();?>
+
+       <div id="bk"></div>
+   <?php if($_imgUrl): ?>
+               <div id="section-banner">
+               <?php echo $_imgHtml ?>
+       </div>
+   <?php endif; ?>
+
+   <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+       <div class="category-description std">
+           <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+       </div>
+   <?php endif; ?>
+
+       <div id="content-col">
+   <?php if($this->isContentMode()): ?>
+       <?php echo $this->getCmsBlockHtml() ?>
+
+   <?php elseif($this->isMixedMode()): ?>
+               <?php if(isset($_REQUEST['level_of_clean'])): ?>
+                       <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('balance/levelofclean/levelofclean.phtml')->toHtml() ?>
+               <?php endif; ?>
+       <?php echo $this->getProductListHtml() ?>
+       <?php echo $this->getCmsBlockHtml() ?>
+
+   <?php else: ?>
+               <?php if(isset($_REQUEST['level_of_clean'])): ?>
+                       <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('balance/levelofclean/levelofclean.phtml')->toHtml() ?>
+               <?php endif; ?>
+       <?php echo $this->getProductListHtml() ?>
+   <?php endif; ?>
+   <div id="sticky-text">
+               <?php $currentCategory =  Mage::registry('current_category');
+                         $currentCategory1  = $currentCategory->getName();
+               ?>
+   </div>
+   </div>
+</div>
+
+</div>

@@ -1,0 +1,71 @@
+<?php 
+$_helper = $this->helper('catalog/output');
+$product_sku = $_REQUEST['product_sku'];
+$_product = Mage::getModel('catalog/product')->loadByAttribute('sku',$product_sku);
+$product = Mage::getModel('catalog/product');
+$productId = $product->getIdBySku($product_sku);
+$_product = Mage::getModel('catalog/product')->load($productId);
+?>
+<?php 
+//Start code to get the attricutes
+$data = array();
+$attributes = $_product->getAttributes();
+foreach ($attributes as $attribute) {
+	if ($attribute->getIsVisibleOnFront() && (empty($excludeAttr) || !in_array($attribute->getAttributeCode(), $excludeAttr))) {
+		$value = $attribute->getFrontend()->getValue($_product);
+
+		if (!$_product->hasData($attribute->getAttributeCode())) {
+			$value = Mage::helper('catalog')->__('N/A');
+		} elseif ((string)$value == '') {
+			$value = Mage::helper('catalog')->__('No');
+		} elseif ($attribute->getFrontendInput() == 'price' && is_string($value)) {
+			$value = Mage::app()->getStore()->convertPrice($value, true);
+		}
+
+		if (is_string($value) && strlen($value)) {
+			$data[$attribute->getAttributeCode()] = array(
+				'label' => $attribute->getStoreLabel(),
+				'value' => $value,
+				'code'  => $attribute->getAttributeCode()
+			);
+		}
+	}
+}
+$_additional = $data;
+//End code to get the attricutes
+?>
+<?php $_additionalNew = array(); ?>
+<?php foreach ($_additional as $_data): ?>
+<?php if(($_helper->productAttribute($_product, $_data['value'], $_data['code']) != 'No') && ($_helper->productAttribute($_product, $_data['value'], $_data['code']) != 'N/A')){ $_additionalNew[] = $_data; } ?>
+<?php endforeach; ?>
+<?php if($_additionalNew): ?>
+
+<table class="data-table" id="product-attribute-specs-table" style="width:50%;float:left; border-right: 1px solid #FFFFFF;">
+	<col width="13%" />
+	<col />
+	<tbody>
+		<?php $count = count($_additionalNew);
+			$count_table_devide = $count/2;
+			$count_table_devide = ceil($count_table_devide);
+			$i=1;?>
+		<?php foreach ($_additionalNew as $_data): ?>
+		<?php if($this->htmlEscape($this->__($_data['label'])) != "What's In The Box"): ?>
+		<?php if($i%2==1):?>
+		<tr class="odd">
+			<?php else:?>
+		<tr>
+			<?php endif;?>
+			<td class="col1"></td>
+			<td class="caption"><?php echo $this->htmlEscape($this->__($_data['label'])) ?></td>
+			<td><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+		</tr>
+		<?php if($i == $count_table_devide){
+				echo '</table><table class="data-table" id="product-attribute-specs-table" style="width:50%;float:left; border-right: 1px solid #FFFFFF;">';
+				$i=0;
+			}
+			$i++; ?>
+		<?php endif; ?>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+<?php endif;?>

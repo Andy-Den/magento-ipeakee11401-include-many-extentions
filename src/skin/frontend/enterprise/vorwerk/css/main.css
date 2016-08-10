@@ -1,0 +1,152 @@
+/*Font*/
+@font-face {
+    font-family: UniversLTPro-65Bold;
+    src: url(../fonts/UniversLTPro-65Bold.otf);
+}
+
+#MainContentContainer {
+  text-align: left;
+}
+.mainContent {
+    background-color: #fff;
+    padding: 24px 24px 50px;
+    -webkit-box-shadow: 0 0 5px #ccc;
+       -moz-box-shadow: 0 0 5px #ccc;
+            box-shadow: 0 0 15px #ccc;
+}
+.cms-index-index .mainContent {
+    background: none;
+    padding: 0;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+}
+
+
+.sidebarRight {
+    float: right;
+    width: 240px;
+}
+
+
+.std h2 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #113c2b;
+}
+.std p {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #8c8c8c;
+}
+.std .content-image-right {
+    float: right;
+    margin: 0 0 10px 40px;
+    padding: 5px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 5px #ccc;
+       -moz-box-shadow: 0 0 5px #ccc;
+            box-shadow: 0 0 15px #ccc;
+}
+
+#apDivLogo {
+  width: 174px;
+  margin-top:18px;
+}
+
+/****************** READMORE BUTTON **********************/
+
+.button-eyecatcher {
+  display: block;
+}
+.button-eyecatcher span {
+  font: 0/0 a;
+  color: transparent;
+}
+
+
+.apDivTitleBar3 {
+  float: none;
+}
+
+/* Nav */
+.main-nav {
+    float: right;
+    clear: right;
+    font-family: UniversLTPro-65Bold;
+}
+.main-nav a {
+    display: block;
+}
+.main-nav li.level0 {
+    position: relative;
+    float: left;
+}
+.main-nav li.level0 > a {
+    position: relative;
+    z-index: 5000;
+    padding: 16px 15px;
+    font-size: 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #113c2b;
+}
+.main-nav li.level0:hover {
+    -webkit-box-shadow: 0 0 15px #ccc;
+       -moz-box-shadow: 0 0 15px #ccc;
+            box-shadow: 0 0 15px #ccc;
+}
+.main-nav li.level0:hover > a,
+.main-nav li.level0 > a:hover {
+    color: #009645;
+    background-color: #f8f6f4;
+}
+.main-nav li.level0.parent > a {
+    padding-right: 30px;
+    background-image: url('../images/vorwerk/down.png');
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+.main-nav ul.level0 {
+    position: absolute;
+    top: 100%;
+    left: -9999px;
+    z-index: 4000;
+    width: 200px;
+    padding: 15px;
+    text-align: left;
+    background-color: #f8f6f4;
+    -webkit-box-shadow: 0 0 15px #ccc;
+       -moz-box-shadow: 0 0 15px #ccc;
+            box-shadow: 0 0 15px #ccc;
+}
+.main-nav li:hover ul.level0 {
+    left: 0;
+}
+
+.main-nav li.level1 + li {
+    margin-top: 10px;
+    padding-top: 10px;
+    background: url('../images/vorwerk/nav/trennlinie.png') top repeat-x;
+}
+.main-nav .level1 > a {
+    font-size: 12px;
+    padding: 3px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #595552;
+}
+.main-nav .level1 > a:hover {
+    color: #009645;
+}
+.main-nav .level2 a {
+    padding: 3px 0 3px 10px;
+    background: url('../images/vorwerk/nav/link_intern.png') left center no-repeat;
+}
+.main-nav .level2 a:hover {
+    color: #8cbd5a;
+    background-image: url('../images/vorwerk/nav/link_intern_hover.png');
+}
+.product-sidebar-content .button-lookalike{margin-right: 40px;}

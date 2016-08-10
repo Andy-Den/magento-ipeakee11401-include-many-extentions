@@ -1,0 +1,80 @@
+<?php
+$_reviews = Mage::getModel('review/review')
+    ->getResourceCollection()
+    ->addStoreFilter(Mage::app()->getStore()->getId())
+    ->addStatusFilter(Mage_Review_Model_Review::STATUS_APPROVED)
+    ->setDateOrder()
+//->printLogQuery(true)
+    ->addRateVotes();
+?>
+
+
+
+
+<div class="home_bloc_l home_bloc_a">
+    <h3>Reviews</h3>
+
+    <ul id="carousel_reviews" class="jcarousel-skin-ie7">
+
+        <?php
+        foreach ($_reviews as $review):
+
+
+            $product = Mage::getModel('catalog/product')->load($review->getentity_pk_value());
+            $productName = $product->getName();
+            $j = 0;
+            $cumulative = 0;
+            foreach ($review->getRatingVotes() as $vote) {
+                $cumulative += $vote->getPercent();
+                $j++;
+            }
+            $finalPercentage = 0;
+            if ($cumulative != 0) {
+                $finalPercentage = ($cumulative / $j);
+            }
+            ?>
+
+
+            <li>
+                <div class="home_bloc_title">
+                    <?php echo $productName ?>
+                </div>
+
+                <div class="reviews_text_wraper">
+
+                    <div class="reviews_img">
+
+                        <div class="ratings">
+                            <div class="rating-box">
+                                <div class="rating" style="width:<?php echo ceil($finalPercentage) . '%;'; ?>"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reviews_text">
+                        <?php
+                        $sdesc = trim($this->htmlEscape($review->getDetail()));
+                        $limit = 120;
+                        if (strlen($sdesc) > $limit) {
+                            $sdesc = substr($sdesc, 0, strrpos(substr($sdesc, 0, $limit), ' '));
+                        }
+                        ?>
+                        <?php echo $sdesc; ?>
+                        <a href="<?php echo $product->getProductUrl() ?>"><span>Read more...</span></a>
+                    </div>
+                    <div class="reviews_read_all">
+                        <a href="<?php echo $product->getProductUrl() ?>">
+                            <img src="<?php echo $this->getSkinUrl('images/reviews_read_all.png'); ?>" alt=""
+                                 style="margin: 4px 3px 0 0;"/>
+                            Read all reviews
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <?php
+        endforeach;
+        ?>
+    </ul>
+</div>
+
+

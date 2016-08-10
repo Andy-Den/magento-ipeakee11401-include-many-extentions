@@ -1,0 +1,423 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+    $_helperCompare = $this->helper('catalog/product_compare');
+    $_haveCompare = $_helperCompare->getItemCount();
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);  
+</script>
+<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    jQuery("a.fancy-image").fancybox();
+	jQuery("a.fancy-youtube").click(function() {
+		jQuery.fancybox({
+			'padding'		: 0,
+			'autoScale'		: false,
+			'transitionIn'	: 'none',
+			'transitionOut'	: 'none',
+			'title'			: this.title,
+			'width'			: 680,
+			'height'		: 495,
+			'href'			: this.href = this.href.replace(new RegExp("watch\\?v=", "i"), 'v/') + '&autoplay=1',
+			'type'			: 'swf',
+			'swf'			: {
+			   	 'wmode'		: 'transparent',
+				'allowfullscreen'	: 'true'
+			}
+		});
+
+	return false;
+	});
+});
+  // Code that uses other library's $ can follow here.
+</script>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view">
+	<div class="product-essential">
+		<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+			<div class="no-display">
+				<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+				<input type="hidden" name="related_product" id="related-products-field" value="" />
+			</div>
+			<!-- product box -->
+			<div id="product_box"> 
+				<!-- product pictures --> 
+				<?php echo $this->getChildHtml('media') ?> 
+				<!-- end product pictures-->
+				<div id="product_info">
+					<h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+					<div><?php echo $this->getReviewsSummaryHtml($_product, "short", true)?> </div>
+
+					<div id="product_config">
+						<div class="product_config_top"></div>
+						<div class="product_config_content"> 
+							<!-- quantity -->
+							
+							<?php if (!$this->hasOptions()):?>
+							<?php if($_product->isSaleable()): ?>
+							<?php if(!$_product->isGrouped()): ?>
+							<div class="row">
+								<input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+								<label for="qty"><?php echo $this->__('Quantity') ?></label>
+							</div>
+							<?php endif; ?>
+							<?php endif; ?>
+							<?php else:?>
+							<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+							<div class="row">
+								<input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+								<label for="qty"><?php echo $this->__('Quantity') ?></label>
+							</div>
+							<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+							<?php endif; ?>
+							<?php endif; ?>
+							
+							<!-- end quantity -->
+							
+							<div class="product-price"> <?php echo $this->getPriceHtml($_product, true, '-widget-new-grid') ?> </div>
+							<div class="button-row">
+								<?php if (!$this->hasOptions()):?>
+								<?php if($_product->isSaleable()): ?>
+								<a href="javascript:void(0)" class="add-to-cart-large" onclick="productAddToCartForm.submit(this)"><?php echo $this->__('add to cart')?></a>
+								<?php else:?>
+								<a href="/store-locator" class="moreinfo-link-large">more info</a>
+								<?php endif;?>
+								<?php else: ?>
+								<?php if ($_product->isSaleable()):?>
+								<a href="javascript:void(0)" class="add-to-cart-large" onclick="productAddToCartForm.submit(this)"><?php echo $this->__('add to cart')?></a>
+								<?php else:?>
+								<a href="/store-locator" class="moreinfo-link-large">more info</a>
+								<?php endif;?>
+								<?php endif; ?>
+								<a href="#" class="more-options ext"><?php echo $this->__('more options')?></a>
+								<ul class="more-options-links ext-content">
+									<li><a href="#">Enquire Now</a></li>
+									<li><a href="<?php echo $this->helper('catalog/product_compare')->getAddUrl($_product)?>">Add this item to Compare</a></li>
+                                    <?php if($_haveCompare > 0): ?>
+                                        <li><a href="javascript:void(0)" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')">Go to Compare</a></li>
+                                    <?php endif; ?>
+								</ul>
+                                <script type="text/javascript">
+                                    $j1_6(".ext, .ext-content").hover(
+                                        function () {
+                                            $j1_6(".ext").addClass("active");
+                                            $j1_6(".ext-content").css("display","block");
+                                            
+                                        },
+                                        function () {
+                                            $j1_6(".ext").removeClass("active");
+                                            $j1_6(".ext-content").css("display","none");
+                                        }
+                                    );
+                                </script>
+							</div>
+                            <?php echo $this->getChildHtml('bundleSummary') ?>
+						</div>
+                        
+						<div class="product_config_bottom"></div>
+					</div>
+					<dl class="product_content">
+						<?php if ($_product->getShortDescription()):?>
+						<dt><?php echo $this->__('Quick Overview') ?></dt>
+						<dd> <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?> </dd>
+						<?php endif;?>
+						<?php if ($_product->getShortDescription()):?>
+						<dt><?php echo $this->__('Features')?></dt>
+						<dd>
+							<ul class="product-features-top3">
+								<li><?php echo $_product->getFeature_1(); ?></li>
+								<li><?php echo $_product->getFeature_2(); ?></li>
+								<li><?php echo $_product->getFeature_3(); ?></li>
+							</ul>
+						</dd>
+						<?php endif;?>
+					</dl>
+					<div class="sharebox"> <?php echo $this->getChildHtml('facebook_like'); ?>
+						<?php if ($this->helper('catalog/product')->getEmailToFriendUrl($_product)): ?>
+						<a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><img src="<?php echo $this->getSkinUrl('images/share_email.jpg')?>" alt="<?php echo $this->__('Email to a Friend') ?>"></a>
+						<?php endif; ?>
+					</div>
+					
+					<!-- START show badges (fk) -->
+					<dl class="product_features">
+						<?php if($_product->getData('warranty') == '80'): ?>
+						<dd class="warranty-1yr"><img src="/js/spacer.gif" width="60" height="60" title="1 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('warranty') == '81'): ?>
+						<dd class="warranty-2yr"><img src="/js/spacer.gif" width="60" height="60" title="2 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('warranty') == '82'): ?>
+						<dd class="warranty-3yr"><img src="/js/spacer.gif" width="60" height="60" title="3 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('warranty') == '83'): ?>
+						<dd class="warranty-4yr"><img src="/js/spacer.gif" width="60" height="60" title="4 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('warranty') == '84'): ?>
+						<dd class="warranty-5yr"><img src="/js/spacer.gif" width="60" height="60" title="5 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('anti_allergy') == '92'): ?>
+						<dd class="allergies"><img src="/js/spacer.gif" width="60" height="60" title="Anti-Allergy" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('asthma') == '94'): ?>
+						<dd class="asthma"><img src="/js/spacer.gif" width="60" height="60" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('pet_hair') == '111'): ?>
+						<dd class="pets"><img src="/js/spacer.gif" width="60" height="60" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('level_of_clean') == '32'): ?>
+						<dd class="single-action"><img src="/js/spacer.gif" width="60" height="60" title="Single Action" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('level_of_clean') == '33'): ?>
+						<dd class="double-action"><img src="/js/spacer.gif" width="60" height="60" title="Double Action" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('level_of_clean') == '34'): ?>
+						<dd class="triple-action"><img src="/js/spacer.gif" width="60" height="60" title="Triple Action" /></dd>
+						<?php endif ?>
+					</dl>
+					<!-- END show badges --> 
+					
+				</div>
+			</div>
+			<?php echo $this->getChildHtml('other');?>
+			<?php //if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+            
+			<div id="products" class="left-col" >
+				<ul id="tabs">
+					<li><a href="#" class="l1"><?php echo $this->__('Description & Specification'); ?></a></li>
+					<?php if ($_product->getData('youtube_url')): ?>
+					<li><a href="#" class="l2"><?php echo $this->__('Videos & Demonstrations'); ?></a></li>
+					<?php endif ?>
+					<li><a href="#" class="l3"><?php echo $this->__('Customer Reviews'); ?></a></li>
+					<li><a href="#" class="l4"><?php echo $this->__('Delivery & Warranty'); ?></a></li>
+				</ul>
+				<div id="tab-panes">			<a name="l3-flag"></a>
+
+					<ul class="l1 tab-pane" style="display: none;">
+						<div class="tab-left-col">
+							<?php $count = 0; ?>
+							<?php for ($i = 1; $i <= 10; $i++) { ?>
+							<?php if($_product->getData('feature_'.$i)) { $count++; }}?>
+							<?php if($count > 0) { ?>
+							<div id="key_features">
+								<h3><?php echo $this->__('Key Features')?></h3>
+								<ul class="product-features">
+									<?php for ($i = 1; $i <= 10; $i++) { ?>
+									<?php if ($_product->getData('feature_'.$i)): ?>
+									<li><?php echo $_product->getData('feature_'.$i); ?></li>
+									<?php endif; } ?>
+								</ul>
+							</div>
+							<?php } ?>
+							<div id="description"><?php echo $_helper->productAttribute($_product, $this->getProduct()->getDescription(), 'description') ?> </div>
+						</div>
+						<?php if($this->getChildHtml('additional')): ?>
+						<div id="info_chart"><?php echo $this->getChildHtml('additional')?> </div>
+						<?php endif ?>
+					</ul>
+					<?php if ($_product->getData('youtube_url')): ?>
+					<ul class="l2 tab-pane" style="display: none;">
+						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('videos-demonstrations')->toHtml() ?>
+					</ul>
+					<?php endif ?>
+					<ul class="l3 tab-pane" style="display: none;">
+						<?php echo $this->getChildHtml('product_review_list.count'); ?><?php echo $this->getChildHtml('product_additional_data2'); ?>
+					</ul>
+					<ul class="l4 tab-pane" style="display: none;">
+						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('delivery-warranty')->toHtml() ?>
+					</ul>
+				</div>
+			</div>
+			<?php //endif;?>
+			<div> <?php echo $this->getChildHtml('relatedProducts'); ?> </div>
+			<!-- product box end -->
+			
+			<div class="clearer"></div>
+		</form>
+		<?php echo $this->getChildHtml('product_additional_data') ?>
+		<div id="sticky-text">
+			<?php $currentCategory =  Mage::registry('current_category');
+			  if($currentCategory){
+			  	$currentCategory1  = $currentCategory->getName();
+			  }
+			  else{
+			  	$currentCategory1 = $_product->getName();
+			  }
+		?>
+		</div>
+		<script type="text/javascript">
+    //<![CDATA[
+        //$j1_6(".special-price .price-label").text("Save:");       
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+
+      	if($j1_6('.product_content .strong ul li').is('*')){
+	        $j1_6(".product_content .strong ul").css({'list-style':'disc inside none','color':'#e50b14'});
+	        $j1_6(".product_content .strong ul li").before().css({'content':'.','color':'#e50b14','font-size':'5px','vertical-align':'top'});
+	        $j1_6(".product_content .strong ul li span").css({'color':'#4f4f4f','font-size':'12px'}); 
+        
+	        var max_listCount = 3;
+	        //alert($j1_6('.product_content .strong ul li').size());
+	        while ($j1_6('.product_content .strong ul li').size() > max_listCount){
+	        	$j1_6('.product_content .strong ul li:last').remove();  
+	        }
+		}
+        $j1_6("#tabs").css({'width':'737px'});
+        $j1_6("#tabs li a").css({'width':'145px','padding':'16px 15px 0 15px'});
+        $j1_6("#tab-panes ul li").css({'border-right':'none','padding':'0 0 0 0px','width':'300px','margin-bottom':'0px'});
+        $j1_6("#tab-panes ul").css({'padding-top':'20px'});
+        $j1_6("#tab-panes").css({'width':'725px'});
+        $j1_6("#key_features").css({'width':'330px'});//call innerhtml
+        //$j1_6("#info_chart").append('<?php echo $this->getChildHtml('additional')?>');
+        $j1_6("#key_features #description").css({'position':'relative','clear':'both','padding-top':'15px'});
+        $j1_6("#sticky-text h3").css({'border-top':'none'});
+        $j1_6("#sticky-text").css({'padding-top':'10px'});
+        $j1_6("#product_box .special-price").css({'width':'95px','color': '#232323','display': 'block'});
+        $j1_6("#product_box .special-price .price-label").css({'font-size':'13px','font-weight':'bold','text-transform':'uppercase'});
+        $j1_6("#product_box .special-price .price").css({'font-size':'13px','font-weight':'bold','left':'10px','top':'-17px'});
+        $j1_6("#product_config .more-options").css({'position':'','clear':'','left':''});
+        $j1_6(".more-options-links").css({'right':'10px','bottom':'30px'});	
+        //$j1_6("#product_config .special-price .price-label").text('Save');
+        //$j1_6("#you-may-also-need .special-price .price-label").text('Save');
+        function triggerTab(id){
+            if($j1_6(id)){
+                $j1_6('#tabs li a').removeClass('active');
+                
+                $j1_6('#tabs li a.l'+id).addClass('active');
+                Cufon.replace('#tabs li a');
+                //Cufon.replace('#tabs li a.l'+id);
+                $j1_6('#tab-panes .tab-pane').hide();
+                $j1_6('#tab-panes .l'+id).show();
+                $j1_6('#tab-panes').height($j1_6('#l'+id).height()+15);
+                setLocation('#l'+id+'-flag');
+            }
+            else{
+                setLocation('#');
+            }
+        }
+        //]]>
+    </script> 
+	</div>
+	
+</div>
+<script type="text/javascript">
+        <?php if ($this->isStartCustomization()): ?>
+            Enterprise.Bundle.start();
+        <?php endif;?>
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+
+        Enterprise.Bundle.initialize();
+</script>

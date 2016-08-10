@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Godfreys_GoogleAnalytics>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Godfreys_GoogleAnalytics>
+    </modules>
+</config>

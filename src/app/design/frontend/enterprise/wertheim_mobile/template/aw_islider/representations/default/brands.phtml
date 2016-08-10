@@ -1,0 +1,49 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ *
+ * @category   AW
+ * @package    AW_Islider
+ * @copyright  Copyright (c) 2011 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ */
+?>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.simplyscroll-1.0.4.js'); ?>"></script>
+<link type="text/css" href="<?php echo $this->getSkinUrl('css/jquery.simplyscroll.css') ?>" rel="stylesheet">
+<script type="text/javascript">
+    var j$ = jQuery.noConflict();	
+    (function(j$) {
+        j$(function() { 
+            j$("#scroller").simplyScroll({
+                autoMode: 'loop'
+            });
+        });
+    })(jQuery);
+</script>
+<?php $helper = Mage::helper('awislider') ?>
+<?php if($this->canDisplay() && $this->getSlides()->getSize()) : ?>
+<div id="brands-new">
+	<ul id="scroller">
+        <?php $_i = 0 ?>
+        <?php foreach($this->getSlides() as $slide) : ?>
+        <li>
+            <?php if($slide->getData('url')) : ?>
+            <a href="<?php echo $helper->getUseDirectLinks() ? $slide->getData('url') : $this->getUrl('awislider/link/out', array('sid' => $slide->getData('id'))) ?>"<?php if($slide->getData('new_window')) : ?> target="_blank"<?php endif ?><?php if($slide->getData('nofollow')) : ?> rel="nofollow"<?php endif ?>>
+            <?php endif ?>
+                <img src="<?php echo ($slide->getUriLocation()) ?>" title="<?php echo htmlspecialchars($slide->getData('title')) ?>" alt="<?php echo htmlspecialchars($slide->getData('title')) ?>" border="0" />
+            <?php if($slide->getData('url')) : ?>
+            </a>
+            <?php endif ?>
+        </li>
+        <?php $_i++ ?>
+        <?php endforeach ?>
+    </ul>
+</div>
+<?php endif ?>

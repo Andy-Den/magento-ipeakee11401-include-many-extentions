@@ -1,0 +1,64 @@
+<?php
+/**
+* aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE-ENTERPRISE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento ENTERPRISE edition
+ * aheadWorks does not guarantee correct work of this extension
+ * on any other Magento edition except Magento ENTERPRISE edition.
+ * aheadWorks does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_FBIntegrator
+ * @version    2.1.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE-ENTERPRISE.txt
+ */
+?>
+<script type="text/javascript">
+    var aw_fb_disable_loader;
+    var aw_fb_is_cancel = true;
+
+    function aw_fb_login(){
+        aw_fb_disable_loader=false;
+        $('fb-loader').setStyle({ display: 'block' });
+        FB.getLoginStatus(aw_fb_login_a);   
+        aw_fb_disable_loader=true;
+        FB.Event.subscribe('auth.statusChange', aw_fb_login_a);
+    }
+    
+    function aw_fb_on_login(){
+        if (aw_fb_is_cancel) $('fb-loader').setStyle({ display: 'none' });
+    }
+
+    function aw_fb_login_a(response){
+        if (response.authResponse) {
+            for(var key in response.authResponse) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", response.authResponse[key]);
+                $('fb-connect').appendChild(hiddenField);
+            }
+            $('fb-connect').submit();
+            aw_fb_is_cancel = false;
+        } else {
+            if(aw_fb_disable_loader){ $('fb-loader').setStyle({ display: 'none' });      }
+        }
+    }
+</script>
+<div class="fb-login-button" onclick="aw_fb_login();" onlogin="aw_fb_on_login();" scope="publish_stream,user_birthday,email" data-show-faces="false" data-width="200" data-max-rows="1"><?php echo $this->helper('fbintegrator')->__('Login via Facebook'); ?></div>
+<div id="fb-loader" style="display:none;">
+    <p class="loader" id="loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif') ?>" alt="<?php echo Mage::helper('adminhtml')->__('Loading...') ?>" /><br /><?php echo Mage::helper('adminhtml')->__('Please wait...') ?></p>
+</div>

@@ -1,0 +1,697 @@
+@charset "utf-8";
+/* CSS Document */
+
+.shopContent {
+	float:left;
+	background-color:#FFF;
+	width: 648px;
+    padding: 24px 24px 50px;
+	-webkit-box-shadow:0 0 5px #cccccc;
+	-moz-box-shadow:0 0 5px #cccccc;
+	box-shadow:0 0 15px #cccccc;
+}
+
+
+
+.ShopMainContentFullLength {
+	position:relative;
+	float:left;
+	margin-left:24px;
+	width:645px;
+	margin-top:0;
+	padding:0;
+}
+
+.ShopMainContentFullLength h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	color:#113C2B;
+	text-transform:uppercase;
+}
+
+.ShopMainContentForm {
+	position:relative;
+	float:left;
+	margin: 0 24px 0 24px;
+	width:597px;
+	padding:0;
+}
+
+/* cart */
+
+
+.block.block-cart .clearfix{
+	margin-bottom:0px;
+}
+.block-content.clearfix{
+	margin-top:3px;
+	float:left;
+	position:relative;
+	top:0px;
+}
+
+.block-cart {
+	background: transparent url("../../images/vorwerk/shop/cart.png") no-repeat 0 0;
+	float: right;
+	height: 85px;
+	margin: 30px -52px 0 30px;
+	padding: 16px 22px 6px 18px;
+	width: 218px;
+}
+.block-cart .block-title {
+	float: left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin:0;
+	padding: .6em 0 0 0;
+	width: 50%;
+}
+
+.block-title  a{
+	color:#009A3D;
+}
+
+.block-title  a:hover,
+.block-title  a:focus{
+	color: #8cbd5a;
+	text-decoration:none;
+}
+
+.block-cart p {
+	margin:0;
+}
+.block-cart .subtotal {
+	display: none;
+}
+.block-cart .actions {
+	float: right;
+	width: 50%;
+}
+.summary .small span
+{
+	color:#009645;
+}
+p.small {
+	font-size: 10px;
+	margin:8px 0 0 0;
+}
+.summary {
+	font-size: 11px;
+	margin:0;
+}
+
+/*checkout button*/
+
+.button.cart {
+	background: transparent url("../../images/vorwerk/nav/buttons-left.png") no-repeat left -600px;
+	cursor: pointer;
+	display: block;
+	height: 25px;
+	margin-bottom: 0;
+	margin-left:5px;
+}
+.button.cart span {
+	background: transparent url("../../images/vorwerk/nav/buttons-right.png") no-repeat right -600px;
+	display: inline-block;
+	height: 25px;
+	margin: 0 0 0 25px;
+	color: #FFF;
+	font-weight:bold;
+	padding: 0 0 0 0;
+}
+.button.cart span button {
+	background: transparent none;
+	border: 0;
+	color: #FFF;
+	display: block;
+	font-size:11px;
+	font-weight: bold;
+	height: 25px;
+	padding: 0 12px 0 0;
+	cursor: pointer;
+}
+.button.cart:hover {
+	background-position: left -700px;
+}
+.button.cart:hover span,
+.button.cart span:hover {
+	background-position: right -700px;
+}
+
+
+/* Product List */
+
+
+
+.category-products{
+	float:left;
+	padding:0;
+}
+
+table.products-row {
+	padding:0;
+	margin:0;
+	border: 0 none;
+	border-collapse:collapse;
+}
+table.products-row td{
+	padding:0;
+	margin:0;
+	border: 0 none;
+	vertical-align:top;
+}
+table.products-grid {
+	width:144px;
+	float: left;
+	position:relative;
+	border: 0 none;
+	border-collapse:collapse;
+
+}
+.shopContent table.products-grid {
+	margin: 0;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.shopContent h4 + table.products-grid {
+	margin: 1em 0 0 0;
+}
+.shopContent table.products-grid {
+	background: none;
+	float: left;
+	margin: 0 24px 24px 0;
+	padding: 0;
+	width: 144px;
+	position:relative;
+}
+
+.shopContent table.products-grid img {
+	-khtml-box-shadow: 0 0 5px #ccc;
+	-moz-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+	border: 5px solid #FFF;
+	height: 134px;
+	width: 134px;
+	border-collapse: separate;
+
+}
+
+
+.shopContent ul.products-grid li.last-in-row {
+	clear: right;
+	margin: 0 0 24px 0;
+}
+
+.shopContent table.products-grid img {
+
+	height: 134px;
+	width: 134px;
+}
+
+.shopContent table.products-grid .product-name,
+.shopContent table.shopping-cart .product-name {
+	font-size: 11px;;
+	font-weight: bold;
+	margin:0;
+	color: #009A3D;
+}
+.shopContent table.products-grid .product-name a,
+.shopContent table.products-grid .product-name a:link,
+.shopContent table.products-grid .product-name a:visited,
+.shopContent table.shopping-cart .product-name a,
+.shopContent table.shopping-cart .product-name a:link,
+.shopContent table.shopping-cart .product-name a:visited {
+	background: url("../../images/vorwerk/nav/link_intern.png") 0.2em 0.4em no-repeat;
+	display: inline-block;
+	line-height: 15px;
+	padding: 0 0 0 12px;
+	color: #009A3D;
+	margin:7px 0 0 0;
+}
+.shopContent table.products-grid .product-name a:hover,
+.shopContent table.products-grid .product-name a:focus,
+.shopContent table.products-grid .product-name a:active,
+.shopContent table.shopping-cart .product-name a:hover,
+.shopContent table.shopping-cart .product-name a:focus,
+.shopContent table.shopping-cart .product-name a:active {
+	background: url("../../images/vorwerk/nav/link_intern_hover.png") 0.2em 0.4em no-repeat;
+	color: #8cbd5a;
+}
+.shopContent table.products-grid .product-related {
+	font-size:11px;
+	line-height:15px;
+	margin:10px 0 0 0;
+	color: #595552;
+}
+
+.shopContent table.products-grid .price,
+.shopContent table.products-grid .price-save,
+.shopContent table.products-grid .price-new,
+.shopContent table.products-grid .price-special-offer {
+	font-size: 12px;
+	margin:10px 0 0 0;
+	color: #595552;
+}
+.shopContent table.products-grid .price,
+.shopContent table.products-grid .price-save {
+	font-weight: bold;
+}
+
+.shopContent ul.products-grid li .price-save .regular-price {
+	padding-right: .75em;
+}
+.shopContent ul.products-grid li .price-save .reduced-price {
+	color: #8cbd5a;
+    display: block;
+}
+
+.price-new .old-price,
+.price-new .new-price,
+.price-special-offer .special-offer-price,
+.price-special-offer .saving-price {
+	display: block;
+}
+
+.price-new .old-price {
+	color: #aeaaa6;
+}
+.price-special-offer .special-offer-price {
+	color: #cd071e;
+}
+
+.price-new .old-price del,
+.price-new .new-price,
+.price-special-offer .special-offer-price,
+.price-special-offer .saving-price {
+	font-weight: bold;
+}
+.price-new .new-price span,
+.price-special-offer .special-offer-price span,
+.price-special-offer .saving-price span {
+	font-weight: normal;
+}
+
+.shopContent ul.products-grid li a.product-image {
+	position: relative;
+}
+
+
+
+
+/************ADD TO CART BUTTON***************/
+.button.addToCart {
+	background: transparent url("../../images/vorwerk/nav/buttons-left.png") no-repeat left -1000px;
+	cursor: pointer;
+	display: block;
+	height: 25px;
+	margin-bottom: 10px;
+}
+.button.addToCart span {
+	background: transparent url("../../images/vorwerk/nav/buttons-right.png") no-repeat right 0;
+	display: inline-block;
+	height: 25px;
+	margin: 0 0 0 25px;
+	padding: 5px 24px 0 12px;
+}
+
+.button.addToCart span,
+.button.addToCart span a,
+.button.addToCart span input[type="submit"] {
+	color: #FFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+}
+.button.addToCart:hover {
+	background-position: left -1100px;
+}
+.button.addToCart:hover span,
+.button.addToCart span:hover {
+	background-position: right -100px;
+}
+
+.add-to-cart .button.addToCart span {
+margin-top:5px;
+}
+.product-shop .button.addToCart span  input[type="submit"] {
+	background: transparent none;
+	border: 0;
+	color: #FFF;
+	display: block;
+	cursor:pointer;
+	font-weight: bold;
+	height: 25px;
+	padding: 0 24px 0 12px;
+}
+
+
+
+.product-shop .button.addToCart span {
+	padding: 0;
+}
+
+
+table.add-to-basket .button.addToCart span {
+    padding: 0 6px 0 0;
+}
+
+/*---------------------------------------------------------------------*/
+/*			'SUBMIT' BUTTONS
+/*---------------------------------------------------------------------*/
+
+/********GREEN*******/
+
+.button.greenBtn span input[type="submit"] {
+	color: #FFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+.button.greenBtn span  input[type="submit"] {
+	background: transparent none;
+	border: 0;
+	color: #FFF;
+	display: block;
+	cursor:pointer;
+	font-weight: bold;
+	padding: 0 0 0 0;
+}
+
+/********GREY*******/
+
+.button.greyBtn span input[type="submit"] {
+	color: #009645;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+.button.greyBtn span  input[type="submit"] {
+	background: transparent none;
+	border: 0;
+	color: #009645;
+	display: block;
+	cursor:pointer;
+	font-weight: bold;
+	padding: 1px 0 0 0;
+}
+
+/************GREY BUTTON, GREEN TEXT***************/
+.button.greyBtn {
+	background: transparent url("../../images/vorwerk/nav/buttons-left.png") no-repeat left -200px;
+	cursor: pointer;
+	display: block;
+	height: 25px;
+	margin-bottom: 10px;
+}
+.button.greyBtn span {
+	background: transparent url("../../images/vorwerk/nav/buttons-right.png") no-repeat right -200px;
+	display: inline-block;
+	height: 25px;
+	margin: 0 0 0 25px;
+    padding: 5px 24px 0 12px;
+}
+.button.greyBtn span,
+.button.greyBtn span a {
+	color: #009645;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+}
+.button.greyBtn:hover {
+	background-position: left -300px;
+}
+.button.greyBtn:hover span,
+.button.greyBtn span:hover {
+	background-position: right -300px;
+}
+
+table.voucher .greyBtn span {
+    padding: 5pxs 24px 0 12px;
+}
+
+table.voucher .greyBtn {
+	float:left;
+	margin-top: 10px;
+}
+
+/************GREEN BUTTON, WHITE TEXT***************/
+.button.greenBtn {
+	background: transparent url("../../images/vorwerk/nav/buttons-left.png") no-repeat left 0px;
+	cursor: pointer;
+	display: block;
+	height: 25px;
+	margin-bottom: 10px;
+}
+.button.greenBtn span {
+	background: transparent url("../../images/vorwerk/nav/buttons-right.png") no-repeat right 0px;
+	display: inline-block;
+	height: 25px;
+	margin: 0 0 0 25px;
+    padding: 5px 24px 0 12px;
+}
+.button.greenBtn span,
+.button.greenBtn span a {
+	color: #FFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+}
+.button.greenBtn:hover {
+	background-position: left -100px;
+}
+.button.greenBtn:hover span,
+.button.greenBtn span:hover {
+	background-position: right -100px;
+}
+
+table.voucher .greenBtn span {
+    padding: 0 24px 0 12px;
+}
+
+table.voucher .greenBtn {
+	float:left;
+	margin-top: 10px;
+}
+
+/************SHOP TYPOGRAPHY***************/
+
+.shopContent h2 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:32px;
+	font-weight:bold;
+	color:#113C2B;
+	text-transform:uppercase;
+}
+
+.shopContent p.big {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	font-weight:normal;
+	margin:0;
+	color:#595552;
+	line-height:1.5em;
+}
+
+.shopContent p.big2 { /* For the Newsletter Page */
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	font-weight:normal;
+	margin:0;
+	color:#8c8c8c;
+	line-height:1.5em;
+}
+
+.trusted {
+	margin: 40px 0 5px 0;
+}
+
+
+.trusted p {
+    text-align: right;
+	font-size:10px;
+	color:#595552;
+}
+
+.trusted.left p {
+    text-align: left;
+}
+
+.shopHelp {
+	position:relative;
+	float:left;
+	margin: 0 0 0 -10px;
+	width:662px;
+	height:64px;
+	background: url("../../images/vorwerk/shop/bg_questions.png") no-repeat 0 0;
+}
+
+.shopHelp h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:23px;
+	font-weight:normal;
+	margin:20px 0 0 64px;
+	color:#8C8C8C;
+	float:left;
+}
+
+.shopHelp .bottom-link {
+	margin: 22px 20px 0 0;
+}
+
+/************SHOP SUB NAVIGATION***************/
+
+.shopSubNav {
+	float:left;
+	width:264px;
+	padding-bottom:50px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.shopSubNav h5 {
+	background: url("../../images/vorwerk/nav/trennlinie.png") 0 bottom no-repeat;
+	color: #595552;
+	font-size: 14px;
+	line-height: 1em;
+	margin: 29px 24px 20px 22px;
+	padding: 0 0 20px 0;
+}
+
+.shopSubNav ul,
+.shopSubNav ul.productsNav,
+.shopSubNav ul.shopSubNavExtras {
+	margin: 0 24px 24px 0;
+	padding-left:24px;
+}
+
+.shopSubNav ul li {
+	color: #595552;
+	line-height: 1.3em;
+	margin: 0 0 7px 0;
+    font-size: 12px;
+	list-style:none;
+}
+.shopSubNav li a,
+.shopSubNav li a:link,
+.shopSubNav li a:visited {
+	background: transparent url("../../images/vorwerk/nav/subnav_inactive.png") 0 .5em no-repeat;
+	color: #595552;
+	display: block;
+	font-weight: normal;
+	margin: 0;
+	padding: .1em 0 .1em 10px;
+	text-decoration: none;
+}
+.shopSubNav li a:hover,
+.shopSubNav li a:focus,
+.shopSubNav li a:active,
+.shopSubNav .sub-nav li a.active {
+	background: transparent url("../../images/vorwerk/nav/subnav_active.png") 0 .5em no-repeat;
+	color: #009645;
+	text-decoration: underline;
+}
+.shopSubNav li.nav-separator {
+	background: url("../../images/vorwerk/nav/trennlinie.png") 0 0 no-repeat;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 20px 0 .8em 0;
+	padding: 20px 0 0 0;
+}
+.shopSubNav li.nav-separator:first-child {
+	background: none;
+	margin: 0 0 .8em 0;
+	padding: 0;
+}
+.shopSubNav li.nav-separator span {
+	display: none; /* hide : */
+}
+
+.shopSubNav li.shopActive a,
+.shopSubNav li.shopActive a:link,
+.shopSubNav li.shopActive a:visited {
+	background: transparent url("../../images/vorwerk/nav/subnav_active.png") 0 .5em no-repeat;
+	color: #009645;
+	text-decoration: underline;
+}
+
+.shopSubNav li.nav-separator:first-child {
+	background: url("../../images/vorwerk/nav/trennlinie.png") no-repeat 0 0 transparent;
+	margin: 20px 0 .8em 0;
+	padding: 20px 0 0 0;
+}
+.shopSubNav li.nav-separator.first {
+	background: none;
+	margin: 0 0 .8em 0;
+	padding: 0;
+}
+
+
+/**************************************************/
+/* USP */
+/**************************************************/
+
+ul.usp {
+	list-style-type:none;
+
+}
+ul.usp li {
+	background:url("../../images/vorwerk/nav/tick_bullet.jpg") no-repeat;
+	background-position: top left;
+	padding: 0 10px 0 25px;
+	font-size:11px;
+	margin-left:0px;
+	margin-right:15px;
+}
+
+.shopSubNav .usp {
+	font-size: 11px;
+	color: #595552;
+	margin: 20px 0 0 24px;
+	padding: 0 0 0 0;
+	width:206px;
+	background-color: #FFF;
+}
+
+.shopSubNav li.nav-separator-no-line {
+	font-size: 12px;
+	font-weight: bold;
+	margin: 20px 0 .8em 0;
+	padding: 20px 0 0 0;
+	background:none;
+}
+
+
+.shopSubNav ul.usp{
+	margin: 0 12px 0 12px;
+	padding-bottom:15px;
+}
+
+
+/* CMS */
+
+.cms-page-view .shopContent h2 {
+    font-size: 16px;
+}
+.shopSubNav .cms-navigation h2 {
+    margin: 0 0 .8em;
+    padding:0;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #595552;
+}
+.shopSubNav .cms-navigation * + h2 {
+    margin-top: 20px;
+    padding: 20px 0 0 0;
+    background: url('../../images/vorwerk/nav/trennlinie.png') 0 0 no-repeat;
+}
+.shopSubNav .cms-navigation li {
+    font-size: 12px;
+    line-height: 1.3;
+    margin-bottom: 7px;
+}

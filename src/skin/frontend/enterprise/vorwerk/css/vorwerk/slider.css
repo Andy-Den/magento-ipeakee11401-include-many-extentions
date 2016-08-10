@@ -1,0 +1,426 @@
+/* -------------------------------------------------------------
+ *	project: Vorwerk, 2010
+ *	created: 2010-04-07
+ *	last changed: 2010-09-08
+ *	author: Patricia Ro&Atilde;&#376;, triplesense
+ --------------------------------------------------------------- */
+
+/* -------------------------------------------------------------
+ *	@ Table of contents
+ * -------------------------------------------------------------
+ *	# Horizontal Slider
+ *	# Vertical Slider (Magazine)
+ *	# Horizontal Content Slider
+ * ------------------------------------------------------------- */
+ 
+/* -------------------------------------------------------------
+ *	Horizontal Slider
+ * ------------------------------------------------------------- */
+.horizontal-slider {
+	overflow: hidden;
+}
+
+.horizontal-slider .scrollarea {
+	float: left;
+	height: 175px;
+	overflow: hidden;
+	position: relative;
+	width: 560px;
+}
+
+.horizontal-slider .items {
+	clear: both;
+	position: absolute;
+	width: 20000em;
+}
+
+.horizontal-slider .page {
+	float: left;
+	max-width: 560px;
+	width: auto;
+}
+
+/* item content */
+.horizontal-slider .item {
+	cursor: pointer;
+	float: left;
+	max-height: 135px;
+	min-height: 118px;
+	padding: 8px 0 24px 0;
+	width: 112px;
+}
+
+.horizontal-slider .item.active,
+.horizontal-slider .item:hover,
+.horizontal-slider .item:focus,
+.horizontal-slider .item:active {
+	background: transparent url("../shop/images/slider/slider-activecontent.png") no-repeat 0 bottom;
+}
+
+.horizontal-slider .item h4 {
+	color: #009645;
+	margin: 0 10px;
+}
+.horizontal-slider .item p {
+	margin: 0 10px;
+}
+
+.horizontal-slider .item img {
+	height: 85px;
+	margin: 0 9px 9px 9px;
+	width: 85px;
+}
+
+/* active item */
+.horizontal-slider .scrollarea .active {
+	position: relative;
+	z-index: 2;
+}
+
+/* prev, next, prevPage and nextPage buttons */
+.horizontal-slider a.browse {
+	background: transparent url("../shop/images/slider/buttons-slider-horizontal.png") no-repeat 0 30px;
+	cursor: pointer;
+	display: block;
+	float: left;
+	height: 112px;
+	width: 40px;
+}
+
+/* left */
+.horizontal-slider a.browse.left {
+	background-position: 0 10px;
+	margin-left: 0;
+} 
+.horizontal-slider a.browse.left:hover,
+.horizontal-slider a.browse.left:focus,
+.horizontal-slider a.browse.left:active {
+	background-position: 0 -122px;
+}
+
+.horizontal-slider a.browse.left.disabled {
+	background-position: 0 -255px;
+	cursor: default;
+}
+
+/* right */
+.horizontal-slider a.browse.right {
+	background-position: -127px 10px;
+	clear: right;
+	margin-right: 0;
+}
+.horizontal-slider a.browse.right:hover,
+.horizontal-slider a.browse.right:focus,
+.horizontal-slider a.browse.right:active {
+	background-position: -127px -122px;
+} 
+
+.horizontal-slider a.browse.right.disabled {
+	background-position: -127px -255px;
+	cursor: default;
+}
+
+
+.faq-questions,
+.dynamic-slider-content,
+.kobold .dynamic-slider-content.accessories {
+	background: #F1EDEA;
+	display: none;
+	margin-top: 24px;
+	overflow: hidden;
+	padding: 24px;
+}
+
+.dynamic-slider-content.accessories {
+	padding-right: 0 !important;
+} 
+
+.dynamic-slider-content.accessories p {
+	margin-bottom: 1.2em;
+	font-size: 1em;
+	width: 184px;
+}
+
+.dynamic-slider-content.accessories h3 {
+	padding-top: 20px;
+}
+
+.dynamic-slider-content.accessories .slider-content:first-child h3 {
+	padding-top: 0;
+}
+
+.dynamic-slider-content.accessories div li {
+	float: left;
+	margin: 0 24px 0 0;
+	padding: 0;
+	background: none;
+	height: 160px;
+}
+
+.faq-questions h3,
+.dynamic-slider-content h3 {
+	margin-top: 0;
+}
+
+.faq-questions img {
+	float: left;
+}
+
+.faq-questions .text {
+	margin-left: 230px;
+}
+
+.faq-questions .text ol {
+	color: #009645;
+}
+
+.faq-questions .text ol li {
+	margin-left: 18px;
+}
+
+.faq-questions .text ol li a,
+.faq-questions .text ol li a:link, 
+.faq-questions .text ol li a:visited {
+	display: inline;
+}
+
+
+
+/* -------------------------------------------------------------
+ *	Vertical Slider (Magazine)
+ * ------------------------------------------------------------- */
+.vertical-slider {
+	left: 0;
+	overflow: hidden;
+	position: relative;
+	top: 0;
+	width: 274px;
+}
+
+.vertical-slider .scrollarea {
+	height: 634px; /* based on 5 items */
+	position: relative;
+	overflow: hidden;
+	width: 274px;
+}
+
+.vertical-slider .items {
+	height: 20000em;
+	position: absolute;
+}
+
+.vertical-slider .page {
+	height: auto;
+	max-height: 634px; /* based on 5 items */
+	width: 274px;
+}
+
+/* item content */
+.vertical-slider .item,
+.vertical-slider .item:hover,
+.vertical-slider .item:focus,
+.vertical-slider .item:active,
+.vertical-slider .item.active {
+	background-image: url("../shop/images/slider/slider-vertical.png");
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+
+.vertical-slider .item {
+	background-position: 0 -475px;
+	cursor: pointer;
+	height: 127px;
+	width: 274px;
+}
+
+.vertical-slider .item:hover,
+.vertical-slider .item:focus,
+.vertical-slider .item:active {
+	background-position: 0 -248px;
+}
+
+.vertical-slider .item.active {
+	background-position: 0 0;
+	overflow: hidden;
+}
+
+.vertical-slider .item .inner {
+	padding: 14px 16px;
+}
+
+.vertical-slider .item .inner h4 {
+	margin: 0 0 .6em 0;
+}
+
+.vertical-slider .item .inner h4 a,
+.vertical-slider .item .inner h4 a:link
+.vertical-slider .item .inner h4 a:visited {
+	color: #8C8C8C;
+	text-decoration: none;
+}
+
+.vertical-slider .item .inner img {
+	height: 55px;
+	float: left;
+	width: 55px;
+}
+
+.vertical-slider .item .inner p {
+	margin-left: 80px;
+}
+
+/* active item */
+.vertical-slider .scrollarea .active {
+	position: relative;
+	z-index: 2;
+}
+
+/* up and down it goes */
+.vertical-slider .up a,
+.vertical-slider .up a:link,
+.vertical-slider .down a,
+.vertical-slider .down a:link {
+	text-indent: -999em;
+}
+
+/* srpite */
+.vertical-slider .up a,
+.vertical-slider .up a:link,
+.vertical-slider .up a:visited,
+.vertical-slider .up a:hover,
+.vertical-slider .up a:focus,
+.vertical-slider .up a:active,
+.vertical-slider .up a.disabled,
+.vertical-slider .down a,
+.vertical-slider .down a:link,
+.vertical-slider .down a:visited,
+.vertical-slider .down a:hover,
+.vertical-slider .down a:focus,
+.vertical-slider .down a:active,
+.vertical-slider .down a.disabled {
+	background-image: url("../shop/images/slider/buttons-slider-vertical.png");
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+ 
+/* up */
+.vertical-slider .up a,
+.vertical-slider .up a:link,
+.vertical-slider .up a:visited {
+	background-position: 0 -694px;
+	cursor: pointer;
+	display: block;
+	height: 34px;
+	width: 274px;
+}
+
+.vertical-slider .up a:hover,
+.vertical-slider .up a:focus,
+.vertical-slider .up a:active {
+	background-position: 0 -560px;
+}
+
+.vertical-slider .up a.disabled {
+	background-position: 0 -426px;
+	cursor: default;
+}
+
+
+/* down */
+.vertical-slider .down a,
+.vertical-slider .down a:link,
+.vertical-slider .down a:visited {
+	background-position: 0 -284px;
+	cursor: pointer;
+	display: block;
+	height: 32px;
+	width: 268px;
+}
+
+.vertical-slider .down a:hover,
+.vertical-slider .down a:focus,
+.vertical-slider .down a:active {
+	background-position: 0 -142px;
+}
+
+.vertical-slider .down a.disabled {
+	background-position: 0 0;
+	cursor: default;
+}
+
+
+
+/* -------------------------------------------------------------
+ *	Horizontal Content Slider
+ * ------------------------------------------------------------- */
+.horizontal-content-slider {
+	overflow: hidden;
+}
+.lightbox .horizontal-content-slider {
+	margin: 0 -24px;
+}
+
+.horizontal-content-slider .scrollarea {
+	float: left;
+	height: 420px;
+	overflow: hidden;
+	position: relative;
+	width: 600px;
+}
+
+.horizontal-content-slider .items {
+	clear: both;
+	position: absolute;
+	width: 20000em;
+}
+
+.horizontal-content-slider .item {
+	float: left;
+	width: 600px;
+}
+
+.lightbox .horizontal-content-slider .item p {
+	text-align: center;
+}
+
+/* prev, next, prevPage and nextPage buttons */
+.horizontal-content-slider a.browse {
+	background: transparent url("../images/global/buttons-slider-mini-horizontal.png") no-repeat 0 0;
+	cursor: pointer;
+	display: block;
+	float: left;
+	height: 16px;
+	width: 24px;
+}
+
+/* left */
+.horizontal-content-slider a.browse.left {
+	background-position: 0 0;
+} 
+.horizontal-content-slider a.browse.left:hover,
+.horizontal-content-slider a.browse.left:focus,
+.horizontal-content-slider a.browse.left:active {
+	background-position: 0 -50px;
+}
+
+.horizontal-content-slider a.browse.left.disabled {
+	background-position: 0 -100px;
+	cursor: default;
+}
+
+/* right */
+.horizontal-content-slider a.browse.right {
+	background-position: -187px 0;
+	clear: right;
+}
+.horizontal-content-slider a.browse.right:hover,
+.horizontal-content-slider a.browse.right:focus,
+.horizontal-content-slider a.browse.right:active {
+	background-position: -187px -50px;
+} 
+
+.horizontal-content-slider a.browse.right.disabled {
+	background-position: -187px -100px;
+	cursor: default;
+}
+

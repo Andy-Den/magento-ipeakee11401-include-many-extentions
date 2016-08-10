@@ -1,0 +1,86 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+	    jQuery('#carousel').jcarousel({
+	    	wrap: 'circular',
+	        animation: 'slow',
+	        scroll: 1,
+	        start: 1
+	    });
+	});
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#review-carousel').jcarousel({
+    	scroll: 1,
+    	start: 1,
+    	visible: 3
+    });
+});
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+
+<div id="head-wrapper" class="head-wrapper">
+	<div class="header-container">
+		<div class="logo-image">
+			<div id="logo"><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></div>
+		</div>
+		<div class="top">
+			<div class="social-icons">
+					<a href="http://www.youtube.com/user/SauberVacuum/videos?view=0" target="_blank"><img src="<?php echo $this->getSkinUrl('images/youtube.png');?>" alt="Sauber Youtube"/></a>
+					<a href="http://www.facebook.com/sauberintelligence" target="_blank"><img src="<?php echo $this->getSkinUrl('images/facebook.png');?>" alt="Sauber Facebook"/></a>
+			</div>
+			<div class="head-search">
+				<?php echo $this->getChildHtml('topSearch') ?>
+				<!-- <form id="search_mini_form" action="<?php //echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get"> 
+					<input class="search-ico" type="image" src="<?php //echo $this->getSkinUrl('images/search-ico.png');?>" title="Go"/>
+					<input onblur="if(this.value==''){this.value='Search products here...';}" onfocus="if(this.value=='Search products here...'){this.value='';}" class="search-text" value="Search products here..." name="search-text"/> 
+				</form> -->
+				<div class="clear">&nbsp;</div>
+			</div>
+		</div>
+
+		<div class="menu">
+			<?php  echo $this->getChildHtml('topMenu'); ?>
+		</div>
+	</div>
+</div>
+
+<?php  //echo $this->getChildHtml('carousel'); ?>
+
+
+

@@ -1,0 +1,556 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <default>
+       <reference name="head">            	
+                <!-- js -->                                    		                               
+                <block type="core/template" name="allajax_jsfile" as="allajax_jsfile" template="allajax/jsfiles.phtml" />
+                
+            
+        </reference>
+       <reference name="wishlist_link">
+            <action method="setAParams">
+                <value>id='allajax-wishlist-links'</value>
+            </action>
+        </reference>
+    
+      <reference name="head">
+        <!-- CSS -->
+		<action method="addItem"><type>skin_css</type><name>balance/allajax/css/allajax.css</name></action>
+		<action method="addItem"><type>skin_css</type><name>balance/allajax/css/jquery.fancybox-1.3.4.css</name><params/></action>
+	
+	<!-- js -->
+                <action method="addItem">
+                    <type>skin_js</type>
+                    <name>balance/allajax/js/jquery.fancybox-1.3.4.pack.js</name>
+                </action>
+		
+                <block type="core/template" name="allajax_jsfile" as="allajax_jsfile" template="allajax/jsfiles.phtml" />
+                
+                             
+                
+                     <!-- product type assets start -->
+            <action method="addJs">
+                <script>varien/product.js</script>
+            </action>
+            <action method="addJs">
+                <script>varien/configurable.js</script>
+            </action>
+ 	
+             <action method="addItem">
+                <type>skin_js</type>
+                <name>balance/allajax/js/enterprise/scripts.js</name>                
+            </action> 
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/bundle.js</name>
+            </action>
+
+            <action method="addItem">
+                <type>js_css</type>
+                <name>calendar/calendar-win2k-1.css</name>
+                <params/>
+                <!--<if/><condition>can_load_calendar_js</condition>-->
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>calendar/calendar.js</name>
+                <!--<params/><if/><condition>can_load_calendar_js</condition>-->
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>calendar/calendar-setup.js</name>
+                <!--<params/><if/><condition>can_load_calendar_js</condition>-->
+            </action>
+            <!-- product type assets end -->
+            
+                <action method="addItem"><type>skin_js</type><script>balance/allajax/js/enterprise/wishlist.js</script></action>
+		
+                			
+      </reference>
+      
+         <reference name="wishlist_sidebar">
+            <action method="setTemplate">
+                <template>allajax/wishlist/sidebar.phtml</template>
+            </action>
+        </reference>
+        
+      
+        <reference name="compareMini">
+            <action method="setTemplate">
+                <template>allajax/catalog/product/compare/mini.phtml</template>
+            </action>
+        </reference>
+        
+        <reference name="right">
+            <block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist" template="allajax/wishlist/sidebar.phtml" />
+        </reference>
+    
+        <reference name="left">
+            <block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist" template="allajax/wishlist/sidebar.phtml" />
+        </reference>
+		<reference name="product.info.downloadable.options">
+            <action method="setTemplate">
+                <template>allajax/downloadable/catalog/product/links.phtml</template>
+            </action>
+        </reference>
+        
+        <reference name="before_body_end">
+            <block type="enterprise_wishlist/behaviour" name="wishlist_behaviour" as="wishlist_behaviour" template="allajax/wishlist/behaviour.phtml" />
+        </reference>
+         
+   
+  </default>
+  
+       <wishlist_index_configure translate="label">
+      
+              
+        <reference name="product.info.addto">
+            <action method="setTemplate">
+                <template>allajax/wishlist/item/configure/addto.phtml</template>
+            </action>
+        </reference>
+        
+      
+    </wishlist_index_configure>
+    
+<PRODUCT_TYPE_bundle translate="label" module="bundle">
+    
+        <!-- <reference name="product.info">
+            <action method="setTemplate">
+                <template>allajax/bundle/catalog/product/view.phtml</template>
+            </action>
+        </reference> -->
+        <reference name="product.info.bundle">
+            <action method="setTemplate">
+                <template>allajax/catalog/product/view/type/bundle.phtml</template>
+            </action>
+        </reference>
+    </PRODUCT_TYPE_bundle>
+<ajaxwishlist_wishlist_sidebar>
+    <block type="wishlist/customer_sidebar" name="ajaxwishlist_wishlist_sidebar" output="toHtml" template="allajax/wishlist/sidebar.phtml">
+        <action method="setIsAjax"><value>true</value></action>
+    </block>
+  </ajaxwishlist_wishlist_sidebar> 
+  
+  <toplinks_allajax>
+            <block type="page/template_links" name="toplinks_allajax" output="toHtml" template="page/template/links.phtml">
+                <action method="setIsAjax"><value>true</value></action>
+            </block>
+  </toplinks_allajax> 
+  
+  <ajaxwishlist_compare>
+      <block type="catalog/product_compare_sidebar" output="toHtml" name="ajaxwishlist_compare" template="allajax/catalog/product/compare/mini.phtml">
+             <action method="setIsAjax"><value>true</value></action>
+      </block>
+  </ajaxwishlist_compare>
+  
+   <ajaxcart>
+        <reference name="content">
+            <block type="checkout/cart" name="checkout.cart">
+                <action method="setCartTemplate">
+                    <value>checkout/cart.phtml</value>
+                </action>
+                <action method="setEmptyTemplate">
+                    <value>checkout/cart/noItems.phtml</value>
+                </action>
+                <action method="chooseTemplate"/>
+                <action method="addItemRender">
+                    <type>simple</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>checkout/cart_item_renderer_grouped</block>
+                    <template>checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>configurable</type>
+                    <block>checkout/cart_item_renderer_configurable</block>
+                    <template>checkout/cart/item/default.phtml</template>
+                </action>
+
+                <block type="core/text_list" name="checkout.cart.top_methods" as="top_methods" translate="label">
+                    <label>Payment Methods Before Checkout Button</label>
+                    <block type="checkout/onepage_link" name="checkout.cart.methods.onepage"
+                           template="checkout/onepage/link.phtml"/>
+                </block>
+
+                <block type="page/html_wrapper" name="checkout.cart.form.before" as="form_before" translate="label">
+                    <label>Shopping Cart Form Before</label>
+                </block>
+
+                <block type="core/text_list" name="checkout.cart.methods" as="methods" translate="label">
+                    <label>Payment Methods After Checkout Button</label>
+                    <block type="checkout/onepage_link" name="checkout.cart.methods.onepage"
+                           template="checkout/onepage/link.phtml"/>
+                    <block type="checkout/multishipping_link" name="checkout.cart.methods.multishipping"
+                           template="checkout/multishipping/link.phtml"/>
+                </block>
+
+                <block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon"
+                       template="checkout/cart/coupon.phtml"/>
+                <block type="checkout/cart_shipping" name="checkout.cart.shipping" as="shipping"
+                       template="checkout/cart/shipping.phtml"/>
+                <block type="checkout/cart_crosssell" name="checkout.cart.crosssell" as="crosssell"
+                       template="checkout/cart/crosssell.phtml"/>
+
+                <block type="checkout/cart_totals" name="checkout.cart.totals" as="totals"
+                       template="checkout/cart/totals.phtml"/>
+            </block>
+        </reference>
+    </ajaxcart>
+    
+  
+  
+  <catalog_category_default translate="label">
+    
+      <reference name="product_list">
+            <action method="setTemplate">
+                <template>allajax/catalog/product/list.phtml</template>
+            </action>
+      
+      </reference> 
+  </catalog_category_default>
+  
+  <catalog_category_layered translate="label">
+    
+      <reference name="product_list">
+            <action method="setTemplate">
+                <template>allajax/catalog/product/list.phtml</template>
+            </action>
+      
+      </reference> 
+  </catalog_category_layered>
+  
+  <catalog_product_view translate="label">
+      
+        <reference name="product.info.addtocart">
+            <action method="setTemplate">
+                <template>allajax/catalog/product/view/addtocart.phtml</template>
+            </action>      
+        </reference>
+
+
+        <reference name="product.info.addto">
+            <action method="setTemplate">
+                <template>allajax/catalog/product/view/addto.phtml</template>
+            </action>    
+        </reference> 
+
+        <reference name="product.info">
+            <action method="setTemplate">
+                <template>allajax/catalog/product/view.phtml</template>
+            </action>
+            <block type="catalog/product_list_crosssell" name="product.view.crosssell" as="product_view_crosssell" template="allajax/catalog/product/crosssell.phtml"/>
+        </reference>
+      
+        <reference name="catalog.product.related">
+	       <action method="setTemplate">
+                <template>allajax/catalog/product/list/related_multi.phtml</template>
+            </action>
+        </reference>  
+      
+  </catalog_product_view>
+  
+  
+     <ajaxcart_configurable_options>
+        <reference name="content">
+            <block type="catalog/product_view" name="ajaxcart.configurable.options"
+                   template="allajax/catalog/ajaxcart/configurable_options.phtml" as="ajaxcart.configurable.options">
+                <block type="core/template_facade" name="product.info.container1" as="container1">
+                    <action method="setDataByKey">
+                        <key>alias_in_layout</key>
+                        <value>container1</value>
+                    </action>
+                    <action method="setDataByKeyFromRegistry">
+                        <key>options_container</key>
+                        <key_in_registry>product</key_in_registry>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper</block>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper.bottom</block>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </ajaxcart_configurable_options>
+ <ajaxcart_bundle_options>
+        <reference name="content">
+      
+            
+             <block type="catalog/product_view" name="ajaxcart.bundled.options"
+                   template="allajax/catalog/ajaxcart/bundled_options.phtml" as="ajaxcart.bundled.options">
+                <block type="core/template_facade" name="product.info.container1" as="container2">
+                    <action method="setDataByKey">
+                        <key>alias_in_layout</key>
+                        <value>container1</value>
+                    </action>
+                    <action method="setDataByKeyFromRegistry">
+                        <key>options_container</key>
+                        <key_in_registry>product</key_in_registry>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper</block>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper.bottom</block>
+                    </action>
+                </block>  
+                
+            <block type="bundle/catalog_product_view_type_bundle" name="product.info.bundle" as="product_type_data" template="allajax/catalog/product/view/type/bundle.phtml">
+                <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+                <block type="bundle/catalog_product_price" name="bundle.prices" as="bundle_prices" template="bundle/catalog/product/view/price.phtml">
+                    <action method="setMAPTemplate"><tmpl>catalog/product/price_msrp_item.phtml</tmpl></action>
+                </block>
+            </block>        
+                <block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart.phtml"/> 
+            </block>
+            
+        </reference>
+    </ajaxcart_bundle_options>
+<ajaxcart_downloadable_options>
+        <reference name="content">
+      
+            
+             <block type="catalog/product_view" name="ajaxcart.downloadable.options"
+                   template="allajax/catalog/ajaxcart/downloadable_options.phtml" as="ajaxcart.downloadable.options">
+                <block type="core/template_facade" name="product.info.container2" as="container3">
+                    <action method="setDataByKey">
+                        <key>alias_in_layout</key>
+                        <value>container1</value>
+                    </action>
+                    <action method="setDataByKeyFromRegistry">
+                        <key>options_container</key>
+                        <key_in_registry>product</key_in_registry>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper</block>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper.bottom</block>
+                    </action>
+                </block>  
+                           
+
+<block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart.phtml"/> 
+
+            </block>  
+
+        </reference>
+    </ajaxcart_downloadable_options>
+    <ajaxcart_grouped_options translate="label" module="catalog">
+        <reference name="content">
+            <block type="catalog/product_view" name="ajaxcart.grouped.options"
+                   template="allajax/catalog/ajaxcart/grouped_options.phtml" as="ajaxcart.grouped.options">
+                <block type="catalog/product_view_type_grouped" name="grouped.options"
+                       as="grouped.options" template="catalog/product/view/type/grouped.phtml">
+                    <block type="core/text_list" name="product.info.grouped.extra" as="product_type_data_extra"
+                           translate="label">
+                        <label>Product Extra Info</label>
+                    </block>
+                </block>
+                <block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart.phtml"/>
+            </block>
+        </reference>
+    </ajaxcart_grouped_options>
+    
+ <!-- shopping cart options -->
+
+<!-- Add mini cart to the header -->	
+   <default>                 
+      <reference name="header">
+          <block type="checkout/cart_sidebar" name="cart_sidebar" template="allajax/checkout/cart/mini.phtml" before="-" ajax="true">
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>
+				 <action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>    
+                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                        <label>Shopping Cart Sidebar Extra Actions</label>
+                </block>
+                <block type="cms/block" name="block_mini_cart_above_products">
+                        <action method="setBlockId"><block_id>block_mini_cart_above_products</block_id></action>
+                </block>
+            </block>
+      </reference>           
+  </default>
+
+  <CART_UPDATE_AJAX>
+      <block type="checkout/cart" name="checkout.cart" output="toHtml">
+                <action method="setIsAjax"><value>true</value></action>
+                <action method="setCartTemplate"><value>warehouse/checkout/cart.phtml</value></action>
+                <action method="setEmptyTemplate"><value>allajax/checkout/cart/noItems.phtml</value></action>
+                <action method="chooseTemplate"/>
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>warehouse/checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>warehouse/checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>warehouse/checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>warehouse/checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>allajax/checkout/cart/item/downloadable/default.phtml</template></action>
+                <block type="core/text_list" name="checkout.cart.empty.widget" as="checkout_cart_empty_widget" translate="label">
+                    <label>Empty Shopping Cart Content Before</label>
+                </block>
+
+                <block type="core/text_list" name="checkout.cart.top_methods" as="top_methods" translate="label">
+                    <label>Payment Methods Before Checkout Button</label>
+                    <block type="checkout/onepage_link" name="checkout.cart.methods.onepage.top" template="checkout/onepage/link.phtml"/>
+                </block>
+
+                <block type="page/html_wrapper" name="checkout.cart.form.before" as="form_before" translate="label">
+                    <label>Shopping Cart Items Before</label>
+                    <action method="setElementClass"><value>rewards</value></action>
+                    <action method="setMayBeInvisible"><value>1</value></action>
+                </block>
+
+                <block type="core/text_list" name="checkout.cart.methods" as="methods" translate="label">
+                    <label>Payment Methods After Checkout Button</label>
+                    <block type="checkout/onepage_link" name="checkout.cart.methods.onepage.bottom" template="checkout/onepage/link.phtml"/>
+                    <block type="checkout/multishipping_link" name="checkout.cart.methods.multishipping" template="checkout/multishipping/link.phtml"/>
+                </block>
+
+                <block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon" template="allajax/checkout/cart/coupon.phtml"/>
+                <block type="checkout/cart_shipping" name="checkout.cart.shipping" as="shipping" template="allajax/checkout/cart/shipping.phtml"/>
+                <block type="core/text_list" name="checkout.cart.widget" as="checkout_cart_widget" translate="label">
+                    <label>Shopping Cart Items After</label>
+                </block>
+                
+                <block type="checkout/cart_crosssell" name="checkout.cart.crosssell" as="crosssell" template="allajax/checkout/cart/crosssell.phtml">
+                    <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+                </block>                
+                <block type="checkout/cart_totals" name="checkout.cart.totals" as="totals" template="checkout/cart/totals.phtml"/>
+            </block>      
+  </CART_UPDATE_AJAX>
+  
+  <CART_TOTALS_AJAX>
+      <block type="checkout/cart_totals" name="root" output="toHtml" template="checkout/cart/totals.phtml"/>      
+  </CART_TOTALS_AJAX>
+  
+  <CART_SHIPPING_METHODS_AJAX>
+    <block type="checkout/cart_shipping" name="root" output="toHtml" template="allajax/checkout/cart/shipping/methods.phtml"/>
+  </CART_SHIPPING_METHODS_AJAX>
+  
+  <CART_COUPONCODE_AJAX>
+    <block type="checkout/cart_coupon" name="root" output="toHtml" template="allajax/checkout/cart/coupon/cancel.phtml"/>
+  </CART_COUPONCODE_AJAX>
+  
+  <CART_MINICART_AJAX>
+    <block type="checkout/cart_sidebar" name="root" output="toHtml" template="allajax/checkout/cart/mini.phtml">
+        <action method="setIsAjax"><value>true</value></action>
+        <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>
+        <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>
+        <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>
+		<action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>
+        <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>allajax/checkout/cart/sidebar/default.phtml</template></action>    
+    </block>
+  </CART_MINICART_AJAX>
+  
+    <checkout_cart_index>
+ 	 <reference name="head">
+          <action method="addItem"><type>skin_css</type><name>balance/allajax/css/allajax.css</name></action>
+ 			<action method="addItem"><type>skin_css</type><name>balance/allajax/css/jquery.fancybox-1.3.4.css</name><params/></action>                      
+        <action method="addItem">
+                    <type>skin_js</type>
+                    <name>balance/allajax/js/jquery.fancybox-1.3.4.pack.js</name>
+          </action>		     
+        <action method="addItem">
+               <type>skin_js</type>
+               <name>balance/allajax/js/jquery.fancybox-1.3.4.pack.js</name>
+         </action>
+        <!-- <action method="addItem"><type>skin_js</type><name>balance/allajax/js/allajax.js</name></action>-->
+      </reference>
+       <reference name="checkout.cart">
+           <action method="setCartTemplate"><value>allajax/checkout/cart.phtml</value></action>
+           <action method="setEmptyTemplate"><value>allajax/checkout/cart/noItems.phtml</value></action>
+           <action method="chooseTemplate"/>
+           <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>allajax/checkout/cart/item/default.phtml</template></action>
+           <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>allajax/checkout/cart/item/default.phtml</template></action>
+           <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>allajax/checkout/cart/item/default.phtml</template></action>
+           <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>allajax/checkout/cart/item/default.phtml</template></action>    
+           <action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>allajax/checkout/cart/item/downloadable/default.phtml</template></action>
+       </reference>
+       <reference name="checkout.cart.shipping">
+           <action method="setTemplate"><template>allajax/checkout/cart/shipping.phtml</template></action>   
+       </reference>
+       <reference name="checkout.cart.coupon">
+           <action method="setTemplate"><template>allajax/checkout/cart/coupon.phtml</template></action>   
+       </reference>
+        <reference name="checkout.cart.crosssell">
+  <action method="setTemplate"><template>allajax/checkout/cart/crosssell.phtml</template></action>   
+       </reference>
+  </checkout_cart_index>
+
+
+  <!-- wishlist -->
+
+  <wishlist_index_index>
+      <update handle="ALLAJAX_tabs" />
+      <reference name="customer.wishlist.item.remove">          
+          <action method="setTemplate"><template>allajax/wishlist/item/column/remove.phtml</template></action>
+      </reference>
+      <reference name="customer.wishlist">
+          <action method="setTemplate"><template>allajax/wishlist/view.phtml</template></action>
+      </reference>                    
+	  <reference name="customer.wishlist.item.image">
+          <action method="setTemplate"><template>allajax/wishlist/item/column/image.phtml</template></action>
+      </reference>  
+      <reference name="customer.wishlist.item.info">
+          <action method="setTemplate"><template>allajax/wishlist/item/column/info.phtml</template></action>
+      </reference>    
+      <reference name="customer.wishlist.items">
+          <action method="setTemplate"><template>allajax/wishlist/item/list.phtml</template></action>
+      </reference>                    
+  </wishlist_index_index>
+  
+  
+    <WISHLIST_UPDATE_AJAX>              
+            <block type="wishlist/customer_wishlist" name="root" output="toHtml" template="allajax/wishlist/view.phtml">
+               <block name="formkey" type="core/template" template="core/formkey.phtml" />
+                <action method="setIsAjax">
+                    <value>true</value>
+                </action>                 
+                <action method="setTitle" translate="title">
+                    <title>My Wishlist</title>
+               </action>
+               <action method="setTitle" translate="title" module="enterprise_wishlist" ifconfig="wishlist/general/multiple_enabled">
+                   <title>My Wishlists</title>
+                 </action>
+                <block type="enterprise_wishlist/customer_wishlist_management" name="customer.wishlist.management" as="top" template="wishlist/view/management.phtml">
+            </block>                  
+                <block type="wishlist/customer_wishlist_items" name="customer.wishlist.items" as="items" template="allajax/wishlist/item/list.phtml">
+                    <block type="enterprise_wishlist/customer_wishlist_item_column_selector" name="customer.wishlist.item.selector" before="-" template="wishlist/item/column/selector.phtml" />
+                    <block type="wishlist/customer_wishlist_item_column_image" name="customer.wishlist.item.image" template="allajax/wishlist/item/column/image.phtml" />
+                    <block type="wishlist/customer_wishlist_item_column_comment" name="customer.wishlist.item.info" template="allajax/wishlist/item/column/info.phtml">
+                        <action method="setTitle" translate="title">
+                            <title>Product Details and Comment</title>
+                        </action>
+                        <block type="enterprise_wishlist/customer_wishlist_item_column_management" name="customer.wishlist.item.mananagement" before="-" template="wishlist/item/column/management.phtml"></block>
+                    </block>
+                    <block type="wishlist/customer_wishlist_item_column_cart" name="customer.wishlist.item.cart" template="wishlist/item/column/cart.phtml">
+                        <action method="setTitle" translate="title">
+                            <title>Add to Cart</title>
+                        </action>
+			<action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+                        <block type="wishlist/customer_wishlist_item_options" name="customer.wishlist.item.options" />
+                    </block>
+                    <block type="wishlist/customer_wishlist_item_column_remove" name="customer.wishlist.item.remove" template="allajax/wishlist/item/column/remove.phtml" />
+                </block>
+                <block type="core/text_list" name="customer.wishlist.buttons" as="control_buttons">
+                    <block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.share" template="wishlist/button/share.phtml" />
+                    <block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.toCart" template="wishlist/button/tocart.phtml" />
+                    <block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.update" template="wishlist/button/update.phtml" />
+                    <block type="enterprise_wishlist/customer_wishlist_button_delete" name="customer.wishlist.button.delete" template="wishlist/button/delete.phtml"></block>
+                </block>
+            </block>            
+    </WISHLIST_UPDATE_AJAX>
+    
+    <WISHLIST_LINKS_AJAX>
+         <block type="enterprise_wishlist/links" name="wishlist_link" output="toHtml">
+             <action method="setAParams">
+                <value>id='allajax-wishlist-links'</value>
+            </action>
+         </block>   
+    </WISHLIST_LINKS_AJAX>
+</layout>   
+	

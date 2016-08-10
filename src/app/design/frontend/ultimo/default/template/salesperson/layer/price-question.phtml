@@ -1,0 +1,101 @@
+<?php $_filter = $this->getPriceQuestion(); ?>
+<?php if(isset($_filter)):?>
+	<?php if($this->isPriceSlider()):?>
+		<?php
+		$maxPrice =  $this->getMaxPrice($_filter);
+		$answeredPriceRange = $this->getAnsweredPriceRange($_filter);
+		?>
+		<div class="cel_Price">
+			<p>
+				<input type="text" id="price-slider-range-display"
+					class="price-slider-range-display" /> <input
+					type="hidden" name="filter_PriceQuestion"
+					id="filter_PriceQuestion" />
+			</p>
+			<div id="price-slider-range"></div>
+		</div>
+		<script>
+			jQuery(document).ready(function() {
+				jQuery( "#price-slider-range" ).slider({
+					range: true,
+					step: 5,
+					min: 0,
+					max: <?php echo $maxPrice;?> ,
+					values: [ <?php echo $answeredPriceRange[0];?>, <?php echo $answeredPriceRange[1];?> ],
+					slide: function( event, ui ) {
+						jQuery( "#price-slider-range-display" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+					},
+					stop: function(event, ui) {
+						var answerId = "_P" + ui.values[ 0 ] + "_" + ui.values[ 1 ];
+						jQuery( "#filter_PriceQuestion").val(answerId);
+						var url = '<?php echo $this->answerQuestionUrl(""); ?>' + '&amp;answerId=' + answerId;
+							url = url.replace(new RegExp("&amp;",'g'),"&");
+							celebrosSetLocation(url);
+		 				}
+				});
+				jQuery( "#price-slider-range-display" ).val( "$" + jQuery( "#price-slider-range" ).slider( "values", 0 ) +
+					" - $" + jQuery( "#price-slider-range" ).slider( "values", 1 ) );
+			});
+		</script>
+	<?php else:?>
+		<ul>
+			<?php $answers = $this->getNonLeadAnswers($_filter);
+			if(count($answers)):
+				foreach ($answers as $answer):?>
+					<li>
+						<?php echo $this->getAnswerHtml($answer, $bIsHierarchical = true);?>
+					</li>
+				<?php endforeach;?>
+			<?php endif;?>
+
+			<?php $moreAnswers =$this->getMoreNonLeadAnswers($_filter);
+			if(count($moreAnswers)):?>
+				<li>
+					<div class="salesperson-accordion">
+						<div class="salesperson-accordmore salesperson-accordmoreclose">More answers</div>
+						<div class="salesperson-accordmore-content" style="display:none;">
+							<ul>
+							<?php foreach ($moreAnswers as $answer):?>
+								<li>
+									<?php echo $this->getAnswerHtml($answer, $bIsHierarchical = true);?>
+								</li>
+							<?php endforeach;?>
+							</ul>
+						</div>
+					</div>
+				</li>
+			<?php endif;?>
+
+			<li><?php echo $this->__('Custom Price Range')?>
+				<div>
+					<form id="custom-price-form">
+						<fieldset>
+							<label for="priceFrom"><?php echo $this->__('From')?> </label><input
+								name="priceFrom" type="text"
+								class="validate-number required-entry" size="2" /> <label
+								for="priceTo"><?php echo $this->__('To')?> </label><input
+								name="priceTo" type="text"
+								class="validate-number required-entry" size="2" /> <a href="javascript:void(0)"
+								onclick="getCustomPrice()"><?php echo $this->__('Go') ?> </a>
+						</fieldset>
+					</form>
+					<script type="text/javascript">
+						var priceForm =  new VarienForm('custom-price-form');
+						function getCustomPrice(){
+							if(priceForm.validator.validate()){
+								var from = $$('input[name="priceFrom"]')[0].value;
+								var to = $$('input[name="priceTo"]')[0].value;
+								if (from != '' && to !=''){
+									var answerId = '_P' + from + '_' + to;
+									var url = "<?php echo $this->getCustomPriceAnswerUrl()?>";
+									url += '&answerId=' + answerId;
+									celebrosSetLocation(url);
+								}
+							}
+						}
+					</script>
+				</div>
+			</li>
+		</ul>
+	<?php endif;?>
+<?php endif;?>

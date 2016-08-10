@@ -1,0 +1,1028 @@
+﻿/* -------------------------------------------------------------
+ *	Shop Home
+ * ------------------------------------------------------------- */
+.ShopHomeCategoryFirst {
+	position:relative;
+	float:left;
+	width:200px;
+	margin: 0 0 25px 0;
+}
+
+.ShopHomeCategory {
+	position:relative;
+	float:left;
+	width:200px;
+	margin: 0 0 25px 22px;
+}
+
+/* -------------------------------------------------------------
+ *	Product Detail
+ * ------------------------------------------------------------- */
+.intro {
+	margin:40px 0 60px 0;
+}
+
+.intro2 {
+	margin:40px 0 10px 0;
+}
+
+.introCheckOut{
+	margin:40px 0 20px 0;
+}
+
+.product-view {
+	clear: both;
+}
+.no-display {
+	display: none;
+}
+.product-view .product-name h1,
+.product-view .product-name h2 {
+	margin-top: 1em;
+}
+.product-shop {
+	float: right;
+	width: 312px;
+}
+.product-shop-left {
+	float: left;
+	width: 312px;
+}
+
+
+.product-img-box {
+	float: left;
+	margin: 0 24px 24px 0;
+	width: 312px;
+}
+
+/*
+.product-image {
+	float: left;
+	margin: 0 24px 24px 0;
+	width: 300px;
+	height:300px;
+	-webkit-box-shadow:0 0 5px #cccccc;
+	-moz-box-shadow:0 0 5px #cccccc;
+	box-shadow:0 0 5px #cccccc;
+	background-color:#09C;
+}
+*/
+.product-shop .notice {
+    overflow:  hidden;
+}
+.product-shop .short-description img {}
+.product-shop .short-description img.left,
+.product-shop .notice img.left {
+    float: left;
+}
+
+
+.product-shop .add-to-box table.add-to-basket {
+	background: url("../../images/vorwerk/shop/separator-gradient.png") 0 0 repeat-x;
+	padding: 10px 0;
+	width:312px;
+}
+
+.myAccountContent {
+	background: url("../../images/vorwerk/shop/separator-gradient.png") 0 0 repeat-x;
+	padding: 10px 0;
+	width:645px;
+}
+
+.myAccountContent .inner-content {
+	margin:0 0 0 10px;
+}
+
+.orderSummaryContent {
+	position:relative;
+	float:left;
+	padding: 10px 0;
+	width:318px;
+}
+
+.orderSummaryContent .inner-content {
+}
+
+.add-to-box table.add-to-basket td {
+	background: none;
+	border: 0 none;
+	color: #595552;
+	font-size: 1em;
+	line-height: 1.5em;
+	padding: .5em 12px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+/* price */
+.product-shop .price,
+.product-shop .price-save {
+	color: #8cbd5a;
+	display: inline-block;
+	font-size: 22px;
+	font-weight: bold;
+	margin: 5px 0 0 0;
+}
+
+.totals .shopping-cart-totals tfoot td .price {
+	color: #8cbd5a;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0;
+	padding:0;
+}
+	.content .product-shop .price-save .regular-price {
+		color: #595552;
+		padding-right: .75em;
+		text-decoration: line-through;
+	}
+	.content .product-shop .price-save .regular-price .price {
+		color: #595552;
+		display: inline;
+		font-size: 1.1em;
+	}
+	.content .product-shop .price-save .reduced-price {
+		color: #8cbd5a;
+		font-size: 1.1em;
+		font-weight: bold;
+	}
+	.content .product-shop .price-save .reduced-price .price {
+		display: inline-block;
+		font-size: 1.8em;
+		padding-left: .1em;
+	}
+
+	.content .product-shop .price-new .old-price del {
+		font-size: 1.3em;
+	}
+	.content .product-shop .price-new .new-price {
+		color: #89bc5c;
+		font-size: 2.1em;
+		margin: .2em 0;
+	}
+	.content .product-shop .price-new .new-price span {
+		color: #595552;
+		font-size: 11px;
+	}
+	.content .product-shop .price-special-offer {
+		display: block;
+		margin: 0 0 1em 0;
+	}
+	.content .product-shop .price-special-offer .special-offer-price {
+		font-size: 2.1em;
+		margin: .2em 0;
+	}
+
+/* product image */
+.product-img-box .product-image img {
+	-khtml-box-shadow: 0 0 5px #ccc;
+	-moz-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+}
+
+.fancybox img {
+	-khtml-box-shadow: 0 0 5px #ccc;
+	-moz-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+}
+
+.product-img-box .product-image img {
+	width: 312px;
+}
+
+/* more views */
+.product-img-box .more-views {
+	margin: 24px 0 0 0;
+}
+
+.product-img-box .more-views ul {
+	margin: 0;
+	padding: 0;
+}
+
+.product-img-box .more-views ul li {
+	background: none;
+	float: left;
+	margin: 0 12px 24px 0;
+	padding: 0;
+	list-style:none;
+}
+.product-img-box .more-views img {
+	height: 48px;
+	width: 48px;
+	border: 5px solid #FFF;
+
+}
+.content .product-img-box .more-views .selected img {
+	border: 5px solid #DCEBCD;
+}
+
+
+
+/* product details, compatible */
+
+table.compatible {
+	padding:0;
+	margin:0;
+	border: 0 none;
+	border-collapse:collapse;
+}
+
+table.compatible img {
+	margin: 0 0 0 -5px;
+}
+
+
+.product-collateral {
+	margin: 0 0 24px 0;
+}
+.product-collateral .box-description {
+	float: left;
+	margin: 0 22px 40px 0;
+	width: 312px;
+}
+
+.product-collateral .box-compatible {
+	float: left;
+	margin: 32px -24px 0 0;
+	width: 314px;
+}
+
+
+.product-collateral .box-compatible .attachment {
+	background: url("../../images/vorwerk/shop/compatible_models/compatible.png") 0 0 no-repeat;
+	float: left;
+	height: 20px;
+	margin: 0 19px 19px -5px;
+	padding: 103px 5px 0 5px;
+	width: 88px;
+}
+.product-collateral .box-compatible .attachment.compat81 {
+	background-image: url("../../images/vorwerk/shop/compatible_models/compatible_Carpet%20Brush%20EB370.png"); /* EB 360 */
+}
+
+
+/* customers also ordered, promotion */
+
+.units-promotion {
+	float:left;
+	width:645px;
+}
+
+.units-promotion img{
+	float:left;
+	-khtml-box-shadow: 0 0 5px #ccc;
+	-moz-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+	border: 5px solid #FFF;
+}
+
+.units-promotion .text{
+	float:left;
+	width:477px;
+	margin: 0 0 40px 24px;
+	padding:0;
+}
+
+
+/* Shopping Process Message Boxes */
+.shopMessageBoxFull {
+	background: #FFF;
+	border: 5px solid #dcebcd;
+	padding: 24px 15px 10px 15px;
+	float: left;
+	width: 605px;
+	margin-top:15px;
+}
+
+.shopMessageBoxFullFail {
+	background: #FFF;
+	border: 5px solid #C00;
+	padding: 24px 15px 10px 15px;
+	float: left;
+	width: 605px;
+	margin-top:15px;
+}
+
+.shopMessageBoxFull p.shopStd,
+.shopMessageBoxFull2 p.shopStd {
+	margin:0;
+	padding:0;
+}
+
+.shopMessageBoxFull2 {
+	background: #FFF;
+	border: 5px solid #dcebcd;
+	padding: 10px 15px 10px 15px;
+	float: left;
+	width: 605px;
+	margin-bottom:20px;
+}
+
+.shopMessageBoxFull2Fail {
+	background: #FFF;
+	border: 5px solid #C00;
+	padding: 24px 15px 10px 15px;
+	float: left;
+	width: 605px;
+	margin-bottom:20px;
+}
+
+/*TYPOGRAPHY*/
+.short-description p.shopStd,
+p.shopStd,
+.add-to-basket label,
+p.available {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#595552;
+	font-size:11px;
+	line-height:18px;
+	margin-top:0;
+}
+
+
+p.available {
+	line-height:12px;
+	margin-top:0;
+}
+
+p.shopStd a {
+	color: #009645;
+}
+
+p.shopStd a:hover {
+	color: #8cbd5a;
+	text-decoration:none;
+}
+
+.ShopMainContentFullLength p.title {
+	font-size:11px;
+	font-weight:bold;
+	color:#8c8c8c;
+	margin-top:0;
+
+}
+.product-shop .notice p.std,
+p.std {
+	color: #aaa;
+	font-size: 10px;
+	margin-top:0;
+}
+
+.step-content p.title{
+	margin:0 0 10px 0;
+}
+.step-content p.shopStd{
+	float:left;
+}
+
+
+.availability {
+	background: url("../../images/vorwerk/shop/availability.png") 0 0 no-repeat;
+	line-height: 1.2em;
+	padding: 0 0 0 18px;
+    margin-top: 16px;
+}
+
+p.available.yes,
+p.available.no {
+
+}
+
+.availability.yes {
+	background-position: 0 0;
+}
+
+.availability.no {
+	background-position: 0 -108px;
+}
+
+	margin:0 0 12px 0;
+}
+
+ p.required {
+	float:right;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:9px;
+	color: #aaa;
+	margin: 28px 12px 0 0;
+}
+
+.required {
+	float:right;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:9px;
+	color: #aaa;
+	margin: 28px 12px 0 0;
+}
+
+
+.right {
+	float:right;
+}
+
+.left {
+	float:left;
+}
+
+/*LINKS*/
+
+p.historyback a {
+	font-size:11px;
+}
+
+/*LISTS*/
+
+ul.shopStdList li {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	line-height:24px;
+}
+
+ul.shopStdList li a,
+a:link,
+a:visited {
+	text-decoration:underline;
+	color: #009645;
+}
+
+ul.shopStdList li a:hover,
+a:focus,
+a:active {
+	text-decoration:none;
+	color: #8cbd5a;
+}
+
+/* -------------------------------------------------------------
+ *	Basket
+ * ------------------------------------------------------------- */
+
+.basket {
+	float:left;
+	width:645px;
+	padding:0;
+	margin: 0 0 50px 0;
+}
+
+.voucher {
+	float:left;
+}
+
+.voucher h3 {
+	margin: 0 0 10px 0;
+	padding:0;
+}
+
+/*BASKET DELETE BUTTON*/
+a.btn-remove,
+a.btn-remove:link,
+a.btn-remove:visited {
+	background: url("../../images/vorwerk/shop/button-remove.png") 0 0 no-repeat;
+	display: block;
+	height: 23px;
+	margin: 3px 0 0 0;
+	text-indent: -9999em;
+	width: 27px;
+}
+a.btn-remove:hover,
+a.btn-remove:focus,
+a.btn-remove:active {
+	background-position: 0 -52px;
+}
+
+/**************************************************/
+/* TABLES */
+/**************************************************/
+
+/* Voucher Entry Table */
+
+table.voucher {
+	background-color: #fff;
+	border: 0 none;
+	border-collapse: collapse;
+	clear: both;
+	margin: 0 0 24px 0;
+	width: 100%;
+}
+
+table.voucher .formEntry200 {
+	margin: 10px 5px 0 0;
+}
+
+table.voucher tr{
+	padding-bottom: 1px;
+}
+/* Zebra-Look
+.apDivMainContentFull table tbody tr.row-even td,
+.apDivMainContentFull table tbody tr.row-even th {
+	background: #f9f8f6;
+}
+*/
+
+table.voucher tr.alt td {
+	background: #f9f8f6;
+
+}
+
+table.voucher th,
+table.voucher td {
+	background-color: #fff;
+	border: 0 none;
+	border-bottom: 1px dotted #d0ccc9;
+	border-top: 1px dotted #d0ccc9;
+	color: #595552;
+	font-size: 1em;
+	line-height: 1.5em;
+	padding: .5em 12px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+table.voucher th {
+	font-weight: bold;
+}
+
+table.voucher p.shopStd{
+	margin:0 60px 0 0;
+}
+
+
+/* Shopping Cart Table */
+
+table.shopping-cart {
+	background-color: #fff;
+	border: 0 none;
+	border-collapse: collapse;
+	clear: both;
+	margin: 0 0 24px 0;
+	width: 100%;
+}
+
+table.shopping-cart tr{
+	padding-bottom: 1px;
+}
+
+table.shopping-cart tr.alt td {
+	background: #f9f8f6;
+	border-bottom: 1px dotted #d0ccc9;
+	border-top: 1px dotted #d0ccc9;
+}
+
+table.shopping-cart th,
+table.shopping-cart td {
+	background-color: #fff;
+	border: 0 none;
+	color: #595552;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#595552;
+	font-size:11px;
+	padding: .5em 12px;
+	vertical-align: middle;
+}
+
+table.shopping-cart th {
+	font-weight: bold;
+}
+
+table.shopping-cart p.shopStd{
+	margin:0 60px 0 0;
+}
+
+
+/* Accounts Entry Tables */
+
+table.accounts-entry {
+	background-color: #fff;
+	border: 0 none;
+	border-collapse: collapse;
+	clear: both;
+	margin: 0 0 24px 0;
+	width: 450px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+
+table.accounts-entry td {
+	background-color: #fff;
+	border: 0 none;
+	color: #595552;
+	font-size: 11px;
+	line-height: 1.5em;
+	padding: 0;
+	text-align: left;
+	vertical-align: middle;
+}
+
+table.accounts-entry th {
+	font-weight: bold;
+}
+
+/* Terms and Conditions Table */
+
+table.terms-and-conditions{
+	background-color: #fff;
+	border: 0 none;
+	border-collapse: collapse;
+	clear: both;
+	margin: 0 0 24px 0;
+	width: 100%;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+
+table.terms-and-conditions tr{
+}
+
+
+table.terms-and-conditions td {
+	background-color: #fff;
+	border: 0 none;
+	color: #595552;
+	font-size: 11px;
+	line-height: 1.5em;
+	padding: 0 5px 10px 0;
+	text-align: left;
+	vertical-align: top;
+}
+
+table.terms-and-conditions th {
+	font-weight: bold;
+}
+
+/* Order.Shipping info box on the bottom left */
+.totalsinfo,
+#checkout-review-table-wrapper .totalsinfo {
+	background: #FFF;
+	border: 5px solid #dcebcd;
+	padding: 20px 24px 16px 24px;
+}
+.totalsinfo {
+	float: left;
+	width: 256px;
+}
+#checkout-review-table-wrapper .totalsinfo {
+	margin: 10px 0 20px 0;
+}
+.totalsinfo p,
+#checkout-review-table-wrapper .totalsinfo p {
+	margin: 0;
+}
+.totalsinfo p.big,
+#checkout-review-table-wrapper .totalsinfo p.big {
+	font-size: 12px;
+}
+.totalsinfo .price,
+#checkout-review-table-wrapper .totalsinfo .price {
+	color: #8CBD5A;
+	font-weight: bold;
+}
+.totalsinfo p.title,
+#checkout-review-table-wrapper .totalsinfo h4 {
+	font-size:12px;
+	font-weight:bold;
+	color:#8c8c8c;
+	margin-top:5px;
+}
+
+.totalsinfo a.link-intern {
+	font-size:11px;
+	margin-top:10px;
+}
+.totalsinfo a,
+.totalsinfo a:link,
+.totalsinfo a:visited {
+	background: url("../../images/vorwerk/nav/link_intern.png") 0.2em 0.4em no-repeat;
+	display: inline-block;
+	line-height: 15px;
+	padding: 0 0 0 12px;
+	color: #009A3D;
+	margin:7px 0 0 0;
+}
+.totalsinfo a:hover,
+.totalsinfo a:focus,
+.totalsinfo a:active {
+	background: url("../../images/vorwerk/nav/link_intern_hover.png") 0.2em 0.4em no-repeat;
+	color: #8cbd5a;
+}
+
+/* Shopping Cart Totals */
+.totals {
+	float: right;
+	width: 312px;
+}
+.totals table.shopping-cart-totals {
+	margin: 0 0 10px 0;
+	width:312px;
+	border-collapse:collapse;
+}
+.totals .shopping-cart-totals tbody td,
+.totals .shopping-cart-totals tbody th{
+	background-color: #fff;
+	border: 0 none;
+	color: #595552;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#595552;
+	font-size:13px;
+	padding: .5em 12px;
+	vertical-align: middle;
+}
+.totals table.shopping-cart-totals tfoot td {
+	background: url("../../images/vorwerk/shop/separator-gradient.png") 0 0 repeat-x;
+	border: none;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	color: #8c8c8c;
+	padding: 5px 12px 0 12px;
+	vertical-align:text-bottom;
+}
+/*.totals table.shopping-cart-totals tfoot td h3{
+	margin-top:0;
+	vertical-align:bottom;
+}*/
+
+/**************************************************/
+/* CHECKOUT */
+/**************************************************/
+
+#progressbar {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	margin: 0 0 100px 0;
+}
+
+#progressbar ol {
+	margin:0;
+	padding:0;
+}
+
+#progressbar ol li,
+#progressbar.threestep ol li {
+	background: url("../../images/vorwerk/shop/progressbar.png") top right no-repeat;
+	float: left;
+	list-style-type: none;
+	margin: 0 10px 24px 0;
+	min-height: 74px;
+	padding: 8px 24px 8px 12px;
+	width: 177px;
+}
+#progressbar.fivestep ol li {
+	width: 88px;
+	min-height: 32px;
+	height: 32px;
+	margin-right: 2px;
+	word-wrap: break-word;
+	line-height: 15px;
+	padding: 8px 17px 8px 10px;
+}
+#progressbar.fivestep ol li .subtitle {
+	display: none;
+}
+#progressbar ol li.progressbarActive {
+	background-position: right -200px;
+}
+#progressbar ol li.last {
+	background-position: top left;
+	margin: 0 0 24px 0;
+	padding: 8px 11px 8px 12px;
+}
+
+#progressbar ol li.last-active {
+	background-position: -200px -200px;
+	margin: 0 0 24px 0;
+	padding: 8px 11px 8px 12px;
+}
+
+#progressbar ol li strong {
+	color: #8c8c8c;
+	font-size: 1.1em;
+}
+#progressbar ol li.progressbarActive strong,
+#progressbar ol li.last-active strong {
+	color: #009645;
+}
+#progressbar ol li strong span {
+	float: left;
+	margin: 0 0 3px 0;
+}
+#progressbar.fivestep ol li strong span {
+	float: none;
+	margin: 0;
+}
+#progressbar ol li strong .number {
+	width: 16px;
+}
+#progressbar ol li strong .title,
+#progressbar.threestep ol li strong .title {
+	width: 160px;
+}
+#progressbar.fivestep ol li strong .title {
+	width: 85px;
+}
+
+#progressbar ol li span.subtitle {
+	clear: both;
+	display: block;
+	font-weight: normal;
+	margin: 0 0 0 16px;
+}
+#progressbar.fivestep ol li span.subtitle {
+	margin: 0;
+}
+#progressbar.fivestep ol li#progressbar-billing {
+	width: 110px;
+}
+#progressbar.fivestep ol li#progressbar-shipping {
+	width: 118px;
+}
+#progressbar.fivestep ol li#progressbar-payment {
+	width: 77px;
+}
+#progressbar.fivestep ol li#progressbar-review {
+	width: 113px;
+}
+
+/* Checkout Steps */
+
+.step-title {
+	position:relative;
+	float:left;
+	margin:0;
+	width:645px;
+	height:50px;
+	background: url("../../images/vorwerk/shop/separator-gradient-active.png") 0 0 repeat-x;
+}
+
+.step-title.orderSummary {
+	margin:0 0 25px 0;
+}
+.step-title span.number,
+.step-title span.subtitle {
+	font-family:Arial, Helvetica, sans-serif;
+	color: #009645;
+	display: inline;
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 12px 0 0 12px ;
+}
+/*.step-title span.number {
+	margin: 0 10px 0 0;
+}*/
+
+.step-subtitle-container {
+	position:relative;
+	float:left;
+	margin:0;
+	width:318px;
+}
+
+.step-subtitle-container-first {
+	position:relative;
+	float:left;
+	margin:0 9px 0 0;
+	width:318px;
+}
+
+.step-subtitle { /*------For Order Summary -------*/
+	position:relative;
+	float:left;
+	margin:0;
+	width:318px;
+	height:50px;
+	background: url("../../images/vorwerk/shop/separator-gradient-active.png") 0 0 repeat-x;
+}
+
+.step-subtitle span.number,
+.step-subtitle span.subtitle {
+	font-family:Arial, Helvetica, sans-serif;
+	color: #009645;
+	display: inline;
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 12px 0 0 12px ;
+}
+.step-title span.number-orderSummary,
+.step-title span.subtitle-orderSummary,
+.step-subtitle span.number-orderSummary,
+.step-subtitle span.subtitle-orderSummary {
+	font-family:Arial, Helvetica, sans-serif;
+	color: #8C8C8C;
+	display: inline;
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 12px 0 0 12px ;
+}
+
+.step-content {
+	margin:10px 0 20px 0;
+	width:645px;
+}
+
+.step-content .inner-content {
+	margin:0 12px 0 12px;
+	width:621px;
+	float:left;
+}
+
+.step-content .inner-content .vertical-seperator{
+	width:621px;
+	margin:30px 0 30px 0;
+}
+
+
+
+
+/**************************************************/
+/* FORMS */
+/**************************************************/
+
+input[type="text"],
+input[type="password"],
+.dropDown175 {
+	color:#8c8c8c;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	padding-left:7px;
+}
+textarea,
+.form comments {
+	color:#8c8c8c;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	padding-left:7px;
+}
+
+
+
+.formEntry200 {
+	width:200px;
+	background-color:#FFF;
+	border: solid 1px #d0ccc9;
+	height:22px;
+	margin: 0 0 10px 0;
+}
+
+.formDropDown175 {
+	width:175px;
+	background-color:#FFF;
+	border: solid 1px #d0ccc9;
+	height:22px;
+	margin: 0 0 10px 0;
+}
+
+.formComments {
+	background-color:#FFF;
+	border: solid 1px #d0ccc9;
+	margin: 0 0 10px 0;
+}
+
+select[name="drivingLicense"],
+select[name="carOwnership"],
+select[name="careerStatus"],
+select[name="BestTime"],
+select[name="VorwerkCustomer"],
+select[name="MachineREf"],
+select[name="Interest"],
+select[name="ContactPreference"],
+select[name="HearAbout"] {
+	height:25px;
+	padding: 3px 0 0 0;
+}
+
+button.greyButton {
+	color: #009645;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+	background: none;
+	border:0;
+	cursor:pointer;
+	padding:0;
+}
+
+button.greenButton {
+	color: #FFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+	background: none;
+	border:0;
+	cursor:pointer;
+	padding:0;
+}
+
+table.accounts-entry input[type="checkbox"] {
+	margin: 5px 8px 0 0;
+}
+
+
+
+
+
+
+

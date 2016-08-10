@@ -1,0 +1,198 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<h2><?php $description = $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></h2>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getChildHtml('ajax_global_messages'); ?></div>
+<div class="product-view">
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+          id="product_addtocart_form"<?php if ($_product->getOptions()): ?>
+          enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+            <input type="hidden" name="related_product" id="related-products-field" value=""/>
+        </div>
+        <div class="product-essential">
+
+            <div class="product-shop">
+                <div class="product-main-info">
+                    <div class="product-name">
+                        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    </div>
+                    <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+                </div>
+                <?php echo $this->getChildHtml('other');?>
+            </div>
+
+            <div class="product-img-box">
+                <?php echo $this->getChildHtml('media') ?>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<?php echo $this->getLayout()->createBlock('accessory/catalog_product_view_suitsmodels')->setTemplate('accessory/product/view/suitsmodels.phtml')->toHtml(); ?>
+<div class="tabs_wrapper">
+    <div class="left">
+        <div class="tabs">
+            <div id='tabname_1' onclick="showtab('1')" class='active'><h2>product Features</h2></div>
+            <div id='tabname_2' onclick="showtab('2')" class="nonactive"><h2>reviews</h2></div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="tabcontent_1" class="show">
+            <ul class="feachures">
+                <?php echo $_helper->productAttribute($_product, $_product->getRoomByRoom(), 'room_by_room') ?>
+            </ul>
+        </div>
+        <?php echo $this->getChildHtml('reviews',false) ?>
+    </div>
+    <div class="right">
+        <h2>where <span>to buy</span></h2>
+        <ul class="wtb">
+        <?php $wtbarray = $_product->getAttributeText('where_to_buy');  ?>
+        <?php if(count($wtbarray) == 1): ?>
+            <li class="first">
+                <a href="<?php
+
+                    if($wtbarray == 'Big W') {
+                        if($_product->getData('hoover_bigw_link')){ echo $_product->getData('hoover_bigw_link'); }
+                        else { echo "http://www.bigw.com.au/"; }
+                    }
+                    if($wtbarray == 'Coles') { 
+                        if($_product->getData('hoover_coles_link')){ echo $_product->getData('hoover_coles_link'); }
+                        else { echo "http://www.coles.com.au/"; }
+                    }
+                    if($wtbarray == 'Costco') { 
+                        if($_product->getData('hoover_costco_link')){ echo $_product->getData('hoover_costco_link'); }
+                        else { echo "http://www.costco.com.au/"; }
+                    }
+                    if($wtbarray == 'Godfreys AU') { 
+                        if($_product->getData('hoover_godfreysau_link')){ echo $_product->getData('hoover_godfreysau_link'); }
+                        else { echo "http://www.godfreys.com.au/"; }
+                    }
+                    if($wtbarray == 'Godfreys NZ') {
+                        if($_product->getData('hoover_godfreysnz_link')){ echo $_product->getData('hoover_godfreysnz_link'); }
+                        else { echo "http://www.godfreys.co.nz"; }
+                    }
+                    if($wtbarray == 'Masters') { 
+                        if($_product->getData('hoover_masters_link')){ echo $_product->getData('hoover_masters_link'); }
+                        else { echo "http://www.masters.com.au/"; }
+                    }
+                    if($wtbarray == 'Mitre 10') { 
+                        if($_product->getData('hoover_mitre10_link')){ echo $_product->getData('hoover_mitre10_link'); }
+                        else { echo "http://www.mitre10.com.au/"; }
+                    }
+                    if($wtbarray == 'Supercheap Auto') { 
+                        if($_product->getData('hoover_supercheapau_link')){ echo $_product->getData('hoover_supercheapau_link'); }
+                        else { echo "http://www.supercheapauto.com.au/"; }
+                    }
+                    if($wtbarray == 'Supercheap NZ') { 
+                        if($_product->getData('hoover_supercheapnz_link')){ echo $_product->getData('hoover_supercheapnz_link'); }
+                        else { echo "http://www.supercheapauto.co.nz/"; }
+                    }
+                    if($wtbarray == 'The Warehouse') { 
+                        if($_product->getData('hoover_warehouse_link')){ echo $_product->getData('hoover_warehouse_link'); }
+                        else { echo "http://www.thewarehouse.co.nz/"; }
+                    }
+
+                ?>">
+                <img src="<?php echo $this->getSkinUrl() ?>images/wtb-<?php echo $wtbarray ?>.jpg" alt="<?php echo $wtbarray ?>"/>
+                <br/><span>Find a store</span></a>
+            </li>
+        <?php endif; ?>
+        <?php if (!empty($wtbarray) && is_array($wtbarray)) foreach($wtbarray as $index => $retailer): ?>
+            <?php if($index <= 2 && $retailer != 'none'): ?>
+                <li<?php if($index == 0){ echo ' class="first"'; }?><?php if($index == count($wtbarray) -1){ echo ' class="last"'; }?>>
+                <a href="<?php
+
+                    if($retailer == 'Big W') {
+                        if($_product->getData('hoover_bigw_link')){ echo $_product->getData('hoover_bigw_link'); }
+                        else { echo "http://www.bigw.com.au/"; }
+                    }
+                    if($retailer == 'Coles') { 
+                        if($_product->getData('hoover_coles_link')){ echo $_product->getData('hoover_coles_link'); }
+                        else { echo "http://www.coles.com.au/"; }
+                    }
+                    if($retailer == 'Costco') { 
+                        if($_product->getData('hoover_costco_link')){ echo $_product->getData('hoover_costco_link'); }
+                        else { echo "http://www.costco.com.au/"; }
+                    }
+                    if($retailer == 'Godfreys AU') { 
+                        if($_product->getData('hoover_godfreysau_link')){ echo $_product->getData('hoover_godfreysau_link'); }
+                        else { echo "http://www.godfreys.com.au/"; }
+                    }
+                    if($retailer == 'Godfreys NZ') {
+                        if($_product->getData('hoover_godfreysnz_link')){ echo $_product->getData('hoover_godfreysnz_link'); }
+                        else { echo "http://www.godfreys.co.nz"; }
+                    }
+                    if($retailer == 'Masters') { 
+                        if($_product->getData('hoover_masters_link')){ echo $_product->getData('hoover_masters_link'); }
+                        else { echo "http://www.masters.com.au/"; }
+                    }
+                    if($retailer == 'Mitre 10') { 
+                        if($_product->getData('hoover_mitre10_link')){ echo $_product->getData('hoover_mitre10_link'); }
+                        else { echo "http://www.mitre10.com.au/"; }
+                    }
+                    if($retailer == 'Supercheap Auto') { 
+                        if($_product->getData('hoover_supercheapau_link')){ echo $_product->getData('hoover_supercheapau_link'); }
+                        else { echo "http://www.supercheapauto.com.au/"; }
+                    }
+                    if($retailer == 'Supercheap NZ') { 
+                        if($_product->getData('hoover_supercheapnz_link')){ echo $_product->getData('hoover_supercheapnz_link'); }
+                        else { echo "http://www.supercheapauto.co.nz/"; }
+                    }
+                    if($retailer == 'The Warehouse') { 
+                        if($_product->getData('hoover_warehouse_link')){ echo $_product->getData('hoover_warehouse_link'); }
+                        else { echo "http://www.thewarehouse.co.nz/"; }
+                    }
+
+                ?>">
+                <img src="<?php echo $this->getSkinUrl() ?>images/wtb-<?php echo $retailer ?>.jpg" alt="<?php echo $retailer ?>"/>
+                <br/><span>Find a store</span></a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+
+        <h2 style="margin-top: 160px;">product <span>manual downloads</span></h2>
+        <?php echo $this->getLayout()->createBlock('downloads/product_link', '', array('id' => $_product->getId(), 'is_category'=>true))->toHtml() ?>
+    </div>
+    <div class="clear"></div>
+</div>
+<br/>

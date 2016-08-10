@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AHT_Backupcms>
+            <version>0.1.0</version>
+        </AHT_Backupcms>
+    </modules>
+    <frontend>
+        <routers>
+            <backupcms>
+                <use>standard</use>
+                <args>
+                    <module>AHT_Backupcms</module>
+                    <frontName>backupcms</frontName>
+                </args>
+            </backupcms>
+        </routers>
+        <layout>
+            <updates>
+                <backupcms>
+                    <file>backupcms.xml</file>
+                </backupcms>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<backupcms before="Mage_Adminhtml">AHT_Backupcms_Adminhtml</backupcms>
+					</modules>
+				</args>
+			</adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<cms module="backupcms">            
+				<children>
+					<backup>
+						<title>Backup CMS</title>
+						<sort_order>71</sort_order>   
+						<children>
+							<backuppage module="backupcms">
+								<title>Backup CMS Pages</title>
+								<sort_order>0</sort_order>
+								<action>adminhtml/backupcms_backupcms</action>
+							</backuppage>
+							
+							<backupstatic module="backupcms">
+								<title>Backup Static Blocks</title>
+								<sort_order>1</sort_order>
+								<action>adminhtml/backupcms_backupcms/static</action>
+							</backupstatic>
+							<!-- <importpage module="backupcms">
+								<title>Import CMS Pages</title>
+								<sort_order>2</sort_order>
+								<action>adminhtml/backupcms_backupcms/importpage</action>
+							</importpage>
+							
+							<importstatic module="backupcms">
+								<title>Import Static Blocks</title>
+								<sort_order>3</sort_order>
+								<action>adminhtml/backupcms_backupcms/importstatic</action>
+							</importstatic> -->
+						</children>
+					</backup>
+				</children>
+			</cms>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<AHT_Backupcms>
+							<title>Backupcms Module</title>
+							<sort_order>10</sort_order>
+						</AHT_Backupcms>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<backupcms>
+					<file>backupcms.xml</file>
+				</backupcms>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <backupcms>
+                <class>AHT_Backupcms_Model</class>
+                <resourceModel>backupcms_mysql4</resourceModel>
+            </backupcms>
+            <backupcms_mysql4>
+                <class>AHT_Backupcms_Model_Mysql4</class>
+                <entities>
+                    <backupcms>
+                        <table>backupcms</table>
+                    </backupcms>
+                </entities>
+            </backupcms_mysql4>
+        </models>
+        <resources>
+            <backupcms_setup>
+                <setup>
+                    <module>AHT_Backupcms</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </backupcms_setup>
+            <backupcms_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </backupcms_write>
+            <backupcms_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </backupcms_read>
+        </resources>
+        <blocks>
+            <backupcms>
+                <class>AHT_Backupcms_Block</class>
+            </backupcms>
+        </blocks>
+        <helpers>
+            <backupcms>
+                <class>AHT_Backupcms_Helper</class>
+            </backupcms>
+        </helpers>
+    </global>
+</config>

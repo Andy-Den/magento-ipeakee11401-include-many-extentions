@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Itech_Changetheme>
+            <version>0.1.0</version>
+        </Itech_Changetheme>
+    </modules>
+	
+	<frontend>
+		<routers>
+            <changetheme>
+                <use>standard</use>
+                <args>
+                    <module>Itech_Changetheme</module>
+                    <frontName>changetheme</frontName>
+                </args>
+            </changetheme>
+        </routers>
+		<layout>
+            <updates>
+                <changetheme>
+                    <file>changetheme.xml</file>
+                </changetheme>
+            </updates>
+        </layout>
+        <events>
+            <controller_action_layout_load_before>
+				<observers>
+					<changetheme>
+						<class>Itech_Changetheme_Model_Observer</class>
+						<method>addCustomHandles</method>
+					</changetheme>
+				</observers>
+			</controller_action_layout_load_before>
+		</events>
+	</frontend>
+	
+	<adminhtml>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<changetheme translate="title">
+											<title>Change Theme</title>
+											<sort_order>888</sort_order>
+										</changetheme>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+    </adminhtml>  
+
+    <global>
+        
+        <helpers>
+            <changetheme>
+                <class>Itech_Changetheme_Helper</class>
+            </changetheme>
+        </helpers>
+    </global>
+</config>

@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<widgets>
+    <wslider_slider type="wslider/slider">
+        <name>Brands Slider</name>
+        <description type="desc">An awesome brand slider for the store to be placed anywhere to show different brands the store sells. </description>
+	<parameters>
+	 <image1>
+		<visible>1</visible>
+                <label>Set the  image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image1>
+		
+		
+	   <image2>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image2>
+		 
+	   <image3>
+		<visible>1</visible>
+                <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image3>
+		
+	   <image4>
+		<visible>1</visible>
+                <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image4>
+		
+           <image5>
+		<visible>1</visible>
+                <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image5>
+	
+	   <image6>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image6>
+		
+	   <image7>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image7>
+	   
+	    <image8>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image8>
+	   
+	    <image9>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image9>
+	   
+	    <image10>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image10>
+	   
+	    <image11>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image11>
+	   
+	    <image12>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image12>
+	   
+	    <image13>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image13>
+	   
+	    <image14>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image14>
+	   
+	    <image15>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image15>
+	   
+	    <image16>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image16>
+	   
+	    <image17>
+		<visible>1</visible>
+                 <label>Set the image name</label>
+                <description>Set the name of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </image17>
+	   <height>
+	   <visible>1</visible>
+                 <label>Set the logo height</label>
+                <description>Set the height of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </height>
+	   <width>
+	   <visible>1</visible>
+                 <label>Set the logo height</label>
+                <description>Set the height of the image placed in the logo folder.</description>
+                <type>text</type>
+	   </width>
+          
+	  
+	</parameters>
+ </wslider_slider>
+</widgets>

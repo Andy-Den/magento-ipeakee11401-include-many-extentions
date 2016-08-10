@@ -1,0 +1,67 @@
+<div class="opc-wrapper">
+
+<script type='text/javascript'>
+var ebRand = Math.random()+'';
+ebRand = ebRand * 1000000;
+//<![CDATA[ 
+document.write('<scr'+'ipt src="//bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=177655&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+//]]>
+</script>
+<noscript>
+<img width="1" height="1" style="border:0" src="//bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=177655&amp;ns=1"/>
+</noscript>
+
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('varien/accordion.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
+    
+    <!-- Warehouse -->
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/warehouse/opcheckout.js') ?>"></script>
+    <!-- End Warehouse -->
+    
+    <script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
+    <div class="opc-progress-container" id="col-right-opcheckout">
+        <?php echo $this->getChildHtml('checkoutProgress') ?>
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('full_security')->toHtml(); ?>
+    </div>
+    <div class="page-title">
+        <h1><?php echo $this->__('Checkout'); ?></h1>
+    </div>
+    <ol class="opc" id="checkoutSteps">
+    <?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>
+    <?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif; $i++ ?>
+        <li id="opc-<?php echo $_stepId ?>" class="section<?php echo !empty($_stepInfo['allow'])?' allow':'' ?><?php echo !empty($_stepInfo['complete'])?' saved':'' ?>">
+            <div class="step-title">
+                <span class="number"><?php echo $i ?></span>
+                <h2><?php echo $_stepInfo['label'] ?></h2>
+            </div>
+            <div id="checkout-step-<?php echo $_stepId ?>" class="step a-item" style="display:none;">
+                <?php echo $this->getChildHtml($_stepId) ?>
+            </div>
+        </li>
+    <?php endforeach ?>
+    </ol>
+    <div class="logo_payment_accepted"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('checkout_verisign')->toHtml(); ?></div>
+    <script type="text/javascript">
+    //<![CDATA[
+        var accordion = new Accordion('checkoutSteps', '.step-title', true);
+        <?php
+        $_activeStep = $this->getActiveStep();
+        if($_activeStep): ?>
+        accordion.openSection('opc-<?php echo $_activeStep ?>');
+        <?php endif ?>
+        var checkout = new Checkout(accordion,{
+            progress: '<?php echo $this->getUrl('checkout/onepage/progress') ?>',
+            review: '<?php echo $this->getUrl('checkout/onepage/review') ?>',
+            saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod') ?>',
+            failure: '<?php echo $this->getUrl('checkout/cart') ?>'}
+        );
+
+        document.observe("dom:loaded", function() {
+            var _h2 = $$('.opc li.active')[0].next('li');
+            var h2 = $(_h2).down('div h2');
+                h2.addClassName('step-next');
+           
+        });
+    //]]>
+    </script>
+</div>

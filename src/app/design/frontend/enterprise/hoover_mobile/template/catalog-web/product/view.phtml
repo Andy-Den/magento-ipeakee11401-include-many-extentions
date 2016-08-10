@@ -1,0 +1,225 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_iphone
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+
+<div id="messages_product_view"><?php echo $this->getChildHtml('ajax_global_messages'); ?></div>
+<div class="head-title-wp">
+    <div class="head-button"><a onclick="window.history.back()" class="button button-back"><span><?php echo $this->__('Back');?></span></a></div>
+    <div class="head-title"><?php echo $_product->getName();?></div>
+    <div class="clear">&nbsp;</div>
+</div>
+<div class="product-view">
+	<?php
+		$_currentCat = Mage::registry('current_category');
+		if(isset($_currentCat)) {
+			while($_currentCat->getLevel() > 2) {
+				$_currentCat = $_currentCat->getParentCategory();
+			}
+		}
+		
+	?>
+	<?php if(isset($_currentCat) && ($_currentCat->getLevel() == 2) && ($_currentCat->getUrlKey() == 'store-locator')): ?>	
+	<?php
+		$curr_dir = getcwd(); 
+		$myKey = Mage::getStoreConfig('storelocator/general/google_api_key');
+		
+		require_once($curr_dir."/GoogleMap.php");	
+		require_once($curr_dir."/JSMin.php");	
+				
+		$MAP_OBJECT = new GoogleMapAPI(); $MAP_OBJECT->_minify_js = isset($_REQUEST["min"])?FALSE:TRUE;	
+		$MAP_OBJECT->setMapType('map');
+		
+		$longitude = (float)Mage::getModel('catalog/product')->load($_product->getId())->getLongitude();
+		$latitude = (float)Mage::getModel('catalog/product')->load($_product->getId())->getLatitude();
+		$address = '<div style="line-height:15px;"><img src="'.$this->getSkinUrl('images/marker.png').'" align="right"><p style="font-weight:bold;color:#19388A;"><a href="'.$_product->getProductUrl().'">'.$_helper->productAttribute($_product, $_product->getName() , 'name').'</a></p>'.Mage::getModel('catalog/product')->load($_product->getId())->getStoreAddress().'<br/>'.Mage::getModel('catalog/product')->load($_product->getId())->getStoreCity().', '.Mage::getModel('catalog/product')->load($_product->getId())->getStoreState().' '.Mage::getModel('catalog/product')->load($_product->getId())->getStorePostcode().'</div>';
+		$MAP_OBJECT->addMarkerByCoords($longitude,$latitude,$_helper->productAttribute($_product, $_product->getName() , 'name'), $address,'',$this->getSkinUrl('images/marker.png'));
+	?>
+	<div class="store-detail">
+		<p class="view-storeaddress"><?php echo $_product->getStoreAddress() ?><?php if($_product->getStoreCity()):?>, <?php echo strtoupper($_product->getStoreCity()) ?><?php endif; ?><?php if($_product->getStoreState()):?>, <?php echo $_product->getStoreState() ?><?php endif; ?><?php if($_product->getStorePostcode()):?>, <?php echo $_product->getStorePostcode() ?><?php endif; ?><br />
+			P: <?php echo $_product->getStorePhone() ?><br />
+			<?php if($_product->getStoreFax() != ''): ?>
+			F: <?php echo $_product->getStoreFax() ?><br />
+			<?php endif; ?>
+			<?php if($_product->getStoreEmail() !=''): ?>
+			E: <a class="storeemail" href="mailto:<?php echo $_product->getStoreEmail() ?>"><?php echo $_product->getStoreEmail() ?></a>
+			<?php endif; ?>
+		</p>
+		<div class="centermap">
+		<div class="map">
+			<?php echo $MAP_OBJECT->getHeaderJS();?>
+			<?php echo $MAP_OBJECT->getMapJS();?>
+			<?php echo $MAP_OBJECT->printOnLoad();?>
+			<?php echo $MAP_OBJECT->printMap();?>
+		</div>
+		</div>
+		<script type="text/javascript">
+			$('map').style.width='250px';
+			$('map').style.height='250px'; 	
+		</script> 
+		<div class="mapbtn">
+			<a class="button btn-direction" href="http://maps.google.com/maps?daddr=<?php echo $_helper->productAttribute($_product, $_product->getStoreAddress()).' '.strtoupper($_product->getStoreCity()).' '.$_product->getStoreState().' '.$_product->getStorePostcode(); ?>" target="_blank"><span><span><?php  echo $this->__('get directions') ?></span></span></a>
+		</div>
+		<div class="store-hours">
+			<h2 class="tradingHours"><?php echo $this->__('Trading Hours') ?></h2>
+			
+			<?php if ($_product->getStoreHoursMonday() != ''): ?>
+			<table class="store-info">
+				<tr>
+					<td>M</td>
+					<td><?php echo $_product->getStoreHoursMonday() ?></td>
+				</tr>
+				<tr>
+					<td>T</td>
+					<td><?php echo $_product->getStoreHoursTuesday() ?></td>
+				</tr>
+				<tr>
+					<td>W</td>
+					<td><?php echo $_product->getStoreHoursWednesday() ?></td>
+				</tr>
+				<tr>
+					<td>T</td>
+					<td><?php echo $_product->getStoreHoursThursday() ?></td>
+				</tr>
+				<tr>
+					<td>F</td>
+					<td><?php echo $_product->getStoreHoursFriday() ?></td>
+				</tr>
+				<tr>
+					<td>S</td>
+					<td><?php echo $_product->getStoreHoursSaturday() ?></td>
+				</tr>
+				<tr>
+					<td>S</td>
+					<td><?php echo $_product->getStoreHoursSunday() ?></td>
+				</tr>
+			</table>
+			<?php else: ?>
+			<p><?php echo $this->__('Call Store for details') ?></p>
+			<?php endif; ?>
+		</div>
+	</div>
+	<?php else: ?>
+    <div class="product-essential">
+        <div class="product-img-box">
+            <?php echo $this->getChildHtml('media') ?>
+        </div>                
+    </div>
+    <div class="product-collateral">
+        <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')): ?>
+            <dl id="collateral-tabs" class="collateral-tabs">
+                <?php foreach ($detailedInfoGroup as $alias => $html): ?>
+                    <dt class="tab"><span><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></span></dt>
+                    <dd class="tab-container">
+                        <div class="tab-content"><?php echo $html ?></div>
+						<?php if($alias == "product.room.by.room"): ?>
+							<div class="when-to-buy-wp">
+								<h2 id="when-to-buy-close"><span><?php echo $this->__('Find a stockist');?><span></h2>
+								<div class="when-to-buy-content" id="when-to-buy-content">
+								<?php $wtbarray = $_product->getAttributeText('where_to_buy');  ?>
+								<?php if(count($wtbarray) == 1): ?>
+									<div class="item">
+										<a target="_blank" href="<?php
+											if($wtbarray == 'Big W')            { echo "http://www.bigw.com.au/"; }
+											if($wtbarray == 'Coles')            { echo "http://www.coles.com.au/"; }
+											if($wtbarray == 'Costco')           { echo "http://www.costco.com.au/"; }
+											if($wtbarray == 'Godfreys AU')      { echo "http://www.godfreys.com.au/"; }
+											if($wtbarray == 'Godfreys NZ')      { echo "http://www.godfreys.co.nz"; }
+											if($wtbarray == 'Masters')          { echo "http://www.masters.com.au/"; }
+											if($wtbarray == 'Mitre 10')         { echo "http://www.mitre10.com.au/"; }
+											if($wtbarray == 'Supercheap Auto')  { echo "http://www.supercheapauto.com.au/"; }
+											if($wtbarray == 'Supercheap NZ')    { echo "http://www.supercheapauto.co.nz/"; }
+											if($wtbarray == 'The Warehouse')    { echo "http://www.thewarehouse.co.nz/"; }
+										?>">
+										<img src="<?php echo $this->getSkinUrl('images/where-to-buy/Retailer_Button_'. $wtbarray . '.jpg') ?>" alt="<?php echo $retailer ?>"/>
+										</a>
+									</div>
+								<?php endif; ?>
+								<?php if (!empty($wtbarray) && is_array($wtbarray)) foreach($wtbarray as $index => $retailer): ?>
+									<?php if($index <= 2 && $retailer != 'none'): ?>
+										<div class="item">
+										<a target="_blank" href="<?php
+											if($retailer == 'Big W')            { echo "http://www.bigw.com.au/"; }
+											if($retailer == 'Coles')            { echo "http://www.coles.com.au/"; }
+											if($retailer == 'Costco')           { echo "http://www.costco.com.au/"; }
+											if($retailer == 'Godfreys AU')      { echo "http://www.godfreys.com.au/"; }
+											if($retailer == 'Godfreys NZ')      { echo "http://www.godfreys.co.nz"; }
+											if($retailer == 'Masters')          { echo "http://www.masters.com.au/"; }
+											if($retailer == 'Mitre 10')         { echo "http://www.mitre10.com.au/"; }
+											if($retailer == 'Supercheap Auto')  { echo "http://www.supercheapauto.com.au/"; }
+											if($wtbarray == 'Supercheap NZ')    { echo "http://www.supercheapauto.co.nz/"; }
+											if($retailer == 'The Warehouse')    { echo "http://www.thewarehouse.co.nz/"; }
+										?>">
+										<img src="<?php echo $this->getSkinUrl('images/where-to-buy/Retailer_Button_'. $retailer . '.jpg') ?>" alt="<?php echo $retailer ?>"/>
+										</a>
+										</div>
+									<?php endif; ?>
+								<?php endforeach; ?>
+								</div>
+								<div class="clear"></div>
+								<script type="text/javascript">
+									//<![CDATA[ 
+									Event.observe(window, 'load',function(){
+										Event.observe($('when-to-buy-close'), 'click', function(){
+											if($('when-to-buy-close').hasClassName('close')){
+												$('when-to-buy-content').show();      
+												$('when-to-buy-close').removeClassName('close');
+											}else{
+												$('when-to-buy-content').hide();     
+												$('when-to-buy-close').addClassName('close');
+											}                                      
+										});     
+									});              
+									//]]>
+								</script>
+						</div>
+						<?php endif; ?>
+                    </dd>
+                <?php endforeach; ?>
+            </dl>
+        
+            <script type="text/javascript">
+                //<![CDATA[
+                    var collateralTabs = new Enterprise.Tabs('collateral-tabs');
+                    Event.observe(window, 'load', function() {
+                        if(window.location.href.indexOf('write-review')>0){
+                            collateralTabs.activeTab = collateralTabs.tabs[1];
+                        }                    
+                        collateralTabs.select();                                       
+                    });
+                //]]>
+            </script>
+        <?php endif; ?>
+    </div>
+	<?php endif; ?>
+</div>

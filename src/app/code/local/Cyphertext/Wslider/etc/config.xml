@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Cyphertext_Wslider>
+            <version>0.0.1</version>
+        </Cyphertext_Wslider>
+    </modules>
+    <global>
+        <helpers>
+            <wslider>
+                <class>Cyphertext_Wslider_Helper</class>
+            </wslider>
+        </helpers>
+        <blocks>
+             <wslider>
+                <class>Cyphertext_Wslider_Block</class>
+             </wslider>
+        </blocks>
+    </global>
+</config> 

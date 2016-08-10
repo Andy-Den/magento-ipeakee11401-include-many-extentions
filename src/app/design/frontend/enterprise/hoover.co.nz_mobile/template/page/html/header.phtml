@@ -1,0 +1,68 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_iphone
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<?php $_cartItems = $this->helper('checkout/cart')->getSummaryCount(); ?>
+
+<header>
+    <div class="menu-wrapper">
+        <dl id="menu">
+            <dt class="menu dropdown"><a href="#">Menu</a></dt>
+            <dd class="menu-box">
+                <?php echo $this->getChildHtml('topLinks') ?>
+                <?php echo $this->getChildHtml('checkoutLinks') ?>
+                <?php echo $this->getChildHtml('accountLinks') ?>
+            </dd>
+        </dl>
+        <div class="show-menu" id="show-menu">
+            <?php echo $this->__('menu');?>
+        </div>
+        <div class="hoover_mobile_dropdown_menu" id="hoover_mobile_dropdown_menu" style="display: none;"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('hoover_mobile_dropdown_menu')->toHtml() ?></div> 
+    </div>
+    <div class="header-bg">
+        <div class="clear">&nbsp;</div>
+        <a class="header-logo" href="<?php echo $this->getUrl('') ?>">&nbsp;</a>    
+        <div class="hoover_mobile_welcome"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('hoover_mobile_welcome')->toHtml() ?></div>        
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[ 
+        Event.observe(window, 'load',function(){
+            Event.observe($('show-menu'), 'click', function(){
+                if($('show-menu').hasClassName('show')){
+                    $('hoover_mobile_dropdown_menu').hide();    
+                    $('show-menu').removeClassName('show');
+                }else{
+                    $('hoover_mobile_dropdown_menu').show();   
+                    $('show-menu').addClassName('show');
+                }                                      
+            });     
+        });              
+        //]]>
+    </script>
+</header>
+

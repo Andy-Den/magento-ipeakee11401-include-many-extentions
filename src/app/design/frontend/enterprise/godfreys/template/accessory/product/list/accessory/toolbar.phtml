@@ -1,0 +1,24 @@
+<?php
+/**
+ * Product list accessory search toolbar
+ *
+ * @see Balance_Accessory_Block_Category_Product_List_Accessory_Toolbar
+ */
+?>
+<div class="toolbar">
+    <h3>Accessories Search</h3>
+    <dl id="narrow-by-list">
+            <?php $_layered = $this->getChild('accessory.layered'); ?>
+                
+                <p class="block-subtitle"><?php echo $this->__('Shopping Options') ?></p>
+            <dl id="narrow-by-list">
+                <?php $_filters = $_layered->getFilters() ?>
+                <?php foreach ($_filters as $_filter): ?>
+                <?php if(is_object($_filter) && $_filter->getName() != 'Price'): ?>
+                    <dt><?php echo $this->__($_filter->getName()) ?></dt>
+                    <dd><?php echo $_filter->getHtml() ?></dd>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </dl>
+            </dl>
+</div>

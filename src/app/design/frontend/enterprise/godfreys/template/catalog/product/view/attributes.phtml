@@ -1,0 +1,27 @@
+<?php $_helper = $this->helper('catalog/output'); $_product = $this->getProduct() ?>
+<?php $_additional = $this->getAdditionalData() ?>
+<?php $_additionalNew = array(); ?>
+<?php foreach ($_additional as $_data): ?>
+<?php if(($_helper->productAttribute($_product, $_data['value'], $_data['code']) != 'No') && ($_helper->productAttribute($_product, $_data['value'], $_data['code']) != 'N/A')){ $_additionalNew[] = $_data; } ?>
+<?php endforeach; ?>
+<?php if($_additionalNew): ?>
+
+<table class="data-table" id="product-attribute-specs-table">
+	<col width="13%" />
+	<col />
+	<tbody>
+		<?php $i=1;?>
+		<?php foreach ($_additionalNew as $_data): ?>
+		<?php if($i%2==1):?>
+		<tr class="odd">
+			<?php else:?>
+		<tr>
+			<?php endif;?>
+			<td class="col1"><div id="red-bullet"></div></td>
+			<td class="caption"><?php echo $this->htmlEscape($this->__($_data['label'])) ?></td>
+			<td><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+		</tr>
+		<?php $i++; endforeach; ?>
+	</tbody>
+</table>
+<?php endif;?>

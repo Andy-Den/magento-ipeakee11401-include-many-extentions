@@ -1,0 +1,56 @@
+<script type="text/javascript">
+//<![CDATA[
+	var iTabsSettings = <?php echo Mage::getModel('itoris_producttabsslider/settings')->getCurrentAsJson();?>;
+//]]>
+</script>
+<div class="itabs">
+	<div class="i_titles">
+		<div class="i_scroll i__left"><div>&nbsp;</div></div>
+		<div class="i_scroll i__right"><div>&nbsp;</div></div>
+		<div class="i_titles-holder">
+			<?php 
+			$n = 0;
+			foreach($this->getTitles() as $key => $title): 
+	     		$first = isset($first) ? '' : 'i_first'; 
+	     		$current = isset($current) ? '' : 'i_current';
+	     		$last = $n+1 == count($this->getTitles()) ? 'i_last' : ''; 
+	     		$n++; 
+	     	?><!-- 
+	     	--><span id="tab_title_<?php echo $key;?>" class="i_title <?php echo $current; ?> <?php echo $first; ?> <?php echo $last; ?>" ><!-- 
+				 --><span class="i_left" ><span class="i_corner l">&nbsp;</span>&nbsp;</span><!-- 
+				 --><span class="i_center" ><?php echo $title;?></span><!-- 
+				 --><span class="i_right" ><span class="i_corner r">&nbsp;</span>&nbsp;</span><!-- 
+			 --></span><!-- 
+			 --><?php endforeach;?>
+		</div>
+	</div>
+	<?php unset($current);?>
+	<div class="contents">
+		<div class="contents2">
+		<?php foreach($this->getContents() as $key => $content):?>
+		<?php $current = isset($current) ? '' : 'i_current'; ?>
+		<div id="tab_content_<?php echo $key;?>" class="content <?php echo $current;?>">
+			<?php echo $content;?>
+			<div style="clear: both;"></div>
+		</div>
+		<?php endforeach;?>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	$$('.itabs .i_titles .i_title').each(function(title){
+        title.observe('mouse'+iTabsSettings.behavior,function(event){
+       
+            var current = [$$('.itabs .i_titles .i_title.i_current')[0], $$('.itabs .contents .content.i_current')[0]];
+            if (current[0]) current[0].className = current[0].className.replace('i_current', '').replace('  ', ' ');
+            if (current[1]) current[1].className = current[1].className.replace('i_current', '').replace('  ', ' ');
+           
+            title.className = title.className + ' i_current';
+            var contentElm = document.getElementById('tab_content_'+title.id.substring(10));
+            if (contentElm) contentElm.className = contentElm.className + ' i_current';
+           
+        });
+    });
+//]]>
+</script>

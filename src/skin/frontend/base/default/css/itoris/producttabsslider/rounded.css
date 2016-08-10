@@ -1,0 +1,46 @@
+	.itabs .i_titles{position:relative; z-index:10;}
+
+.itabs .i_titles .i_title{height:26px; cursor:pointer;margin-left:1px;}
+.itabs .i_titles .i_title.i_first{margin-left:0;}
+.itabs .i_titles .i_title.i_last{margin-right:0;}
+.itabs .i_titles.with-scroll .i_title.i_first{margin-left:1px;}
+.itabs .i_titles.with-scroll .i_title.i_last{margin-right:1px;}
+
+.itabs .i_titles .i_title span{display:inline-block;height:26px;line-height:26px;background-repeat:repeat-x;position:relative;}
+
+.opera9 .itabs .i_titles .i_title span{position:static;}
+
+.itabs .i_titles .i_title .i_left, 
+.itabs .i_titles .i_title .i_right{width:11px; float:none !important;}
+
+.itabs .i_titles .i_titles-holder{overflow :hidden;white-space:nowrap;height:26px;position:relative;}
+
+.itabs .i_titles .i_title.i_current .i_corner{display:block;position:absolute;width:5px;height:5px;bottom:0;}
+
+.opera9 .itabs .i_titles .i_title.i_current .i_corner{position:relative;display:inline-block;top:21px;}
+
+.itabs .i_titles .i_title.i_current.i_first .i_corner.l{display:none;}
+.itabs .i_titles .i_title.i_current.i_last .i_corner.r{display:none;}
+.itabs .i_titles .i_title.i_current .i_corner.l{left:-4px;}
+.itabs .i_titles .i_title.i_current .i_corner.r{right:-4px;}
+.opera9 .itabs .i_titles .i_title.i_current .i_corner.r{right:-10px;}
+
+.itabs .i_titles .i_scroll{display:none;cursor:pointer;position:absolute;z-index:150;}
+.itabs .i_titles .i_scroll.i__right{right:0;}
+.itabs .i_titles .i_scroll.i__left{left:0;}
+.itabs .i_titles.with-scroll .i_scroll{display:block;width:15px;height:25px;}
+.itabs .i_titles.with-scroll .i_scroll div{position:absolute;top:0;width:21px;height:25px;}
+
+.itabs .i_titles.with-scroll .i_scroll.i__left div{left:0;}
+.itabs .i_titles.with-scroll .i_scroll.i__right div{right:0;}
+
+.itabs .i_titles.with-scroll .i_titles-holder{margin:0 15px;}
+.itabs .contents{position: relative;top:-1px;z-index:0;border:1px solid;}
+
+.itabs .contents2{margin:10px;}
+
+.itabs .contents .content{display:none; padding:0 !important;}
+.itabs .contents .content.i_current{display:inline;}
+.product-view .box-up-sell .products-grid td {padding-left:8px !important;padding-right:8px !important;}
+.product-view .box-up-sell{margin:0;}
+.tab_title{display:none;}

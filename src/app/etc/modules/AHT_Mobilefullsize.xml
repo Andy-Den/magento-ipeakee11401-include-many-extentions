@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AHT_Mobilefullsize>
+            <active>true</active>
+            <codePool>local</codePool>
+        </AHT_Mobilefullsize>
+    </modules>
+</config> 

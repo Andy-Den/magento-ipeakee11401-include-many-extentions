@@ -1,0 +1,59 @@
+<config>			
+    <tabs>
+        <tbtall translate="label">
+            <label>Balance Extensions</label>
+            <sort_order>100</sort_order>
+        </tbtall>
+    </tabs>
+    <sections>
+        <warranty translate="label">
+            <label>Warranty</label>
+            <tab>tbtall</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <about translate="label">
+                    <label>About</label>
+                    <comment><![CDATA[Balance Warranty Extension Provided By <a href="http://www.balanceinternet.com.au/" target="_blank">Balance Internet</a>]]>
+                    </comment>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </about>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <!-- TODO: make an attribute source model -->
+                        <brand_attribute translate="label">
+                            <label>Brand Attribute</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The attribute code that is used for the 'make' select on warranty registration]]>
+                            </comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </brand_attribute>
+                        <warranty_attribute translate="label">
+                            <label>Warranty Attribute</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The attribute code that is used for the 'warranty period' select on warranty registration]]>
+                            </comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </warranty_attribute>
+                    </fields>
+                </settings>
+            </groups>
+        </warranty>
+    </sections>
+</config>

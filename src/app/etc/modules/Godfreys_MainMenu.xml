@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Godfreys_MainMenu>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Godfreys_MainMenu>
+  </modules>
+</config>

@@ -1,0 +1,150 @@
+<?php
+$formData = $this->getFormData();
+
+
+$billingAddress = $this->getBillingAddress();
+$shippingAddress = $this->getShippingAddress();
+$quote = $this->getCreatorQuote();
+$items = $quote->getAllItems();
+
+?>
+<form action="<?php echo $this->getSubmitUrl(); ?>" method="post" id="nostepcheckout_checkout_form">
+    <?php echo $this->getBlockHtml('formkey') ?>
+    <?php foreach ($formData as $key => $value) : ?>
+    <?php if(is_array($value)): ?>
+        <?php foreach($value as $k => $v): ?>
+        <input type="hidden" name="<?php echo $key.'['.$k.']'; ?>" value="<?php echo $v; ?>" />
+        <?php endforeach;?>
+    <?php else: ?>
+        <input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>" />
+        <?php endif;?>
+    <?php endforeach; ?>
+        <div class="popup-cart-order">
+
+                    <div class="page-title">
+                        <h1>Order Confirmation</h1>
+                    </div>
+
+                    <div class="left-popup-cart-order">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th class="td-image">Supplier</th>
+                                    <th class="td-name">Product Name</th>
+                                    <th class="td-price">Price</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($items as $item) : ?>
+                            <?php $product = $item->getProduct();?>
+                            <?php $productUrl = $product->getUrlModel()->getUrl($product); ?>
+                            <?php $_incl = $this->helper('checkout')->getPriceInclTax($item); ?>
+                            <?php $thumbnail =  $this->helper('catalog/image')->init($product, 'thumbnail'); ?>
+                            <tbody>
+                               
+                                <tr>
+                                  <td class="td-image">
+                                      <?php if ($productUrl):?><a href="<?php echo $productUrl ?>" title="<?php echo $this->escapeHtml($product->getName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $thumbnail->resize(85); ?>" width="85" height="85" alt="<?php echo $this->escapeHtml($product->getName()) ?>" /><?php if ($productUrl):?></a><?php endif;?>
+
+                                  </td>
+                                  <td class="td-name">
+                                      <h3 class="product-name"><a href="<?php echo $productUrl;?>"><?php echo $product->getName(); ?></a></h3>
+                                      <p>Product Code: <?php echo $product->getSku(); ?></p>
+                                  </td>
+                                  <td class="td-price">
+                                      <span class="price"><?php echo $this->helper('checkout')->formatPrice($_incl) ?></span>
+                                  </td>
+                                  <td class="td-btn">
+<!--                                      <a class="btn-remove" title="delete" href="javascript:void(0);" onclick="jQuery.fancybox.close()">delete</a>-->
+                                      
+                                  </td>
+                                </tr>
+           
+                            </tbody>
+                            <?php endforeach; ?>
+                           
+                        </table>
+<!--                        <p class="cancel-supply"><a href="javascript:void(0);" onclick="jQuery.fancybox.close()">Cancel Supply &amp; Fit</a></p>-->
+                        <div class="popup-total clearfix">
+                            
+                            <div class="right-total-popup inline-block">
+                                <table>
+                                    <tr>
+                                        <td>Subtotal</td>
+                                        <td><span class="price"><?php echo $this->helper('checkout')->formatPrice($quote->getSubtotal()); ?></span></td>
+                                    </tr>
+                                    <?php /* BEGIN REF: GOD-1823*/?>
+                                    <tr>
+                                        <td><?php echo $this->__('Shipping Cost:'); ?></td>
+                                        <td><span class="price"><?php echo $this->helper('checkout')->formatPrice($quote->getShippingAddress()->getShippingAmount()); ?></span></td>
+                                    </tr>
+                                    <?php /* END REF: GOD-1823*/?>
+                                    <tr class="total">
+                                        <td><strong>Grand Total</strong></td>
+                                        <td><span class="price"><?php echo $this->helper('checkout')->formatPrice($quote->getGrandTotal()); ?></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="right-popup-cart-order">
+                      
+                        <?php /*
+                        <div class="order-comment">
+                            <label>Comments:</label>
+                            <textarea onblur="clearText(this)" onfocus="clearText(this)" name="amorderattr[order_comment]">Enter your comments here...</textarea>
+                        </div>                         
+                         */ ?>
+                        <div class="btn-order clearfix">
+                            <button type="button" title="Place Order" class="button btn-cart" onclick="noStepCheckoutCheckoutForm.submit(this);"><span><span>Place Order</span></span></button>                            
+                        </div>
+                    </div>
+
+                </div> 
+        <?php /* ?>
+    <?php foreach($quote->getAllItems() as $item) :?>    
+    <div class="product_details">
+        <?php $product = $item->getProduct(); ?>
+        <p><?php echo $product->getName() . ' (SKU: ' . $product->getSku() . ')'; ?></p>
+
+    </div>
+    <?php endforeach;?>
+    <div class="billing_address_container">
+        <p><?php echo $billingAddress->getStreetFull(); ?></p>
+        <p><?php echo $billingAddress->getCity() . ' ' . $billingAddress->getRegion() . ' ' . $billingAddress->getPostcode(); ?></p>
+        <p><?php echo ' ' . $billingAddress->getCountry() ?></p>
+    </div>
+    <div class="shipping_address_container">
+        <p><?php echo $shippingAddress->getStreetFull(); ?></p>
+        <p><?php echo $shippingAddress->getCity() . ' ' . $shippingAddress->getRegion() . ' ' . $shippingAddress->getPostcode(); ?></p>
+        <p><?php echo ' ' . $shippingAddress->getCountry() ?></p>
+    </div>
+    <div>
+        <?php echo $quote->getGrandTotal(); ?>
+    </div>
+    <div>
+        <button type="button" title="Place Order" class="button btn-cart" onclick="noStepCheckoutCheckoutForm.submit(this);"><span><span>Place Order</span></span></button>
+    </div>         
+        <?php */ ?>
+</form>
+<script type="text/javascript">
+    var noStepCheckoutCheckoutForm = new VarienForm('nostepcheckout_checkout_form');
+    noStepCheckoutCheckoutForm.submit = function(){
+        if (this.validator.validate()) {
+            _form = jQuery("#nostepcheckout_checkout_form");
+            if(_form) {
+                _form_vars =  _form.serialize();                
+                url = _form.attr("action");
+                if(!url) this.form.submit();                    
+                window._nostepcheckout_Loading();
+                jQuery.post( url + "?" + _form_vars ,
+                function(data){
+                    window._nostepcheckout_LoadJsonData(data);
+                    window._nostepcheckout_AfterLoading();                        
+                }, "json");
+            }
+        }
+    }
+</script>

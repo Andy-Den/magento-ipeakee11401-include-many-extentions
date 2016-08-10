@@ -1,0 +1,24 @@
+/* 
+    Document   : styles-font
+    Created on : Mar 30, 2013, 2:01:18 PM
+    Author     : ldk
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+@font-face {
+    font-family: 'HelveticaNeueCE-ThinIE';
+    src: url('helveticaneuece35thinIE.eot');
+    src: url('helveticaneuece35thinIE.eot?#iefix') format('embedded-opentype'),
+        url('helveticaneuece35thinIE.ttf') format('truetype'),
+        url('helveticaneuece35thinIE.svg#HelveticaNeueCE-ThinIE') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.page-title h1, h1{
+    font:normal 40px/40px 'HelveticaNeueCE-Thin',  'Helvetica Neue', Helvetica;
+}
+

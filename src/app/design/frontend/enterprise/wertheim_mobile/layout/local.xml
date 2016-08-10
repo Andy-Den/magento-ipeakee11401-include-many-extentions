@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<layout>
+    <!--default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/style.css</stylesheet>
+            </action>
+            
+            
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/jquery-1.8.2.min.js</script>
+            </action>
+            
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/jquery.jcarousel.min.js</script>
+            </action>   
+                 
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/wertheim_menu.js</script>
+            </action>  
+                      
+                       
+                          
+                              
+        </reference>  
+        
+        <reference name="left">
+            <remove name="customer.address" />
+        </reference>
+          
+        
+        
+        <reference name="right"> 
+            <remove name="catalog.compare.sidebar" />
+            <remove name="right.reports.product.viewed" />
+            <remove name="accessory.mini.search" />
+            
+            
+            <remove name="right.poll" />
+            <remove name="paypal.partner.right.logo" />
+            <remove name="left.reports.product.viewed" />
+            
+            
+            
+            <block type="cms/block" name="right_sidebar_bloc_contact-us" after="-"> 
+                <action method="setBlockId">
+                    <block_id>right_sidebar_bloc_contact-us</block_id>
+                </action> 
+            </block> 
+        </reference>
+        
+        <reference name="footer">
+            <block type="cms/block" name="wertheim_footer_1" after="-"> 
+                <action method="setBlockId">
+                    <block_id>wertheim_footer_1</block_id>
+                </action> 
+            </block> 
+            <block type="cms/block" name="wertheim_footer_2" after="-"> 
+                <action method="setBlockId">
+                    <block_id>wertheim_footer_2</block_id>
+                </action> 
+            </block>
+        </reference>
+        
+        
+    </default> 
+    
+    <cms_index_index>
+        <reference name="head"> 
+            
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>js/index_carousel.js</script>
+            </action> 
+                
+            <action method="addCss">
+                <stylesheet>css/index_style.css</stylesheet>
+            </action>
+                
+                
+                
+            <action method="addCss">
+                <stylesheet>css/jcarousel_skin_home.css</stylesheet>
+            </action> 
+            
+            
+            <action method="addCss">
+                <stylesheet>css/jcarousel_skin_reviews.css</stylesheet>
+            </action>
+        </reference>
+        
+               
+        <reference name="content">
+            
+            
+            <block type="cms/block" name="home_page_carousel">
+                <action method="setBlockId">
+                    <block_id>home_page_carousel</block_id>
+                </action>
+            </block>
+            
+            
+            <block type="core/template" name="reviews" as="reviews" template="reviews/reviews.phtml"/>
+            
+
+            <block type="cms/block" name="hom_bloc_excellent_filtration" after="reviews">
+                <action method="setBlockId">
+                    <block_id>hom_bloc_excellent_filtration</block_id>
+                </action>
+            </block>
+            
+            <block type="cms/block" name="hom_bloc_where_buy" after="hom_bloc_excellent_filtration">
+                <action method="setBlockId">
+                    <block_id>hom_bloc_where_buy</block_id>
+                </action>
+            </block>
+        </reference>
+    </cms_index_index>
+    
+    <catalog_product_view>
+        
+        <reference name="content">
+            <block type="review/form" name="product.review.form" as="product_review_form">
+                <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before">
+                    <action method="setMayBeInvisible">
+                        <value>1</value>
+                    </action>
+                </block>
+            </block>
+            
+        </reference>
+               
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/jcarousel_skin_reviews.css</stylesheet>
+            </action>
+            
+            <action method="addCss">
+                <stylesheet>css/jcarousel_skin_madia.css</stylesheet>
+            </action>
+        </reference>
+    
+        
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        
+    </catalog_product_view>
+    
+    <catalog_category_view>
+        
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-right.phtml</template>
+            </action>
+        </reference>
+        
+        <reference name="right"> 
+            <block type="cms/block" name="right_sidebar_bloc_category" after="-"> 
+                <action method="setBlockId">
+                    <block_id>right_sidebar_bloc_category</block_id>
+                </action> 
+            </block> 
+        </reference>
+    </catalog_category_view-->
+
+</layout> 

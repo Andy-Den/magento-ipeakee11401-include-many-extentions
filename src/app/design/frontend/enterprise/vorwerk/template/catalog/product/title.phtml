@@ -1,0 +1,19 @@
+<?php
+
+$_product = Mage::registry('product');
+if (!$_product) return;
+
+$_helper = $this->helper('catalog/output');
+$_name = $_helper->productAttribute($_product, $_product->getName(), 'name');
+
+$_words = explode(' ', $_name);
+if (count($_words) > 1) {
+    $_lastWord   = array_pop($_words);
+    $_firstWords = implode(' ', $_words);
+    $_name = $_firstWords . ' <span>' . $_lastWord . '</span>';
+}
+
+?>
+<div class="pageTitle product-title">
+    <h1><?php echo $_name; ?></h1>
+</div>

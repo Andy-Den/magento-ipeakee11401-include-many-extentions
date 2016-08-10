@@ -1,0 +1,15 @@
+<?php
+
+
+switch ($_REQUEST['level_of_clean'])
+{
+	case '32': echo $this->getLayout()->createBlock('cms/block')->setBlockId('level-of-clean-description-1')->toHtml();
+			 break;
+	case '33': echo $this->getLayout()->createBlock('cms/block')->setBlockId('level-of-clean-description-2')->toHtml();
+			 break;
+	case '34': echo $this->getLayout()->createBlock('cms/block')->setBlockId('level-of-clean-description-3')->toHtml();
+			 break;
+	default:
+			 break;
+}
+?>

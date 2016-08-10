@@ -1,0 +1,484 @@
+
+/**
+ Shop the look main Layout
+**/
+
+.stl-cont {
+    position: relative; overflow: hidden; margin-top: 10px;
+}
+
+.stl-ttl {
+    margin-bottom: 10px;
+}
+
+.stl-body-left {
+    float: left; width: 66%; box-sizing: border-box; padding-right: 5%; margin-bottom: 3em;
+}
+
+.stl-body-right {
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 33%;
+    box-sizing: border-box;
+}
+
+.stl-footer {
+    float:left; width: 100%; margin-top: 50px;
+}
+
+
+
+#lookgroup-product-list-overlay {
+    background: #f00; width: 100px; height: 100px;
+}
+
+
+
+/** Look Slider **/
+
+
+
+.stl-look-slider{
+    position: relative; overflow: hidden;
+    width: 100%; height: 300px; margin-bottom: 20px; outline: #f00 1px solid;
+
+}
+.stl-look-slide{
+    position:absolute; top: 0; left: 0; z-index: 1; transition: opacity .3s linear;
+}
+/* don't hide on browsers that don't support opacity */
+.opacity .stl-look-slide{
+    opacity:0;
+}
+
+.stl-look-slide.is-active{
+    z-index:10; opacity: 1;
+}
+
+/** Look Tiles **/
+.stl-look-tiles{
+    float: left; width: 100%; margin-bottom: 30px;
+}
+.stl-look-tile{
+    float:left; margin-right: 15px; border: #fff 1px solid; transition: border-color .2s linear;
+}
+.stl-look-tile:hover{
+    border-color: #eee;
+}
+.stl-look-tile.is-active{
+    border-color: #666;
+}
+
+/** Look Details **/
+.stl-look-details{
+    float:left; clear:both;
+}
+
+.stl-look-detail{
+    display:none;
+}
+.stl-look-detail.is-active{
+    display:block;
+}
+
+.stl-look-detail p{
+    color: #000; margin-bottom: 0.8em;
+    font: 12px/15px arial;
+    letter-spacing: 0px;
+}
+
+.stl-look-ttl {
+    color: #000; margin-bottom: 4px;
+    font: normal 12px/25px "Gill Sans Std", arial;
+}
+
+
+/** Look Products **/
+/*.stl-list-ttl{*/
+    /*border-bottom: 1px solid #000000;*/
+    /*color: #000000;*/
+    /*font-size: 12px;*/
+    /*line-height: 25px;*/
+    /*margin-right: 30px;*/
+    /*padding-bottom: 3px;*/
+    /*width: 89.2%;*/
+    /*font-family:Gill Sans Std;*/
+    /*margin-top:20px;*/
+/*}*/
+
+.stl-list-btns{
+    float:left; width: 100%; text-align: right;
+}
+.stl-list-btns .loader{
+    position: relative; float:right; top: 6px; right: 10px;
+}
+
+.stl-prod-list{
+    float: left; margin: 1em 0;  max-height: 714px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+}
+
+.stl-prod{
+    float:left; margin: 0 0 1em 0; width: 100%;
+    color: #999;
+}
+.stl-prod .section-line{
+    margin: 0;
+}
+
+
+
+.stl-prod-thumb{
+    float:left; width: 33.3%;  box-sizing: border-box; padding-right:5%;
+}
+
+.stl-prod-desc{
+    float:left; width: 66.6%;
+}
+.stl-prod-ttl{
+    text-transform: none; color: #000; margin-bottom: 2px; font: normal 12px Arial!important; letter-spacing: 0px;
+}
+.stl-prod-price{
+    font-size: 12px;color: #000;font-family: Arial, sans-serif;  margin-top: 5px;font-weight: bold;
+}
+.stl-prod-lnk{
+
+}
+
+.stl-prod-attr-lbl{
+    display:block; margin: 10px 0 8px 0;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+.stl-prod-desc .size span {font-size: 10px;
+    letter-spacing: 2px;}
+
+.stl-prod-attr-option{
+    display: inline-block;
+    margin-right: 2px; margin-bottom: 5px; padding: 5px;
+    font-size: 10px !important; text-align: center; text-transform: none; letter-spacing: 0;
+    color: #999; border: 1px solid #CCC;
+    transition: color .2s linear, border-color .2s linear, background-color .2s linear;
+}
+.stl-prod-attr-option:hover{
+    color: #ccc; border-color: #ddd;
+}
+.stl-prod-attr-option.active{
+    background-color: #000; border-color: #000; color: #fff;
+}
+
+.stl-prod-attr-option.is-outofstock{
+    background-color: #f1f1f1; border-color: #ddd; color: #ccc; cursor: auto;
+}
+
+
+.stv-prod-qty-cont{
+    margin-top: 19px;
+    letter-spacing: 1px;font-size: 10px;width: 225px;
+}
+.stv-prod-qty{
+    width: 26px; border: 1px solid #d9d9d9; text-align: center; padding: 2px 0; margin: 0 5px;color: #999;font-size: 10px;letter-spacing: 0;
+}
+
+.stv-prod-qty-cont div.checker{
+    float:right;
+}
+
+.stv-prod-qty-arrows{
+    position:relative; display: inline-block;
+    width: 20px; height: 10px;
+}
+.btn-up,.btn-down{
+    position: absolute; display: inline-block; left:0;
+    height: 8px;
+    line-height: 8px; vertical-align: middle; letter-spacing: 0;
+    color: #d9d9d9; transition: color .2s linear;
+}
+.btn-up{
+    top: -5px;
+}
+.btn-down{
+    bottom: -10px;
+}
+
+.btn-up:after{
+    content: "︿";
+}
+.btn-down:after{
+    content: "﹀";
+}
+
+
+.look-prod-links {
+    margin-top: 1em;
+}
+
+.look-prod-links li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.stl-prod-wshlst{
+    clear:both; margin-top: 14px;
+}
+
+.stl-prod-wshlst a:after{
+    content: " +";
+}
+
+
+#shop-look-form span.loader {
+    display:block; width: 100%; text-align: center; padding: 2em 0;
+}
+
+
+/** Buttons **/
+a.stl-look-add{
+    float: right; margin-right: 30px; padding: 0 15px;
+}
+.stl-collection{
+    float:right; margin-right: 30px;
+}
+.stl-all-collections{color: #000000;
+    font-family: ArialNarrowBold;
+    font-size: 12px;
+    letter-spacing: 2px;
+    line-height: 25px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+
+
+
+/** Actions **/
+.stl-look-tile, .stl-prod-attr-option, .btn-up, .btn-down, .stl-collection, .stl-all-collections{
+    cursor: pointer;
+}
+.stl-prod-desc .size {width: 245px;}
+.stl-prod-lnk a {font-size: 10px;}
+
+
+
+/* Desktop - design for a width of 1280px
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* 1280px <= width */
+
+@media only screen and (min-width: 1280px)  {
+    .loc-srch-or{
+        width: 240px;
+    }
+
+    #slider-container{
+        width: 565px; margin-left: 50px; margin-top: 1em;
+    }
+}
+
+
+/* Design for a width of less than 1024 px
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* width < 1024px */
+@media only screen and (max-width: 1023px) {
+
+}
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+    .stl-prod-list {
+        max-height: none; overflow: auto;
+    }
+}
+
+
+/* Tablet (Portrait) - design for a width of 768px
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* 768px <= width < 960px */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+
+    .stl-body-left {
+        width:50%;
+    }
+
+    .stl-body-right {
+        width:50%;
+    }
+
+    .stl-prod-list {
+        max-height: none; overflow: auto;
+    }
+}
+
+/* All mobile - design for a width of less than 768px
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* width < 768px */
+@media only screen and (max-width: 767px) {
+
+    .stl-body-left {
+        width:100%; padding-right: 0;
+    }
+
+    .stl-body-right {
+        width:100%;
+    }
+
+    .stl-prod-list {
+        max-height: none; overflow: auto;
+    }
+
+    .slides{
+        /*display:none!important;*/ margin-left: -9999px!important; width: 0; height:0;
+    }
+}
+
+
+/* Mobile (Landscape) - design for a width of 480px
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* 480px <= width < 768px */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+
+}
+
+
+/* Mobile (Landscape, iPhone 4 Portrait) - design for a width of 640px
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+/* 640px <= width < 768px */
+@media only screen and (min-width: 640px) and (max-width: 767px) {
+
+}
+
+
+
+
+
+/* Design for a width of less than 480px (small mobile)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* width < 480px */
+@media only screen and (max-width: 479px) {
+
+}
+
+
+
+
+
+/* Mobile (Portrait) - design for a width of 320px
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* 320px <= width < 480px */
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+
+
+}
+
+
+
+
+
+/* Mobile (Portrait) - design for a width of less than 320px
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* width < 320px */
+@media only screen and (max-width: 319px) {
+
+
+}
+
+
+
+
+/*
+ * jQuery FlexSlider v2.0
+ * http://www.woothemes.com/flexslider/
+ *
+ * Copyright 2012 WooThemes
+ * Free to use under the GPLv2 license.
+ * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Contributing author: Tyler Smith (@mbmufffin)
+ */
+
+
+/* Browser Resets */
+.flex-container a:active,
+.flexslider a:active,
+.flex-container a:focus,
+.flexslider a:focus  {outline: none;}
+.slides,
+.flex-control-nav,
+.flex-direction-nav {margin: 0; padding: 0; list-style: none;}
+
+/* FlexSlider Necessary Styles
+*********************************/
+.flexslider {margin: 0; padding: 0;}
+.flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.flexslider .slides img {width: 100%; display: block;}
+.flex-pauseplay span {text-transform: capitalize;}
+
+/* Clearfix for the .slides element */
+.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
+* html .slides {height: 1%;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .slides > li:first-child {display: block;}
+
+
+/* FlexSlider Default Theme
+*********************************/
+.flexslider {margin: 0; background: #fff; border: 4px solid #fff; position: relative; -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px;  zoom: 1; margin-bottom: 2em;}
+.flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
+.loading .flex-viewport {max-height: 300px;}
+.flexslider .slides {zoom: 1;}
+
+.carousel li {margin-right: 5px}
+
+
+/* Direction Nav */
+.flex-direction-nav a {width: 30px; height: 30px; margin: -20px 0 0; display: block; background: url(../images/bg_direction_nav.png) no-repeat 0 0; position: absolute; top: 50%; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
+.flex-direction-nav .flex-next {background-position: 100% 0; right: -36px; }
+.flex-direction-nav .flex-prev {left: -36px;}
+.flexslider:hover .flex-next {opacity: 0.8; right: 5px;}
+.flexslider:hover .flex-prev {opacity: 0.8; left: 5px;}
+.flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover {opacity: 1;}
+.flex-direction-nav .disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
+
+/* Control Nav */
+.flex-control-nav {width: 100%; position: absolute; bottom: -40px; text-align: center;}
+.flex-control-nav li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline;}
+.flex-control-paging li a {width: 11px; height: 11px; display: block; background: #666; background: rgba(0,0,0,0.5); cursor: pointer; text-indent: -9999px; -webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; box-shadow: inset 0 0 3px rgba(0,0,0,0.3);}
+.flex-control-paging li a:hover { background: #333; background: rgba(0,0,0,0.7); }
+.flex-control-paging li a.flex-active { background: #000; background: rgba(0,0,0,0.9); cursor: default; }
+
+.flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
+.flex-control-thumbs li {width: 25%; float: left; margin: 0;}
+.flex-control-thumbs img {width: 100%; display: block; opacity: .7; cursor: pointer;}
+.flex-control-thumbs img:hover {opacity: 1;}
+.flex-control-thumbs .active {opacity: 1; cursor: default;}
+
+@media screen and (max-width: 860px) {
+    .flex-direction-nav .flex-prev {opacity: 1; left: 0;}
+    .flex-direction-nav .flex-next {opacity: 1; right: 0;}
+}

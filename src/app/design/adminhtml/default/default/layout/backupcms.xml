@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_backupcms_backupcms_index>
+        <reference name="content">
+            <block type="backupcms/adminhtml_backupcms" name="backupcms" template="aht/backupcms/importcmspage.phtml" />
+        </reference>
+    </adminhtml_backupcms_backupcms_index>
+	<adminhtml_backupcms_backupcms_static>
+        <reference name="content">
+			<block type="backupcms/adminhtml_backupcms" name="backupcmsblock" template="aht/backupcms/importcmsblock.phtml" />
+        </reference>
+    </adminhtml_backupcms_backupcms_static>
+</layout>

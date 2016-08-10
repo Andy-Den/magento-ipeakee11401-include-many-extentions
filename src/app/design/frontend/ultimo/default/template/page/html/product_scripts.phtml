@@ -1,0 +1,136 @@
+<?php
+/**
+ * product page scripts
+ */
+?>
+<?php
+$theSizes = Mage::helper('colorselectorplus')->getImageSizes();
+$product = Mage::registry('current_product');
+$productType = $product->getTypeID();
+?>
+<script type="text/javascript">
+    //<![CDATA[
+    var slider;
+    var currentSelector = '';
+
+    <?php if($productType == 'configurable'): ?>
+    currentSelector = 'li.onload-views';
+    <?php endif; ?>
+
+    jQuery(function ($) {
+        if(jQuery(".thumbnail-slider").length){
+
+            if (infortisTheme.viewportW) {
+                var viewportW = infortisTheme.viewportW;
+            } else {
+                var viewportW = jQuery(window).width();
+            }
+
+            if (viewportW < 768) {
+                slider = $(".thumbnail-slider").bxSlider({
+                    slideSelector: currentSelector,
+                    slideWidth: 300,
+                    mode: 'horizontal',
+                    adaptiveHeight: true,
+                    slideMargin: 5,
+                    infiniteLoop: false,
+                    pager: false,
+                    minSlides: 2,
+                    maxSlides: 2,
+                    moveSlides: 1
+                });
+            } else {
+                slider = $(".thumbnail-slider").bxSlider({
+                    slideSelector: currentSelector,
+                    slideWidth: <?php echo $theSizes['more']['width'] ?>,
+                    mode: 'vertical',
+                    adaptiveHeight: true,
+                    slideMargin: 5,
+                    infiniteLoop: false,
+                    pager: false,
+                    minSlides: 4,
+                    maxSlides: 4,
+                    moveSlides: 1
+                });
+            }
+
+        }
+
+        if (typeof infortisTheme !== 'undefined' && infortisTheme.responsive) {
+            //reloadThumbSlider();
+            $(document).on("themeResize", reloadThumbSlider);
+        }
+
+        // Fix checkbox hide
+
+        jQuery(".product-custom-option").each(function () {
+            var id = $(this).attr('id');
+            var label = $("label[for='" +id + "']");
+            var parent = $(this).parent();
+            parent.prepend(label);
+            parent.prepend($(this));
+        });
+
+        // Add active class for current expanded tab.
+        jQuery(".tabs-panels > h2.acctab.current").addClass('active');
+
+        jQuery(".tabs-panels > h2.acctab").on('click', function(){
+            // Remove others tabs active class
+            jQuery(".tabs-panels > h2.acctab").not(this).removeClass('active');
+
+            // Scroll to tabs header.
+            jQuery('html, body').animate({
+                scrollTop: jQuery("#product-tabs").offset().top
+            }, 1000);
+
+            // Collapse current tab (have active class)
+            if(jQuery(this).hasClass('active')){
+                jQuery(".tabs-panels > .panel").slideUp();
+                //Remove current state
+                jQuery(this).removeClass('current');
+            }
+            jQuery(this).toggleClass('active');
+        });
+    });
+
+    function reloadThumbSlider() {
+        if(slider == null || slider == 'undefined') return;
+
+        if (infortisTheme.viewportW) {
+            var viewportW = infortisTheme.viewportW;
+        } else {
+            var viewportW = jQuery(window).width();
+        }
+
+        if (viewportW < 768) {
+            jQuery.reloadBxSlider('horizontal', 300, 2);
+        } else {
+            jQuery.reloadBxSlider('vertical', <?php echo $theSizes['more']['width'] ?>, 4);
+        }
+    }
+
+    jQuery.reloadBxSlider = function (mode, width, minSlide) {
+        slider.reloadSlider({
+            slideSelector: currentSelector,
+            slideWidth: width,
+            mode: mode,
+            adaptiveHeight: true,
+            slideMargin: 5,
+            infiniteLoop: false,
+            pager: false,
+            minSlides: minSlide,
+            maxSlides: minSlide,
+            moveSlides: 1,
+            onSliderLoad: function(){
+                <?php if($productType == 'configurable'): ?>
+                setTimeout(function(){
+                    jQuery('#ul-moreviews li.currentSws:first a').click();
+                }, 200);
+                <?php endif; ?>
+            }
+        });
+    };
+
+
+    //]]>
+</script>

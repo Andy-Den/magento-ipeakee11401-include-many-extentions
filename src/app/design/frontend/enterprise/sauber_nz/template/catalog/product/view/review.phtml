@@ -1,0 +1,54 @@
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<div class="box-collateral box-reviews ajax-reload" id="customer-reviews" rel="product.review" mode="replace">
+    <?php /* we need this because reviews block takes product id from query string */?>
+    <?php if ($_product = Mage::registry('product')): ?>
+        <script type="text/javascript">
+            AntiVarnish.addQueryParam({param: 'id', value : '<?php echo $_product->getId() ?>'});
+        </script>
+    <?php endif;?>
+	<?php if (count($_items)):?>
+	<?php echo $this->getChildHtml('toolbar') ?>
+	<dl>
+		<?php $count = 1; $_reveiw_count = isset($_GET['review-count']) ? $_GET['review-count'] : 0;
+        foreach ($_items as $_review):?>
+		<dt> 
+			<!--<a href="<?php //echo Mage::getUrl('review/product/view', array('id' =>$_review->getId())) ?>">-->
+            <div class="review-product-name"><a name="review<?php echo $count ?>"></a><?php echo $_product->getName() ?></div>
+			<div class="review-title">"<?php echo $this->htmlEscape($_review->getTitle()) ?>"</div>
+			<!--</a>--><?php //echo $this->__(' Review by <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?> </dt>
+		<dd<?php if($_reveiw_count == $count) echo ' class="review-count' .$count .'"'; ?>>
+            <?php //echo $this->escapeHtml($_vote->getRatingCode()) ?>
+
+            <?php //echo var_dump($_review); ?>
+
+
+			<?php $_votes = $_review->getRatingVotes(); ?>
+			<?php if (count($_votes)): ?>
+			<table class="ratings-table">
+				<col width="1" />
+				<col />
+				<tbody>
+                    <?php foreach ($_votes as $_vote): ?>
+                <tr>
+                    <td><div class="rating-box">
+                        <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                    </div></td>
+                </tr>
+                    <?php endforeach; ?>
+				</tbody>
+			</table>
+			<?php endif; ?>
+			<div class="actual-review"> <?php echo nl2br($this->htmlEscape($_review->getDetail())) ?> </div>
+			<small class="date"><?php //echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?></small> </dd>
+            <?php $count++ ?>
+		<?php endforeach; ?>
+	</dl>
+	<?php echo $this->getChildHtml('toolbar') ?>
+	<?php endif;?>
+	<?php echo $this->getChildHtml('review_form') ?> 
+</div>
+<script type="text/javascript">
+    if(window.location.hash) {
+        showtab('2');
+    };
+</script>

@@ -1,0 +1,86 @@
+<?php
+/**
+ * Webtex
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.webtexsoftware.com/LICENSE.txt
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@webtexsoftware.com and we will send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.webtexsoftware.com for more information, 
+ * or contact us through this email: info@webtexsoftware.com.
+ *
+ * @category   design_default
+ * @package    MagExt_Tips
+ * @copyright  Copyright (c) 2011 Webtex Solutions, LLC (http://www.webtexsoftware.com/)
+ * @license    http://www.webtexsoftware.com/LICENSE.txt End-User License Agreement
+ */
+?>
+
+<?php
+	$sSwitcher = Mage::getStoreConfig('magext_mgxtips/mgxtips/switcher');  
+?>
+
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+?>
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+    <dl>
+    <?php foreach($_attributes as $_attribute): ?>
+        <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label>
+        
+        <?php
+                try
+                {
+                    $atributeId = $_attribute->getAttributeId();
+                    $mainDescription = Mage::getModel('eav/entity_attribute')->load($atributeId)->getData('mgxtips');
+                    $store = Mage::app()->getStore()->getId();
+                            
+                    $labels = Mage::getModel('mgxtips/mgxtips')->getCollection()
+                                ->addFieldToFilter('attribute_id', $atributeId)
+                                ->addFieldToFilter('store_id', $store)
+                                ->load()
+                                ->toArray();
+                                
+                    if($labels['totalRecords'])
+                    {
+                        $description = $labels['items'][0]['value'];
+                    }
+                    else
+                    {
+                        $description = $mainDescription;
+                    }
+                            
+                    if($this->__($description) != "" && ($sSwitcher == 'all' || $sSwitcher == 'layered-nav'))
+                    {
+                        echo '<img class="tipsyicon" src="'. Mage::getModel('mgxtips/mgxtips')->getImageSrc() .'" original-title="'. $this->htmlEscape($this->__($description)) .'" />';
+                    }
+                }
+                catch(Exception $e)
+                {}
+        ?>
+        
+        </dt>
+        <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+            <div class="input-box">
+                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    <option><?php echo $this->__('Choose an Option...') ?></option>
+                  </select>
+              </div>
+        </dd>
+    <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+    </script>
+<?php endif;?>

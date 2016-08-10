@@ -1,0 +1,20 @@
+<?php 
+$category = Mage::getSingleton('catalog/layer')->getCurrentCategory(); 
+?>
+<div class="block-title">
+    <h3><?php echo $category->getName() ?></h3>
+</div>
+<?php 
+$collection = $category->getProductCollection();
+$collection->addAttributeToSelect(array('small_image','name', 'url_path', 'url_key')); 
+?>
+<ul>
+    <?php $count = count($collection); $i = 0; ?>
+    <?php foreach ($collection as $product): ?>
+    <?php $i++ ?>
+    <li class="<?php if ($count == $i): ?>last <?php endif ?>" id="li_p_<?php echo $product->getId()?>">
+        <a href="<?php echo $this->getProductUrl($product) ?>"><?php echo $product->getName() ?></a>
+        <img src="<?php echo $product->getSmallImageUrl(60, 60)?>" width="60" height="60"/>
+    </li>
+    <?php endforeach ?>
+</ul>

@@ -1,0 +1,37 @@
+<?php
+$category_id = $this->getCategoryId();
+if($category_id){
+    $category = Mage::getModel('catalog/category')->load($category_id);
+
+    if($category){
+        ?>
+        <li class="level1">
+        <a href="<?php echo $category->getUrl()?>"><?php echo $category->getName()?></a>
+        <?php
+
+        $children = $category->getCollection()
+            ->addAttributeToSelect(array(
+                'url_key',
+                'name',
+                'all_children',
+                'is_anchor',
+                'include_in_menu',
+            ))
+            ->addAttributeToFilter('is_active', 1)
+            ->addIdFilter($category->getChildren())
+            ->setOrder('position', Varien_Db_Select::SQL_ASC)
+            ->joinUrlRewrite();
+
+        if($children->count()){
+            echo '<ul class="level1">';
+            foreach($children as $child){
+                if($child->getIncludeInMenu())
+                    echo '<li class="level2"><a href="'.$child->getUrl().'">'.$child->getName().'</a></li>';
+            }
+            echo '</ul>';
+        }
+        ?>
+        </li>
+        <?php
+    }
+}

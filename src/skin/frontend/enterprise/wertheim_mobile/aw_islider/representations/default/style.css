@@ -1,0 +1,116 @@
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ *
+ * @category   AW
+ * @package    AW_Islider
+ * @copyright  Copyright (c) 2011 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ */
+.slider-container{
+	position:relative;
+}
+.awis-block, .slider-container .awis-r-default-item img {
+    margin: 0 auto;
+    display: block;
+}
+.slider-container .awis-slides-controls {
+     position: absolute;
+     z-index: 5;
+	 bottom:10px;
+	 top:auto !important;
+	 width:100%;
+}
+.slider-container .awis-slides-controls .awis-c-left {
+    float: left;
+    height: 34px;
+    text-align: right;
+    width: 22px;
+	left: 10px;
+    position: absolute;
+	bottom:55px;
+}
+.slider-container .awis-slides-controls .awis-c-left button, .slider-container .awis-slides-controls .awis-c-right button {
+    position: relative;
+}
+.slider-container .awis-slides-controls .awis-c-left button.button, .slider-container .awis-slides-controls .awis-c-right button.button {
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+}
+.slider-container .awis-slides-controls .awis-c-left button {
+    background-image: url('images/arrow_left.png');
+    background-repeat: no-repeat;
+    width: 22px;
+    height: 34px;
+}
+.slider-container .awis-slides-controls .awis-c-left button:hover {
+}
+.slider-container .awis-slides-controls .awis-c-center {
+    line-height: 22px;
+    margin: 0px 10px;
+    text-align: center;
+	width:100%;
+	float:left;
+}
+.slider-container .awis-slides-controls .awis-c-center button.button {
+    background-color: transparent;
+    background-image: url('images/item.png');
+    border: 0px;
+    height: 16px;
+    width: 16px;
+	display:inline-block;
+	padding:0;
+}
+.slider-container .awis-slides-controls .awis-c-center button.awis-s-current {
+    background-image: url('images/item_current.png');
+}
+.slider-container .awis-slides-controls .awis-c-center button:hover {
+    background-image: url('images/item_current.png');
+}
+.slider-container .awis-slides-controls .awis-c-right {
+    float: right;
+    height: 34px;
+    position: relative;
+    text-align: right;
+    width: 22px;
+	
+	right: 10px;
+    position: absolute;
+	bottom:52px;
+}
+.slider-container .awis-slides-controls .awis-c-right button {
+    background-image: url('images/arrow_right.png');
+    background-repeat: no-repeat;
+    height: 34px;
+    width: 22px;
+}
+
+.awis-effect-simple-slider {
+     overflow: hidden;
+     position: relative;
+	 padding:10px 0 20px;
+}
+.awis-effect-simple-slider .awis-r-default-item {
+     float: left;
+}
+.awis-slides-container {
+    position: relative;
+}
+
+.awis-effect-fade-appear .awis-r-default-item,
+.awis-effect-blind-up-down .awis-r-default-item,
+.awis-effect-slide-up-down .awis-r-default-item,
+.awis-effect-jalousie .awis-r-default-item {
+    position: absolute;
+}
+
+.awis-jalousie-slice {
+    position: absolute;
+}

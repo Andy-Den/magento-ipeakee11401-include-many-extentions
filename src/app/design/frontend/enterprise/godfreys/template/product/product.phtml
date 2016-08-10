@@ -1,0 +1,254 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+/*$current_url = $this->helper('core/url')->getCurrentUrl();
+if(isset($_REQUEST['print'])){
+	$_product = $this->getProduct();
+	echo '<pre>';print_r($_product->getData());die;
+}*/
+?>
+<!--<a href="<?php //echo $current_url.'?&print';?>" target="_blank">Print</a>-->
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php //$_product = $this->getProduct(); 
+$product_sku = $this->getRequest()->getParam('product_sku');
+$_product = Mage::getModel('catalog/product')->loadByAttribute('sku', $product_sku);
+//echo '<pre>';print_r($_product->getWhatsInTheBox());die;
+//echo '<pre>';print_r($_product->getData());die;
+//eav_attribute_option_value
+
+?>
+<?php
+    $_helperCompare = $this->helper('catalog/product_compare');
+    $_haveCompare = $_helperCompare->getItemCount();
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);  
+</script>
+
+<div class="printpage-wrapper">
+	<div id="logo-printpage">
+		<img class="printlogo" src="<?php echo $this->getSkinUrl('images/logo.png') ?>" />
+		<div class="phone_num"><p><?php echo(Mage::getStoreConfig('general/store_information/phone'));?></p><h3>ORDER ONLINE</h3> <?php echo(Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)); ?></div>
+	<div class="clear"></div>
+	</div>
+	
+		
+<div class="printpageproduct-view">
+	<div id="printpage-heading">
+		<div id="product_info">
+			<h1><?php echo $_product->getName();?></h1>
+		</div>
+	</div>
+	<div class="clear"></div>
+
+	<div class="printpage-left">
+			<div id="product_box"> 
+				<div id="printproduct_pictures">
+						<div id="product_large_picture"> <a href="javascript:void(0)" onclick="$j1_6('ul#product_thumbs_img li:first-child a').click()">
+							<?php
+							$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image').'" width="350" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" style="width:350px" />';
+							echo $_helper->productAttribute($_product, $_img, 'watermark');
+						?>
+							</a>
+							<?php if($_product->getData('shoutout')): ?>
+							<span class="product-tag" style="background:url(<?php echo $this->getSkinUrl(); ?>images/dinkus<?php echo $_product->getData('shoutout') ?>.png)"></span>
+							<?php endif; ?>
+						</div>
+						<img src="<?php echo $this->getSkinUrl(); ?>/images/printpage-line.jpg" id="printpage-line"/>
+					</div>
+				</div>
+				
+			</div>
+
+	<div class="printpage-right">
+		<div>
+					<dl class="product_content">
+							<?php if ($_product->getPrice() > 0): ?>
+							<div class="product-price">
+							
+							<?php //echo $this->getPriceHtml($_product, true, '-widget-new-grid') ?>
+								<span id="product-price-41-widget-new-grid" class="regular-price">
+									<span class="price" style="color:#E50B14 !important;font-size: 27px;">$<?php echo number_format(round($_product->getFinalPrice(),2),2);?></span>
+                                                                        <?php
+                                                                        if($_product->getSpecialPrice() != ""):  
+                                                                            $_coreHelper = $this->helper('core');
+                                                                            $_taxHelper  = $this->helper('tax');
+                                                                            $_id = $_product->getId();
+                                                                            $_simplePricesTax = ($_taxHelper->displayPriceIncludingTax() || $_taxHelper->displayBothPrices());
+                                                                            $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice(), $_simplePricesTax);
+                                                                            $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()); 
+                                                                        ?>
+                                                                            <p class="save-price">
+                                                                                <span class="price-label"><?php echo $this->__('Save:') ?></span>
+                                                                                <span class="price" id="product-price-<?php echo $_product->getId() ?><?php echo $this->getIdSuffix() ?>">
+                                                                                    <?php echo $_coreHelper->currency($_regularPrice - $_finalPrice ,true,false) ?>
+                                                                                </span>
+                                                                            </p><?php
+                                                                        endif; ?>   
+                                                                        <?php
+                                                                        $reviews = Mage::getModel('review/review')
+                                                                                    ->getResourceCollection()
+                                                                                    ->addStoreFilter(Mage::app()->getStore()->getId())
+                                                                                    ->addEntityFilter('product', $_product->getId())
+                                                                                    ->addStatusFilter(Mage_Review_Model_Review::STATUS_APPROVED)
+                                                                                    ->setDateOrder()
+                                                                                    ->addRateVotes();
+                                                                                    //print_r($reviews);
+                                                                        $avg = 0;
+                                                                        $ratings = array();
+                                                                        if (count($reviews) > 0) {
+                                                                        foreach ($reviews->getItems() as $review) {
+                                                                        foreach( $review->getRatingVotes() as $vote ) {
+                                                                        $ratings[] = $vote->getPercent();
+                                                                        }
+                                                                        }
+                                                                        $avg = array_sum($ratings)/count($ratings);
+                                                                        } 
+                                                                        ?>
+                                                                       <span style="float:right;"> 
+                                                                        <div class="rating-box" style="float:left;">
+                                                                            <div class="rating" style="width: <?php echo ceil($avg); ?>%;"></div> 
+                                                                        </div>
+                                                                        <div style="float:right; color:#E50B14 !important;font-size: 12px; margin-left: 5px;"> Reviews</div>
+                                                                       </span>
+								</span>
+							<?php endif; ?>
+							<?php if($_product->getFinalPrice() == '0'): ?>
+							<div style="font-size:15px;color:#777;">Please visit stores for pricing information</div>
+							<?php endif; ?>
+							</div>
+							
+							<div class="printpage-badges">
+								<dl class="product_features">
+									<?php if($_product->getData('warranty') == '80'): ?>
+									<dd class="warranty-1yr" ><img src="/js/spacer.gif" width="60" height="60" title="1 Year Warranty" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('warranty') == '81'): ?>
+									<dd class="warranty-2yr" ><img src="/js/spacer.gif" width="60" height="60" title="2 Year Warranty" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('warranty') == '82'): ?>
+									<dd class="warranty-3yr" ><img src="/js/spacer.gif" width="60" height="60" title="3 Year Warranty" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('warranty') == '83'): ?>
+									<dd class="warranty-4yr" ><img src="/js/spacer.gif" width="60" height="60" title="4 Year Warranty" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('warranty') == '84'): ?>
+									<dd class="warranty-5yr" ><img src="/js/spacer.gif" width="60" height="60" title="5 Year Warranty" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('anti_allergy') == '92'): ?>
+									<dd class="allergies" ><img src="/js/spacer.gif" width="60" height="60" title="Anti-Allergy" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('asthma') == '94'): ?>
+									<dd class="asthma" ><img src="/js/spacer.gif" width="60" height="60" title="Asthma Specialty" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('pet_hair') == '111'): ?>
+									<dd class="pets" ><img src="/js/spacer.gif" width="60" height="60" title="Pet Hair Specialty" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('level_of_clean') == '32'): ?>
+									<dd class="single-action" ><img src="/js/spacer.gif" width="60" height="60" title="Single Action" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('level_of_clean') == '33'): ?>
+									<dd class="double-action" ><img src="/js/spacer.gif" width="60" height="60" title="Double Action" /></dd>
+									<?php endif ?>
+									<?php if($_product->getData('level_of_clean') == '34'): ?>
+									<dd class="triple-action" ><img src="/js/spacer.gif" width="60" height="60" title="Triple Action" /></dd>
+									<?php endif ?>
+								</dl>
+								<div class="clear"></div>
+							</div>
+
+							<h3 style="clear:both;font-size: 17px;margin: 0 0 10px;"><?php echo $this->__('Description')?></h3>
+							<div id="description"><?php echo $_helper->productAttribute($_product, $_product->getDescription(), 'description') ?> </div>
+							<?php $count = 0; ?>
+							<?php for ($i = 1; $i <= 3; $i++) { ?>
+							<?php if($_product->getData('feature_'.$i)) { $count++; }}?>
+							<?php if($count > 0) { ?>
+							<div id="key_features">
+								<h3><?php echo $this->__('Key Features')?></h3>
+								<ul class="product-features">
+									<?php for ($i = 1; $i <= 3; $i++) { ?>
+									<?php if ($_product->getData('feature_'.$i)): ?>
+									<li><?php echo $_product->getData('feature_'.$i); ?></li>
+									<?php endif; } ?>
+								</ul>
+							</div>
+						<?php } ?>
+					</dl>
+				</div>
+	</div>
+
+	<?php echo $this->getChildHtml('other');?>
+		
+		<div id="products" class="left-col" style="width:100%" >
+			<div id="tab-panes" style="width:100%"> <a name="l3-flag"></a>
+					
+					<?php if($this->getChildHtml('additional')): ?>
+					<div id="info_chart" style="width:100%"><?php echo $this->getChildHtml('additional')?> </div>
+					<?php endif ?>
+			</div>
+		</div>
+		
+		<div> <?php echo $this->getChildHtml('relatedProducts'); ?> </div>
+		<!-- product box end -->
+		
+		<div class="clearer"></div>
+		<?php echo $this->getChildHtml('product_additional_data') ?>
+		<div id="sticky-text">
+			<?php $currentCategory =  Mage::registry('current_category');
+			  if($currentCategory){
+			  	$currentCategory1  = $currentCategory->getName();
+			  }
+			  else{
+			  	$currentCategory1 = $_product->getName();
+			  }
+		?>
+        
+        <?php if($_product->getResource()->getAttribute('whats_in_the_box')->getFrontend()->getValue($_product)):?>
+		<div id="whatsinthebox-print" style="position:relative">
+			<img src="<?php echo $this->getSkinUrl('images/footer_banner_print.jpg') ?>" />
+			<div style="font-size: 13px; position: absolute; left: 351px; top: 30px; width: 580px;">
+				<?php echo $_product->getResource()->getAttribute('whats_in_the_box')->getFrontend()->getValue($_product); ?>
+			</div>
+		</div>
+		<?php endif; ?>
+		
+		</div>
+		
+	
+	<?php 
+		$copyright = Mage::getStoreConfig('design/footer/copyright');
+		echo '<div id="copyright"  style="width:100%"><div style="float:left;width:75%;">'.$copyright.'<br/><br/></div> <div style="float:right;width:25%; text-align:right;"> This information was correct as at<br />'.date("m/d/Y H:i A").' AEST</div></div>';
+	?>
+		
+	</div>
+</div>
+</div>

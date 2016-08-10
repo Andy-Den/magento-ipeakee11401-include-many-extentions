@@ -1,0 +1,245 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+
+<?php /* ?>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+  // Handler for .ready() called.
+  if (jQuery('input[value="freeshipping_freeshipping"]').length > 0) { jQuery('input[value="freeshipping_freeshipping"]').click(); }
+});
+</script>
+<?php */ ?>
+
+<!-- Warehouse -->
+<?php $helper = Mage::helper('warehouse') ?>
+
+<?php if ($helper->getConfig()->isMultipleMode() && $helper->getConfig()->isSplitOrderEnabled()) : ?>
+
+<dl class="sp-warehouse-shipping-methods warehouse-shipping-methods">
+<?php foreach ($this->getAddresses() as $address) : ?>
+<?php $warehouse = $address->getWarehouse() ?>
+<?php if (!$warehouse) continue; ?>
+<?php $rateIdPrefix = 's_method_' ?>
+<?php $stockId = $warehouse->getStockId() ?>
+<?php $shippingMethod = $this->_getAddressShippingMethod($stockId) ?>
+<dt class="warehouse-title">
+    <?php if ($helper->getConfig()->isInformationVisible()) : ?>
+    <?php echo $warehouse->getTitle() ?>
+    <?php else : ?>&nbsp;<?php endif; ?>
+</dt>
+<dd class="warehouse-content">
+    <?php if ($helper->getConfig()->isDescriptionVisible() && $warehouse->getDescription()) : ?>
+    <p class="warehouse-description"><?php echo $warehouse->getDescription() ?></p>
+    <?php endif; ?>
+    
+    <?php $shippingCodePrice = array() ?>
+    <?php $shippingRates = $this->_getShippingRates($stockId) ?>
+    <?php if (count($shippingRates)) : ?>
+    <script type="text/javascript">
+    //<![CDATA[
+    lastPrice_<?php echo $stockId ?> = null;
+    //]]>
+    </script>
+    <dl class="sp-methods">
+    <?php $_sole = count($shippingRates) == 1 ?>
+    <?php foreach ($shippingRates as $code => $_rates): ?>
+    <dt><?php echo $this->getCarrierName($code) ?></dt>
+    <dd>
+        <ul>
+            <?php $_sole = $_sole && count($_rates) == 1 ?>
+            <?php foreach ($_rates as $_rate): ?>
+            <?php $rateCode = $_rate->getCode(); ?>
+            <?php $ratePrice = (float)$_rate->getPrice() ?>
+            <?php $rateId = $rateIdPrefix.$rateCode.'_'.$stockId; ?>
+            <?php $shippingCodePrice[] = "'".$rateCode."':".$ratePrice; ?>
+            <li>
+            <?php if ($_rate->getErrorMessage()): ?>
+            <ul class="messages">
+                <li class="error-msg">
+                    <ul>
+                        <li><?php echo $_rate->getErrorMessage() ?></li>
+                    </ul>
+                </li>
+            </ul>
+            <?php else: ?>
+            <?php if ($_sole) : ?>
+            <span class="no-display">
+                <input class="shipping-method" name="shipping_method[<?php echo $stockId ?>]" type="radio" value="<?php echo $rateCode ?>" id="<?php echo $rateId ?>" checked="checked" />
+            </span>
+            <?php else: ?>
+                <input class="shipping-method" name="shipping_method[<?php echo $stockId ?>]" type="radio" value="<?php echo $rateCode ?>" id="<?php echo $rateId ?>"<?php if ($rateCode === $shippingMethod) echo ' checked="checked"' ?> class="radio"/>
+                <?php if ($rateCode === $shippingMethod): ?>
+                <script type="text/javascript">
+                //<![CDATA[
+                lastPrice_<?php echo $stockId ?> = <?php echo $ratePrice; ?>;
+                //]]>
+                </script>
+                <?php endif; ?>
+            <?php endif; ?>
+            <label for="<?php echo $rateId ?>">
+            <?php echo $_rate->getMethodTitle() ?>
+            <?php $_excl = $this->_getShippingPrice($stockId, $_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+            <?php $_incl = $this->_getShippingPrice($stockId, $_rate->getPrice(), true); ?>
+            <?php echo $_excl; ?>
+            <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+            <?php endif; ?>
+            </label>
+            <?php endif ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </dd>
+    <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">
+    //<![CDATA[
+    if (typeof quoteBaseGrandTotal == 'undefined') {
+        quoteBaseGrandTotal = null;
+    }
+    if (typeof checkQuoteBaseGrandTotal == 'undefined') {
+        checkQuoteBaseGrandTotal = null;
+    }
+    <?php if (!empty($shippingCodePrice)): ?>
+    var shippingCodePrice = {<?php echo implode(',', $shippingCodePrice); ?>};
+    <?php endif; ?>
+    $$('input[type="radio"][name="shipping_method\[<?php echo $stockId ?>\]"]').each(function(el) {
+        Event.observe(el, 'click', function(){
+            if (el.checked == true) {
+                var getShippingCode = el.getValue();
+                <?php if (!empty($shippingCodePrice)): ?>
+                var newPrice = shippingCodePrice[getShippingCode];
+                if (!lastPrice_<?php echo $stockId ?>) {
+                    lastPrice_<?php echo $stockId ?> = newPrice;
+                    quoteBaseGrandTotal += newPrice;
+                }
+                if (newPrice != lastPrice_<?php echo $stockId ?>) {
+                    quoteBaseGrandTotal += (newPrice - lastPrice_<?php echo $stockId ?>);
+                    lastPrice_<?php echo $stockId ?> = newPrice;
+                }
+                <?php endif; ?>
+                checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+                return false;
+            }
+       });
+    });
+    //]]>
+    </script>
+    <?php else : ?>
+    
+    <?php if ($helper->getConfig()->isInformationVisible()) : ?>
+    <p><?php echo sprintf($helper->__('There are no shipping methods available for %s warehouse.'), $warehouse->getTitle()) ?></p>
+    <?php else : ?>
+    <p><?php echo $helper->__('There are no shipping methods available.') ?></p>
+    <?php endif; ?>
+    
+    <?php endif; ?>
+</dd>
+<?php endforeach; ?>
+</dl>
+<?php else : ?>
+<!-- End Warehouse -->
+
+<?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
+    <p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
+<?php else: ?>
+    <dl class="sp-methods">
+    <?php $shippingCodePrice = array(); ?>
+    <?php $_sole = count($_shippingRateGroups) == 1; foreach ($_shippingRateGroups as $code => $_rates): ?>
+        <dt><?php echo $this->getCarrierName($code) ?></dt>
+        <dd>
+            <ul>
+            <?php $_sole = $_sole && count($_rates) == 1; foreach ($_rates as $_rate): ?>
+                <?php $shippingCodePrice[] = "'".$_rate->getCode()."':".(float)$_rate->getPrice(); ?>
+                <li>
+                   <?php if ($_rate->getErrorMessage()): ?>
+                    <ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
+                   <?php else: ?>
+                        <?php if ($_sole) : ?>
+                        <span class="no-display"><input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>" checked="checked" /></span>
+                        <?php else: ?>
+                        <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio"/>
+
+                        <?php if ($_rate->getCode() === $this->getAddressShippingMethod()): ?>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                                lastPrice = <?php echo (float)$_rate->getPrice(); ?>;
+                            //]]>
+                        </script>
+                        <?php endif; ?>
+
+                        <?php endif; ?>
+                        <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $_rate->getMethodTitle() ?>
+                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                        <?php endif; ?>
+                        </label>
+                   <?php endif ?>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+        </dd>
+		<?php if($code=="freeshipping"){ break; } ?>
+    <?php endforeach; ?>
+    </dl>
+<script type="text/javascript">
+//<![CDATA[
+    <?php if (!empty($shippingCodePrice)): ?>
+        var shippingCodePrice = {<?php echo implode(',',$shippingCodePrice); ?>};
+    <?php endif; ?>
+
+    $$('input[type="radio"][name="shipping_method"]').each(function(el){
+        Event.observe(el, 'click', function(){
+            if (el.checked == true) {
+                var getShippingCode = el.getValue();
+                <?php if (!empty($shippingCodePrice)): ?>
+                    var newPrice = shippingCodePrice[getShippingCode];
+                    if (!lastPrice) {
+                        lastPrice = newPrice;
+                        quoteBaseGrandTotal += newPrice;
+                    }
+                    if (newPrice != lastPrice) {
+                        quoteBaseGrandTotal += (newPrice-lastPrice);
+                        lastPrice = newPrice;
+                    }
+                <?php endif; ?>
+                checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+                return false;
+            }
+       });
+    });
+//]]>
+</script>
+<?php endif; ?>
+
+
+<!-- Warehouse -->
+<?php endif; ?>
+<!-- End Warehouse -->

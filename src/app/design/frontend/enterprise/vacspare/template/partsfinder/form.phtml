@@ -1,0 +1,99 @@
+<?php $_category = Mage::registry('current_category'); ?>
+<div class="accessory-search accessory-search-large" id="partsfinder_container">
+    <form id="partsfinder_form_main" action="<?php echo $this->getUrl('partsfinder/index/index'); ?>" method="GET" class="partsfinder_form">
+        <div class="fieldset">
+            <ul class="form-list">
+                <li>
+                    <label for="brand">Select Vacuum Brand</label>
+					<div class="input-box selectstylesheild" id="select-wrapper-brand">
+						<span class="selectstylesheild-text brand_span"> </span>
+<select id="parts_filter_brand" class="select filter_brand" name="filter_brand">
+<option><?php echo $this->__('Please select');?></option>
+<?php $brands = Mage::getModel('partsfinder/brand')->loadAll();?>
+<?php foreach ($brands as $brand) :?>
+<option value="<?php echo $brand['id']?>"><?php echo $brand['name']?></option>
+<?php endforeach;?>
+</select>
+						<span class="selectstylesheild-icon"> </span>
+					</div>
+                </li>
+                <li>
+                    <label for="model">Select Vacuum Model</label>
+					<div class="input-box selectstylesheild" id="select-wrapper-model">
+						<span class="selectstylesheild-text model_span"> </span>
+<select id="parts_filter_model" class="select filter_model" name="filter_model"></select>
+						<span class="selectstylesheild-icon"> </span>
+					</div>
+                </li>
+            </ul>
+<?php if (!empty($_category) && $_category->getId()) {?><input type="hidden" id="parts_filter_cate" name="filter_cate" value="<?php echo $_category->getId();?>" /><?php }?>            
+        </div>
+        <div class="buttons-set">
+            <button type="submit" title="<?php echo $this->__('Search') ?>" class="button" id="parts_filter_submit"><span><span><?php echo $this->__('GO') ?></span></span></button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+jQuery("#parts_filter_brand").change(function(){
+	jQuery("#parts_filter_model").empty();
+	jQuery('#select-wrapper-model span.selectstylesheild-text').text('');
+	var srt = '';
+	jQuery('#parts_filter_brand option:checked').each(function(i,e){if (jQuery(e).attr('value')) {srt = jQuery(e).text();}});
+	jQuery('span.brand_span').text(srt);
+	jQuery.ajax({
+	    url: '/partsfinder/ajax/filtermodel',
+	    data: {
+	    	filter_brand: jQuery('#parts_filter_brand').val()
+	    },
+	    success: function(response) {
+		    var options = [];
+	        if (response) {
+	        	var obj = jQuery.parseJSON(response);
+				for(var i =0;i < obj.length;i++)
+				{
+				  options.push('<option value="'+obj[i].id+'">'+obj[i].name+'</option>');
+				}
+				jQuery('#parts_filter_model') .html(options.join(''));
+				if (2==options.length){
+					jQuery('#parts_filter_model option').first().attr('selected', 'selected');
+				}
+				jQuery('#select-wrapper-model span.selectstylesheild-text').text('Please Select');
+	        }
+	    }
+	}); 
+});
+
+jQuery('#parts_filter_model').change(function(){
+	var srt = '';
+	jQuery('#parts_filter_model option:checked').each(function(i,e){if (jQuery(e).attr('value')) {srt = jQuery(e).text();}});
+	jQuery('span.model_span').text(srt);
+});
+
+jQuery("#parts_filter_submit").click(function(){
+	var brand_id = jQuery('#parts_filter_brand').attr("value");
+	var model_id = jQuery('#parts_filter_model').attr("value");
+	if (0 != brand_id) {
+		console.log(brand_id + model_id);
+		//jQuery.cookie("brand_id", brand_id, { expires: 7 });
+		//jQuery.cookie("model_id", model_id, { expires: 7 });
+		jQuery('#partsfinder_form_main').submit();
+	}
+});
+
+<?php
+$pre_brand_id = null; 
+
+if (!empty($_category)) {
+	$pre_brand_id = $_category->getBrandId();
+?>
+
+<?php 
+} 
+
+if (!empty($pre_brand_id)) {
+?>
+jQuery(document).ready(function(){
+jQuery('#parts_filter_brand option').each(function(i,e){if (jQuery(e).attr('value')==<?php echo $pre_brand_id;?>) {jQuery(e).attr('selected', 'selected');jQuery('#parts_filter_brand').change(); return false;}});
+});
+<?php }?>
+</script>

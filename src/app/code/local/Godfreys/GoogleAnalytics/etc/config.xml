@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <blocks>
+            <googleanalytics>
+                <class>Godfreys_GoogleAnalytics_Block</class>
+            </googleanalytics>
+        </blocks>
+    </global>
+</config>

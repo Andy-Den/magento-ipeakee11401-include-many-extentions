@@ -1,0 +1,68 @@
+<?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
+    <strong><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></strong>
+<?php else: ?>
+    <?php if (count($_shippingRateGroups)=='1' && Mage::getStoreConfig('onestepcheckout/general/hide_shipping_method')):?>
+        <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
+            <?php foreach ($_rates as $_rate): ?>
+                <?php if ($_rate->getErrorMessage()): ?>
+                    <ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
+                <?php else: ?>
+                    <input name="shipping_method" type="hidden" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>" checked="checked" />
+                <?php endif ?>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <dl class="shipment-methods">
+            <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
+                <?php if(Mage::getStoreConfig('autoshipping/settings/enabled')) {?>
+                    <?php foreach ($_rates as $_rate): ?>
+                        <dt style="margin-bottom: 5px;">
+
+                        <?php if ($_rate->getErrorMessage()): ?>
+                            <ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
+                        <?php else: ?>
+                            <?php if($_rate->getCode()===$this->getAddressShippingMethod()) { ?>
+                                <input name="shipping_method" type="hidden" class="autoship" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"  />
+                                <span><label for="s_method_<?php echo $_rate->getCode() ?>"><!--<b><?php echo $this->getCarrierName($code) ?>:</b>--> <?php echo $_rate->getMethodTitle() ?>
+                                    <strong>
+                                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                                        <?php echo $_excl; ?>
+                                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                                        <?php endif; ?>
+                                    </strong>
+                                </label></span>
+                            <?php }?>
+                        <?php endif ?>
+                        </dt>
+                    <?php endforeach; ?>
+                <?php }else{?>
+
+                    <dd><?php echo $this->getCarrierName($code) ?></dd>
+                    <?php foreach ($_rates as $_rate): ?>
+                        <dt style="margin-bottom: 5px;">
+
+                        <?php if ($_rate->getErrorMessage()): ?>
+                            <ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
+                        <?php else: ?>
+                            <input name="shipping_method" type="radio" class="validate-one-required-by-name" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> />
+                            <label for="s_method_<?php echo $_rate->getCode() ?>"><!--<b><?php echo $this->getCarrierName($code) ?>:</b>--> <?php echo $_rate->getCarrierTitle() ?>
+                                <strong>
+                                    <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                                    <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+
+                                    <?php echo $_excl; ?>
+                                    <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                                        (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                                    <?php endif; ?>
+                                </strong>
+                            </label>
+                        <?php endif ?>
+                        </dt>
+                    <?php endforeach; ?>
+                <?php } ?>
+            <?php endforeach; ?>
+        </dl>
+    <?php endif; ?>
+<?php endif; ?>

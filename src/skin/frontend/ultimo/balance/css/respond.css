@@ -1,0 +1,83 @@
+/* width < 768px */
+@media only screen and (max-width: 767px) {
+    /* remove negative margin on mobile sliders, shouldn't be needed when theme upgraded */
+    .slides{
+         margin-left: 0!important;
+    }
+
+    .slideshow-banners img{
+        width: 100%;
+    }
+}
+
+
+.the-slideshow-wrapper .slides{
+    width:100%;
+}
+
+
+
+
+.product-view .btn-cart:hover span, button.btn-checkout:hover span{
+    background-color: #da1312; color: #fff;
+}
+
+.icon .fa {
+    font-size: 35px;
+    vertical-align: middle;
+}
+
+
+
+/**
+ * Icons and "feature" box
+ */
+
+
+
+/** Medium Icons **/
+div.icon.medium, /*backward compatibility*/
+span.icon.medium {
+    width:40px;
+    height:40px;
+    padding:5px;
+}
+
+.icon.medium.i-number,
+.icon.medium.i-char {
+    font-size: 15px;
+    line-height: 40px;
+    font-weight: normal;
+}
+
+.icon .fa{
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+
+.icon.medium .fa {
+    font-size: 25px;
+}
+.icon.large .fa {
+    font-size: 34px;
+}
+
+
+
+/*** MINI CART ***/
+
+#mini-cart .btn-checkout {
+    margin-left: 8px;
+}
+
+#mini-cart .truncated {
+    display:block;
+    margin-left:0;
+}
+
+
+
+
+
+

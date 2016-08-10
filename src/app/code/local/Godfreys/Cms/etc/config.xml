@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Godfreys_Cms>
+            <version>1.0.0</version>
+        </Godfreys_Cms>
+    </modules>
+    <global>
+        <blocks>
+            <godfreys_cms>
+                <class>Godfreys_Cms_Block</class>
+            </godfreys_cms>
+            <!--rewrite Enterprise_Cms_Block_Hierarchy_Menu -->
+            <enterprise_cms>
+                <rewrite>
+                    <hierarchy_menu>Godfreys_Cms_Block_Hierarchy_Menu</hierarchy_menu>
+                </rewrite>
+            </enterprise_cms>
+        </blocks>
+    </global>
+</config>

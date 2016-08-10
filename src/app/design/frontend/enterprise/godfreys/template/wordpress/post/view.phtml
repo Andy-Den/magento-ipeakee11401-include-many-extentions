@@ -1,0 +1,92 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<?php if ($post): ?>
+
+	<?php $helper = $this->helper('wordpress') ?>
+	<?php $author = $post->getAuthor() ?>
+	<div class="post-title">
+		<h1><?php echo $this->escapeHtml($post->getPostTitle()) ?></h1>
+	</div>
+	<div class="post-view">
+        <div class="post-info-data">
+            <div class="post-author-avatar">
+                <?php $avatar = $post->getAuthor()->getUserAvatar();?>
+                    <img src="<?php echo $avatar; ?>" width="50" height="50" />
+            </div>
+            <div class="post-info-right">
+                <p class="post-date"><?php echo $this->__('Posted on %s',$post->getPostDate('d/m/Y')); ?></p>
+                <p class="post-info">
+                    <span>
+                        <?php echo $this->__('Written by'); ?>
+                    </span>
+                    <span class="author" >
+                       <a href="<?php echo $post->getAuthor()->getUrl(); ?>"><?php echo $post->getAuthor()->getDisplayName(); ?></a>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1&appId=1470336236515709";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+        <div class="social-like-share">
+            <div class="social-item social-fb">
+                <div class="fb-like" data-href="<?php echo Mage::helper('core/url')->getCurrentUrl(); ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+            </div>
+
+            <div class="social-item social-twitter">
+                <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <div class="social-item social-plus">
+                 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+                 <g:plusone size="medium" ></g:plusone>
+            </div>
+
+            <div class="social-item social-pinterest">
+                <a href="//www.pinterest.com/pin/create/button/?url=<?php echo urlencode(Mage::helper('core/url')->getCurrentUrl()); ?>&media=<?php if($featuredImage = $post->getFeaturedImage()){ echo urlencode($featuredImage->getFullSizeImage()); } ?>&description=<?php echo urlencode($post->getPostTitle()); ?>" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
+                 <!-- Please call pinit.js only once per page -->
+                <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
+            </div>
+        </div>
+
+		<?php echo $this->getBeforePostContentHtml() ?>
+		<div class="post-entry entry">
+			<?php if ($post->isViewableForVisitor()): ?>
+				<?php if ($featuredImage = $post->getFeaturedImage()): ?>
+					<div class="featured-image"><img src="<?php echo $featuredImage->getFullSizeImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"/></div>
+				<?php endif; ?>
+				<?php echo $post->getPostContent() ?>
+			<?php else: ?>
+				<?php echo $this->getPasswordProtectHtml() ?>
+			<?php endif; ?>
+		</div>
+		<?php //echo $this->getAfterPostContentHtml() ?>
+        <p class="post-meta details">
+            <span class="post-skips">
+                <?php if (($previous = $post->getPreviousPost()) !== false): ?>
+                    <a href="<?php echo $previous->getPermalink() ?>" class="post-skip post-skip-previous" title="<?php echo $this->escapeHtml($previous->getPostTitle()) ?>"><span><?php echo $previous->getPostTitle(); ?></span></a>
+                <?php endif; ?>
+                <?php if (($next = $post->getNextPost()) !== false): ?>
+                    <a href="<?php echo $next->getPermalink() ?>" class="post-skip post-skip-next right" title="<?php echo $this->escapeHtml($next->getPostTitle()) ?>"><span><?php echo $next->getPostTitle(); ?></span></a>
+                <?php endif; ?>
+            </span>
+        </p>
+		<?php echo $this->getCommentsHtml() ?>
+	</div>
+<?php endif; ?>

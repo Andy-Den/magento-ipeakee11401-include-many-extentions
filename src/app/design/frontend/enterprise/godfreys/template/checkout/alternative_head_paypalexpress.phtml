@@ -1,0 +1,23 @@
+<div class="header-container" id="custom_header_container"> 
+	<!-- header s -->
+	<div id="header">
+		<?php if ($this->getIsHomePage()):?>
+		<div id="logo"><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></div>
+		<?php else:?>
+		<div id="logo"><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"></a></div>
+		<?php endif?>
+
+		<?php //echo $this->getChildHtml('headerCallout') ?>
+		<div id="header-right">
+            <span class="welcome-container">
+                <?php echo $this->getWelcome(); ?>
+            </span>
+            <?php echo $this->getChildHtml("customer_header"); ?>
+			<div id="top-nav" class="custom_head">
+				<span>NEED MORE INFORMATION?</span><br />
+				<a href="/contact-us">CONTACT US NOW</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="custom_main_container">

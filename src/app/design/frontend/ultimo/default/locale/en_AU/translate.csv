@@ -1,0 +1,42 @@
+# Checkout page #
+###############################
+"Billing address","Personal information"
+"Review your order", "Order review"
+"Already registered? Click here to login.", "Login"
+"Create an account for later use", "Create Account"
+"City", "Suburb / Town"
+"State", "State / Province"
+"Ship to the same address", "Ship to different address"
+"Shipping","Shipping Cost"
+"Email Address", "Email"
+
+
+# Shopping cart page #
+######################
+"Product Name", "Description"
+"Unit Price", "Price"
+"Proceed to Checkout", "Checkout Now"
+
+# Shopping cart cross sell #
+"Based on your selection, you may be interested in the following items:", "You may also need"
+
+# Product detail page #
+#######################
+"The %s expert says", "The %s expert says"
+"More Views",""
+"Roll over image to zoom","Roll over image to zoom"
+"Additional Information", "Specifications"
+"Quantity", "Qty"
+"View all features","View all features"
+"Add to cart","Add to cart"
+"Share","Share"
+"Color", "Colour"
+"Key Features", "Key Features"
+"Description & Specification","Description & Specification"
+"Customer Reviews", "Customer Reviews"
+"Videos & Download", "Videos & Download"
+"Add Recommended Products", "Add Recommended Products"
+"Instore Only", "Instore Only"
+"Enquire Now", "Enquire Now"
+"Please specify the product's option: %s", "Please specify the product's option: %s"
+

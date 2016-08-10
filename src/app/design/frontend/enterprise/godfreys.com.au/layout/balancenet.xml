@@ -1,0 +1,541 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Innoexts
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ *
+ * @category    Innoexts
+ * @package     Innoexts_Balancenet
+ * @copyright   Copyright (c) 2011 Innoexts (http://www.innoexts.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<layout>
+    <!-- Cart -->
+    <!--<checkout_cart_index>
+        <reference name="content">
+            <reference name="checkout.cart">
+                <action method="setCartTemplate"><value>balancenet/checkout/cart.phtml</value></action>
+                <action method="chooseTemplate"/>
+                <action method="addItemRender">
+                    <type>simple</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>balancenet/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>virtual</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>balancenet/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>checkout/cart_item_renderer_grouped</block>
+                    <template>balancenet/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>configurable</type>
+                    <block>checkout/cart_item_renderer_configurable</block>
+                    <template>balancenet/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/checkout_cart_item_renderer</block>
+                    <template>balancenet/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>giftcard</type>
+                    <block>enterprise_giftcard/checkout_cart_item_renderer</block>
+                    <template>balancenet/checkout/cart/item/default.phtml</template>
+                </action>
+                <reference name="checkout.cart.shipping">
+                    <action method="setTemplate">
+                        <template>balancenet/checkout/cart/shipping.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </checkout_cart_index> -->
+    <!-- One Page Checkout -->
+    <checkout_onepage_index>
+        <reference name="right">
+            <reference name="checkout.progress.wrapper">
+                <reference name="checkout.progress">
+                    <action method="setTemplate">
+                        <template>balancenet/checkout/onepage/progress.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+        <reference name="content">
+            <reference name="checkout.onepage">
+                <action method="setTemplate">
+                    <template>balancenet/checkout/onepage.phtml</template>
+                </action>
+                <reference name="checkout.onepage.shipping_method">
+                    <reference name="checkout.onepage.shipping_method.available">
+                        <action method="setTemplate">
+                            <template>balancenet/checkout/onepage/shipping_method/available.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </checkout_onepage_index>
+    <!-- One Page Checkout Progress -->
+    <checkout_onepage_progress>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>balancenet/checkout/onepage/progress.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_progress>
+    <!-- One Page Checkout Shipping Method -->
+    <checkout_onepage_shippingmethod>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>balancenet/checkout/onepage/shipping_method/available.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_shippingmethod>
+    <!-- Customer Account Index -->
+    <customer_account_index>
+        <reference name="customer_account_dashboard">
+            <reference name="customer_account_dashboard_top">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/recent.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </customer_account_index>
+    <!-- Order History -->
+    <sales_order_history>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.history">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/history.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_order_history>
+    <!-- Order View -->
+    <sales_order_view>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference type="sales/order_view" name="sales.order.view">
+                <reference name="order_items">
+                    <action method="setTemplate">
+                        <template>balancenet/sales/order/items2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>giftcard</type>
+                        <block>enterprise_giftcard/sales_order_item_renderer</block>
+                        <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_view>
+    <!-- Invoice -->
+    <sales_order_invoice>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.invoice">
+                <reference name="invoice_items">
+                    <action method="setTemplate">
+                        <template>balancenet/sales/order/invoice/items2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>giftcard</type>
+                        <block>enterprise_giftcard/sales_order_item_renderer</block>
+                        <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_invoice>
+    <!-- Shipment -->
+    <sales_order_shipment>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.shipment">
+                <reference name="shipment_items">
+                    <action method="setTemplate">
+                        <template>balancenet/sales/order/shipment/items2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>balancenet/sales/order/shipment/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>giftcard</type>
+                        <block>enterprise_giftcard/sales_order_item_renderer</block>
+                        <template>balancenet/sales/order/shipment/items/renderer/default2.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_shipment>
+    <!-- Credit Memo -->
+    <sales_order_creditmemo>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.creditmemo">
+                <reference name="creditmemo_items">
+                    <action method="setTemplate">
+                        <template>balancenet/sales/order/creditmemo/items2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>giftcard</type>
+                        <block>enterprise_giftcard/sales_order_item_renderer</block>
+                        <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_creditmemo>
+    <!-- Print Order -->
+    <sales_order_print>
+        <reference name="content">
+            <reference name="sales.order.print">
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>giftcard</type>
+                	<block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                    <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_order_print>
+    <!-- Print Invoice -->
+    <sales_order_printinvoice>
+        <reference name="content">
+            <reference name="sales.order.print.invoice">
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>giftcard</type>
+                	<block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                    <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_order_printinvoice>
+    <!-- Print Shipment -->
+    <sales_order_printshipment>
+        <reference name="content">
+            <reference name="sales.order.print.shipment">
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>balancenet/sales/order/shipment/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>giftcard</type>
+                	<block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                    <template>balancenet/sales/order/shipment/items/renderer/default2.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_order_printshipment>
+    <!-- Print Credit Memo -->
+    <sales_order_printcreditmemo>
+        <reference name="content">
+            <reference name="sales.order.print.creditmemo">
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>giftcard</type>
+                	<block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                    <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_order_printcreditmemo>
+    <!-- Guest Order View -->
+    <sales_guest_view>
+        <reference name="content">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference type="sales/order_view" name="sales.order.view">
+                <reference name="order_items">
+                    <action method="setTemplate">
+                        <template>balancenet/sales/order/items2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>giftcard</type>
+                		<block>enterprise_giftcard/sales_order_item_renderer</block>
+                        <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_view>
+    <!-- Guest Invoice -->
+    <sales_guest_invoice>
+        <reference name="content">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.invoice">
+                <reference name="invoice_items">
+                    <action method="setTemplate">
+                        <template>balancenet/sales/order/invoice/items2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>giftcard</type>
+                		<block>enterprise_giftcard/sales_order_item_renderer</block>
+                        <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_invoice>
+    <!-- Guest Shipment -->
+    <sales_guest_shipment>
+        <reference name="content">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.shipment">
+                <reference name="shipment_items">
+                    <action method="setTemplate">
+                        <template>balancenet/sales/order/shipment/items2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>balancenet/sales/order/shipment/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>giftcard</type>
+                		<block>enterprise_giftcard/sales_order_item_renderer</block>
+                        <template>balancenet/sales/order/shipment/items/renderer/default2.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_shipment>
+    <!-- Guest Credit Memo -->
+    <sales_guest_creditmemo>
+        <reference name="content">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>balancenet/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.creditmemo">
+                <reference name="creditmemo_items">
+                    <action method="setTemplate">
+                        <template>balancenet/sales/order/creditmemo/items2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>giftcard</type>
+               			<block>enterprise_giftcard/sales_order_item_renderer</block>
+                        <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_creditmemo>
+    <!-- Print Guest Order -->
+    <sales_guest_print>
+        <reference name="content">
+            <reference name="sales.order.print">
+                <action method="addItemRender">
+	                <type>default</type>
+	                <block>sales/order_item_renderer_default</block>
+	                <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+	            </action>
+	            <action method="addItemRender">
+	                <type>grouped</type>
+	                <block>sales/order_item_renderer_grouped</block>
+	                <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+	            </action>
+	            <action method="addItemRender">
+	                <type>giftcard</type>
+                	<block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+	                <template>balancenet/sales/order/items/renderer/default2.phtml</template>
+	            </action>
+            </reference>
+        </reference>
+    </sales_guest_print>
+    <!-- Print Guest Invoice -->
+    <sales_guest_printinvoice>
+        <reference name="content">
+            <reference name="sales.order.print.invoice">
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>giftcard</type>
+                	<block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                    <template>balancenet/sales/order/invoice/items/renderer/default2.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_guest_printinvoice>
+    <!-- Print Guest Shipment -->
+    <sales_guest_printshipment>
+        <reference name="content">
+            <reference name="sales.order.print.shipment">
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>balancenet/sales/order/shipment/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>giftcard</type>
+                	<block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                    <template>balancenet/sales/order/shipment/items/renderer/default2.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_guest_printshipment>
+    <!-- Print Guest Credit Memo -->
+    <sales_guest_printcreditmemo>
+        <reference name="content">
+            <reference name="sales.order.print.creditmemo">
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>giftcard</type>
+                    <block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                    <template>balancenet/sales/order/creditmemo/items/renderer/default2.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_guest_printcreditmemo>
+</layout>

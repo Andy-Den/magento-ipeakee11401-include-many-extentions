@@ -1,0 +1,42 @@
+<?php
+/**
+ * Accessory search mini form
+ *
+ * @see Balance_Accessory_Block_Search_Form_Mini
+ */
+?>
+<div class="accessory-search accessory-search-mini sidebar-box">
+<div class="accessory_title">
+    <h2 class="side_title_gray"><?php echo $this->__('Accessory Finder') ?></h2>
+</div>
+<?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<form action="<?php echo $this->getMiniSearchPostUrl() ?>" method="get">
+    <div class="fieldset">
+        
+        <ul class="form-list">
+            <?php foreach ($this->getSearchAttributes() as $_attribute): ?>
+            <?php $_code = $_attribute->getAttributeCode() ?>
+            <li>
+                <label for="<?php echo $_code ?>"><?php echo $this->getAttributeLabel($_attribute) ?></label>
+                <?php switch($this->getAttributeInputType($_attribute)):
+                    case 'select': ?>
+                        <div class="input-box">
+                            <?php echo $this->getAttributeSelectElement($_attribute) ?>
+                        </div>
+                    <?php break; ?>
+                <?php endswitch; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button"><span><span><?php echo $this->__('Search') ?></span></span></button>
+    </div>
+</form>
+</div>
+<div class="box-foot"></div>
+<script type="text/javascript">
+//<![CDATA[
+    //var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>

@@ -1,0 +1,84 @@
+<div id="contents" >
+<div id="sidebar">
+	<?php echo $this->getChildHtml('persistent.left.sidebar') ?>
+</div>
+<div id="content-col" class="ext-login-content">
+	<?php $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+		  $breadcrumbs->addCrumb('home', array('label'=>Mage::helper('cms')->__('Home'), 'title'=>Mage::helper('cms')->__('Home Page'), 'link'=>Mage::getBaseUrl()));
+		  $breadcrumbs->addCrumb('login', array('label'=>'Login', 'title'=>'Login'));
+		  echo $this->getLayout()->getBlock('breadcrumbs')->toHtml();?>
+    <div class="page_wrap">
+    	<div class="page_content">
+    		<?php if ($this->helper('customer')->isRegistrationAllowed()): ?>
+            	<h2 class="page_title page_title_gray"><?php echo strtoupper($this->__('Login')) ?></h2>
+            <?php else: ?>
+            	<h2 class="page_title page_title_gray"><?php echo strtoupper($this->__('Login')); ?></h2>
+            <?php endif; ?>
+    		<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    		<div class="page_inner">
+    			
+    			<div class="col2 loginbox">
+    				<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+    				<h3 class="page_section_title"><?php echo $this->__('Existing Customers')?></h3>
+    				<p><?php echo $this->__('If you have an account log in using your email address.')?> </p>
+    				<div class="row">
+                    	<label for="email" class="required"><?php echo $this->__('Email Address*')?></label>
+                        <input type="text" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" type="text" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>">
+                    </div>
+                    <div class="row">
+                        <label for="pass" class="required"><?php echo $this->__('Password*')?></label>
+                        <input name="login[password]" type="password" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                    </div>
+                    <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+                    <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+                    <div class="button-row">
+                        <a href="<?php echo $this->getForgotPasswordUrl() ?>"><?php echo $this->__('Forgotten password?') ?></a>
+                        <button type="submit" name="send" id="send2"><?php echo $this->__('Login') ?></button>    
+                    </div>
+                    </form>
+                    <div class="fb-connect-container">
+                        <div class="aw-fb-login">
+                            <a class="aw-fb-login-button" href="#" onclick="aw_fb_login(); return false;"><?php echo $this->helper('fbintegrator')->__('Login via Facebook'); ?></a>
+                        </div>
+            			<div id="fb-loader" style="display:none;">
+                				<p class="loader" id="loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/zoomloader.gif') ?>" alt="<?php echo Mage::helper('adminhtml')->__('Loading...') ?>" /><br /><?php echo Mage::helper('adminhtml')->__('Please wait...') ?></p>
+            			</div>
+                    </div>
+    			</div>
+    			
+    			<?php if ($this->helper('customer')->isRegistrationAllowed()): ?>
+    			<div class="col2 right registerbox">
+    				<h3 class="page_section_title"><?php echo $this->__('New Customers') ?></h3>
+    				<p><?php echo $this->__('Create a quick Godfreys account which allows you to move through the checkout process faster!')?></p>
+                    <a href="javascript:void(0)" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';" class="register-link">Register</a>
+                    <!--  <div class="buttons-set">
+                        <button type="button" class="register-link" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Register') ?></span></span></button>
+                    </div>-->
+    			</div>
+    			<?php endif; ?>
+    		</div>
+    	</div>
+        <?php echo $this->getChild('fbintegrator.login-page-connect-container'); ?>        
+    	<div class="page_foot"></div>      
+    </div>
+
+    
+    
+    
+        
+        <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+            <input name="context" type="hidden" value="checkout" />
+        <?php endif; ?>
+    
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+        //$j1_6(".col-main").css({'padding':'0'});        
+        /* $j1_6(".col2 a").css({'position':'relative','bottom':'-10px'});
+        $j1_6(".register-link").css({'bottom':'-3px','position':'absolute'});
+        $j1_6(".page_content").css({'padding-bottom':'10px'});
+        $j1_6(".page_inner").css({'height':'175px'}); */
+    //]]>
+    </script>
+</div>
+</div>

@@ -1,0 +1,509 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); 
+$warranty_product_collection = $_product->getWarrantiedProducts();
+//var_dump(get_class_methods($_product)); die;
+$current_product_id = $_product->getId();
+$product_sku = $_product->getSku();
+$home_url = Mage::helper('core/url')->getHomeUrl();
+?>
+<?php
+    $_helperCompare = $this->helper('catalog/product_compare');
+    $_haveCompare = $_helperCompare->getItemCount();
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);  
+</script>
+<script type="text/javascript">
+
+jQuery(document).scroll(function(){
+	jQuery('.preferences_scroll').fadeOut();
+});
+
+	function check_warranty(id){
+		var warranty_id = jQuery("#"+id).val();
+		var related_products_refine_val = '';
+		if(jQuery("#"+id).is(":checked")){
+			var related_products_field = jQuery('#related-products-field').val();
+			if(related_products_field == ''){
+				
+			}else{
+				warranty_id = related_products_field+','+warranty_id
+			}
+			jQuery('#related-products-field').val(warranty_id);
+		}else{
+			$related_products_ids = jQuery('#related-products-field').val();
+			$related_products_ids = $related_products_ids.split(',');
+			for(i=0;i<$related_products_ids.length;i++){
+				if($related_products_ids[i] == warranty_id){}
+				else{
+					if(related_products_refine_val == ''){
+						related_products_refine_val = $related_products_ids[i];
+					}else{
+						related_products_refine_val = related_products_refine_val + ',' + $related_products_ids[i];
+					}
+				}
+			}
+			jQuery('#related-products-field').val(related_products_refine_val);
+		}
+	}
+</script>
+
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css">
+<div id="messages_product_view"><?php echo $this->getChildHtml('ajax_global_messages'); ?></div>
+<?php // RICH SNIPPETS UPDATE ?>
+<div class="product-view" itemscope itemtype="http://schema.org/Product" itemid="#product_base">
+	<div class="product-essential">
+		<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+			<div class="no-display">
+				<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+				<input type="hidden" name="related_product" id="related-products-field" value="" />
+			</div>
+			<!-- product box -->
+			<div id="product_box"> 
+				<!-- product pictures --> 
+				<?php echo $this->getChildHtml('media') ?> 
+				<!-- end product pictures-->
+				<div id="product_info">
+                    <?php // RICH SNIPPETS UPDATE ?>
+					<h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <meta itemprop="url" content="<?php echo $_product->getUrlModel()->getUrl($_product, array('_ignore_category'=>true)); ?>" />
+                    <meta itemprop="sku" content="<?php echo $_product->getSku() ?>" />
+                    <meta property="og:site_name" content="<?php echo Mage::getStoreConfig('general/store_information/name'); ?>" />
+					<div><?php echo $this->getReviewsSummaryHtml($_product, "short", true)?> </div>
+					<!-- 
+                    <div class="product-reviews">
+                        <a class="star star4" href="#">Reviews</a>
+                    </div>
+                    -->
+					<div id="product_config">
+						<div class="product_config_top"></div>
+						<div class="product_config_content" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+							<!-- quantity -->
+							
+							<?php if (!$this->hasOptions()):?>
+								<?php if($_product->isSaleable()): ?>
+									<?php if(!$_product->isGrouped()): ?>
+										<div class="row">
+											<input type="text" name="qty" id="qty" maxlength="12" value="1<?php // echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+											<label for="qty"><?php echo $this->__('Quantity') ?></label>
+
+											<div id="compare-container"> <a href="<?php echo $home_url;?>product?product_sku=<?php echo $product_sku;?>" target="_blank">Print Product Details</a><br/><a href="<?php echo $this->helper('catalog/product_compare')->getAddUrl($_product)?>">Add to Compare</a>
+												<?php if($_haveCompare > 0): ?>
+												<a href="javascript:void(0)" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')">Go to Compare</a>
+												<?php endif; ?>
+											</div>
+
+										</div>
+									<?php endif; ?>
+								<?php else: ?>
+									<?php if(!$_product->isGrouped()): ?>
+										<div class="row compare-moreinfo">
+											
+											<div id="compare-container"> <a href="<?php echo $home_url;?>product?product_sku=<?php echo $product_sku;?>" target="_blank">Print Product Details</a><br/><a href="<?php echo $this->helper('catalog/product_compare')->getAddUrl($_product)?>">Add to Compare</a>
+												<?php if($_haveCompare > 0): ?>
+												<a href="javascript:void(0)" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')">Go to Compare</a>
+												<?php endif; ?>
+											</div>
+
+										</div>
+									<?php endif; ?>
+								<?php endif; ?>
+							<?php else:?>
+								<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+									<div class="row">
+										<input type="text" name="qty" id="qty" maxlength="12" value="1<?php // echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+										<label for="qty"><?php echo $this->__('Quantity') ?></label>
+
+										<div id="compare-container"> <a href="<?php echo $home_url;?>product?product_sku=<?php echo $product_sku;?>" target="_blank">Print Product Details</a><br/><a href="<?php echo $this->helper('catalog/product_compare')->getAddUrl($_product)?>">Add to Compare</a>
+											<?php if($_haveCompare > 0): ?>
+											<a href="javascript:void(0)" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')">Go to Compare</a>
+											<?php endif; ?>
+										</div>
+									</div>
+									<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                                <?php else: ?>
+                                    <div class="row compare-moreinfo">
+											
+										<div id="compare-container"> <a href="<?php echo $home_url;?>product?product_sku=<?php echo $product_sku;?>" target="_blank">Print Product Details</a><br/><a href="<?php echo $this->helper('catalog/product_compare')->getAddUrl($_product)?>">Add to Compare</a>
+											<?php if($_haveCompare > 0): ?>
+											<a href="javascript:void(0)" onclick="popWin('<?php echo $this->helper('catalog/product_compare')->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')">Go to Compare</a>
+											<?php endif; ?>
+										</div>
+
+									</div>
+								<?php endif; ?>
+							<?php endif; ?>
+							<!-- end quantity -->
+
+							
+							
+							<div class="product-price">
+								<?php if  ($_product->isSaleable() == ""): ?><div class="price-moreinfo"><?php endif; ?>
+								<?php if ($_product->getPrice()): ?>
+								<?php echo $this->getPriceHtml($_product, true, '-widget-new-grid') ?>
+								<?php endif; ?>
+								<?php if($_product->getFinalPrice() == '0'): ?>
+								<div style="font-size:15px;color:#777;margin-top:20px;">Please visit stores for pricing information</div>
+								<?php endif; ?>
+								<?php if  ($_product->isSaleable() == ""): ?></div><?php endif; ?>
+							</div>
+							
+
+
+							<?php if(!empty($warranty_product_collection)){?>
+								<div class="custom_options">
+										<h4>Add Recommended Products</h4>
+								<?php $new=1;foreach($warranty_product_collection as $key=>$upsell_product){ ?>
+										<div class="custom_option_item">
+											<img class="custom_option_image" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'catalog/product'.$upsell_product->getSmallImage();?>" width="30" height="30" />
+											
+                                                <input type="hidden" id="lendth<?php echo $new ?>" name="lendth<?php echo $new ?>" value="<?php echo strlen($upsell_product->getTooltip()); ?>">
+                                                         
+                                                <div class="warranty_namebox">
+                                                <span id="warranty_name<?php echo $new?>"  class="warranty_name"><?php echo $upsell_product->getName(); ?> 
+                                                	<?php if($upsell_product->getTooltip()): ?><img class="tipsyicon" original-title="<?php echo $upsell_product->getTooltip();?>" src="/media/magext/mgxtips/default/default.png"><?php endif; ?></span>
+											<?php $new++;?>
+											<br/>
+											<span class="warranty_price">
+											<?php echo '+ $'.number_format($upsell_product->getPrice(), 2, '.', '');;?>
+											</span>
+											</div>
+
+											<input type="checkbox" name="check_warranty_<?php echo $key;?>" id="check_warranty_<?php echo $key;?>" value="<?php echo $upsell_product->getEntityId();?>" onclick="check_warranty(this.id);"/>
+										</div>
+
+										<div class="clearer"></div>
+							<?php }?>
+									</div>
+							<?php }	?>
+
+							<div class="button-row">
+                                <?php // RICH SNIPPETS UPDATES - CURRENCY & AVAILABILITY ?>
+                                <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode();?>" />
+                                <?php if ($_product->isSaleable()):?>
+                                    <p class="availability in-stock"><link itemprop="availability" href="http://schema.org/InStock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
+                                <?php else: ?>
+                                    <?php if ($_product->getData('online_only')): ?>
+                                        <p class="availability out-of-stock"><link itemprop="availability" href="http://schema.org/OutOfStock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
+                                    <?php else: ?>
+                                        <p class="availability in-store-only"><link itemprop="availability" href="http://schema.org/InStoreOnly"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In Store Only') ?></span></p>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+								
+								<?php if (!$this->hasOptions()):?>
+									<?php if($_product->isSaleable()): ?>
+										<a href="javascript:void(0)" class="add-to-cart-large" onclick="productAddToCartForm.submit(this)"><?php echo $this->__('add to cart')?></a>
+									<?php elseif ($_product->getData('online_only')): ?>
+								<img src="<?php echo $this->getSkinUrl('images/btn-out-of-stock.png')?>" alt="<?php echo $this->__('Out of Stock') ?>" class="btn-out-of-stock" />
+								<?php else:?>
+								<a href="/store-locator" class="moreinfo-link-large">more info</a>								
+								<?php endif;?>
+								<?php else: ?>
+								<?php if ($_product->isSaleable()):?>
+								<a href="javascript:void(0)" class="add-to-cart-large" onclick="productAddToCartForm.submit(this)"><?php echo $this->__('add to cart')?></a>
+								
+								<?php else:?>
+									<?php if ($_product->getData('online_only')): ?>
+										<img src="<?php echo $this->getSkinUrl('images/btn-out-of-stock.png')?>" alt="<?php echo $this->__('Out of Stock') ?>" class="btn-out-of-stock" />
+										<?php else: ?>
+										<a href="/store-locator" class="moreinfo-link-large">more info</a>
+									<?php endif; ?>
+								<?php endif;?>
+								<?php endif; ?>
+								
+								<a href="javascript:void(0)" id="contact-form" class="enquire-now"><img src="<?php echo $this->getSkinUrl('images/btn-enquire-now.png')?>" alt="<?php echo $this->__('Enquire Now') ?>"></a> 
+								<script type="text/javascript">
+									Event.observe(window, 'load',(function(){
+										$('contact-form').observe('click',(function(){
+											var url = '<?php echo $this->getUrl("contact-us");?>?product=<?php echo urlencode($_product->getName());?>';
+											window.location = url;  
+										}).bind(this));
+									}).bind(this));
+                                </script> 
+							</div>
+						</div>
+						<div class="product_config_bottom"></div>
+					</div>
+					<dl class="product_content">
+						<?php if ($_product->getShortDescription()):?>
+						<dt><?php echo $this->__('Quick Overview') ?></dt>
+                        <?php // RICH SNIPPETS UPDATE ?>
+						<dd itemprop="description"> <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?> </dd>
+						<?php endif;?>
+						<?php echo $this->getLayout()->createBlock('accessory/catalog_product_view_suitsmodels')->setTemplate('accessory/product/view/suitsmodels.phtml')->toHtml(); ?>
+						<?php if ($_product->getShortDescription()):?>
+						<?php if ($_product->getFeature_1() || $_product->getFeature_2() || $_product->getFeature_3()): ?>
+						<dt><?php echo $this->__('Features')?></dt>
+						<dd>
+							<ul class="product-features-top3">
+								<?php if($_product->getFeature_1()): ?>
+								<li><?php echo $_product->getFeature_1(); ?></li>
+								<?php endif ?>
+								<?php if($_product->getFeature_2()): ?>
+								<li><?php echo $_product->getFeature_2(); ?></li>
+								<?php endif ?>
+								<?php if($_product->getFeature_3()): ?>
+								<li><?php echo $_product->getFeature_3(); ?></li>
+								<?php endif ?>
+							</ul>
+						</dd>
+						<?php endif; ?>
+						<?php endif; ?>
+					<a href="javascript:void(0);" class="preferences_scroll" onclick="$j1_6(document.body).animate({'scrollTop':$j1_6('a[name=l1-flag]').offset().top}, 2000);$j1_6('a.l1').click();"></a>
+					</dl>
+					<div class="sharebox"> <?php echo $this->getChildHtml('facebook_like'); ?>
+						<?php if ($this->helper('catalog/product')->getEmailToFriendUrl($_product)): ?>
+						<a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><img src="<?php echo $this->getSkinUrl('images/share_email.jpg')?>" alt="<?php echo $this->__('Email to a Friend') ?>"></a>
+						<?php endif; ?>
+					</div>
+					
+					<!-- START show badges (fk) -->
+					<dl class="product_features">
+						<?php if($_product->getData('warranty') == '80'): ?>
+						<dd class="warranty-1yr"><img src="/js/spacer.gif" width="60" height="60" title="1 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('warranty') == '81'): ?>
+						<dd class="warranty-2yr"><img src="/js/spacer.gif" width="60" height="60" title="2 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('warranty') == '82'): ?>
+						<dd class="warranty-3yr"><img src="/js/spacer.gif" width="60" height="60" title="3 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('warranty') == '83'): ?>
+						<dd class="warranty-4yr"><img src="/js/spacer.gif" width="60" height="60" title="4 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('warranty') == '84'): ?>
+						<dd class="warranty-5yr"><img src="/js/spacer.gif" width="60" height="60" title="5 Year Warranty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('anti_allergy') == '92'): ?>
+						<dd class="allergies"><img src="/js/spacer.gif" width="60" height="60" title="Anti-Allergy" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('asthma') == '94'): ?>
+						<dd class="asthma"><img src="/js/spacer.gif" width="60" height="60" title="Asthma Specialty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('pet_hair') == '111'): ?>
+						<dd class="pets"><img src="/js/spacer.gif" width="60" height="60" title="Pet Hair Specialty" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('level_of_clean') == '32'): ?>
+						<dd class="single-action"><img src="/js/spacer.gif" width="60" height="60" title="Single Action" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('level_of_clean') == '33'): ?>
+						<dd class="double-action"><img src="/js/spacer.gif" width="60" height="60" title="Double Action" /></dd>
+						<?php endif ?>
+						<?php if($_product->getData('level_of_clean') == '34'): ?>
+						<dd class="triple-action"><img src="/js/spacer.gif" width="60" height="60" title="Triple Action" /></dd>
+						<?php endif ?>
+					</dl>
+					<!-- END show badges --> 
+					
+				</div>
+				
+			</div>
+		</form>
+		<?php echo $this->getChildHtml('other');?>
+		<?php //if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+		<div id="products" class="left-col" > <a name="l1-flag"></a>
+			<ul id="tabs">
+				<li class="l1-tab"><a href="#" class="l1"><?php echo $this->__('Description & Specification'); ?></a></li>
+				<?php if ($_product->getData('youtube_url')): ?>
+				<li class="l2-tab"><a href="#" class="l2"><?php echo $this->__('Videos & Demonstrations'); ?></a></li>
+				<?php endif ?>
+				<li class="l3-tab"><a href="#" class="l3"><?php echo $this->__('Customer Reviews'); ?></a></li>
+				<li class="l4-tab"><a href="#" class="l4"><?php echo $this->__('Delivery & Warranty'); ?></a></li>
+			</ul>
+			<div id="tab-panes"> <a name="l3-flag"></a><a name="l1-flag"></a>
+				<ul class="l1 tab-pane" style="display: none;">
+					<div class="tab-left-col">
+						<?php $count = 0; ?>
+						<?php for ($i = 1; $i <= 10; $i++) { ?>
+						<?php if($_product->getData('feature_'.$i)) { $count++; }}?>
+						<?php if($count > 0) { ?>
+						<div id="key_features">
+							<h3><?php echo $this->__('Key Features')?></h3>
+							<ul class="product-features">
+								<?php for ($i = 1; $i <= 10; $i++) { ?>
+								<?php if ($_product->getData('feature_'.$i)): ?>
+								<li><?php echo $_product->getData('feature_'.$i); ?></li>
+								<?php endif; } ?>
+							</ul>
+						</div>
+						<?php } ?>
+						<div id="description"><?php echo $_helper->productAttribute($_product, $this->getProduct()->getDescription(), 'description') ?> </div>
+					</div>
+					<?php if($this->getChildHtml('additional')): ?>
+					<div id="info_chart"><?php echo $this->getChildHtml('additional')?> </div>
+					<?php endif ?>
+				</ul>
+				<?php if ($_product->getData('youtube_url')): ?>
+				<ul class="l2 tab-pane" style="display: none;">
+					<?php
+    preg_match(
+        '/[\\?\\&]v=([^\\?\\&]+)/',
+        $_product->getData("youtube_url"),
+        $matches
+    );
+    // $matches[ 1 ] should contain the youtube id
+?>
+					<?php if ($_product->getData('youtube_url')): ?>
+					<iframe width="725" height="398" src="http://www.youtube.com/embed/<?php echo $matches[1]?>" frameborder="0" allowfullscreen></iframe>
+					<?php endif ?>
+					<?php // echo $this->getLayout()->createBlock('cms/block')->setBlockId('videos-demonstrations')->toHtml() ?>
+				</ul>
+				<?php endif ?>
+				<ul class="l3 tab-pane" style="display: none;">
+					<?php echo $this->getChildHtml('product_review') ?>
+				</ul>
+				<ul class="l4 tab-pane" style="display: none;">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('delivery-warranty')->toHtml() ?>
+				</ul>
+			</div>
+		</div>
+		<?php //endif;?>
+		<div> <?php echo $this->getChildHtml('relatedProducts'); ?> </div>
+		<!-- product box end -->
+		
+		<div class="clearer"></div>
+		<?php echo $this->getChildHtml('product_additional_data') ?>
+		<div id="sticky-text">
+			<?php $currentCategory =  Mage::registry('current_category');
+			  if($currentCategory){
+			  	$currentCategory1  = $currentCategory->getName();
+			  }
+			  else{
+			  	$currentCategory1 = $_product->getName();
+			  }
+		?>
+		</div>
+		<script type="text/javascript">
+    //<![CDATA[
+        //$j1_6(".special-price .price-label").text("Save:");       
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+
+      	if($j1_6('.product_content .strong ul li').is('*')){
+	        $j1_6(".product_content .strong ul").css({'list-style':'disc inside none','color':'#e50b14'});
+	        $j1_6(".product_content .strong ul li").before().css({'content':'.','color':'#e50b14','font-size':'5px','vertical-align':'top'});
+	        $j1_6(".product_content .strong ul li span").css({'color':'#4f4f4f','font-size':'12px'}); 
+        
+	        var max_listCount = 3;
+	        //alert($j1_6('.product_content .strong ul li').size());
+	        while ($j1_6('.product_content .strong ul li').size() > max_listCount){
+	        	$j1_6('.product_content .strong ul li:last').remove();  
+	        }
+		}
+        /* $j1_6("#tabs").css({'width':'737px'});
+        $j1_6("#tabs li a").css({'width':'145px','padding':'16px 15px 0 15px'});
+        $j1_6("#tab-panes ul li").css({'border-right':'none','padding':'0 0 0 0px','width':'300px','margin-bottom':'0px'});
+        $j1_6("#tab-panes ul").css({'padding-top':'20px'});
+        $j1_6("#tab-panes").css({'width':'725px'});
+        $j1_6("#key_features").css({'width':'330px'});//call innerhtml
+        //$j1_6("#info_chart").append('<?php // echo $this->getChildHtml('additional')?>');
+        $j1_6("#key_features #description").css({'position':'relative','clear':'both','padding-top':'15px'});
+        $j1_6("#sticky-text h3").css({'border-top':'none'});
+        $j1_6("#sticky-text").css({'padding-top':'10px'});
+        $j1_6("#product_box .special-price").css({'width':'95px','color': '#232323','display': 'block'});
+        $j1_6("#product_box .special-price .price-label").css({'font-size':'13px','font-weight':'bold','text-transform':'uppercase'});
+        $j1_6("#product_box .special-price .price").css({'font-size':'13px','font-weight':'bold','left':'10px','top':'-17px'});
+        $j1_6("#product_config .more-options").css({'position':'','clear':'','left':''});
+        $j1_6(".more-options-links").css({'right':'10px','bottom':'28px'});	
+        //$j1_6("#product_config .special-price .price-label").text('Save');
+        //$j1_6("#you-may-also-need .special-price .price-label").text('Save'); */
+        function triggerTab(id){
+            if($j1_6(id)){
+                $j1_6('#tabs li a').removeClass('active');
+                
+                $j1_6('#tabs li a.l'+id).addClass('active');
+                Cufon.replace('#tabs li a');
+                //Cufon.replace('#tabs li a.l'+id);
+                $j1_6('#tab-panes .tab-pane').hide();
+                $j1_6('#tab-panes .l'+id).show();
+                $j1_6('#tab-panes').height($j1_6('#l'+id).height()+15);
+                setLocation('#l'+id+'-flag');
+            }
+            else{
+                setLocation('#');
+            }
+        }
+        function toggleMoreInfo(el, is_true) {        
+            if(is_true == 1)
+                $j1_6('.'+el).addClass("active");
+            else
+                $j1_6('.'+el).removeClass("active");
+        }
+        //]]>
+		function warranty(warranty_value){
+			alert(warranty_value);
+		}
+	</script>
+	</div>
+</div>

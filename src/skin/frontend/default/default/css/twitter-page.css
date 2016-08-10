@@ -1,0 +1,76 @@
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg-FB-Twitter-Connect
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+   */
+.twitter-index-index {}
+.twitter-index-index .main-container .page-title { margin-bottom:0; }
+.twitter-index-index .main-container .product-view { *zoom:1; }
+.twitter-index-index .main-container .product-view:after { content:'.'; clear:both; overflow:hidden; height:0; }
+.twitter-index-index .main-container .product-view { }
+.twitter-index-index .main-container .product-left { float:left; width:150px; text-align:center; }
+.twitter-index-index .main-container .product-right { margin:0 0 0 150px; padding:30px 0 0; }
+.twitter-index-index .main-container .product-right .product-name h1 { font-size:32px; }
+
+.twitter-index-index .main-container .twitterpage-content { zoom:1; }
+.twitter-index-index .main-container .twitterpage-content:after { content:'.'; clear:both; overflow:hidden; height:0; }
+.twitter-index-index .main-container .twitterpage-content-left { float:left; width:500px; }
+.twitter-index-index .main-container .twitterpage-content-right { margin:0 0 0 500px; }
+
+.color-blue {color:#8097B3;}
+@media all and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+	html, body { height:100%; }
+	.ipad-index-index .main-container .twitter-content-left { float:left; width:530px; }
+	.ipad-index-index .main-container .twitter-content-right { margin:0 0 0 540px; }
+}
+@media all and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+	html, body { height:100%; }
+	.ipad-index-index .main-container .twitter-content-left { margin:0 0 10px; }
+	.ipad-index-index .main-container .twitter-content-right {  }
+}
+
+.ipad-index-index { background: #EEF0FD; background:-moz-linear-gradient(top, #EEF0FD 0%, #FFFFFF 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EEF0FD), color-stop(100%,#FFFFFF)); }
+.ipad-index-index .page { padding:0; width:auto; }
+.ipad-index-index .main-container { }
+.ipad-index-index .main-container .main { padding:40px 50px 10px; }
+.ipad-index-index .main-container .twitter-content,
+.ipad-index-index .main-container .product-view { *zoom:1; }
+.ipad-index-index .main-container .twitter-content:after,
+.ipad-index-index .main-container .product-view:after { content:'.'; clear:both; overflow:hidden; height:0; }
+.ipad-index-index .main-container .twitter-content-left { float:left; width:530px; }
+.ipad-index-index .main-container .twitter-content-right { margin:0 0 0 540px; }
+.ipad-index-index .main-container .product-view { }
+.ipad-index-index .main-container .product-left { float:left; width:214px; text-align:center; }
+.ipad-index-index .main-container .product-right { margin:0 0 0 240px; padding:30px 0 0; }
+.ipad-index-index .main-container .product-right .product-name h1 { font-size:32px; }
+.ipad-index-index .main-container .product-right .std { font-size:17px; line-height:1.7; }
+.twitter-share-button{  
+    display: block;    
+    padding: 10px;
+    position: relative;   
+    clear:both;
+}

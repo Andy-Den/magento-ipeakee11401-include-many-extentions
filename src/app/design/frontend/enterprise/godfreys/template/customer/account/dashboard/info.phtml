@@ -1,0 +1,28 @@
+<div class="col2_container">
+<div class="col2">
+	<dl>
+		<dt><?php echo $this->__('Contact Information') ?> </dt>
+	    <dd><?php echo $this->htmlEscape($this->getCustomer()->getName()) ?><br />
+	        <?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?><br /><br />
+	        <a href="<?php echo $this->getChangePasswordUrl() ?>" ><?php echo $this->__('Change Password') ?></a>
+	   	</dd>
+	</dl>
+	<a class="edit-link" href="<?php echo $this->getUrl('customer/account/edit') ?>"><?php echo $this->__('Edit') ?></a>
+</div>
+<?php if( $this->isNewsletterEnabled() ): ?>
+<div class="col2 right">
+	<dl>
+		<dt><?php echo $this->__('Godfreys Newsletter')?></dt>
+        <dd>
+        	<?php if( $this->getIsSubscribed() ): ?>
+            	<?php echo $this->__("You are currently subscribed to 'General Subscription'.") ?>
+            <?php else: ?>
+                <?php echo $this->__('You are currently not subscribed to the Godfreys VIP club sign up to the Newsletter.') ?>
+            	<a class="join-vip" href="<?php echo $this->getUrl('newsletter/manage') ?>"><?php echo $this->__('Joinvip club') ?></a>
+            <?php endif; ?>
+      	</dd>
+	</dl>
+	
+</div>
+<?php endif; ?>
+</div>

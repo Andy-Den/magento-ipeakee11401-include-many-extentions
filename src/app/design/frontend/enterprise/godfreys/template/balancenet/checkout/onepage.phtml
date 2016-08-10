@@ -1,0 +1,63 @@
+<div class="opc-wrapper">
+
+<script type='text/javascript'>
+var ebRand = Math.random()+'';
+ebRand = ebRand * 1000000;
+//<![CDATA[ 
+document.write('<scr'+'ipt src="//bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=177655&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+//]]>
+</script>
+<noscript>
+<img width="1" height="1" style="border:0" src="//bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=177655&amp;ns=1"/>
+</noscript>
+
+    <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
+    
+    <!-- Warehouse -->
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/warehouse/opcheckout.js') ?>"></script>
+    <!-- End Warehouse -->
+    
+    <script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
+    <div class="opc-progress-container" id="col-right-opcheckout">
+        <?php echo $this->getChildHtml('checkoutProgress') ?>
+    </div>
+
+
+    <div class="breadcrumbs-container">
+    <?php $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+		  $breadcrumbs->addCrumb('home', array('label'=>Mage::helper('cms')->__('Home'), 'title'=>Mage::helper('cms')->__('Home Page'), 'link'=>Mage::getBaseUrl()));
+		  $breadcrumbs->addCrumb('checkout', array('label'=>'Checkout', 'title'=>'Checkout'));
+		  echo $this->getLayout()->getBlock('breadcrumbs')->toHtml();?>
+	</div>
+    <ol class="opc" id="checkoutSteps">
+    <?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>
+    <?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif; $i++ ?>
+        <li id="opc-<?php echo $_stepId ?>" class="section<?php echo !empty($_stepInfo['allow'])?' allow':'' ?><?php echo !empty($_stepInfo['complete'])?' saved':'' ?>">
+            <div class="step-title">
+                <span class="number"><?php echo $i ?></span>
+                <h2><?php echo $_stepInfo['label'] ?></h2>
+            </div>
+            <div id="checkout-step-<?php echo $_stepId ?>" class="step a-item" style="display:none;">
+                <?php echo $this->getChildHtml($_stepId) ?>
+            </div>
+        </li>
+    <?php endforeach ?>
+    </ol>
+    <script type="text/javascript">
+    //<![CDATA[
+        var accordion = new Accordion('checkoutSteps', '.step-title', true);
+        <?php if($this->getActiveStep()): ?>
+        accordion.openSection('opc-<?php echo $this->getActiveStep() ?>');
+        <?php endif ?>
+        var checkout = new Checkout(accordion,{
+            progress: '<?php echo $this->getUrl('checkout/onepage/progress') ?>',
+            review: '<?php echo $this->getUrl('checkout/onepage/review') ?>',
+            saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod') ?>',
+            failure: '<?php echo $this->getUrl('checkout/cart') ?>'}
+        );
+
+        $j1_6("button.button span").css({'display':'none'});
+    //]]>
+    </script>
+</div>

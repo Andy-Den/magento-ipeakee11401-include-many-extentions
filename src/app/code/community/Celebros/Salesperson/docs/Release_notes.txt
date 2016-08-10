@@ -1,0 +1,261 @@
+======================
+03/10/2013 Build 2.1.2
+======================
+
+---
+NEW
+---
+
+	General
+	=======
+
+	- Add plugin version info in the plugin's admin page.
+
+	- Added the Magento base path to be displayed in the admin under Plugin's version.
+
+	- All plugin's file are now under the salesperson directory in the relevant locations.
+
+	- Added "docs/files.txt" which list all of the Celebros Salesperson plugin folders/files location
+
+
+	Search
+	======
+
+	- Added URL masking option (changing the plugin's front name):
+		It is possible to change the URL so that it will change for example:
+
+		From:	http://<domain>//salesperson/result/index/?q=Apparel
+
+		To: 	http://<domain>//search/result/index/?q=Apparel
+
+		- You cannot  change "salesperson" to "catalogsearch" as it is reserved for Magento's search.
+		- Frontname can be changed only in the default scope for all store views that are connected to our search.
+
+	- Added support for nav2search in Magento >= 1.13
+
+        * <=1.13 Regular method (URL rewrite)
+        * >=1.13 Catching event "catalog_controller_category_init_after" and there transferring the call to ResultController's index action.
+
+	- Added support for nav2search blacklisting:
+        1) Enable nav2search- This adds a new attribute to the categories. In "Catalog/Categories/Manage Categories" one can see now "Salesperson- Use category in nav2search"
+
+		   When enabling nav2search for the first time it sets this value to "Yes" for all categories.
+
+        2) One can change this value as wanted.
+
+		3) After finishing setting this value for the categories there is a need to re-index the "Catalog URL rewrites" or go to our plugin's admin (where nav2search is already enabled from step 1) and press save.
+
+
+	Export
+	======
+	
+	- Exporting additional table "catalog_product_relation" for grouped and bundled products relations
+
+	- Added an options in our export settings in Magento admin to specify extra tables to be exported.
+
+	- Exporting now also the following tables:
+	    - “salesperson_mapping”
+	    - “review_entity_summary”
+
+
+----------------
+IMPROVED/CHANGED
+----------------
+
+	General
+	=======
+
+	- "Celebros.log" will be truncated if size >=2MB.
+
+
+	Export
+	======
+
+	- Default export path changed to "/var/salesperson/export"
+
+	- Images and thumbnails: If there is no image and also no placeholder for a product a message is being displayed (if running manual export) and the image/thumbnail link is empty.
+
+
+	Search
+	======
+
+	- In search results list, product's image and URL are being taken from Magento now instead of from the XML
+
+	- Redirect to product page on 1 result is taking the product's URL from Magento now instead of  from the XML.
+
+
+---
+FIX
+---
+
+	General
+	=======
+
+	- Removed PHP short tags usage.
+
+	Export
+	======
+
+	- Products without categories were not exported. "categoryless_products.txt" is being exported now. Should be taken nto consideration by the transformation.
+	
+	- File name of exported table to not include the table prefix (if any)
+
+	- Changed "Data_history.txt" to "Data_History.txt" as the DFM (new V8 CS) is case sensitive 
+
+	- Update export to support extracting attributes info for products without a category.
+
+	- Some customers are using a cloud service for the images (like rackcdn.com). Changed our code to take the media URL from Magento for the image URL and not from the original image URL.
+
+	- Fix for some places in code that don't get the table names from Magento. Caused a problem when the customer used a prefix when installing Magento
+
+	- Column names in “source_products.txt” and “categoryless_products.txt” are being taken from “Salesperson Mapping” if exist.
+
+
+	Search
+	======
+
+	- Fix clear selected filter(s). There was a prag_replace that did anything but corrupt in some situations the search handle.
+
+	- Grouped product price returns the minimal price.
+
+
+	Analytics
+	=========
+
+	-  Product ANLX will use SKU instead of ID
+
+
+======================
+29/07/2013 Build 2.1.1
+======================
+
+-----
+ New
+-----
+
+- Changes in salesperson mapping !!!:
+	id -> mag_id
+	sku -> sku
+
+- What is known as large export is the default export now!. Integrators should use the MagentoTransformer tansformation.
+
+- Zip file name of both the export (Default:products.txt) and the orders history (Exported if either crosssell/upsell or both are enabled) (default: Data_history.zip) can be configured for each store view in the plugin's admin.
+
+- One can determin per store view in the admin if campaigns are active (Image, flash and redirect campaigns).
+
+- New default parameters are set automatically when the plugin is installed:
+	* General Settings/Port: 6035
+	* Result Display Settings/Page Layout: 2 columns with left bar
+	* Export Data Format Settings/Absolute Path is now automatically populated to 	 	 <magentopath>/var/export upon installing the plugin.
+
+- Manual export and cron scheduling can only be run now when user is logged in to the Magento admin.
+
+- Filter improvement: Selected filters are being displayed with their question name.     
+  
+  Example: Color / Black
+
+  
+----------
+ Improved
+----------
+
+- Crosssel and upsell method change: We now overwrite class instead of layout changes
+
+- Better display and logging for the export process.
+
+- Memory usage when doing an export is greatly reduced.
+
+- nav2search:
+
+	Changes to the URL rewrite logic:
+
+	The way that nav2search works is that when enabled for a specific store view it indexes the URL rewrite table and then when export is being run URL rewrite is being re-indexed  again for relevant store views.
+
+	Between the time, that the client makes changes to the categories and the time of the export, the nav2search is not up to date.
+
+	The major thing is that if the client/Magento performs a re-index of the URL rewrite table, than nav2search is not active until the next export.
+
+	I changed this behavior now as follows:
+
+	When enabling nav2search for a store view, the URL rewrite table is being re-indexed.
+
+	Now anytime that a URL rewrite re-index is being done (Either manually or by Magento) our plugin detects it and performs our indexing for all relevant (where nav2search is active) store views.
+
+	We are also still re-indexing the URL rewrite when doing an export because if the customer makes changes to the categories, this doesn’t necessarily triggers a Magento re-index. So if the export will run before the next automatic re-index this will shorten the time for updating the nav2search with changes to the categories.
+
+	If nav2search is enabled for a store view then perform url rewrite on each admin save (This will update the url rewrite with any changes that might have been done and auto re-index didn't run yet).
+
+
+	Our indexing process writes to a log file celebros.log under var/log. The following is an example of its output:
+
+	2013-06-12T11:19:19+00:00 DEBUG (7): Salesperson- Checking need for reindexing of URL rewrite for store: English, ID:1
+	2013-06-12T11:19:22+00:00 DEBUG (7): Salesperson- Reindexed URL rewrite for store: English, ID:1. Total Time: 3 sec.
+	2013-06-12T11:19:22+00:00 DEBUG (7): Salesperson- Checking need for reindexing of URL rewrite for store: German, ID:2
+	2013-06-12T11:19:25+00:00 DEBUG (7): Salesperson- Reindexed URL rewrite for store: German, ID:2. Total Time: 2.7 sec.
+	2013-06-12T11:19:25+00:00 DEBUG (7): Salesperson- Checking need for reindexing of URL rewrite for store: French, ID:3
+	2013-06-12T11:19:25+00:00 DEBUG (7): Salesperson- Checking need for reindexing of URL rewrite for store: Private Sales View, ID:4
+
+- Sort by: Allows now for using the same XML field twice (For asc and desc).
+
+
+-------
+ Fixed
+-------
+
+- Fixed sort by display bug when performing a new search:
+	When a new search is being performed then sort is the default sort (Previously sort was the defualt one, but the display showed the previously selected one (If changed))
+    
+- Fixed code so that product review count returns correct results
+
+- The template in the list view is calling a function getProductUrl which we don't have in our Product.php model. Added the function
+
+- Only manual export (GUI run) will echo to the screen. CRON won't (Prevents errors in some configurations where echoing from CLI causes issues)
+
+- nav2search:
+	* Fix for when there is only one store.
+	* Fix for case where parent category is disabled.
+
+
+***********************************************************************************************************************************
+***********************************************************************************************************************************
+
+======================
+11/04/2013 Build 2.1.0
+======================
+
+New
+---
+* Allow usage of flat tables in export (Important for multi-store websites)
+
+
+Fixes
+-----
+* Export crash when export encounters disabled categories.
+* Disabled variant products being exported
+* Enable/disable AC from admin
+
+
+Improved
+--------
+* Better reporting in manual export (More details and better output).
+
+
+Changed files
+-------------
+config.xml
+system.xml
+Observer.php
+
+*********************************************************************************************
+
+Build x.x.17
+
+Release notes:
+
+•	Change in Analytics to work with AIWriter API
+
+Files updated:
+
+•	/app/code/local/Celebros/Salesperson/etc/config.xml
+•	/app/code/local/Celebros/Salesperson/Model/Observer.php
+•	/app/code/local/Celebros/Salesperson/controllers/ResultController.php

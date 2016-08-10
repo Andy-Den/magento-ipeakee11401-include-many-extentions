@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- 
+  Copyright (c) 2009 Raptor Commerce (http://www.raptorcommerce.com)
+-->
+<config>
+    <modules>
+        <Raptor_Explodedmenu>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Raptor_Explodedmenu>
+    </modules>
+</config> 

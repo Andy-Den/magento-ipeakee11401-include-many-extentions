@@ -1,0 +1,59 @@
+<?php
+$formData = $this->getFormData();
+
+$product = $this->getProduct();
+$billingAddress = $this->getBillingAddress();
+$shippingAddress = $this->getShippingAddress();
+$quote = $this->getCreatorQuote();
+?>
+<form action="<?php echo $this->getSubmitUrl(); ?>" method="post" id="nostepcheckout_checkout_form">
+    <?php echo $this->getBlockHtml('formkey') ?>
+    <?php foreach ($formData as $key => $value) : ?>
+    <?php if(is_array($value)): ?>
+        <?php foreach($value as $k => $v): ?>
+        <input type="hidden" name="<?php echo $key.'['.$k.']'; ?>" value="<?php echo (is_array($v) ? implode(',', $v) : $v);  ?>" />
+        <?php endforeach;?>
+    <?php else: ?>
+        <input type="hidden" name="<?php echo $key; ?>" value="<?php echo (is_array($value) ? implode(',', $value) : $value); ?>" />
+        <?php endif;?>
+    <?php endforeach; ?>
+    <div class="product_details">
+        <p><?php echo $product->getName() . ' (SKU: ' . $product->getSku() . ')'; ?></p>
+
+    </div>
+    <div class="billing_address_container">
+        <p><?php echo $billingAddress->getStreetFull(); ?></p>
+        <p><?php echo $billingAddress->getCity() . ' ' . $billingAddress->getRegion() . ' ' . $billingAddress->getPostcode(); ?></p>
+        <p><?php echo ' ' . $billingAddress->getCountry() ?></p>
+    </div>
+    <div class="shipping_address_container">
+        <p><?php echo $shippingAddress->getStreetFull(); ?></p>
+        <p><?php echo $shippingAddress->getCity() . ' ' . $shippingAddress->getRegion() . ' ' . $shippingAddress->getPostcode(); ?></p>
+        <p><?php echo ' ' . $shippingAddress->getCountry() ?></p>
+    </div>
+    <div>
+        <?php echo $quote->getGrandTotal(); ?>
+    </div>
+    <div>
+        <button type="button" title="Place Order" class="button btn-cart" onclick="noStepCheckoutCheckoutForm.submit(this);"><span><span>Place Order</span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    var noStepCheckoutCheckoutForm = new VarienForm('nostepcheckout_checkout_form');
+    noStepCheckoutCheckoutForm.submit = function(){
+        if (this.validator.validate()) {
+            _form = jQuery("#nostepcheckout_checkout_form");
+            if(_form) {
+                _form_vars =  _form.serialize();                
+                url = _form.attr("action");
+                if(!url) this.form.submit();                    
+                window._nostepcheckout_Loading();
+                jQuery.post( url + "?" + _form_vars ,
+                function(data){
+                    window._nostepcheckout_LoadJsonData(data);
+                    window._nostepcheckout_AfterLoading();                        
+                }, "json");
+            }
+        }
+    }
+</script>

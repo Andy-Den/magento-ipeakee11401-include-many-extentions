@@ -1,0 +1,160 @@
+.ImageGalleryContainer {
+	position:relative;
+	width:645px;
+	height:261px;
+	margin-bottom:30px;
+}
+
+.image-gallery {
+	/*background:url("../../images/vorwerk/galleriffic/image-gallery-bg.png") 0 0 no-repeat;*/
+	height: 261px;
+	margin: 0;
+	position:relative;
+	width:645px;
+	clear:both;
+}
+.image-gallery .controls {
+	height:0px;
+	left:0px;
+	position:absolute;
+	top:0px;
+}
+.image-gallery .controls a,
+.image-gallery .controls a:link,
+.image-gallery .controls a:visited {
+	color:#595552;
+	padding:0;
+	text-decoration:none;
+}
+.image-gallery .ss-controls {
+	float: left;
+}
+.image-gallery .nav-controls {
+	float: right;
+}
+.image-gallery .slideshow-container {
+	height: 251px; /* This should be set to be at least the height of the largest image in the slideshow */
+	left:5px;
+	overflow:hidden;
+	padding:0;
+	position: absolute;
+	top:5px;
+	width:441px;
+}
+.image-gallery .loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image:url(../../images/vorwerk/our_products/gallerific/loader.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 441px;
+	height: 251px; /* This should be set to be at least the height of the largest image in the slideshow */
+}
+
+.image-gallery .slideshow span.image-wrapper {
+	display: block;
+}
+.image-gallery .slideshow a.advance-link {
+	display: block;
+	width: 451px;
+	height: 251px; /* This should be set to be at least the height of the largest image in the slideshow */
+	line-height: 251px; /* This should be set to be at least the height of the largest image in the slideshow */
+	text-decoration: none;
+	margin: 0 0 0 -4px;
+}
+
+.image-gallery .slideshow img {
+	border:0;
+}
+
+.image-gallery .caption-container {
+}
+
+.image-gallery span.image-caption {
+}
+.image-gallery .image-desc {
+}
+.image-gallery .navigation {
+	/* The navigation style is set using jQuery so that the javascript specific styles won't be applied unless javascript is enabled. */
+}
+.image-gallery ul.thumbs {
+	height: 261px;
+	overflow: hidden;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 194px;
+	margin:0 0 0 5px;
+}
+.image-gallery ul.thumbs li {
+	background: none;
+	display: block;
+	float: left;
+	height: 59px;
+	margin: 5px 5px 0 0;
+	overflow: hidden;
+	padding: 0;
+	width: 92px;
+}
+.image-gallery a.thumb {
+	background: none;
+	display: block;
+	opacity: .65;
+	filter: alpha(opacity=65);
+	-moz-opacity: .65;
+	padding: 0;
+}
+.image-gallery ul.thumbs li.selected a.thumb,
+.image-gallery a.thumb:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+	-moz-opacity: 1;
+}
+.image-gallery ul.thumbs img {
+	display: block;
+}
+
+
+.image-gallery .pagination {
+	clear: both;
+}
+.image-gallery .navigation div.top {
+	display:none;
+}
+.image-gallery .navigation div.bottom {
+	background:none;
+	height:auto;
+	position:absolute;
+	right: 0px;
+	top: 0px;
+	width:auto;
+}
+.image-gallery  .ss-controls a,
+.image-gallery  .nav-controls a,
+.image-gallery  .pagination a,
+.image-gallery  .pagination span.current,
+.image-gallery  .pagination span.ellipsis {
+	border:0px solid #ccc;
+	display:block;
+	float:left;
+	margin-right:0px;
+	padding: 0;
+	text-decoration:none;
+}
+
+.image-gallery .pagination a:hover {
+	background-color: #eee;
+	color:#595552;
+	text-decoration: none;
+}
+.image-gallery .pagination span.current {
+	font-weight: bold;
+	background-color: #595552;
+	border-color: #595552;
+	color: #fff;
+}
+.image-gallery .pagination span.ellipsis {
+	border: none;
+	padding: 0;
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tal_Custom>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Tal_Custom>
+    </modules>
+</config>

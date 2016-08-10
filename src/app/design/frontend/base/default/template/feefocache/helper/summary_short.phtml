@@ -1,0 +1,19 @@
+<?php
+$_product = $this->getProduct();
+?>
+<?php if ($_product->getFeefoReviewsAverage() > 0): ?>
+    <div class="ratings">
+        <?php if ($_product->getFeefoReviewsAverage() > 0 ):?>
+            <div class="rating-box">
+                <div class="rating" style="width:<?php echo $_product->getFeefoReviewsAverage() ?>%"></div>
+            </div>
+        <?php endif;?>
+        <span class="amount">
+            <a href="#" onclick="var t = opener ? opener.window : window; t.location.href='<?php echo $_product->getProductUrl();//echo $this->getReviewsUrl() ?>#feefo_reviews_block'; return false;">
+                <?php echo $this->__('%d Review(s)', $_product->getFeefoReviewsCount()) ?>
+            </a>
+        </span>
+    </div>
+<?php elseif ($this->getDisplayIfEmpty()): ?>
+    <p class="no-rating"><a href="<?php echo $this->getReviewsUrl() ?>#review-form"><?php echo $this->__('Be the first to review this product') ?></a></p>
+<?php endif; ?>

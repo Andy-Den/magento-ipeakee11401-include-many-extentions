@@ -1,0 +1,82 @@
+<config>			
+    <tabs>
+        <tbtall translate="label">
+            <label>Balance Extensions</label>
+            <sort_order>100</sort_order>
+        </tbtall>
+    </tabs>
+    <sections>
+        <accessory translate="label">
+            <label>Accessory</label>
+            <tab>tbtall</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <about translate="label">
+                    <label>About</label>
+                    <comment><![CDATA[Balance Accessory Extension Provided By <a href="http://www.balanceinternet.com.au/" target="_blank">Balance Internet</a>]]>
+                    </comment>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </about>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <!-- TODO: make a category source model -->
+                        <category translate="label">
+                            <label>Category ID</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The category ID to hold accessories]]></comment>
+                            <sort_order>30</sort_order>
+                            <validate>validate-number</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </category>
+                        <!-- TODO: make an attribute source model -->
+                        <brand_attribute translate="label">
+                            <label>Brand Attribute</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The attribute code that holds brand information on an accessory]]></comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </brand_attribute>
+                        <model_attribute translate="label">
+                            <label>Model Attribute</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The attribute code that holds model information on an accessory]]></comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </model_attribute>
+                        <catalog_brand_attribute translate="label">
+                            <label>Product Brand Attribute</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The attribute code that holds brand information on a product]]></comment>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </catalog_brand_attribute>
+                        <catalog_model_attribute translate="label">
+                            <label>Product Model Attribute</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The attribute code that holds model information on a product]]></comment>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </catalog_model_attribute>
+                    </fields>
+                </settings>
+            </groups>
+        </accessory>
+    </sections>
+</config>

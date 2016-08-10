@@ -1,0 +1,194 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getChildHtml('ajax_global_messages'); ?></div>
+<div class="product-view"
+     style="background: url('<?php echo (string)Mage::helper('catalog/image')->init($_product, 'image') ?>')  no-repeat 75px 43px;">
+    <!--<div class="addthis_toolbox addthis_default_style addthis-product-like">
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    </div>-->
+
+    <div class="product-name">
+        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+    </div>
+    <div class="raiting">
+        <?php echo $this->getReviewsSummaryHtml($_product) ?>
+    </div>
+    <div class="description">
+        <?php if($_product->getData('sauber_carousel_productheading')): ?>
+            <p class="description-title">
+                <?php echo($_product->getData('sauber_carousel_productheading')); ?>
+            </p>
+        <?php endif; ?>
+        <?php if($_product->getData('sauber_carousel_productdesc')): ?>
+        <p class="description-text">
+            <?php echo($_product->getData('sauber_carousel_productdesc')); ?>
+        </p>
+        <?php endif; ?>
+        
+        <div class="button-group">
+            <!--<div class="rev">
+                <a href="javascript:void(0);" class="find-out-more" ><?php echo $this->__('Find out more');?></a>
+            </div>-->
+            <div class="review">
+                <a href="#reviews" class="read-reviews" onclick="showtab('2')" ><?php echo $this->__('Read reviews');?></a>
+            </div>
+        </div>        
+    </div>
+    <div class="main-product-info">
+        <div class="left-column">
+            <div class="tab-line">&nbsp;</div>
+            <a name="reviews"></a>
+            <div class="tab-block">
+                <div id='tabname_1' onclick="showtab('1')" class='active'><u>Overview</u></div>
+                <div id='tabname_2' onclick="showtab('2')" class='nonactive'><u>Reviews</u></div>
+                <div class="clear">&nbsp;</div>
+            </div>
+
+
+            <div id='tabcontent_1' class='show'>
+                <div class="overview-left">
+                    <ul>
+                        <?php for ($i=1; $i<=8; $i++): ?>
+                            <?php if ($_product->getData('menu_attribute_'.$i) != null): ?>
+                                <li class="overview-links<?php if($i==1):?> active-overview<?php endif; ?>"><p><span class="overview-links" id='subtabname_<?php echo $i; ?>' onclick="showsubtab('<?php echo $i; ?>')"><?php echo $_product->getData('menu_attribute_'.$i); ?></span></p></li>
+                            <?php endif;?>
+                        <?php endfor; ?>
+                    </ul>
+                </div>
+                <div class="overview-right">
+                    <?php
+                        $_cmsHelper = Mage::helper('cms');
+                        $_process = $_cmsHelper->getBlockTemplateProcessor();
+                    ?>
+
+                    <?php for ($i=1; $i<=8; $i++): ?>
+                        <?php if ($_product->getData('overview_content_'.$i) != null): ?>
+                            <div id="subtabcontent_<?php echo $i; ?>" class="<?php ($i>1) ? "hide" : "show"; ?>"><?php echo $_process->filter($_product->getData('overview_content_'.$i)); ?></div>
+                        <?php endif;?>
+                    <?php endfor; ?>
+
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+            <div id='tabcontent_2' class='hide'>
+                <?php echo $this->getLayout()->createBlock('review/form')->setBlockId('product.review.form')->toHtml() ?>
+                <?php //echo$this->getLayout()->createBlock('review/product_view_list')->setBlockId('product.review')->toHtml() ?>
+                <?php echo $this->getChildHtml('product_review') ?>
+            </div>
+        </div>
+        <div class="right-column">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_socials')->toHtml() ?>
+
+            <a class="buttons" href="/contact-us">Enquire Now</a>
+            <a class="buttons fancy-image" href="<?php echo (string)Mage::helper('catalog/image')->init($_product, 'image') ?>" class="fancy-image" rel="sauber-gallery">Image Gallery</a>
+
+            <a class="buttons fancy-image" href="#360view">360 Degree View</a>
+
+            <script language="javascript">
+            jQuery(function() { 
+                var arr = []; for (var x=0; x<= 15; x++) arr.push("<?php echo $this->getSkinUrl('360/'.$_product->getUrlKey()) ?>/sauber-body-360-" +x + ".jpg");
+                jQuery("#sauber360").threesixty({images:arr, method:'mousemove', 'cycle':2, direction:"backward"});
+            });
+            </script>
+
+            <div style="display:none">
+                <div id="360view">
+                    <img src="<?php echo $this->getSkinUrl('360/'.$_product->getUrlKey()) ?>/sauber-body-360-0.jpg" id="sauber360" width="640" height="406"/>
+                </div>
+            </div>
+
+            <?php echo $this->getChildHtml('media') ?>
+
+            <?php /* Hide interactive photo block
+            <div class="interactive-photo">
+                <div class="head-block">Interactive photo</div>
+                <div class="center-block">
+                    <center>
+                        <img src="<?php echo $this->getSkinUrl('images/interactive-photo-1.jpg');?>" alt=""/>
+
+                        <p class="img-description">Intelligence si-200</p>
+                    </center>
+                </div>
+                <div class="bottom-block"></div>
+            </div>
+            */ ?>
+
+            <div class="vertical-menu">
+                <div class="head-block">Support Centre</div>
+                <div class="center-block">
+                    <div id="menu_body">
+                        <ul>
+                            <?php /*
+
+                            If this is enabled, make sure to change the download links section IDs to sub_menu_2 (line 151 and 152)
+
+                            <li><p><a href="404.html" onclick="openMenu('sub_menu_1');return(false)">Product
+                                Registration</p></a>
+                                <ul id="sub_menu_1">
+                                    <li><a href="404.html">Manual</a></li>
+                                </ul>
+                            </li>
+                            */ ?>
+
+                            
+
+<?php $downloads_link = $this->getLayout()->createBlock('downloads/product_link', '', array('id' => $_product->getId(), 'is_category' => true))->toHtml();
+                
+                if (!empty($downloads_link)): ?>
+                    <li>
+                    <p><a onclick="openMenu('sub_menu_1');return(false)">Downloads</a></p>
+                    <ul id="sub_menu_1">
+                        <li>
+                            <?php echo $this->getLayout()->createBlock('downloads/product_link', '', array('id' => $_product->getId(), 'is_category' => true))->toHtml(); ?>
+                        </li>
+                    </ul>
+                    </li>
+                    <?php endif; ?>
+   
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="bottom-block"></div>
+            </div>
+        </div>
+        <div class="clear">&nbsp;</div>
+    </div>
+
+</div>

@@ -1,0 +1,28 @@
+<!-- NOT BEING USED, MOVED TO view.phtml (FK) -->
+
+
+<a name="l3-flag">&nbsp;</a>
+<div id="products" class="left-col" >
+    <ul id="tabs">
+        <li><a href="#" class="l1"><?php echo $this->__('Description & Specification'); ?></a></li>
+        <li><a href="#" class="l2"><?php echo $this->__('Videos & Demonstrations'); ?></a></li>
+        <li><a href="#" class="l3"><?php echo $this->__('Customer Reviews'); ?></a></li>
+        <li><a href="#" class="l4"><?php echo $this->__('Delivery & Warranty'); ?></a></li>
+    </ul>
+    <div id="tab-panes">
+        <ul class="l1 tab-pane" style="display: none;">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('description-specification')->toHtml() ?> 
+        </ul>
+        <ul class="l2 tab-pane" style="display: none;">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('videos-demonstrations')->toHtml() ?> 
+        </ul>
+        <ul class="l3 tab-pane" style="display: none;">
+            <?php echo $this->getChildHtml('product_review_list.count'); ?> 
+            <?php echo $this->getChildHtml('product_additional_data2'); ?> 
+        </ul>
+        <ul class="l4 tab-pane" style="display: none;">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('delivery-warranty')->toHtml() ?> 
+        </ul>
+    </div>
+</div>
+     

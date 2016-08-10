@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<config>
+		<modules>
+				<Balance_Extendedwarranty>
+						<version>1.0.0</version>
+				</Balance_Extendedwarranty>
+		</modules>
+    <global>
+	<helpers>
+		<extendedwarranty>
+				<class>Balance_Extendedwarranty_Helper</class>
+		</extendedwarranty>
+	</helpers>
+    <models>
+        <extendedwarranty>
+             <class>Balance_Extendedwarranty_Model</class>
+        </extendedwarranty>
+    </models>
+   </global>
+   <frontend>
+    <events>
+			<controller_action_postdispatch_checkout_cart_add>
+				<observers>
+				  <balance_extendedwarranty_observer>
+					<type>singleton</type>
+					<class>extendedwarranty/observer</class>
+					<method>addExtendedWarrantyItem</method>
+				  </balance_extendedwarranty_observer>
+				</observers>
+			</controller_action_postdispatch_checkout_cart_add>
+    </events>
+  </frontend>
+
+  <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <extendedwarranty>
+                                            <title>Balance Extended Warranty</title>
+                                        </extendedwarranty>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <default>
+        <extendedwarranty>
+            <settings>
+                <enabled>0</enabled>
+            </settings>
+        </extendedwarranty>
+    </default>
+</config>

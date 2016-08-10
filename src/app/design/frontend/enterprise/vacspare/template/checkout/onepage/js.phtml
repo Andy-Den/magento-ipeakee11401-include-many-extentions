@@ -1,0 +1,35 @@
+<?php if($this->helper('tradegroup')->_isCustomerGroupTrade()):?>
+<?php if($this->getRequest()->getParam('trade') == 1):?>
+    <script type="text/javascript">
+        document.observe("dom:loaded", function() {
+            $$('#checkoutSteps li').each(function(el){
+                //el.removeClassName('allow');
+            })
+            $('opc-review').addClassName('allow active');
+            $('checkout-step-review').show();
+
+            $$('#checkoutSteps li.allow').each(function(el){
+                $(el).observe('click',function(){
+                    if(el.id !='opc-review'){
+                        $('opc-review').removeClassName('allow active');
+                        $('checkout-step-review').hide();
+                    }
+                });
+            })
+        });
+
+        $j1_6("button.button span").css({'display':'block'});
+    </script>
+    <?php else: ?>
+     <script type="text/javascript">
+        document.observe("dom:loaded", function() {
+           var firstLi = $('checkoutSteps').down('li');
+           var divContent = $('checkoutSteps').down('.step');
+           firstLi.addClassName('allow active');
+           divContent.show();
+        });
+
+        $j1_6("button.button span").css({'display':'block'});
+    </script>
+    <?php endif ?>
+<?php endif ?>

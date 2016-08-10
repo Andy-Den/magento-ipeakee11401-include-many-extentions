@@ -1,0 +1,1007 @@
+<?php
+    ini_set('memory_limit','1024M');
+    set_time_limit(7200);
+    ini_set('max_execution_time',7200);
+    ini_set('display_errors', 1);
+    ini_set('output_buffering', 0);
+
+    /**
+     * Celebros Qwiser - Magento Extension
+     *
+     * DISCLAIMER
+     *
+     * Do not edit or add to this file if you wish correct extension functionality.
+     * If you wish to customize it, please contact Celebros.
+     *
+     * @category    Celebros
+     * @package     Celebros_Salesperson
+     * @author		Omniscience Co. - Dan Aharon-Shalom (email: dan@omniscience.co.il)
+     *
+     */
+//include_once("createZip.php");
+    class Celebros_Salesperson_Model_ObserverLarge extends
+        Celebros_Salesperson_Model_Observer
+    {
+        protected static $_profilingResults;
+        protected $bExportProductLink = true;
+        protected $_product_entity_type_id = null;
+        protected $_category_entity_type_id = null;
+        protected $prod_file_name="source_products";
+        protected $isLogProfiler=true;
+		protected $_categoriesForStore = false;
+
+        function __construct() {
+            $this->_read=Mage::getSingleton('core/resource')->getConnection('core_read');
+            $this->_product_entity_type_id = $this->get_product_entity_type_id();
+            $this->_category_entity_type_id = $this->get_category_entity_type_id();
+        }
+
+        private function logProfiler($msg, $isSpaceLine=false)
+        {
+            if (!($this->isLogProfiler))
+                return;
+
+            Mage::log(date("Y-m-d, H:i:s:: ").$msg, null, 'celebros.log',true);
+
+            if ($isSpaceLine)
+                Mage::log('', null, 'celebros.log',true);
+        }
+
+        public function export_celebros() {
+            //self::startProfiling(__FUNCTION__);
+
+			foreach (Mage::app()->getStores() as $store) {
+				if ($store->getConfig('salesperson/export_settings/export_enabled')) {
+				
+					$this->_fStore_id = $store->getId();
+					$this->export_config($this->_fStore_id);
+					$this->_categoriesForStore = false;
+					
+					$this->logProfiler('===============');
+					$this->logProfiler('Starting Export');
+					$this->logProfiler('===============',true);
+
+					$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+
+
+					echo "<BR>".date('Y/m/d H:i:s');
+					echo "<BR>Starting export<BR>";
+					echo "===============<BR>";
+					echo "Memory usage: ".memory_get_usage(true)."<BR>";
+
+					echo "<BR>Exporting tables<BR>";
+					echo "================<BR>";
+					echo "Memory usage: ".memory_get_usage(true)."<BR>";
+					echo str_repeat(" ", 4096);
+
+					$this->logProfiler('Exporting tables');
+					$this->logProfiler('----------------',true);
+
+					$this->export_tables();
+
+					echo "<BR>Exporting products<BR>";
+					echo "==================<BR>";
+					echo "Memory usage: ".memory_get_usage(true)."<BR>";
+					echo str_repeat(" ", 4096);
+
+					$this->logProfiler('Writing products file');
+					$this->logProfiler('---------------------',true);
+
+					$this->export_products();
+
+					echo "<BR>Creating ZIP file<BR>";
+					echo "=================<BR>";
+					echo "Memory usage: ".memory_get_usage(true)."<BR>";
+					echo str_repeat(" ", 4096);
+
+					$this->logProfiler('Creating ZIP file');
+					$this->logProfiler('-----------------',true);
+
+					$zipFilePath = $this->zipLargeFiles();
+
+					echo "<BR>Checking FTP upload<BR>";
+					echo "=======================<BR>";
+					echo "Memory usage: ".memory_get_usage(true)."<BR>";
+
+					if($this->_fType==="ftp" && $this->_bUpload)
+					{
+						echo "Uploading export file<BR>";
+
+						$this->logProfiler('Uploading export file');
+						$this->logProfiler('---------------------',true);
+
+						$ftpRes = $this->ftpfile($zipFilePath);
+						if(!$ftpRes)
+						{
+							echo "Could not upload " . $zipFilePath . ' to ftp';
+							$this->logProfiler('FTP upload ERROR',true);
+						}
+						else
+							$this->logProfiler('FTP upload success',true);
+					}
+					else
+					{
+						echo "No need to upload export file<BR>";
+						$this->logProfiler('No need to upload export file',true);
+					}
+
+					echo "<BR>Finished<BR>";
+					echo "========<BR>";
+					echo "Memory usage: ".memory_get_usage(true)."<BR>";
+					echo "Memory peek usage: ".memory_get_peak_usage(true)."<BR>";
+
+					echo "<BR><BR>".date('Y/m/d H:i:s');
+					echo str_repeat(" ", 4096);
+
+					$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+					$this->logProfiler('Mem peek usage: '.memory_get_peak_usage(true),true);
+
+					//self::stopProfiling(__FUNCTION__);
+
+					//$html = self::getProfilingResultsString();
+					//$this->log_profiling_results($html);
+					//echo $html;
+				}
+			}
+        }
+
+        protected function log_profiling_results($html) {
+            $fh = $this->create_file("profiling_results.log", "html");
+            $this->write_to_file($html, $fh);
+        }
+
+        protected function get_status_attribute_id() {
+            $table = $this->getTableName("eav_attribute");
+            $sql = "SELECT attribute_id
+		FROM {$table}
+		WHERE entity_type_id ={$this->_product_entity_type_id} AND attribute_code='status'";
+            return $this->_read->fetchOne($sql);
+        }
+
+        protected function get_product_entity_type_id() {
+            $table = $this->getTableName("eav_entity_type");
+            $sql = "SELECT entity_type_id
+		FROM {$table}
+		WHERE entity_type_code='catalog_product'";
+            return $this->_read->fetchOne($sql);
+        }
+
+        protected function get_category_entity_type_id() {
+            $table = $this->getTableName("eav_entity_type");
+            $sql = "SELECT entity_type_id
+		FROM {$table}
+		WHERE entity_type_code='catalog_category'";
+            return $this->_read->fetchOne($sql);
+        }
+
+        protected function get_visibility_attribute_id() {
+            $table = $this->getTableName("eav_attribute");
+            $sql = "SELECT attribute_id
+		FROM {$table}
+		WHERE entity_type_id ={$this->_product_entity_type_id} AND attribute_code='visibility'";
+            return $this->_read->fetchOne($sql);
+        }
+
+        protected function get_category_name_attribute_id() {
+            $table = $this->getTableName("eav_attribute");
+            $sql = "SELECT attribute_id
+		FROM {$table}
+		WHERE entity_type_id ={$this->_category_entity_type_id} AND attribute_code='name'";
+            return $this->_read->fetchOne($sql);
+        }
+
+        protected function get_category_is_active_attribute_id() {
+            $table = $this->getTableName("eav_attribute");
+            $sql = "SELECT attribute_id
+		FROM {$table}
+		WHERE entity_type_id ={$this->_category_entity_type_id} AND attribute_code='is_active'";
+            return $this->_read->fetchOne($sql);
+        }
+		
+		protected function export_tables() {
+			//self::startProfiling(__FUNCTION__);
+			$read = Mage::getModel('core/resource')->getConnection('core_read');
+			
+			$table = $this->getTableName("catalog_eav_attribute");
+			$query = $read->select()
+				->from($table,
+						array('attribute_id', 'is_searchable', 'is_filterable', 'is_comparable'));
+			$this->export_table($query, "catalog_eav_attribute", false);
+			
+			$table = $this->getTableName("eav_attribute");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('attribute_id', 'attribute_code', 'backend_type', 'frontend_input'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id);
+			$this->export_table($query, "attributes_lookup", false);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+
+
+			$table = $this->getTableName("catalog_product_entity");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('entity_id', 'type_id', 'sku'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id);
+			$this->export_table($query, $table, false);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+			
+
+			$table = $this->getTableName("catalog_product_entity_int");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$status_attribute_id = $this->get_status_attribute_id();
+
+			$sql = $read->select()
+				->from($table, 
+					array('entity_id'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id)
+				->where('attribute_id = ?', $status_attribute_id)
+				->where('value = ?', '2');
+				
+			$this->export_table($sql, "disabled_products");
+			
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+			
+			$table = $this->getTableName("catalog_product_entity_int");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$visibility_attribute_id = $this->get_visibility_attribute_id();
+			
+			$sql = $read->select()
+				->distinct()
+				->from($table, 
+					array('entity_id'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id)
+				->where('attribute_id = ?', $visibility_attribute_id)
+				->where('value = ?', '1');
+			
+			$this->export_table($sql, "not_visible_individually_products");		
+			
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+			
+
+			$table = $this->getTableName("catalog_product_entity_varchar");		
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			
+			$sql = $read->select()
+				->from($table, 
+					array('entity_id', 'value', 'attribute_id'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id);
+			
+			$this->export_table($sql, $table);
+
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+			
+			
+			$table = $this->getTableName("catalog_product_entity_int");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('entity_id', 'value', 'attribute_id'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id);
+				
+			$this->export_table($query, $table);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+			
+
+			$table = $this->getTableName("catalog_product_entity_text");		
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('entity_id', 'value', 'attribute_id'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id);
+				
+			$this->export_table($query, $table);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+
+
+			$table = $this->getTableName("catalog_product_entity_decimal");		
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('entity_id', 'value', 'attribute_id'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id);
+				
+			$this->export_table($query, $table);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+
+			
+			$table = $this->getTableName("catalog_product_entity_datetime");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('entity_id', 'value', 'attribute_id'))
+				->where('entity_type_id = ?', $this->_product_entity_type_id);
+				
+			$this->export_table($query, $table);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+
+			
+			$table = $this->getTableName("eav_attribute_option_value");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('option_id', 'value'));
+						
+			$this->export_options_table($query, $table);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+			
+			
+			$table = $this->getTableName("eav_attribute_option");		
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('option_id', 'attribute_id'));
+						
+			$this->export_table($query, $table, false);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+			
+
+			$table = $this->getTableName("catalog_category_product");		
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('category_id', 'product_id'));
+			$this->export_table($query, $table, false);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+		
+			
+			$table = $this->getTableName("catalog_category_entity");		
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('entity_id', 'parent_id', 'path'));
+			$this->export_table($query, $table, false);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+
+			
+			$table = $this->getTableName("catalog_category_entity_varchar");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$name_attribute_id = $this->get_category_name_attribute_id();
+			$query = $read->select()
+				->from($table,
+						array('entity_id', 'value'))
+				->where('attribute_id = ?', $name_attribute_id);
+				
+			$this->export_categories($query, "category_lookup");
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+			
+			
+			$table = $this->getTableName("catalog_category_entity_int");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$is_active_attribute_id = $this->get_category_is_active_attribute_id();
+			$query = $read->select()
+				->from($table,
+						array('entity_id'))
+				->where('attribute_id = ?', $is_active_attribute_id)
+				->where('value = 0')
+				->where('entity_type_id = ?', $this->_category_entity_type_id);
+				
+			$this->export_categories($query, "disabled_categories");
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+
+
+			$table = $this->getTableName("catalog_product_super_link");		
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('product_id', 'parent_id'));
+						
+			$this->export_table($query, $table, false);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);
+
+			
+			$table = $this->getTableName("catalog_product_super_attribute");
+			$this->logProfiler("START {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true));
+			$query = $read->select()
+				->from($table,
+						array('product_id', 'attribute_id'));
+						
+			$this->export_table($query, $table, false);
+			$this->logProfiler("FINISH {$table}");
+			$this->logProfiler('Mem usage: '.memory_get_usage(true),true);		
+
+			//self::stopProfiling(__FUNCTION__);
+		}
+		
+		protected function export_categories($sql, $filename)
+		{
+			
+			$read = Mage::getModel('core/resource')->getConnection('core_read');
+			$sql2 = $read->select()
+				->from('catalog_category_entity',
+						array('entity_id', 'path'));
+						
+			$results = $read->fetchPairs($sql2);
+			$rootCategoryId = $this->_fStore->getRootCategoryId();
+			$categories = array();
+			foreach ($results as $entity_id => $path) {
+				$path = explode('/', $path);
+				if (count($path) > 1) {
+					if ($path[1] == $rootCategoryId) {
+						$categories[] = $entity_id;
+					}
+				} else {
+					$categories[] = $entity_id;
+				}
+			}
+			
+			$fh = $this->create_file($filename);
+
+			//stream_set_write_buffer($fh,4096);
+			$str = "";
+			$i = 0;
+			
+			$header = "^";
+			foreach ($sql->getPart('columns') as $column) {
+				if ($column[1] != '*') {
+					$fields[] = $column[1];
+				}
+			}
+			$header .= implode("^	^", $fields);
+			$header .= "^" . "\r\n";
+			$this->write_to_file($header, $fh);
+			
+			$sql->limit(100000000, 0);
+			$sql->where("`entity_id` IN (?)", $categories);
+			$secondSql = clone($sql);
+			
+			$sql->where('store_id = ?', $this->_fStore_id);
+				
+			Mage::log((string)$sql);
+			$query = $sql->query();
+			$rowCount=0;
+			
+			$processedRows = array();
+			
+			while ($row = $query->fetch()) {
+				
+				//$this->logProfiler("Block read start ({$this->_limit} products");
+				//$this->logProfiler('Mem usage: '.memory_get_usage(true));
+
+				$processedRows[] = $row['entity_id'];
+				
+				$str.= "^" . implode("^	^",$row) . "^" . "\r\n";
+				$rowCount++;
+				
+				if (($rowCount%1000)==0)
+				{
+					//$this->logProfiler("Write block start");
+					$this->write_to_file($str , $fh);
+					//$this->logProfiler("Write block end");
+					$str="";
+				}
+			}
+			
+			$secondSql->where('store_id = 0');
+			if (count($processedRows)) {
+				$secondSql->where("`entity_id` NOT IN (?)", $processedRows);
+			}
+			Mage::log((string)$secondSql);
+			$query2 = $secondSql->query();
+			
+			while ($row = $query2->fetch()) {
+
+				//$this->logProfiler("Block read start ({$this->_limit} products");
+				//$this->logProfiler('Mem usage: '.memory_get_usage(true));
+				
+				$str.= "^" . implode("^	^",$row) . "^" . "\r\n";
+				$rowCount++;
+				
+				if (($rowCount%1000)==0)
+				{
+					//$this->logProfiler("Write block start");
+					$this->write_to_file($str , $fh);
+					//$this->logProfiler("Write block end");
+					$str="";
+				}
+			}
+			
+			if (($rowCount%1000)!=0)
+			{
+				$this->logProfiler("Write last block start");
+				$this->write_to_file($str , $fh);
+				$this->logProfiler("Write last block end");
+			}
+			
+			$this->logProfiler("Total rows: {$rowCount}");
+			
+			fclose($fh);
+			//self::stopProfiling(__FUNCTION__. "({$filename})");
+		}
+		
+		protected function export_options_table($sql, $filename)
+		{
+						
+			$fh = $this->create_file($filename);
+
+			//stream_set_write_buffer($fh,4096);
+			$str = "";
+			$i = 0;
+			
+			$header = "^";
+			foreach ($sql->getPart('columns') as $column) {
+				if ($column[1] != '*') {
+					$fields[] = $column[1];
+				}
+			}
+			$header .= implode("^	^", $fields);
+			$header .= "^" . "\r\n";
+			$this->write_to_file($header, $fh);
+			
+			$sql->limit(100000000, 0);							
+					
+			$secondSql = clone($sql);
+			
+			$sql->where('store_id = ?', $this->_fStore_id);
+				
+			Mage::log((string)$sql);
+			$query = $sql->query();
+			$rowCount=0;
+			
+			$processedRows = array();
+			
+			while ($row = $query->fetch()) {
+				
+				//$this->logProfiler("Block read start ({$this->_limit} products");
+				//$this->logProfiler('Mem usage: '.memory_get_usage(true));
+
+				$processedRows[] = $row['option_id'];
+				
+				$str.= "^" . implode("^	^",$row) . "^" . "\r\n";
+				$rowCount++;
+				
+				if (($rowCount%1000)==0)
+				{
+					//$this->logProfiler("Write block start");
+					$this->write_to_file($str , $fh);
+					//$this->logProfiler("Write block end");
+					$str="";
+				}
+			}
+			
+			$secondSql->where('store_id = 0');
+			if (count($processedRows)) {
+				$secondSql->where("`option_id` NOT IN (?)", $processedRows);
+			}
+			Mage::log((string)$secondSql);
+			$query2 = $secondSql->query();
+			
+			while ($row = $query2->fetch()) {
+
+				//$this->logProfiler("Block read start ({$this->_limit} products");
+				//$this->logProfiler('Mem usage: '.memory_get_usage(true));
+				
+				$str.= "^" . implode("^	^",$row) . "^" . "\r\n";
+				$rowCount++;
+				
+				if (($rowCount%1000)==0)
+				{
+					//$this->logProfiler("Write block start");
+					$this->write_to_file($str , $fh);
+					//$this->logProfiler("Write block end");
+					$str="";
+				}
+			}
+			
+			if (($rowCount%1000)!=0)
+			{
+				//$this->logProfiler("Write last block start");
+				$this->write_to_file($str , $fh);
+				//$this->logProfiler("Write last block end");
+			}
+			
+			$this->logProfiler("Total rows: {$rowCount}");
+			
+			fclose($fh);
+			//self::stopProfiling(__FUNCTION__. "({$filename})");
+		}
+		
+		protected function export_table($sql, $filename, $checkStore = true) {
+			
+			$fh = $this->create_file($filename);
+
+			//stream_set_write_buffer($fh,4096);
+			$str = "";
+			$i = 0;
+			
+			$header = "^";
+			foreach ($sql->getPart('columns') as $column) {
+				if ($column[1] != '*') {
+					$fields[] = $column[1];
+				}
+			}
+			$header .= implode("^	^", $fields);
+			$header .= "^" . "\r\n";
+			$this->write_to_file($header, $fh);
+			
+			$sql->limit(100000000, 0);							
+					
+			if ($checkStore) {
+				if (!in_array('entity_id', $fields)) {
+					$sql->columns('entity_id');
+				}
+				if (!in_array('attribute_id', $fields)) {
+					$sql->columns('attribute_id');
+				}
+				$table = $sql->getPart('from');
+				$table = array_shift($table);
+				
+				
+				$sql->joinLeft(	'catalog_category_product', 
+								"{$table['tableName']}.`entity_id` = `catalog_category_product`.`product_id`",
+								array());
+								
+				$categoriesForStore=$this->_getCategoriesForStore();
+				if(is_array($categoriesForStore) && count($categoriesForStore))
+				{
+				  $sql->where("`catalog_category_product`.`category_id` IN (`{$categoriesForStore}`)");
+				}
+				
+				$sql->group('value_id');
+				
+				$read = Mage::getModel('core/resource')->getConnection('core_read');
+				$secondSql = clone($sql);
+				
+				$sql->where('store_id = ?', $this->_fStore_id);
+			}
+			Mage::log((string)$sql);
+			
+			$query = $sql->query();
+			$rowCount=0;
+			
+			$processedRows = array();
+			
+			while ($row = $query->fetch()) {
+				//$this->logProfiler("Block read start ({$this->_limit} products");
+				//$this->logProfiler('Mem usage: '.memory_get_usage(true));
+
+				if ($checkStore) {
+					$processedRows[] = $row['attribute_id'] . '-' . $row['entity_id'];
+					if (!in_array('entity_id', $fields)) {
+						unset($row['entity_id']);
+					}
+					if (!in_array('attribute_id', $fields)) {
+						unset($row['attribute_id']);
+					}
+				}
+				$str.= "^" . implode("^	^",$row) . "^" . "\r\n";
+				$rowCount++;
+				
+				if (($rowCount%1000)==0)
+				{
+					//$this->logProfiler("Write block start");
+					$this->write_to_file($str , $fh);
+					//$this->logProfiler("Write block end");
+					$str="";
+				}
+			}
+			
+			if ($checkStore) {
+				$secondSql->where('store_id = 0');
+				if (count($processedRows)) {
+					$secondSql->where("CONCAT(`attribute_id`, '-', `entity_id`) NOT IN (?)", $processedRows);
+				}
+				Mage::log((string)$secondSql);
+				$query2 = $secondSql->query();
+				
+				while ($row = $query2->fetch()) {
+					//$this->logProfiler("Block read start ({$this->_limit} products");
+					//$this->logProfiler('Mem usage: '.memory_get_usage(true));
+					
+					if ($checkStore) {
+						if (!in_array('entity_id', $fields)) {
+							unset($row['entity_id']);
+						}
+						if (!in_array('attribute_id', $fields)) {
+							unset($row['attribute_id']);
+						}
+					}
+					
+					$str.= "^" . implode("^	^",$row) . "^" . "\r\n";
+					$rowCount++;
+					
+					if (($rowCount%1000)==0)
+					{
+						//$this->logProfiler("Write block start");
+						$this->write_to_file($str , $fh);
+						//$this->logProfiler("Write block end");
+						$str="";
+					}
+				}
+			}
+			
+			if (($rowCount%1000)!=0)
+			{
+				//$this->logProfiler("Write last block start");
+				$this->write_to_file($str , $fh);
+				//$this->logProfiler("Write last block end");
+			}
+			
+			$this->logProfiler("Total rows: {$rowCount}");
+			
+			fclose($fh);
+			//self::stopProfiling(__FUNCTION__. "({$filename})");
+		}
+
+        protected function create_file($name, $ext = "txt") {
+            //self::startProfiling(__FUNCTION__);
+            if (!is_dir($this->_fPath)) $dir=@mkdir($this->_fPath,0777,true);
+            $filePath = $this->_fPath . DIRECTORY_SEPARATOR . $name . "." . $ext;
+
+            //if (file_exists($filePath)) unlink($filePath);
+            $fh = fopen($filePath, 'ab');
+            //self::stopProfiling(__FUNCTION__);
+            return $fh;
+        }
+
+        protected function write_to_file($str, $fh){
+            //self::startProfiling(__FUNCTION__);
+            fwrite($fh, $str);
+
+            //self::stopProfiling(__FUNCTION__);
+        }
+
+        public function zipLargeFiles() {
+            //self::startProfiling(__FUNCTION__);
+
+            $out = false;
+            $zipPath = $this->_fPath . DIRECTORY_SEPARATOR . "products_file.zip";//$this->_fileNameZip;
+
+            $dh=opendir($this->_fPath);
+            $filesToZip = array();
+            while(($item=readdir($dh)) !== false && !is_null($item)){
+                $filePath = $this->_fPath . DIRECTORY_SEPARATOR . $item;
+                $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+                if(is_file($filePath) && ($ext == "txt" || $ext == "log")) {
+                    $filesToZip[] = $filePath;
+                }
+            }
+
+            for($i=0; $i < count($filesToZip); $i++) {
+                $filePath = $filesToZip[$i];
+                $out = $this->zipLargeFile($filePath, $zipPath);
+            }
+
+            //self::stopProfiling(__FUNCTION__);
+            return $out ? $zipPath : false;
+        }
+
+        public function zipLargeFile($filePath, $zipPath)
+        {
+            //self::startProfiling(__FUNCTION__);
+
+            $out = false;
+
+            $zip = new ZipArchive();
+            if ($zip->open($zipPath, ZipArchive::CREATE) == true) {
+                $fileName = basename($filePath);
+                $out = $zip->addFile($filePath, basename($filePath));
+                if(!$out) throw new  Exception("Could not add file '{$fileName}' to_zip_file");
+                $zip->close();
+                $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+                if($ext != "log") unlink($filePath);
+            }
+            else
+            {
+                throw new  Exception("Could not create zip file");
+            }
+
+            //self::stopProfiling(__FUNCTION__);
+            return $out;
+        }
+		
+		protected function _getCategoriesForStore()
+		{
+			if (!$this->_categoriesForStore) {
+				$rootCategoryId = $this->_fStore->getRootCategoryId();
+				$rootCategory = Mage::getModel('catalog/category')->load($rootCategoryId);
+				$rootResource = $rootCategory->getResource();
+				$this->_categoriesForStore = implode(',', $rootResource->getChildren($rootCategory));
+			}
+			return $this->_categoriesForStore;
+		}
+
+
+        protected function export_products()
+        {
+            echo "Begining products export<BR>Memory usage: ".memory_get_usage(true)."<BR>";
+
+            $fh = $this->create_file($this->prod_file_name);
+
+            $fields = array("id", "price", "image_link", "thumbnail", "type_id", "product_sku");
+            $attributes = array("price", "image", "thumbnail", "type");
+
+            if($this->bExportProductLink) $fields[] = "link";
+            if($this->bExportProductLink) $attributes[] = "url_key";
+
+            if(count($fields)- 2 != count($attributes)) throw new Exception('Fields (without id):' . implode("^	^",$fields) . ' are not equal to ' . implode("^	^",$fields));
+
+            $header = "^" . implode("^	^",$fields) . "^" . "\r\n";
+            $this->write_to_file($header, $fh);
+
+            // *********************************
+			
+            $table = $this->getTableName("catalog_product_entity");
+            
+            $categoriesForStore=$this->_getCategoriesForStore();
+            if(is_array($categoriesForStore) && count($categoriesForStore))
+				$isCategories=true;
+			else
+				$isCategories=false;
+            
+            $sql = "SELECT DISTINCT(entity_id), type_id, sku
+					FROM {$table}";
+					
+			if($isCategories)
+				$sql.="\nLEFT JOIN (`catalog_category_product`)
+						ON (`catalog_category_product`.`category_id` IN (`{$categoriesForStore}`))";
+					
+			$sql.="\nWHERE {$table}.entity_type_id ={$this->_product_entity_type_id}";
+
+			if ($isCategories)
+				$sql.="\nAND {$table}.`entity_id` = `catalog_category_product`.`product_id`";
+
+			Mage::log($sql);
+			
+            $stm = $this->_read->query($sql . " LIMIT 0, 100000000");
+
+            $productNum=0;
+            $rowCount=0;
+            $str='';
+
+            $product=Mage::getSingleton('catalog/product');
+
+            $hasData=($row=$stm->fetch());
+
+            while($hasData)
+            {
+                do
+                {
+                    $product->load(($row["entity_id"]));
+
+                    if ($product->isSaleable())
+                    {
+                        $values["id"] = $product->getentity_id();
+                        $values["price"] = Mage::helper('core')->currency($this->getCalculatedPrice($product), false, false);
+                        $values["image_link"] = $product->getMediaConfig()->getMediaUrl($product->getData("image"));
+                        $values["thumbnail"] = (string) Mage::helper('catalog/image')->init($product, 'thumbnail')->resize(66);
+                        $values["type_id"] = $product->gettype_id();
+                        $values["product_sku"] = $product->getSku();
+
+                        if($this->bExportProductLink)
+                        {
+                            $values["link"] = $product->getProductUrl();
+                        }
+
+                        $str.= "^" . implode("^	^",$values) . "^" . "\r\n";
+
+                        $productNum++;
+
+                        if (($productNum%1000)==0)
+                        {
+                            //$this->logProfiler("Product num: {$productNum}");
+                            //$this->logProfiler('Mem usage: '.memory_get_usage(true));
+                            //$this->logProfiler("Write block start");
+                            $this->write_to_file($str , $fh);
+                            //$this->logProfiler("Write block end",true);
+                            $str='';
+                        }
+                    }
+
+                    //$product->cleanCache();
+                    $product->clearInstance();
+                    $product->reset();
+
+                    $rowCount++;
+
+                    /*					if (($rowCount%1000)==0)
+                                        {
+                                            $this->logProfiler("Number of processed rows: {$rowCount}");
+                                            $this->logProfiler("Fetch start");
+                                            $hasData=($row=$stm->fetch());
+                                            $this->logProfiler("Fetch end", true);
+                                        }
+                                        else
+                    */
+                    $hasData=($row=$stm->fetch());
+                } while($hasData);
+
+                if (($productNum%1000)!=0)
+                {
+                    //$this->logProfiler("Product num: {$productNum}");
+                    //$this->logProfiler("Write last block start");
+                    $this->write_to_file($str , $fh);
+                    //$this->logProfiler("Write last block end",true);
+                }
+
+            }
+
+            //$this->logProfiler("Finished outer while",true);
+
+            fclose($fh);
+        }
+
+
+        protected static function startProfiling($key) {
+
+            if(!isset(self::$_profilingResults[$key])) {
+                $profile = new stdClass();
+                $profile->average =0 ;
+                $profile->count = 0;
+                $profile->max = 0;
+                self::$_profilingResults[$key] = $profile;
+            }
+
+            $profile = self::$_profilingResults[$key];
+            if(isset($profile->start) && $profile->start > $profile->end) throw new Exception("The start of profiling timer '{$key}' is called before the stop of it was called");
+
+            $profile->start = (float) array_sum(explode(' ',microtime()));
+        }
+
+        protected static function stopProfiling($key) {
+            if(!isset(self::$_profilingResults[$key])) throw new Exception("The stop of profiling timer '{$key}' was called while the start was never declared");
+
+            $profile = self::$_profilingResults[$key];
+            if($profile->start == -1) throw new Exception("The start time of '{$key}' profiling is -1");
+
+            $profile->end = (float) array_sum(explode(' ',microtime()));
+            $duration = $profile->end - $profile->start;
+            if($profile->max < $duration) $profile->max = $duration;
+
+            $profile->average = ($profile->average * $profile->count + $duration)/($profile->count +1);
+            $profile->count++;
+        }
+
+        protected static function getProfilingResultsString() {
+            $html = "";
+            if(count(self::$_profilingResults)) {
+                $html.= "In sec:";
+                $html.=  '<table border="1">';
+                $html.=  "<tr><th>Timer</th><th>Total</th><th>Average</th><th>Count</th><th>Peak</th></tr>";
+                foreach(self::$_profilingResults as $key =>$profile) {
+                    $total = $profile->average * $profile->count;
+                    $html.=  "<tr><td>{$key}</td><td>{$total}</td><td>{$profile->average}</td><td>{$profile->count}</td><td>{$profile->max}</td></tr>";
+                }
+                $html.=  "</table>";
+            }
+
+            $html.= 'PHP Memory peak usage: ' . memory_get_peak_usage();
+
+            return $html;
+        }
+
+    }

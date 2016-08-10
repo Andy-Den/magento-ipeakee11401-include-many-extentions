@@ -1,0 +1,278 @@
+<?php
+/* @var $this Mage_Wishlist_Block_Customer_Wishlist */
+
+$magentoVersion = Mage::getVersion();
+if (version_compare($magentoVersion, '1.13', '<')){
+?>   
+<?php if ($this->helper('wishlist')->isAllow()) : ?>
+    <?php if (!$this->getIsAjax()): ?>
+        <div class="my-wishlist" id="my-wishlist">
+    <?php  endif;?>    
+        <div class="page-title title-buttons">
+            <?php if ($this->helper('wishlist')->isRssAllow() && $this->hasWishlistItems()): ?>
+                <a href="<?php echo $this->helper('wishlist')->getRssUrl($this->getWishlistInstance()->getId()); ?>" class="link-rss"><?php echo $this->__('RSS Feed') ?></a>
+            <?php endif; ?>
+            <h1><?php echo $this->getTitle(); ?></h1>
+        </div>
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+        <form id="wishlist-view-form" action="<?php echo $this->getUrl('*/*/update', array('wishlist_id' => $this->getWishlistInstance()->getId())) ?>" method="post">
+            <?php echo $this->getChildHtml('top'); ?>
+            <fieldset>
+                <?php if ($this->hasWishlistItems()): ?>
+                        <?php echo $this->getBlockHtml('formkey');?>
+                        <?php $this->getChild('items')->setItems($this->getWishlistItems()); ?>
+                        <?php echo $this->getChildHtml('items');?>
+                        <script type="text/javascript">decorateTable('wishlist-table')</script>
+                <?php else: ?>
+                    <p class="wishlist-empty"><?php echo $this->__('You have no items in your wishlist.') ?></p>
+                <?php endif ?>
+                <div class="buttons-set buttons-set2">
+                    <?php echo $this->getChild('control_buttons')->toHtml();?>
+                </div>
+            </fieldset>
+        </form>
+
+        <script type="text/javascript">
+        //<![CDATA[
+        var wishlistForm = new Validation($('wishlist-view-form'));
+        function addAllWItemsToCart() {
+            var url = '<?php echo $this->getUrl('*/*/allcart', array('wishlist_id' => $this->getWishlistInstance()->getId())) ?>';
+            var separator = (url.indexOf('?') >= 0) ? '&' : '?';
+            $$('#wishlist-view-form .qty').each(
+                function (input, index) {
+                    url += separator + input.name + '=' + encodeURIComponent(input.value);
+                    separator = '&';
+                }
+            );
+            setLocation(url);
+        }
+                                               
+        $$("#wishlist-view-form button.btn-update").each(function(element) {                
+           Event.observe(element, 'click', function(event)
+           {                     
+               allajax.wishlistPost(element,'<?php echo $this->getUrl('allajax/wishlist/update', array('wishlist_id' => $this->getWishlistInstance()->getId()))?>'); 
+               Event.stop(event);                    
+               return false;
+           });
+         });                         
+       
+        //]]>
+        </script>
+    <?php if (!$this->getIsAjax()): ?>  
+     </div>
+    <?php echo $this->getChildHtml('bottom'); ?>
+    <div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+    </div>
+            
+        <span class="please-wait" id="ajax-please-wait" style="display:none;">
+                  <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading...') ?>" title="<?php echo $this->__('Loading...') ?>" class="v-middle" /> <?php echo $this->__('Loading...') ?>
+        </span>
+
+
+<a style="display: none;" id="various1" href="#allajax-content" >Inline</a>
+
+
+    <div style="display: none;">
+        <div id="inline1" style="width:300px;height:100px;overflow:auto;">
+
+            <div id="allajax-content" class="allajax-content bbb" >
+                <div class="allajax-preload" id="allajax-prestep">
+                    <a id="ajax-loading-lightbx-pro-image" href="#" title=" " class="product-image" id="">
+                        <img src="#" width="128" height="128" alt=" ">
+                    </a>
+                    <div class="product-info">
+                        <h2 class="product-name" id="ajax-loading-lightbx-pro-name">
+                            <a href="#" title=" "> </a>
+                        </h2>
+                        <div class="ratings" id="ajax-loading-lightbx-pro-rating">
+                            
+                        </div>
+                        <div class="product-type-data"><div class="price-box" id="ajax-loading-lightbx-pro-price-box">
+                         
+                            </div></div>
+                    </div>
+                    <div class="allajax-loading" id="">        
+                        <img alt="Loading..." src="<?php echo $this->getSkinUrl('balance/allajax/images/loading.gif'); ?>">
+                        <span id="add_to_cart">Loading...</span>
+                    </div>
+                    <div class="allajax-configurations" id="allajax-configurations-append">
+                        
+                    </div>
+                    
+                </div>
+                <div id="allajax-poststeps">
+                    <div class="allajax-respond-msg">
+                        
+                    </div>
+                    <a id="ajax-loading-lightbx-pro-image-respond" href="#" title=" " class="product-image" id="">
+                        <img src="#" width="160" height="160" alt=" ">
+                    </a>
+                    
+                    <div class="actions clearer">
+                    <button type="button" title="View all items in your shopping cart" class="button btn-inline button-view" id="allajax_view_cart" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>')"><span><span>View cart & checkout</span></span></button>
+                    <button type="button" title="View all items in your compare" class="button btn-inline button-view" id="allajax_view_compare" style="display: none" onclick="jQuery.fancybox.close();popWin('<?php echo Mage::helper('catalog/product_compare')->getListUrl(); ?>','compare','top:0,left:0,width=750,height=600,resizable=yes,scrollbars=yes')"><span><span><?php echo $this->__('Go to compare') ?></span></span></button>
+                    <button type="button" title="Continue Shopping" class="button btn-checkout btn-inline " onclick="jQuery.fancybox.close();"><span><span>Continue Shopping</span></span></button>
+						                                    </div>
+                    
+                    
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <?php endif; ?>
+
+<?php endif; ?>
+<script type="text/javascript">
+<?php $baseUrl = $this->getBaseUrl() ; ?>
+function getBaseUrl() { return '<?php echo $baseUrl; ?>'; } 
+</script>
+
+
+<?php } else {?>
+<?php if ($this->helper('wishlist')->isAllow()) : ?>
+     <?php if (!$this->getIsAjax()): ?>
+        <div class="my-wishlist" id="my-wishlist">
+    <?php  endif;?>    
+        <div class="page-title title-buttons">
+            <?php if ($this->helper('wishlist')->isRssAllow() && $this->hasWishlistItems()): ?>
+                <a href="<?php echo $this->helper('wishlist')->getRssUrl($this->getWishlistInstance()->getId()); ?>" class="link-rss"><?php echo $this->__('RSS Feed') ?></a>
+            <?php endif; ?>
+            <h1><?php echo $this->getTitle(); ?></h1>
+        </div>
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+        <form id="wishlist-view-form" action="<?php echo $this->getUrl('*/*/update', array('wishlist_id' => $this->getWishlistInstance()->getId())) ?>" method="post">
+            <?php echo $this->getChildHtml('top'); ?>
+            <fieldset>
+                <?php if ($this->hasWishlistItems()): ?>
+                        <?php echo $this->getBlockHtml('formkey');?>
+                        <?php $this->getChild('items')->setItems($this->getWishlistItems()); ?>
+                        <?php echo $this->getChildHtml('items');?>
+                        <script type="text/javascript">decorateTable('wishlist-table')</script>
+                <?php else: ?>
+                    <p class="wishlist-empty"><?php echo $this->__('You have no items in your wishlist.') ?></p>
+                <?php endif ?>
+                <div class="buttons-set buttons-set2">
+                    <?php echo $this->getChild('control_buttons')->toHtml();?>
+                </div>
+            </fieldset>
+        </form>
+
+        <form id="wishlist-allcart-form" action="<?php echo $this->getUrl('*/*/allcart') ?>" method="post">
+            <?php echo $this->getBlockHtml('formkey') ?>
+            <div class="no-display">
+                <input type="hidden" name="wishlist_id" id="wishlist_id" value="<?php echo $this->getWishlistInstance()->getId() ?>" />
+                <input type="hidden" name="qty" id="qty" value="" />
+            </div>
+        </form>
+
+        <script type="text/javascript">
+        //<![CDATA[
+            var wishlistForm = new Validation($('wishlist-view-form'));
+            var wishlistAllCartForm = new Validation($('wishlist-allcart-form'));
+
+            function calculateQty() {
+                var itemQtys = new Array();
+                $$('#wishlist-view-form .qty').each(
+                    function (input, index) {
+                        var idxStr = input.name;
+                        var idx = idxStr.replace( /[^\d.]/g, '' );
+                        itemQtys[idx] = input.value;
+                    }
+                );
+
+                $$('#qty')[0].value = JSON.stringify(itemQtys);
+            }
+
+            function addAllWItemsToCart() {
+                calculateQty();
+                wishlistAllCartForm.form.submit();
+            }
+            
+           $$("#wishlist-view-form button.btn-update").each(function(element) {                
+           Event.observe(element, 'click', function(event)
+           {                     
+               allajax.wishlistPost(element,'<?php echo $this->getUrl('allajax/wishlist/update', array('wishlist_id' => $this->getWishlistInstance()->getId()))?>'); 
+               Event.stop(event);                    
+               return false;
+           });
+         });           
+        //]]>
+        </script>
+    <?php if (!$this->getIsAjax()): ?>  
+    </div>
+    <?php echo $this->getChildHtml('bottom'); ?>
+    <div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+    </div>
+     <span class="please-wait" id="ajax-please-wait" style="display:none;">
+                  <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading...') ?>" title="<?php echo $this->__('Loading...') ?>" class="v-middle" /> <?php echo $this->__('Loading...') ?>
+        </span>
+
+
+<a style="display: none;" id="various1" href="#allajax-content" >Inline</a>
+
+
+    <div style="display: none;">
+        <div id="inline1" style="width:300px;height:100px;overflow:auto;">
+
+            <div id="allajax-content" class="allajax-content bbb" >
+                <div class="allajax-preload" id="allajax-prestep">
+                    <a id="ajax-loading-lightbx-pro-image" href="#" title=" " class="product-image" id="">
+                        <img src="#" width="128" height="128" alt=" ">
+                    </a>
+                    <div class="product-info">
+                        <h2 class="product-name" id="ajax-loading-lightbx-pro-name">
+                            <a href="#" title=" "> </a>
+                        </h2>
+                        <div class="ratings" id="ajax-loading-lightbx-pro-rating">
+                            
+                        </div>
+                        <div class="product-type-data"><div class="price-box" id="ajax-loading-lightbx-pro-price-box">
+                         
+                            </div></div>
+                    </div>
+                    <div class="allajax-loading" id="">        
+                        <img alt="Loading..." src="<?php echo $this->getSkinUrl('balance/allajax/images/loading.gif'); ?>">
+                        <span id="add_to_cart">Loading...</span>
+                    </div>
+                    <div class="allajax-configurations" id="allajax-configurations-append">
+                        
+                    </div>
+                    
+                </div>
+                <div id="allajax-poststeps">
+                    <div class="allajax-respond-msg">
+                        
+                    </div>
+                    <a id="ajax-loading-lightbx-pro-image-respond" href="#" title=" " class="product-image" id="">
+                        <img src="#" width="160" height="160" alt=" ">
+                    </a>
+                    
+                    <div class="actions clearer">
+                    <button type="button" title="View all items in your shopping cart" class="button btn-inline button-view" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>')"><span><span>View cart & checkout</span></span></button>
+                    
+                    <button type="button" title="Continue Shopping" class="button btn-checkout btn-inline " onclick="jQuery.fancybox.close();"><span><span>Continue Shopping</span></span></button>
+						                                    </div>
+                    
+                    
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <?php endif; ?>
+<?php endif ?>
+
+<?php } ?>
+

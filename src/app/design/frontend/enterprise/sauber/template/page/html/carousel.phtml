@@ -1,0 +1,75 @@
+<?php
+$_productCollection = Mage::getModel('catalog/product')->getCollection()->addAttributeToSelect('*')->addAttributeToFilter('show_in_carousel', "1");
+$temp=0;
+foreach ($_productCollection as $_product)
+{
+    if($temp<3)
+    {
+        $my_collection[$temp] = $_product;
+        $temp++;
+    }
+    else{break;}
+}
+//print_r($my_collection[1]->getData());
+?>
+
+<div id="wrap">
+    <div id="mycarousel" class="jcarousel-skin-tango">
+        <div id="mycarousel-prev" class="jcarousel-prev jcarousel-prev-horizontal" style="display: block; z-index: 500;"></div>
+        <div id="mycarousel-next" class="jcarousel-next jcarousel-next-horizontal" style="display: block; z-index: 500;"></div>
+        <?php  ?>
+        <ul>
+            <?php for($i=0; $i<3; $i++): ?>
+            <?php if (isset($my_collection[$i])):?>
+                <li>
+                    <div class="main-container"><img src="<?php echo Mage::getModel('catalog/product_media_config')->getMediaUrl( $my_collection[$i]->getImage() );?>" alt="si-200" /><br />
+                        <div class="description">
+                        <?php if($my_collection[$i]->getData('sauber_carousel_title') && $my_collection[$i]->getData('description_in_carousel')): ?>
+                            <p><?php echo $my_collection[$i]->getData('sauber_carousel_title')?></p>
+                            <span><?php echo $my_collection[$i]->getData('description_in_carousel')?></span>
+                        <?php endif; ?>
+                            <br />
+                            <div class="clear"></div>
+                            <div class="button-group">
+                                <?php if($my_collection[$i]->getData('sauber_carousel_link')): ?>
+                                    <div class="rev">
+                                        <a href="<?php echo $my_collection[$i]->getData('sauber_carousel_link') ?>" class="find-out-more" ><?php echo $this->__('Find out more');?></a>
+                                    </div>
+                                    <div class="review">
+                                        <a href="<?php echo $my_collection[$i]->getData('sauber_carousel_link') ?>#reviews" class="read-reviews" ><?php echo $this->__('Read reviews');?></a>
+                                    </div>                                    
+                                <?php else: ?>
+                                    <div class="rev">
+                                        <a href="<?php echo $my_collection[$i]->getUrlKey()?>" class="find-out-more" ><?php echo $this->__('Find out more');?></a>
+                                    </div>
+                                    <div class="review">
+                                        <a href="<?php echo $my_collection[$i]->getUrlKey()?>#reviews" class="read-reviews" ><?php echo $this->__('Read reviews');?></a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="clear"></div>
+                            <!--<div class="watch-video">
+                                <a target="_blank" href="<?php echo $my_collection[$i]->getYoutubeUrl(); ?>"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>wysiwyg/watch-video.png" alt="" /></a>
+                            </div>-->
+                        </div>
+                    </div>
+                </li>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </ul>
+
+        <div class="jcarousel-control">
+            <div class="central-block">
+                <?php for($i=0; $i<3; $i++): ?>
+                <?php if (isset($my_collection[$i])):?>
+                    <a class="central-block-item first" href="#"><?php echo $i+1; ?>
+                        <img src="<?php echo $my_collection[$i]->getImageUrl();?>" height="80" alt="" />
+                        <p class="central-title"><?php echo $my_collection[$i]->getData('name')?></p>
+                        <p class="central-description"><?php echo $my_collection[$i]->getData('short_description_in_carousel')?></p>
+                    </a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+            </div>
+        </div>
+    </div>
+</div>

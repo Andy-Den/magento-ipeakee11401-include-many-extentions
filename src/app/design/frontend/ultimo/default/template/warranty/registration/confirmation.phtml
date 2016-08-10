@@ -1,0 +1,89 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<form id="warranty-confirmation" action="">
+<fieldset>
+    <h4><?php echo $this->__('Confirm Your Registration') ?></h4>
+    <p>You are about to register your warranty with Godfreys.</p>
+    <p>Please be aware that you will need to hold onto your receipt as proof of purchase should you need to make a warranty claim at any stage, this online registration is not proof of purchase.  </p>
+    <div class="buttons-set" id="billing-buttons-container">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p class="back-link"><a href="#" onclick="javascript:goBack(); return false;"><small><</small><?php echo $this->__('Back') ?></a></p>
+        <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="submitWarranty()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+        <span id="confirmation-please-wait" class="please-wait" style="display:none;"><img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="" class="v-middle" /> <?php echo $this->__('Registering your warranty...') ?></span>
+        <span id="contact-please-wait" class="please-wait" style="display:none;"><img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="" class="v-middle" /> <?php echo $this->__('Updating customer information...') ?></span>
+    </div>
+</fieldset>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+
+
+
+// ---------------------------------------------
+    
+    var warrantyProduct = new WarrantyProduct('product-registration-form', '<?php echo $this->getUrl('warranty/registration/saveProductRegistration/') ?>');
+    var contact = new Contact('warranty-contact', '<?php echo $this->getUrl('warranty/registration/saveCustomerContact/') ?>');
+    function submitWarranty(){
+        var validator = new Validation('product-registration-form');
+        if(validator.validate()){ 
+        Element.show('confirmation-please-wait');
+        warrantyProduct.save();
+        } else{
+            accordion.openSection('wr-product');
+        }
+    }
+    
+    function submitNext(){
+        Element.hide('confirmation-please-wait');
+        var validator = new Validation('warranty-contact');
+        if(validator.validate()){ 
+        Element.show('contact-please-wait');
+        contact.save();
+        } else{
+            accordion.openSection('wr-contact');
+        }
+        
+                
+    }
+    
+    function finishSubmission(){
+        Element.hide('contact-please-wait');
+        window.location.href = '<?php echo $this->getUrl('warranty/registration/success'); ?>';
+        
+    }
+    
+    function goBack(){
+        //accordion.closeSection('wr-contact');
+        accordion.openSection('wr-<?php echo $this->getPreviousStep() ?>');
+        $('progress-confirmation').removeClassName('complete');
+        $('progress-<?php echo $this->getPreviousStep() ?>').addClassName('complete');
+    }
+    
+    
+    
+//]]>
+</script>

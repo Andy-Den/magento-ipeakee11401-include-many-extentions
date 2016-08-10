@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Balance_Attributes>
+            <version>0.1.0</version>
+        </Balance_Attributes>
+    </modules>
+    <global>
+        <resources>
+            <balance_attributes_setup>
+                <setup>
+                    <module>Balance_Attributes</module>
+                </setup>
+            </balance_attributes_setup>
+        </resources>
+    </global>
+</config>

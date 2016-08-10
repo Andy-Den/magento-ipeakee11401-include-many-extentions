@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Godfreys_M2ePro>
+            <version>0.1.0</version>
+        </Godfreys_M2ePro>
+    </modules>
+    <global>
+        <helpers>
+            <M2ePro>
+                <rewrite>
+                    <Module_Renderer_Description>Godfreys_M2ePro_Helper_Description</Module_Renderer_Description>
+                </rewrite>
+            </M2ePro>
+        </helpers>
+        <models>
+            <M2ePro>
+                <rewrite>
+                    <Magento_Order>Godfreys_M2ePro_Model_Magento_Order</Magento_Order>
+                </rewrite>
+            </M2ePro>
+        </models>
+    </global>
+</config>

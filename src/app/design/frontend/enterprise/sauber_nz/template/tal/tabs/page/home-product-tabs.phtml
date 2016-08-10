@@ -1,0 +1,38 @@
+<?php if(!empty($tabs)) {
+$tab_html = '';
+$content_html = '';
+$i = 0;
+foreach ($tabs as $tab)
+{
+	
+    $html = $tab->getHtml();
+	if(!empty($html))
+	{
+     	if (isset($html['title']))
+     	{
+    		$i++;
+    		
+    		if ($i == 1)
+    		{
+    			$tab_html .= '<ul id="tabs">';
+    			$content_html .='<div id="tab-panes">'; 
+    		}
+     	
+     		$tab_html	.= '<li><a href="#" class="l'.$i.'">'.$html['title'].'</a></li>'; 
+    		$content_html .= '<ul class="l'.$i.' tab-pane" style="display: none;">'.(isset($html['content'])?$html['content']:'').'</ul>';    		                 
+     	}	           
+	}
+}	  
+ if ($i>0){ 
+ 	$tab_html .= '</ul>';
+ 	$content_html .= '</div>'
+ ?>
+ <div id="products" class="left-col" >
+ 	<?php echo $tab_html;?>	    
+	<?php echo $content_html;?>
+ </div>
+<?php }
+}
+?>
+
+     

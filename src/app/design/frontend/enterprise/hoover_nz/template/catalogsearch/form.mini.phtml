@@ -1,0 +1,23 @@
+<div id="top-store-locator">
+	<h4><a href="<?php echo $this->getUrl('store-locator') ?>">&nbsp;</a></h4>
+    <form method="get" action="<?php echo Mage::getURL('locator/search/') ?>" name="store_locator_form" id="store_locator_form">
+        <button class="top-locate" type="submit"></button>
+        <select id="loc-search-country" class="loc-srch-country" name="country" style="display:none">
+            <option selected="selected" value="New Zealand">New Zealand</option>
+        </select>
+        <input type="text" onblur="if (this.value=='') this.value = this.defaultValue" onfocus="if (this.value==this.defaultValue) this.value = ''" value="Postcode" name="s" id="store-loc-postcode">
+        <input type="hidden" value="250" name="distance" />
+    </form>
+    <script type="text/javascript">
+        jQuery( "#store_locator_form" ).submit(function( event ) {
+            if(jQuery('#store_locator_form input[name="s"]').val() == 'Enter postcode'){jQuery('#store_locator_form input[name="s"]').val('');}
+        });
+    </script>
+</div>
+<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+    <div class="form-search">
+        <input id="search" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>" class="input-text"/>
+        <button type="submit" src="/scin/hoover/images/search_ico.png" title="<?php echo $this->__('Go') ?>" class="button"></button>
+        <div class="clear"></div>
+    </div>
+</form>

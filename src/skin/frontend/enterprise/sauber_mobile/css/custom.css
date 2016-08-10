@@ -1,0 +1,279 @@
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_iphone
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/* Theme options */
+
+/* Links Color */
+a { color:#1394ca; }
+
+/* Main color */
+body > header,
+body > footer ul,
+body > address.copyright {}
+
+/* Button Color */
+.map-popup-checkout button,
+.more-button,
+.btn-checkout,
+.account-login button,
+.add-to-links > li > a,
+.cart-table tfoot button,
+.opc .buttons-set button,
+.checkout-success button,
+.box-reviews .buttons-set button,
+.my-account .form-buttons button,
+#contactForm .buttons-set button,
+.giftregistry .buttons-set button,
+.wishlist-view .buttons-set button,
+.send-to-friend .buttons-set button,
+.account-create .buttons-set button,
+.add-to-links > li .split-button strong,
+.catalog-product-gallery .buttons-set a,
+.my-account .my-rewards .buttons-set button,
+.my-account .my-wishlist .buttons-set button,
+.product-view .product-shop .add-to-box button,
+.popup-block .block-content .buttons-set button,
+.customer-account-forgotpassword .buttons-set button,
+.product-view .product-options-bottom .add-to-cart button,
+.my-account .billing-agreements .box-content .form-list select + button { }
+
+/* Main Page Navigation links color */
+#nav-container li a { 
+    color: #939EA5;
+    font-family: HelveticaNeue-Roman;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: block;
+}
+
+/* Buttons background color */
+.form-subscribe button { background:green; }
+.contacts-index-index .contact-us p{
+    color: #51606A;
+    font-family: arial;
+    font-size: 14px;
+    padding-bottom: 0px;  
+    padding-left:17px;
+    padding-top: 10px;
+}
+.form-list label,  .form-list em{
+    color: #51606A;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: normal;
+ }
+ .contacts-index-index .buttons-set button{
+    background: none repeat scroll 0 0 transparent  !important;
+    background-color: none  !important;
+    border: 0 none;
+    cursor: pointer;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    width: auto !important;
+  }
+ .buttons-set{
+      float: right;
+      margin-bottom: 15px;
+      margin-right: 15px;
+ }
+ .buttons-set button{
+     width: auto !important;
+     float: right;
+ }
+.buttons-set button span{
+     background: url("../images/bkg-button.png") no-repeat transparent;
+     background-position: 100% 0;
+     padding:0 39px 0 0;
+     display: block;
+  }
+.buttons-set button span span {
+    background: url("../images/bkg-button.png") no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #1595D3;
+    font-family: HelveticaNeue-Roman;
+    font-size: 14px;
+    height: 40px;
+    line-height: 31px;
+    padding: 0 11px 0 19px;
+}
+
+.col-right.sidebar{
+    display: none;
+}
+
+
+
+.accordion_toggle {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("../images/arrow-dowm.png");
+    background-origin: content-box;
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    border-top: 1px solid #B1C0C9;
+    color: #1595D3;
+    cursor: pointer;
+    font-family: arial;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px;
+    padding: 5px 15px;
+    position: relative;
+    z-index: 10;
+}
+        
+.accordion_toggle_active {
+    color: #9AA4AB;
+    font-family: arial;
+    font-weight: bold;
+    background-image: url("../images/arrow-up.png");
+    
+}
+
+.accordion_content {
+    background: none repeat scroll 0 0 transparent;
+    border-top: 1px solid #B1C0C9;
+    overflow: hidden;
+    width: 100%;
+    padding: 10px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+#enterprise-tabs dt h2{
+    color: #5e6c75;
+    font-family: HelveticaNeue-Roman;
+    font-size: 14px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+#enterprise-tabs dt.active h2{
+    color:#1595D3;
+}
+#product-reviews-list {}
+#customer-reviews dd p{
+    color: #51606A;
+    font-family: arial;
+    font-size: 12px;
+}
+.product-view .box-reviews { 
+    padding:0px; 
+}
+.review-summary-table .rating-box {
+    margin: 0;
+}
+.product-view .box-reviews dt {
+    color: #51606A;
+    font-family: arial;
+    font-size: 14px;
+    margin: 0;
+}
+#customer-reviews .buttons-set{
+    float: none;
+    margin: auto;
+/*    padding-top: 10px;*/
+    text-align: center;
+ }
+ 
+ #customer-reviews #review-form .buttons-set {
+    float: left;
+    left: -3px;
+    padding-top: 3px;
+    position: relative;
+    text-align: center;
+}
+#customer-reviews #review-form .product-review {
+    padding: 0;
+}
+
+#customer-reviews #review-form .product-review td.first{
+    color: #51606A;
+    font-family: HelveticaNeue-Roman;
+    font-size: 14px;
+}
+#customer-reviews #review-form .product-review td .ratings{
+    padding-top: 10px;
+}
+#customer-reviews #review-form .product-review .ratings .rating-links{
+    display:none
+}
+
+#customer-reviews #review-form .product-view .rating-box {
+    margin: 0 0 0;
+}
+.buttons-set.findstorelist{
+    border-top: 1px solid #B1C0C9;
+    float: none;
+    margin: auto;
+    padding-top: 13px;
+}
+.buttons-set .button-review{
+    background: url("../images/btn-button-review.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    font-family: HelveticaNeue-Roman;
+    font-size: 14px;
+    font-weight: bold;
+    height: 35px;
+    line-height: 33px;
+    margin: auto;
+    padding-bottom: 10px;
+    width: 285px;
+}
+.buttons-set .button-review.write{
+    background: url("../images/bkg-button-review.png") no-repeat scroll 0 8px transparent;
+    display: block;
+    line-height: 35px;
+    margin-top: 3px;
+    padding-top: 6px;
+}
+#show_me_review{
+    border-bottom: 1px solid #B1C0C9;
+}
+
+.buttons-set .findStock {
+    background: url("../images/bkg-button-review.png") no-repeat scroll 0 8px transparent;
+    display: block;
+    float: none;
+    font-family: HelveticaNeue-Roman;
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 35px;
+    margin: auto;
+    padding-top: 6px;
+    text-align: center;
+    width: 284px;
+}
+.form-reviews #review-form .box-content{
+    padding: 0 15px;
+}
+#product-review-table tr td{
+    color: #51606A;
+    font-size: 14px;
+}

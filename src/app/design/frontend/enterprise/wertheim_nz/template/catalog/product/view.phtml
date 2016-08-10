@@ -1,0 +1,342 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+$_reviews = Mage::getModel('review/review')
+    ->getResourceCollection()
+    ->addStoreFilter(Mage::app()->getStore()->getId())
+    ->addStatusFilter(Mage_Review_Model_Review::STATUS_APPROVED)
+    ->addFieldToFilter('entity_pk_value', $_product->getId())
+    ->setDateOrder()
+    ->addRateVotes();
+
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+
+
+    jQuery(document).ready(function () {
+
+        jQuery('#carousel_reviews').jcarousel({
+            animation:'slow',
+            visible:1,
+            scroll:1,
+            start:1
+        });
+
+
+        jQuery('.carousel_media').jcarousel({
+            animation:'slow',
+            visible:2,
+            scroll:1,
+            start:1
+        });
+
+        jQuery(".close_product_reviews").click(function () {
+
+            jQuery(".product_reviews_page_view").animate({right:"-293px"}, 1000);
+            //  jQuery(".reviews_smoll").css("display","block");
+        });
+        jQuery("a.read_reviews_open").click(function () {
+
+            jQuery(".product_reviews_page_view").animate({right:0}, 1000);
+            //  jQuery(".reviews_smoll").css("display","none");
+        });
+
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php if (count($_reviews)): ?>
+<div class="reviews_smoll">
+    <a class="read_reviews_open"></a>
+
+    <p>
+        Read<br/> Reviews
+    </p>
+
+</div>
+<div class="home_bloc_l home_bloc_a product_reviews_page_view">
+
+    <a class="close_product_reviews"></a>
+
+    <div class="home_bloc_title">
+        <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+    </div>
+    <ul id="carousel_reviews" class="jcarousel-skin-ie7">
+
+        <?php
+        foreach ($_reviews as $review):
+            $j = 0;
+            $cumulative = 0;
+            foreach ($review->getRatingVotes() as $vote) {
+                $cumulative += $vote->getPercent();
+                $j++;
+            }
+            $finalPercentage = 0;
+            if ($cumulative != 0) {
+                $finalPercentage = ($cumulative / $j);
+            }
+            ?>
+            <li>
+                <div class="reviews_text_wraper">
+                    <div class="reviews_img">
+
+                        <div class="ratings">
+                            <div class="rating-box">
+                                <div class="rating" style="width:<?php echo ceil($finalPercentage) . '%'; ?>"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reviews_text">
+                        <?php echo $this->htmlEscape($review->getDetail()) ?>
+                    </div>
+                </div>
+            </li>
+            <?php
+        endforeach;
+        ?>
+
+    </ul>
+</div>
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+<div style="border-bottom: 1px solid #95979c; margin: 17px 0 0 0;">
+    <div class="product-name product-name_wert">
+        <?php $layer = Mage::getSingleton('catalog/layer');
+        ?>
+        <h5><?php echo $layer->getCurrentCategory()->getName() ?></h5>
+        
+        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+
+    </div>
+    <div class="ratings_wert">
+        <?php echo $this->getReviewsSummaryHtml($_product) ?>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+
+<div id="messages_product_view"><?php echo $this->getChildHtml('ajax_global_messages'); ?></div>
+
+<div class="product-view">
+    <div class="product-essential">
+        <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+              id="product_addtocart_form"<?php if ($_product->getOptions()): ?>
+              enctype="multipart/form-data"<?php endif; ?>>
+            <div class="no-display">
+                <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+                <input type="hidden" name="related_product" id="related-products-field" value=""/>
+            </div>
+
+            <div class="product-shop">
+
+
+                <div class="product-shop_div">
+                    <div class="product-shop_title">
+                        More Images
+                    </div>
+                    <div>
+                        <?php echo $this->getChildHtml('media') ?>
+                    </div>
+                </div>
+
+
+                <div class="product-shop_div">
+                    <div class="product-shop_title">
+                        Overview
+                    </div>
+                    <div style="margin: 15px 0 5px 0;">
+                        <?php
+                        $attributeValueD = Mage::getResourceModel('catalog/product')->getAttributeRawValue($_product->getId(), 'short_description', Mage::app()->getStore()->getId());
+                        echo $attributeValueD;
+                        ?>
+
+                    </div>
+                </div>
+                <?php $downloads_link = $this->getLayout()->createBlock('downloads/product_link', '', array('id' => $_product->getId(), 'is_category' => true))->toHtml();
+                if (!empty($downloads_link)): ?>
+                    <div class="product-shop_div">
+                        <div class="product-shop_title">
+                            Download Manual
+                        </div>
+                        <div>
+                            <?php echo $downloads_link; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+
+
+                <?php
+                $relatedlist = $_product->getRelatedProductIds();
+
+                if (sizeof($relatedlist) > 0):
+                    ?>
+
+                    <div class="product-shop_div">
+                        <div class="product-shop_title">
+                            More Products
+                        </div>
+                        <div>
+                            <div class="more-views">
+                                <ul class="carousel_media jcarousel-skin-media">
+                                    <?php
+                                    foreach ($relatedlist as $value):
+                                        $tovarMagento = Mage::getModel('catalog/product')->load($value);
+                                        $_img = '<img src="' . $this->helper('catalog/image')->init($tovarMagento, 'image')->resize(97) . '" alt="' . $tovarMagento->getName() . '" title="' . $tovarMagento->getName() . '" />';
+                                        ?>
+                                        <li>
+                                            <a href="<?php echo Mage::getUrl($tovarMagento->getUrlKey()); //echo $tovarMagento->getProductUrl();    ?>">
+                                                <?php echo $_helper->productAttribute($tovarMagento, $_img, 'image') ?>
+                                            </a>
+                                        </li>
+                                        <?php
+                                    endforeach;
+                                    ?>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+
+            </div>
+
+            <div class="product-img-box">
+
+
+                <p class="product-image">
+
+                    <?php
+                    $_img = '<img src="' . $this->helper('catalog/image')->init($_product, 'image')->resize(430) . '" alt="' . $this->htmlEscape($this->getImageLabel()) . '" title="' . $this->htmlEscape($this->getImageLabel()) . '" />';
+                    echo $_helper->productAttribute($_product, $_img, 'image');
+                    ?>
+                </p>
+
+
+            </div>
+
+            <div class="clearer"></div>
+
+
+
+            <?php /* if ($_product->isSaleable() && $this->hasOptions()): ?>
+              <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+              <?php endif; */ ?>
+        </form>
+
+
+
+        <?php if($_helper->productAttribute($_product, $_product->getRoomByRoom(), 'room_by_room')): ?>
+            <div class="room_by_room">
+                <div class="room_by_room_title">Room By Room</div>
+                <?php echo $_helper->productAttribute($_product, $_product->getRoomByRoom(), 'room_by_room') ?>
+            </div>
+        <?php endif; ?>
+
+
+
+        <script type="text/javascript">
+            //<![CDATA[
+            var productAddToCartForm = new VarienForm('product_addtocart_form');
+            productAddToCartForm.submit = function (button, url) {
+                if (this.validator.validate()) {
+                    var form = this.form;
+                    var oldUrl = form.action;
+
+                    if (url) {
+                        form.action = url;
+                    }
+                    var e = null;
+                    try {
+                        this.form.submit();
+                    } catch (e) {
+                    }
+                    this.form.action = oldUrl;
+                    if (e) {
+                        throw e;
+                    }
+
+                    if (button && button != 'undefined') {
+                        button.disabled = true;
+                    }
+                }
+            }.bind(productAddToCartForm);
+
+            productAddToCartForm.submitLight = function (button, url) {
+                if (this.validator) {
+                    var nv = Validation.methods;
+                    delete Validation.methods['required-entry'];
+                    delete Validation.methods['validate-one-required'];
+                    delete Validation.methods['validate-one-required-by-name'];
+                    if (this.validator.validate()) {
+                        if (url) {
+                            this.form.action = url;
+                        }
+                        this.form.submit();
+                    }
+                    Object.extend(Validation.methods, nv);
+                }
+            }.bind(productAddToCartForm);
+            //]]>
+        </script>
+    </div>
+</div>

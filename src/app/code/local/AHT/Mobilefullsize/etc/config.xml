@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AHT_Mobilefullsize>
+            <version>0.1.0</version>
+        </AHT_Mobilefullsize>
+    </modules>
+    <frontend>
+        <routers>
+            <mobilefullsize>
+                <use>standard</use>
+                <args>
+                    <module>AHT_Mobilefullsize</module>
+                    <frontName>mobilefullsize</frontName>
+                </args>
+            </mobilefullsize>
+        </routers>
+        <layout>
+            <updates>
+                <mobilefullsize>
+                    <file>mobilefullsize.xml</file>
+                </mobilefullsize>
+            </updates>
+        </layout>        
+    </frontend>    
+
+</config>

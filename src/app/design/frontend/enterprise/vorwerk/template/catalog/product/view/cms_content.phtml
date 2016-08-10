@@ -1,0 +1,18 @@
+<?php
+
+$blocks = array();
+for ($i = 1; $i <= 5; $i++) {
+    if (!$content = $this->getLayout()->createBlock('cms/block')->setBlockId('vorwerk_right_sidebar_' . $i)->toHtml()) continue;
+    $blocks[] = $content;
+}
+
+if (!$blocks) return;
+
+?>
+<div class="product-sidebar-content sidebar-boxed">
+    <?php foreach ($blocks as $block) : ?>
+        <aside class="product-sidebar-content-item">
+            <?php echo $block; ?>
+        </aside>
+    <?php endforeach; ?>
+</div>

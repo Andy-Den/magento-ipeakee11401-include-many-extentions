@@ -1,0 +1,37 @@
+<span id='filter-or'>Or</span>
+<form action="<?php echo $this->getUrl('partsfinder/index/index');?>" id="partsfinder_form" method="GET" class="filter_mini_form">
+		<div class="items first">
+			<label for="filter_brand"><?php echo $this->__('Select VACUUM Brand'); ?></label>
+			<div class='selectstylesheild'>
+				<span class="selectstylesheild-text" id="brand_span">Select Brand</span>
+				<div id="brand_container">
+<select id="filter_brand" class="select filter_brand" name="filter_brand">
+<option><?php echo $this->__('Please select');?></option>
+<?php $brands = Mage::getModel('partsfinder/brand')->loadAll();?>
+<?php foreach ($brands as $brand) :?>
+<option value="<?php echo $brand['id']?>"><?php echo $brand['name']?></option>
+<?php endforeach;?>
+</select>
+				</div> 
+				<span class="selectstylesheild-icon">&nbsp;</span>
+			</div>
+		</div>
+		
+		<div class="items last">
+			<label for="filter_model"><?php echo $this->__('Select VACUUM Model'); ?></label>
+			<div id="model_ajax_loading" style="display:none"><img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="" class="v-middle" /></div>
+			<div class='selectstylesheild' id="model_wrapper">
+				<span class="selectstylesheild-text" id="model_span">Select Model</span>
+					<div id="model_container">
+<select id="filter_model" class="select filter_model" name="filter_model"></select>
+					</div>
+				<span class="selectstylesheild-icon">&nbsp;</span>
+			</div>
+		</div>
+
+		<button type="button" title="<?php echo $this->__('Go') ?>" class="go-button" id="filter_result_show"><span><span><?php echo $this->__('Go') ?></span></span></button>
+	</form>
+
+<script type="text/javascript">
+partsfinder.initFilters();
+</script>

@@ -1,0 +1,477 @@
+.cms-page-view .col2-left-layout .col-main .page-title {
+	background: url(../images/cms-title.jpg) no-repeat transparent
+}
+.col2-left-layout .col-main {
+	width: 738px;
+}
+.col2-left-layout .col-main .exts-vn1 .std {
+	border-right: 1px solid #D9D9D9;
+	border-left: 1px solid #D9D9D9;
+	width: auto;
+	padding: 25px 11px 25px 25px;
+	clear: both;
+	float: left;
+	width: 700px;
+}
+.col2-left-layout .col-main .exts-vn1 .std .std {
+	padding: 0;
+	border: none medium !important;
+	width: auto;
+}
+.col2-left-layout .col-main .page-title {
+	margin: 0;
+	border-width: 0;
+}
+.cms-page-view .col2-left-layout .col-main .exts-vn1 {
+	background: url(../images/cms-block-bottom.jpg) no-repeat scroll center bottom transparent;
+	padding-bottom: 6px;
+	clear: both;
+	float: left;
+	width: 738px;
+}
+.cms-page-view .col2-left-layout .col-main .col-main {
+	width: auto;
+}
+.cms-page-view .col2-left-layout .page-title h1 {
+	color: #4f4f4f;
+	font-size: 24px;
+	text-transform: uppercase;
+	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+}
+.col2-left-layout .col-main .exts-vn1 .cms-col-left {
+	width: 380px;
+	margin-right: 15px;
+	float: left;
+}
+.col2-left-layout .col-main .exts-vn1 .cms-col-right {
+	width: 296px;
+	float: right;
+}
+.p12 {
+	font-size: 12px !important;
+	color: #4f4f4f;
+}
+.p12-bold {
+	font-weight: bold;
+	color: #4f4f4f;
+	font-size: 12px !important;
+}
+.p19 {
+	font-size: 19px;
+	color: #7a7a7b;
+}
+.h24 {
+	font-size: 24px;
+	color: #5b5b5b;
+}
+.exts-vn1 ul {
+	padding: 0;
+	list-style: none inside none;
+}
+.exts-vn1 ul li {
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+span.sp12-bold {
+	text-transform: uppercase;
+	color: #4f4f4f;
+	font-weight: bold;
+	font-size: 12px
+}
+.btn-contact {
+	background: url(../images/btn-contact.png) no-repeat transparent;
+	display: block;
+	text-indent: -9999em;
+	width: 127;
+	height: 33px;
+}
+/*cms menu*/
+.sidebar-box ul.cms-menu {
+	padding: 0;
+	border: none !important;
+}
+.sidebar-box ul li.parent {
+	margin: 0;
+}
+.sidebar-box ul li.parent ul {
+	margin: 0;
+	padding: 4px 9px 0;
+}
+.sidebar-box ul li.parent a {
+	padding: 0;
+	text-decoration: none;
+}
+.sidebar-box ul li.parent a span, .sidebar-box ul li.parent strong {
+	background: url("../images/sidebar_head.png") no-repeat scroll left center transparent;
+	color: #FFFFFF;
+	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	height: 37px;
+	line-height: 37px;
+	margin: 0;
+	padding: 0 14px;
+	text-transform: uppercase;
+	font-weight: bold;
+	display: block;
+}
+.sidebar-box ul li.parent ul li a span, .sidebar-box ul li.parent ul li strong {
+	background: none repeat scroll 0 0 transparent;
+	color: #4F4F4F;
+	display: inline-block;
+	font-family: arial;
+	font-weight: normal;
+	height: auto;
+	line-height: 11px;
+	margin: 0;
+	padding: 5px 0;
+	text-transform: none;
+}
+.sidebar-box ul li.parent ul li strong {
+	color: #e82c33;
+}
+.sidebar-box ul li.parent ul li {
+	margin: 0;
+	padding: 5px 0px;
+	border-bottom: 1px dotted #918f8f;
+	list-style: disc inside url("../images/cms-menu-li.gif")
+}
+.sidebar-box ul li.parent ul li a {
+	text-decoration: none;
+	font-size: 12px;
+	color: #5e5e5e;
+}
+#main-banner-img2 {
+	height: 456px;
+	display: block;
+	float:left;
+}
+/**/
+.messages li.error-msg, .messages li.success-msg, .messages li.note-msg, .messages li.notice-msg {
+}
+.messages ul {
+	padding: 10px 17px 18px !important
+}
+.search-autocomplete {
+	padding: 5px !important;
+	border-left: 1px solid #D7D7D7 !important;
+	border-right: 1px solid #D7D7D7 !important;
+	border-bottom: 1px solid #D7D7D7 !important;
+	width: 218px !important;
+	z-index: 2 !important;
+	background-color: #ffffff !important
+}
+.search-autocomplete ul li {
+	cursor: pointer;
+}
+#customer-reviews ul.form-list li {
+	width: auto !important;
+	margin-bottom: 20px !important;
+}
+#customer-reviews ul.form-list li label {
+	width: 110px !important;
+}
+/**/
+#nav-menu li ul.subexmenu6 {
+	margin-left: -500px;
+}
+#nav-menu li ul.subexmenu5 {
+	margin-left: -494px;
+}
+/**/
+#product_sendtofriend_form .form-list label {
+	text-align: left;
+}
+#product_sendtofriend_form h2.legend {
+	font-weight: bold;
+}
+#product_box .product_info .review-summary-table {
+	float: left;
+	width: 60px;
+}
+.fb_edge_widget_with_comment {
+	max-width: 170px !important;
+}
+#product_config .more-options-links {
+	bottom: 30px;
+}
+div.validation-passed {
+	width: 280px;
+}
+.bundle-summary {
+	position: static;
+	clear: both;
+}
+#product_config p.required {
+	width: auto;
+}
+/*home page*/
+#tab-panes {
+	padding-top: 20px;
+}
+.old-price .price {
+	font-size: 15px;
+	color: #e50b14;
+	left: -3px;
+}
+.regular-price .price {
+	font-size: 15px;
+	color: #e50b14;
+	left: -3px;
+}
+.special-price .price-label {
+	font-size: 11px;
+	text-transform: none;
+	color: #5e5e5e
+}
+.special-price .price {
+	font-size: 11px;
+	color: #5e5e5e;
+	top: -14px;
+	left: -85px;
+}
+.product_price {
+	height: 33px;
+	padding: 8px 0px
+}
+.std p {
+	margin-bottom: 0px;
+}
+.more-options {
+	position: absolute;
+	left: 145px;
+	clear: both;
+}
+.more-links li {
+	float: none;
+	padding: 0 0 0 10px !important;
+	margin: 0 !important;
+	position: relative;
+	top: 0px;
+	width: auto;
+}
+.more-links {
+	right: 7px;
+	margin-bottom: 0;
+	bottom: 2px;
+}
+.cms-index-index .more-links, .checkout-cart-index .more-links {
+	bottom:21px;
+	left:1px;
+}
+.ratings {
+	margin: 0;
+}
+.reviews {
+	height: 16px;
+}
+span.active ul.more-links, span.active ul.more-options-links {
+	display: block;
+}
+.more-links a {
+	height: 24px;
+}
+/*category view*/
+.products-grid-new .product-moreinfo ul.more-links {
+	bottom: 22px;
+	left: 1px;
+}
+.products-list-new .more-links {
+	bottom: 32px;
+	left: -11px !important;
+}
+.products-list-new .more-options {
+	left: 133px;
+}
+/*catalog product view*/
+
+.product-view #tabs {
+	width: 737px;
+}
+.product-view #tabs li a {
+	width: 145px;
+	padding: 16px 15px 0 15px;
+}
+.product-view #tab-panes ul li {
+	border-right: none;
+	padding: 0;
+	width: 300px;
+	margin-bottom: 0;
+}
+.product-view #tab-panes ul {
+	/*padding-top: 20px;*/
+}
+.product-view #tab-panes {
+	width: 725px;
+}
+.product-view #key_features {
+	width: 330px;
+}
+.product-view .product-view #key_features #description {
+	position: relative;
+	clear: both;
+	padding-top: 15px;
+}
+.product-view #sticky-text h3 {
+	border-top: none;
+}
+.product-view #sticky-text {
+	padding-top: 10px;
+}
+.product-view #product_box .special-price {
+	width: 95px;
+	color: #232323;
+	display: block;
+}
+.product-view #product_box .special-price .price-label {
+	font-size: 13px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.product-view #product_box .special-price .price {
+	font-size: 13px;
+	font-weight: bold;
+	left: 10px;
+	top: -17px;
+}
+.product-view #product_config .more-options {
+	right: 10px !important;
+	left: auto;
+}
+/*product related*/
+.box-collateral .box-title {
+	background: none;
+	border: none;
+}
+#you-may-also-need h2 {
+	color: #5e5e5e;
+	font-weight: bold;
+}
+#you-may-also-need .special-price .price-label {
+	text-transform: none;
+	font-weight: normal;
+	font-size: 12px;
+	position: relative;
+	top: -3px;
+}
+#you-may-also-need .special-price .price {
+	text-transform: none;
+	font-weight: normal;
+	font-size: 12px;
+	position: relative;
+	top: -19px;
+	left: -97px;
+}
+#you-may-also-need .more-options2 {
+	clear: both;
+	position: absolute;
+	left: 145px;
+}
+#you-may-also-need .more-links li {
+	float: none;
+	padding: 0 0 0 10px !important;
+	margin: 0;
+	position: relative;
+	top: 23px;
+}
+#you-may-also-need .more-links-related {
+	right: 9px;
+	height: 0;
+	bottom: 94px;
+}
+/*downloadable*/
+.downloadable_page_content {
+	float: none !important;
+}
+/*vacfinder*/
+#vac-finder .sidebar-box .price-box .old-price .price-label {
+	display: none;
+}
+#vac-finder .sidebar-box .price-box .old-price .price {
+	font-size: 13px;
+}
+#vac-finder .sidebar-box .price-box .special-price .price-label {
+	display: none;
+}
+#vac-finder .sidebar-box .price-box .special-price .price {
+	display: none;
+}
+/*form login*/
+.ext-login-content .col2 a {
+	position: relative;
+	bottom: -10px;
+}
+.ext-login-content .register-link {
+	bottom: -3px;
+	position: absolute;
+}
+.ext-login-content .page_content {
+	padding-bottom: 10px;
+}
+.ext-login-content .page_inner {
+	height: 175px;
+}
+/*tag view*/
+/*sale billing*/
+.ext-tag-view-page-content .page_content, .ext-billing .page_content, .ext-recurring .page_content, .ext-history .page_content {
+	float: none !important;
+}
+.ext-tag-view-page-content .my-tags-table, .ext-tag-view-page-content .tags-list, .ext-billing .billing-agreements, .ext-recurring .recurring-profiles {
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-right: 20px;
+}
+/*footer*/
+.footer-container {
+	padding: 0;
+}
+/*template links*/
+#invitation-send-link a {
+	background: none;
+}
+
+/*template category*/
+#bottom-nav .nav-col li:first a {
+border-top: 1px solid #d7d7d7;
+margin-top: 4px;
+}
+/*customer*/
+.ext-customer-navigation #cat-box-foot {
+	position: relative;
+	top: -12px;
+}
+.ext-customer-newsletter .page_content, .ext-customer-form-edit .page_content, .ext-customer-address-book .page_content, .ext-customer-address-edit .page_content, .ext-gifcardaccount-redeem .page_content, .ext-reward .page_content {
+	float: none
+}
+.ext-customer-newsletter .page_inner {
+	height: 100px;
+}
+.ext-customer-form-edit .page_section_title, .ext-customer-form-edit .fieldset, .ext-customer-address-book .col2-set, .ext-customer-address-edit .fieldset, .ext-gifcardaccount-redeem .giftcardaccount, .ext-reward .my-rewards {
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-right: 20px;
+}
+.ext-customer-address-book .title-buttons {
+	padding-top: 20px;
+	padding-right: 10px;
+}
+/*giftregistry*/
+
+.ext-giftregistry-view .page_content, .ext-giftregistry-list .page_content {
+	float: none
+}
+.ext-giftregistry-view .special-price .price {
+	left: -510px;
+	top: -18px;
+}
+.ext-giftregistry-view .old-price .price-label {
+	display: none;
+}
+.ext-giftregistry-view .special-price .price-label {
+	position: relative;
+	left: -5px;
+}
+.ext-giftregistry-list .giftcardaccount {
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-right: 20px;
+}

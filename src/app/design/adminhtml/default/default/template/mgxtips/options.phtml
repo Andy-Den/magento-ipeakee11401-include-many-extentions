@@ -1,0 +1,64 @@
+<?php
+/**
+ * Webtex
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.webtexsoftware.com/LICENSE.txt
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@webtexsoftware.com and we will send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.webtexsoftware.com for more information, 
+ * or contact us through this email: info@webtexsoftware.com.
+ *
+ * @category   design_default
+ * @package    MagExt_Tips
+ * @copyright  Copyright (c) 2011 Webtex Solutions, LLC (http://www.webtexsoftware.com/)
+ * @license    http://www.webtexsoftware.com/LICENSE.txt End-User License Agreement
+ */
+?>
+
+<div>
+<ul class="messages">
+    <li class="notice-msg">
+        <ul>
+            <li><?php echo Mage::helper('catalog')->__('If you do not specify an option value for a specific store view then the default (Admin) value will be used.') ?></li>
+        </ul>
+    </li>
+</ul>
+</div>
+
+<div class="entity-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Manage Description') ?></h4>
+    </div>
+    <div class="box">
+		    <div class="hor-scroll">
+	        <table class="form-list" cellspacing="0" id="attribute-labels-table">
+	            
+                <?php $_labels = $this->getDescValues() ?>
+	            <?php foreach ($this->getStores() as $_store): ?>
+	                <tr><th><?php echo $_store->getName() ?></th></tr>
+                    <tr><td class="value">
+	                    <textarea class="textarea-up" name="mgxtips[<?php echo $_store->getId() ?>]"><?php if(isset($_labels[$_store->getId()])) echo $this->htmlEscape($_labels[$_store->getId()]) ?></textarea>
+	                </td></tr>
+	            <?php endforeach; ?>
+                
+                <script type="text/javascript">
+                    jQuery('#product_attribute_tabs_description').click(function() {
+                        jQuery(".textarea-up").cleditor();
+                    });
+                </script>
+	            
+	        </table>
+		    </div>
+    </div>
+</div>

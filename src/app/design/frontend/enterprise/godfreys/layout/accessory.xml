@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+<!--
+Category layered navigation layout
+-->
+
+    <catalog_category_layered translate="label">
+        <label>Catalog Category (Anchor)</label>
+        <reference name="left">
+            <block type="accessory/search_form_mini" name="accessory.mini.search" template="accessory/search/form/mini.phtml" after="catalog.compare.sidebar"/>
+            <!--<block type="accessory/search_form" name="accessory.search" template="accessory/search/form.phtml"/>-->
+        </reference>
+    </catalog_category_layered>
+    <catalog_category_default>
+        <label>Catalog Category (Non-Anchor)</label>
+        <reference name="left">
+            <block type="accessory/search_form_mini" name="accessory.mini.search" template="accessory/search/form/mini.phtml"/>
+        </reference>
+    </catalog_category_default>
+    <cms_page>
+        <label>CMS Pages (All)</label>
+        <reference name="right">
+            <block type="accessory/search_form_mini" name="accessory.mini.search" template="accessory/search/form/mini.phtml"/>
+        </reference>
+    </cms_page>
+    <cms_index_index translate="label">
+        <label>CMS Home Page</label>
+        <reference name="right">
+            <block type="accessory/search_form_mini" name="accessory.mini.search" template="accessory/search/form/mini.phtml"/>
+        </reference>
+    </cms_index_index>
+    <accessory_search translate="label">
+        <label>Accessory Search (Anchor)</label>
+        <reference name="content">
+            <block type="accessory/search_form" name="accessory.search" before="product_list_toolbar" template="accessory/search/form.phtml"/>
+        </reference>
+        <remove name="accessory.mini.search"/>
+    </accessory_search>
+    <!-- the ajax controller -->
+    <accessory_filter_bybrand translate="label">
+        <label>Filtered Model Dropdown</label>
+            <remove name="root" />
+            <block type="accessory/search_form_model_dropdown" output="toHtml" name="accessory.search.model.dropdown" template="accessory/search/form/model/dropdown.phtml" />
+    </accessory_filter_bybrand>
+    
+    </layout>

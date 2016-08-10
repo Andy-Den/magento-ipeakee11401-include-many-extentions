@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Itoris_Producttabsslider>
+			<version>1.1.10</version>
+		</Itoris_Producttabsslider>
+	</modules>
+	
+	<global>
+	
+		<helpers>
+			<itoris_producttabsslider>
+				<class>Itoris_Producttabsslider_Helper</class>
+			</itoris_producttabsslider>
+		</helpers>
+		
+		<blocks>
+			<itoris_producttabsslider>
+				<class>Itoris_Producttabsslider_Block</class>
+			</itoris_producttabsslider>
+			<catalog>
+				<rewrite>
+					<product_view>Itoris_Producttabsslider_Block_View</product_view>
+				</rewrite>
+			</catalog>
+		</blocks>
+		
+		<models>
+			<itoris_producttabsslider>
+				<class>Itoris_Producttabsslider_Model</class>
+				<resourceModel>itoris_producttabsslider_mysql4</resourceModel>
+			</itoris_producttabsslider>
+			<itoris_producttabsslider_mysql4>
+				<class>Itoris_Producttabsslider_Model_Mysql4</class>
+				<entities>
+					<settings><table>itoris_producttabsslider_settings</table></settings>
+					<tab><table>itoris_producttabsslider_tabs</table></tab>
+				</entities>
+			</itoris_producttabsslider_mysql4>
+		</models>
+		<resources>
+            <itoris_producttabsslider_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </itoris_producttabsslider_write>
+            <itoris_producttabsslider_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </itoris_producttabsslider_read>
+        </resources>
+		<events>
+		    <core_block_abstract_prepare_layout_after>
+		        <observers>
+		            <itoris_producttabsslider_product_edit_layout>
+		                <type>singleton</type>
+		                <class>itoris_producttabsslider/tab</class>
+		                <method>addTabToProductEditPage</method>
+		            </itoris_producttabsslider_product_edit_layout>
+		        </observers>
+		    </core_block_abstract_prepare_layout_after>
+
+			<core_block_abstract_prepare_layout_after>
+		        <observers>
+		            <itoris_producttabsslider_product_view_addjscss>
+		                <type>singleton</type>
+		                <class>itoris_producttabsslider/tab</class>
+		                <method>addJsCss</method>
+		            </itoris_producttabsslider_product_view_addjscss>
+		        </observers>
+		    </core_block_abstract_prepare_layout_after>
+
+			<controller_front_init_before>
+		    	<observers>
+		            <itoris_producttabsslider2>
+		                <type>singleton</type>
+		                <class>itoris_producttabsslider/tab</class>
+		                <method>fixOverride</method>
+		            </itoris_producttabsslider2>
+		        </observers>
+		    </controller_front_init_before>
+		</events>
+	</global>
+	
+	<frontend>
+        <routers>
+            <itoris_producttabsslider>
+                <use>standard</use>
+                <args>
+                    <module>Itoris_Producttabsslider</module>
+                    <frontName>pts</frontName>
+                </args>
+            </itoris_producttabsslider>
+        </routers>
+	</frontend>
+	
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<itoris_producttabsslider before="Mage_Adminhtml">Itoris_Producttabsslider_Adminhtml</itoris_producttabsslider>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+
+	<adminhtml>
+		<layout>
+			<updates>
+				<itoris_producttabsslider>
+					<file>itoris_producttabsslider.xml</file>
+				</itoris_producttabsslider>
+			</updates>
+		</layout>
+ 		<menu>
+            <system>
+                <children>
+                    <itoris_extensions>
+						<children>
+							<itoris_producttabsslider module="itoris_producttabsslider">
+								<title>Product Tabs Slider</title>
+								<action>product_tabs_slider/admin_index</action>
+								<sort_order>4</sort_order>
+							</itoris_producttabsslider>
+						</children>
+                    </itoris_extensions>
+                </children>
+            </system>
+        </menu>
+        
+        <acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<itoris_extensions>
+									<children>
+										<itoris_producttabsslider>
+											<title>Product Tabs Slider</title> 
+										</itoris_producttabsslider>
+									</children>
+								</itoris_extensions>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+</config>

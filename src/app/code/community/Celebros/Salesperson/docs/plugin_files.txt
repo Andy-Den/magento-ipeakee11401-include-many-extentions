@@ -1,0 +1,23 @@
+
+******************************************************
+* Celebros Salesperson Plugin Folders/Files Location *
+******************************************************
+
+
+app/code/community/Celebros/Salesperson
+
+js/salesperson
+
+skin/frontend/base/default/css/salesperson
+
+skin/frontend/base/default/images/salesperson
+
+app/design/frontend/base/default/layout/salesperson.xml
+
+app/design/frontend/base/default/template/salesperson
+
+app/design/adminhtml/default/default/layout/salesperson.xml
+
+app/design/adminhtml/default/default/template/salesperson
+
+app/etc/modules/Celebros_Salesperson.xml

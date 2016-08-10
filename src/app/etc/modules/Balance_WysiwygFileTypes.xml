@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Balance_WysiwygFileTypes>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Balance_WysiwygFileTypes>
+    </modules>
+</config> 
+

@@ -1,0 +1,205 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_iphone
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+<?php
+/**
+ * $this->renderCategoriesMenuHtml() supports optional arguments:
+ * int Level number for list item class to start from
+ * string Extra class of outermost list items
+ * string If specified wraps children list in div with this class
+ */
+    $currentCategory = $this->getCurrentCategory();
+    $rootCategory = Mage::getModel('catalog/category')->load(Mage::app()->getWebsite(true)->getDefaultStore()->getRootCategoryId());
+    $categories = $rootCategory->getChildrenCategories();
+?>
+<?php if ($currentCategory && $currentCategory->getId()): ?>
+    <?php if($this->getUrl('') != $this->getUrl('*/*/*', array('_current' => true, '_use_rewrite' => true))): ?>
+        <div class="head-title-wp <?php if($currentCategory->getLevel()==2):?> category-2 <?php endif;?>">
+            <div class="head-button"><a onclick="window.history.back()" class="button button-back"><span><?php echo $this->__('Back');?></span></a></div>
+            <div class="head-title"><?php echo $currentCategory->getName(); ?></div>
+            <div class="clear">&nbsp;</div>
+        </div>    
+        <?php if($currentCategory->getData('image') != ''&& $currentCategory->getLevel()<=2) : ?>
+            <div class="cat-img-wp">
+                <div class="cat-img">
+                    <img src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $currentCategory->getData('image'); ?>"/>
+                </div>
+            </div> 
+        <?php endif ?>    
+    <?php endif ?>
+	<?php
+		$_currentCat = $currentCategory;
+		while($_currentCat->getLevel() > 2) {
+			$_currentCat = $_currentCat->getParentCategory();
+		}
+		
+	?>
+	<?php if(($_currentCat->getLevel() == 2) && ($_currentCat->getUrlKey() == 'store-locator')): ?>	
+	<div class="locator-search">
+	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('hoover_mobile_storelocator_info')->toHtml(); ?>
+		<form id="store_locator_form" name="store_locator_form" action="<?php echo $this->getUrl('store-locator/results') ?>" method="get">
+			<div class="mid-contain">
+				<input name="address" type="text" class="textfield" id="address" autocomplete="off" value="<?php echo isset($_REQUEST['address']) ? $_REQUEST['address'] : '';?>"/>
+				<div class="search-store">
+					<input type="image" src="<?php echo $this->getSkinUrl('images/btn-bkg-go2.png');?>" class="img">
+				</div>
+			</div>
+			<div class="distance" style="display:none;">
+				<span class="bluetitle">Distance (km): </span><br />
+				<?php 
+					$Dist = Mage::getStoreConfig('storelocator/general/default_radius');
+					$AvialDist = explode(",",$Dist);
+				?>
+				<select name="distance" id="distance" style="margin-top: 6px; width: 80px; border: 2px solid rgb(164, 165, 239);">
+				  <?php foreach($AvialDist  as $avail){?>
+				  <option value="<?php echo $avail;?>" <?php if(isset($_REQUEST['distance']) && $_REQUEST['distance']==$avail){?> selected="selected"<?php }?>><?php echo $avail;?></option>
+				  <?php }?>
+				</select>
+			</div>
+		</form>
+		<script type="text/javascript">
+		  //<![CDATA[
+		  var LocatorForm = new Varien.searchForm('store_locator_form', 'address', '<?php echo $this->__('Enter Postcode / Suburb') ?>');
+		  LocatorForm.initAutocomplete('<?php echo $this->getUrl('storelocator/index/suggest') ?>', 'store_autocomplete');
+		  //]]>
+		</script>
+	</div>
+	<div class="my-locator">
+	<p><button type="button" id="locate_me" class="button btn-locate"><span><span><?php echo $this->__('find nearest service agent') ?></span></span></button></p>
+	<p style="display:none;" id="locate_progress">&nbsp;</p>
+	</div>
+	<script type="text/javascript">
+	$j(document).ready(function() {
+
+		$j(function(){
+		   var GETZIP = {
+			  getLocation: function(){
+				$j("#locate_progress").text('Searching...');
+				$j("#locate_progress").show();
+				 if(navigator.geolocation){
+					navigator.geolocation.getCurrentPosition(GETZIP.getZipCode, GETZIP.error, {timeout: 7000});//cache it for 10 minutes
+				 }else{
+					GETZIP.error('Geo location not supported');
+				 }
+			  },
+			  index: 0,
+			  error: function(msg) {
+				 if(msg.code){
+					//this is a geolocation error
+					switch(msg.code){
+					case 1:
+					   $j("#locate_progress").text('Permission Denied').fadeOut().fadeIn();
+					   break;
+					case 2:
+					   $j("#locate_progress").text('Position Currently Unavailable').fadeOut().fadeIn();
+					   break;
+					case 3:
+					   GETZIP.index++;
+					   $j("#locate_progress").text('Timeout... Trying again (' + GETZIP.index + ')').fadeOut().fadeIn();
+					   navigator.geolocation.getCurrentPosition(GETZIP.getZipCode, GETZIP.error, {timeout: 7000});
+					   break;
+					default:
+					   //nothing
+					}
+				 }else{
+					//this is a text error
+					$j("#locate_progress").text(msg).addClass('failed');
+				 }
+
+			  },
+
+			  getZipCode: function(position){
+				 var position = position.coords.latitude + "," + position.coords.longitude;
+				 $j.getJSON('locator_proxy.php',{
+					path : "http://maps.google.com/maps/api/geocode/json?latlng="+position+"&sensor=false",
+					type: "application/json"
+				 }, function(json){
+					//Find the zip code of the first result
+					if(!(json.status == "OK")){
+					   GETZIP.error('Zip Code not Found');
+					   return;
+					}
+					var found = false;
+					$j(json.results[0].address_components).each(function(i, el){
+					   if($j.inArray("postal_code", el.types) > -1){
+						  $j("#status").text('Your Zip Code: ' + el.short_name);
+						  found = true;
+						  window.location.href = "<?php echo Mage::getBaseUrl(); ?>store-locator/results?address=" + el.short_name + "&distance=250";
+						  //return;
+					   }
+					});
+					if(!found){
+					   GETZIP.error('Zip Code not Found');
+					}
+				 });
+			  }
+		   }
+		$j("#locate_me").click(function(e)
+		{
+			e.preventDefault();
+			GETZIP.getLocation();
+			return false;	
+		});
+		
+		
+		if(!navigator.geolocation){
+		   $j("#locate_me_arrow").hide();
+		 }
+		   
+		});
+		
+		
+	});
+	</script>
+	<script type="text/javascript">
+		   catPath[73] = '1/3/72/73';
+		   catUrl[73] = '<?php echo Mage::getBaseUrl(); ?>store-locator/results';
+	</script>
+	<?php endif; ?>
+    <?php if ($currentCategory->hasChildren()): ?>
+    <div class="nav-wrap">
+        <div id="nav-container">
+            <ul id="nav">
+                <?php foreach ($currentCategory->getChildrenCategories() as $category): ?>
+				<?php $category = Mage::getModel('catalog/category')->load($category->getId()); ?>
+                    <?php if ($category->getIsActive() && $category->getIncludeInMenu()): ?>
+                        <li>
+                            <a href="<?php echo $category->getUrl(); ?>" title="<?php echo $category->getName(); ?>"><span><?php echo $category->getName(); ?></span></a>
+                        </li>
+                    <?php endif ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <?php endif ?>
+<?php endif ?>

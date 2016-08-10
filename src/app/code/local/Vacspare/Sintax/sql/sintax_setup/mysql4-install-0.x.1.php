@@ -1,0 +1,1 @@
+<?php$write = Mage::getSingleton('core/resource')->getConnection('core_write');$write->query("insert into catalog_product_link_type(`link_type_id`,`code`) values('7','custom')");$write->query("insert into catalog_product_link_attribute(`link_type_id`,`product_link_attribute_code`,`data_type`) values('7','position','int')");?>

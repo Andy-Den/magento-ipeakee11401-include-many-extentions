@@ -1,0 +1,320 @@
+<?xml version="1.0" ?>
+<layout>
+	<default>
+		<reference name="right">
+			<remove name="right.poll" />
+			<remove name="paypal.partner.right.logo" />
+		</reference>
+		<reference name="head">
+			<action method="addCss">
+				<stylesheet>css/godfreysau.css</stylesheet>
+			</action>
+			<action method="addCss">
+				<stylesheet>css/home-cms.css</stylesheet>
+			</action>
+		</reference>
+		<refernce name="footer">
+			<remove name="footer_links" />
+			<remove name="store_switcher" />
+			<remove name="footer.newsletter" />
+		</refernce>
+		<reference name="footer">
+			<block type="core/template" name="footer.category" as="footer.category"
+				template="page/template/category.phtml" />
+			<block type="core/template" name="footer.about.site" as="footer.about.site"
+				template="page/template/aboutsite.phtml" />
+			<block type="core/template" name="footer_newsletter" as="footer_newsletter"
+				template="page/template/newsletter.phtml" />
+			<block type="core/template" name="footer.social.network" as="footer.social.network"
+				template="page/template/socialntwk.phtml" />
+			<block type="core/template" name="footer.banners" as="footer.banners"
+				template="page/template/banners.phtml" />
+			<!--<block type="core/template" name="footer.banners" as="footer.brands"
+				template="page/template/brands.phtml" />-->
+			<block type="awislider/block" name="footer.brands" template="" before="-">
+				<action method="setId">
+					<id>brand-slider</id>
+				</action>
+			</block>
+		</reference>
+		<reference name="cms_footer_links">
+			<action method="setBlockId">
+				<block_id>footer_links</block_id>
+			</action>
+		</reference>
+		<reference name="head">
+		</reference>
+                <reference name="content">
+                        <block type="page/html" name="ajax_global_messages" template="page/global_messages.phtml" ajax="true"/>
+                </reference>
+	</default>
+	<cms_index_index>
+		<remove name="breadcrumbs" />
+	</cms_index_index>
+	<catalog_category_default >
+		<reference name="right">
+			<!--<remove name="left.reports.product.viewed"/>-->
+		</reference>
+		<reference name="left">
+			<block type="reports/product_viewed" before="right.permanent.callout" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+		</reference>
+	</catalog_category_default>
+	<catalog_product_view>
+		<update handle="catalog_category_layered_nochildren"/>
+		<reference name="head">
+			<action method="removeItem">
+				<type>skin_js</type>
+				<name>js/jqzoom/jquery-1.3.1.min.js</name>
+			</action>
+			<action method="removeItem">
+				<type>skin_js</type>
+				<name>js/jqzoom/jquery.jqzoom1.0.1.js</name>
+			</action>
+			<action method="addJs">
+				<script>jquery/v1_6/jquery.jcarousel.js</script>
+			</action>
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>js/product.js</name>
+			</action>
+			<action method="addItem">
+				<type>js_css</type>
+				<name>jquery/v1_6/jcarousel/skin.css</name>
+			</action>
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>js/prod_vw_img_slider.js</name>
+			</action>
+                        <action method="addItem">
+				<type>js_css</type>
+				<name>fancybox/jquery.fancybox-1.3.4.css</name>
+			</action>
+                        <action method="addJs">
+				<script>fancybox/jquery.fancybox-1.3.4.js</script>
+			</action>
+		</reference>
+		<reference name="root">
+			<action method="setTemplate">
+				<template>page/2columns-left.phtml</template>
+			</action>
+		</reference>
+		<reference name="left">
+			<block type="catalog/product_compare_sidebar" before="-" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml">
+				<action method="addPriceBlockType">
+					<type>bundle</type>
+					<block>bundle/catalog_product_price</block>
+					<template>bundle/catalog/product/price.phtml</template>
+				</action>
+			</block>
+			<block type="catalog/product_list_upsell" name="catalog.product.upsell" after="catalog.compare.sidebar" template="catalog/product/list/upsell.phtml"/>
+			<block type="reports/product_viewed" before="right.permanent.callout" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+		</reference>
+		<reference name="product.description">
+			<block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml"/>
+		</reference>
+	</catalog_product_view>
+	<customer_account_login>
+		<reference name="head">
+			<!--  <action method="removeItem"><type>skin_css</type><name>css/styles.css</name></action>
+ 		--></reference>
+		<reference name="customer_form_login">
+			<action method="setTemplate">
+				<template>persistent/customer/form/login.phtml</template>
+			</action>
+		</reference>
+	</customer_account_login>
+	<customer_account>
+		<reference name="left">
+			<block type="reports/product_viewed" after="customer_account_navigation" name="left.reports.product.viewed_new" template="reports/product_viewed.phtml" />
+			<block type="accessory/search_form_mini" after="left.reports.product.viewed_new" name="left.accessory.search_form_mini" template="accessory/search/form/mini.phtml" />
+			<!--<block type="cms/block" name="cms_test_block" after="left.reports.product.viewed_new">
+				<action method="setBlockId">
+					<block_id>search_bag_accessories</block_id>
+				</action>
+			</block>-->
+
+			<!-- remove My Orders sidebar -->
+			<remove name="sale.reorder.sidebar"/>
+		</reference>
+	</customer_account>
+	<catalog_category_default>
+		<!--  <remove name="breadcrumbs" />-->
+
+		<reference name="root">
+			<action method="setTemplate">
+				<template>page/1column-category.phtml</template>
+			</action>
+		</reference>
+		<reference name="head">
+			<!--<action method="addItem">
+			<type>skin_js</type>
+				<name>js/tal/shopby/categories-shopby.js</name>
+			</action>-->
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>js/tal/shopby/categories-shopby-menus.js</name>
+			</action>
+		</reference>
+		<reference name="left">
+			<block type="reports/product_viewed" before="right.permanent.callout" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+		</reference>
+		<reference name="right">
+			<block type="reports/product_viewed" before="right.permanent.callout" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+		</reference>
+		<reference name="breadcrumbs.container">
+			<action method="setTemplate">
+				<template>catalog/category/title.phtml</template>
+			</action>
+		</reference>
+		<reference name="content">
+			<reference name="category.products">
+				<block type="core/template" name="category.sidebar" as="category.sidebar" template="catalog/product/sidebar.phtml"/>
+				<block type="catalog/product_compare_sidebar" before="-" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml">
+					<action method="addPriceBlockType">
+						<type>bundle</type>
+						<block>bundle/catalog_product_price</block>
+						<template>bundle/catalog/product/price.phtml</template>
+					</action>
+				</block>
+				<block type="core/template" name="catalog.sidebar.rest" as="catalog.sidebar.rest" template="catalog/product/rest.phtml"/>
+			</reference>
+			<reference name="product_list">
+				<action method="setTemplate">
+					<template>catalog/product/list.phtml</template>
+				</action>
+				<!--  <block type="core/template" name="category.sidebar" as="category.sidebar" template="catalog/product/sidebar.phtml"/>
+ 				-->
+			</reference>
+			<reference name="product_list_toolbar">
+				<action method="setTemplate">
+					<template>catalog/product/list/toolbar.phtml</template>
+				</action>
+			</reference>
+			<reference name="product_list_toolbar_pager">
+				<action method="setTemplate">
+					<template>page/html/pager.phtml</template>
+				</action>
+			</reference>
+		</reference>
+	</catalog_category_default>
+	<catalog_product_compare_index>
+		<reference name="root"></reference>
+	</catalog_product_compare_index>
+	<page>
+		<layouts>
+			<one_column_category>
+				<label>1 Column Category</label>
+				<template>page/1column-category.phtml</template>
+			</one_column_category>
+		</layouts>
+	</page>
+	<catalogsearch_result_index translate="label">
+		<reference name="root">
+			<action method="setTemplate">
+				<template>page/2columns-left.phtml</template>
+			</action>
+		</reference>
+		<update handle="catalog_category_layered_nochildren"/>
+		<reference name="breadcrumbs.container">
+			<action method="setTemplate">
+				<template>catalog/category/title.phtml</template>
+			</action>
+		</reference>
+		<reference name="left">
+			<block type="catalog/product_compare_sidebar" before="-" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml">
+				<action method="addPriceBlockType">
+					<type>bundle</type>
+					<block>bundle/catalog_product_price</block>
+					<template>bundle/catalog/product/price.phtml</template>
+				</action>
+			</block>
+		</reference>
+		<reference name="product_list_toolbar">
+			<action method="setTemplate">
+				<template>catalog/product/list/toolbar.phtml</template>
+			</action>
+			<block type="page/html_pager" name="product_list_toolbar_pager"/>
+		</reference>
+	</catalogsearch_result_index>
+	<checkout_cart_index>
+        <reference name="root">
+            <action method="unsetChild">
+                <name>breadcrumbsContainer</name>
+            </action>
+        </reference>
+		<reference name="content">
+			<!--<remove name="checkout.cart.coupon"/>-->
+			<remove name="checkout.cart.shipping"/>
+		</reference>
+		<reference name="header">
+            <action method="setTemplate">
+                <template>checkout/alternative_head.phtml</template>
+            </action>
+        </reference>
+        <reference name="footer">
+            <action method="setTemplate">
+                <template>checkout/alternative_footercart.phtml</template>
+            </action>
+        </reference>
+	</checkout_cart_index>
+    <onestepcheckout_index_index>
+        <reference name="header">
+            <action method="setTemplate">
+                <template>onestepcheckout/alternative_header.phtml</template>
+            </action>
+        </reference>
+    </onestepcheckout_index_index>
+    <paypal_express_review>
+        <reference name="breadcrumbs">
+            <action method="setTemplate">
+                <template>page/html/breadcrumbs-paypalexpress.phtml</template>
+            </action>
+        </reference>
+        <reference name="footer">
+            <action method="setTemplate">
+                <template>checkout/alternative_footercart.phtml</template>
+            </action>
+        </reference>
+        <reference name="header">
+            <action method="setTemplate">
+                <template>checkout/alternative_head_paypalexpress.phtml</template>
+            </action>
+        </reference>
+        <reference name="account.links">
+            <action method="removeLinkByUrl">
+                <url helper="customer/getRegisterUrl" />
+            </action>
+            <action method="addLink" translate="label title before_text" module="customer">
+                <label>register</label>
+                <url helper="customer/getRegisterUrl" />
+                <title>register</title>
+                <prepare/>
+                <urlParams/>
+                <position>100</position>
+                <li/>
+                <a/>
+                <before_text>or </before_text>
+            </action>
+        </reference>
+        <reference name="paypal.express.review.details.totals">
+            <action method="setTemplate">
+                <template>paypal/express/review/totals.phtml</template>
+            </action>
+        </reference>
+    </paypal_express_review>
+    <catalog_category_layered translate="label">
+		<label>Catalog Category (Anchor)</label>
+		<reference name="left">
+			<block type="salesperson/layer_view" name="salesperson.nonleadquestions.left" as="nonleadquestions_left" before="-">
+				<action method="setTemplate" ifleft="salesperson/display_settings/display_non_lead">
+					<template>salesperson/layer/non-lead.phtml</template>
+				</action>
+				 <block type="salesperson/layer_view" name="price.question" as="price_question">
+					<action method="setTemplate">
+						<template>salesperson/layer/price-question.phtml</template>
+					</action>
+				</block>
+			</block>
+		</reference>
+    </catalog_category_layered>
+</layout>

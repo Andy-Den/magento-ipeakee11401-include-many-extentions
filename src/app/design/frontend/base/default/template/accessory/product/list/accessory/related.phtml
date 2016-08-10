@@ -1,0 +1,28 @@
+<?php
+/**
+ * Uses the related block to add suits the following models
+ */
+?>
+<?php /* @var $this Balance_Accessory_Block_Catalog_Product_List_Accessory_Related */ ?>
+<?php if($this->isAccessoryProduct() && count($this->getItems())): ?>
+
+        <dt><?php echo $this->__('Suits The Following Models:') ?></dt>
+        
+        <?php $i=0; foreach($this->getItems() as $_item): ?>
+        <?php $i++; ?>
+        <ul class="product-features-top3">
+            <li class="item<?php if(($i-1)%3==0): ?> first<?php elseif($i%3==0): ?> last<?php endif; ?>">
+                <?php $_relatedProduct = Mage::getModel('catalog/product')->load(Mage::getModel('catalog/product')->getIdBySku($_item->getSku())); ?>
+              <?php if($_relatedProduct->isVisibleInSiteVisibility()): ?>
+                <a href="<?php echo $_item->getProductUrl() ?>">
+              <?php endif; ?>
+                        <?php echo $this->htmlEscape($_relatedProduct->getName()) ?>
+              <?php if($_relatedProduct->isVisibleInSiteVisibility()): ?>
+                </a>
+              <?php endif; ?>
+            </li>
+        <?php if ($i==$this->getItems()->count()): ?>
+        </ul>
+        <?php endif ?>
+        <?php endforeach ?>
+<?php endif; ?>

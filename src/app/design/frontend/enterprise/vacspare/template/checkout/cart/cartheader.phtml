@@ -1,0 +1,92 @@
+<div class="cart-link">
+<?php $_cartQty = $this->getSummaryCount() ?>
+<?php if ($_cartQty > 0): ?>
+    <?php $_myCart = $this->__('MY CART') ?>
+<?php else: ?>
+    <?php $_myCart = $this->__('MY CART') ?>
+<?php endif ?>
+<?php if ($this->getIsLinkMode() || !$this->getIsNeedToDisplaySideBar()):?>
+    <div class="block-title no-items">
+        <ul class="links cart-link">
+            <li ><a href="<?php echo $this->getUrl('checkout/cart'); ?>"><?php echo $_myCart ?></a></li>
+        </ul>
+    </div>
+<?php else:?>
+    <div class="block-title<?php if(!$_cartQty) { echo (' no-items'); } ?>">
+		<span>
+			<small><?php if(!$_cartQty) { echo (' 0'); } else{echo $_cartQty;} ?></small>
+		</span>
+    	
+    </div>
+    <div id="topCartContent" class="block-content" style="display:none">
+		
+        <div class="inner-wrapper">
+			<label>My Cart<span><small>(<?php if(!$_cartQty) { echo (' 0'); } else{echo $_cartQty;} ?> Items)</small></span>
+			</label>
+        <?php $_items = $this->getRecentItems() ?>
+        <?php if(count($_items)): ?>
+            <!--  <p class="block-subtitle">
+                <span onclick="Enterprise.TopCart.hideCart()" class="close-btn"><?php echo $this->__('Close'); ?></span>
+                <?php echo $this->__('Recently added item(s)') ?>
+            </p>-->
+			<div id="carousel-wrapper-cartheader">
+				<ol id="mini-cart" class="mini-products-list">
+					<?php foreach($_items as $_item): ?>
+						<?php echo $this->getItemHtml($_item) ?>
+					<?php endforeach; ?>
+				</ol>
+				
+			</div>
+			<div class="controls">
+				<a style="float: right" rel="next" class="carousel-control ico-next" href="javascript:">&nbsp;</a>
+				<a rel="prev" class="carousel-control ico-prev" href="javascript:">&nbsp;</a>
+			</div>
+            <script type="text/javascript">decorateList('mini-cart', 'none-recursive')</script>
+			<script type="text/javascript">
+				new Carousel($('carousel-wrapper-cartheader'),
+							 $('carousel-wrapper-cartheader').select('.item'),
+							 $('topCartContent').select('.controls a'),
+							 { wheel: false,visibleSlides:3 }
+							);
+			</script>
+        <?php else: ?>
+            <!--<p class="block-subtitle">
+                <span onclick="Enterprise.TopCart.hideCart()" class="close-btn"><?php echo $this->__('Close'); ?></span>
+                <?php echo $this->__('Recently added item(s)') ?>
+            </p>-->
+            <p class="cart-empty">
+                <?php echo $this->__('You have no items in your shopping cart.') ?>
+            </p>
+        <?php endif ?>
+        <?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+            <!--<p class="subtotal">
+                <?php if ($this->canApplyMsrp()): ?>
+                    <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+                <?php else: ?>
+                    <span class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?><?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?> / <?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?><?php endif; ?>
+                <?php endif; ?>
+            </p>-->
+            
+        <?php endif ?>
+		<div class="actions">
+                <?php echo $this->getChildHtml('extra_actions') ?>
+                <a href="javascript:void(0)" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')" class="checkout-small"><?php echo $this->__('Checkout') ?></a>
+                <!--  <button class="button" type="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>-->
+                <a class="gotocart" id="gotocartlink" href="<?php echo $this->getUrl('checkout/cart'); ?>"><span><?php echo $this->__('View Cart') ?></span></a>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    //Enterprise.TopCart.initialize('topCartContent');
+    // Below can be used to show minicart after item added
+    // Enterprise.TopCart.showCart(7);
+    
+    $j1_6('.mini-products-list .product-image').css({'position':'relative','left':'10px','top':'5px'});
+    $j1_6('.mini-products-list li .product-details table tr th').css({'display':'none'});
+    $j1_6('.mini-products-list li .product-details table').find('tr:last').remove();
+    $j1_6('.mini-products-list li .product-details table tr td span.price').css({'font-size':'13px','position':'relative','left':'5px','top':'-5px','color':'#5e5e5e','font-weight':'normal'});
+    $j1_6('.mini-products-list li .product-details .btn-edit').css({'display':'none'});
+    //$j1_6('.cart-link .block-content .inner-wrapper .actions .button')
+</script>
+<?php endif;?>
+</div>

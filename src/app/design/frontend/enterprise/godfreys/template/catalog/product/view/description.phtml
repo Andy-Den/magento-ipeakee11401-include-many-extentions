@@ -1,0 +1,34 @@
+<!-- NOT BEING USED (FK) -->
+
+
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct()
+?>
+
+<div id="key_features">
+	<h3><?php echo $this->__('Key Features')?></h3>
+	<ul class="product-features">
+	  <?php if ($_product->getFeature_1()): ?><li><?php echo $_product->getFeature_1(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_2()): ?><li><?php echo $_product->getFeature_2(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_3()): ?><li><?php echo $_product->getFeature_3(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_4()): ?><li><?php echo $_product->getFeature_4(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_5()): ?><li><?php echo $_product->getFeature_5(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_6()): ?><li><?php echo $_product->getFeature_6(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_7()): ?><li><?php echo $_product->getFeature_7(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_8()): ?><li><?php echo $_product->getFeature_8(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_9()): ?><li><?php echo $_product->getFeature_9(); ?></li><?php endif; ?>
+	  <?php if ($_product->getFeature_10()): ?><li><?php echo $_product->getFeature_10(); ?></li><?php endif; ?>
+	</ul>
+	<div id="description" style="position:relative;">
+		<?php echo $_helper->productAttribute($_product, $this->getProduct()->getDescription(), 'description') ?></p>
+	</div>
+</div>
+
+<div id="info_chart">
+<?php echo $this->getChildHtml('additional')?>
+</div>
+		
+		
+	
+                            

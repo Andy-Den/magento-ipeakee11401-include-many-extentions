@@ -1,0 +1,72 @@
+<?php
+/**
+ * Raptor
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Raptor
+ * @copyright  Copyright (c) 2010 Raptor Commerce (http://www.raptorcommerce.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+<div id="nav-menu">
+    <?php $_helper = Mage::helper('catalog/category') ?>
+    <?php $_categories = $_helper->getStoreCategories() ?>
+    <ul id="topnav">
+        <?php foreach ($_categories as $_category) : ?>
+        <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+        <li>
+            <a href="<?php echo Mage::getUrl($_category->getUrlKey()); ?>" title="<?php echo $_category->getName(); ?>">
+                <span><?php echo $_category->getName(); ?></span>
+            </a>
+            <?php
+            $catagory_model = Mage::getModel('catalog/category')->load($_category->getId());
+
+            $collection = Mage::getResourceModel('catalog/product_collection');
+            $collection->addCategoryFilter($catagory_model);
+            $collection->addAttributeToFilter('status', 1);
+            $collection->addAttributeToSelect(array('name', 'url', 'url_key'));
+
+            if (!empty($collection)): ?>
+                <ul>
+                    <?php $i=0; ?>
+                    <?php foreach ($collection as $_product): ?>
+                        <?php $i++; if($i>3) break; ?>
+                        <li>
+                            <a href="<?php echo Mage::getUrl($_category->getUrlKey()."/".$_product->getUrlKey()); // echo $_product->getProductUrl() //$_product->getUrlKey(); ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" style="color: rgb(240, 240, 240); border-bottom-style: none; ">
+                                <span><?php echo $_product->getName(); ?></span>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                    <?php if(count($collection)>=1) : ?>
+                        <li class="last"><a href="<?php echo $cat_ch['url_key'];?>"><span>View All</span></a></li>
+                    <?php endif; ?>
+                </ul>
+            <?php endif; ?>
+        </li>
+        <?php endforeach ?>
+    </ul>
+
+</div>

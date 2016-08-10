@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Godfreys_SetupScript>
+            <version>1.0.39</version>
+        </Godfreys_SetupScript>
+    </modules>
+    <global>
+        <resources>
+            <setupscript_setup>
+                <setup>
+                    <module>Godfreys_SetupScript</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </setupscript_setup>
+        </resources>
+    </global>
+</config> 

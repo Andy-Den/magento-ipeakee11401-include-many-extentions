@@ -1,0 +1,66 @@
+<?php 
+	$_product = $this->getProduct(); 
+	$groupCollection    = Mage::getResourceModel('eav/entity_attribute_group_collection');
+	
+	$groupId = 0;
+	foreach ($groupCollection as $group) {
+		if($group->getAttributeGroupName() == 'Room by Room'){
+			$groupId = $group->getId();
+			break;
+		}
+	}
+
+	$attributesCollection = Mage::getResourceModel('catalog/product_attribute_collection');
+	$attributesCollection->setAttributeGroupFilter($groupId);
+?>
+<?php if(count($attributesCollection)>0): ?>
+	<div class="room_by_room">
+		<div class="room_by_room_title"><?php echo $this->__('Room by Room') ?></div>
+		<?php $i=0; foreach ($attributesCollection as $attribute): $i++?>
+			<?php if($_product->getData($attribute->getAttributeCode())!=''): ?>
+				<?php if($i%2 == 0) continue; ?>
+                <div class="room_by_room_in">
+					<h4 class="attribute-title attribute-<?php echo $i ?>-h4" onclick="toggleTab('attribute-<?php echo $i ?>', this)"><?php echo $attribute->getFrontendLabel() ?></h4>
+					<div class="attribute-content" id="attribute-<?php echo $i ?>" style="display:none">
+						<?php echo $_product->getData($attribute->getAttributeCode()) ?>
+					</div>
+				</div>
+			<?php endif ?>
+		<?php endforeach ?>
+	</div>
+<?php endif ?>
+<script type="text/javascript">
+	function triggleAttributeContent(el, no){
+		$A(document.getElementsByClassName('attribute-title')).each(
+			function(a)
+			{
+				a.removeClassName('active');
+			}
+		);
+		$A(document.getElementsByClassName('attribute-content')).each(
+			function(b)
+			{
+				b.hide();
+			}
+		);
+		el.addClassName('active');
+		$('attribute-'+no).show();
+		collateralTabs.select();
+	}
+	
+	function toggleTab(obj, ob){
+		if(jQuery(ob).hasClass('active')){
+			jQuery('h4.'+obj+'-h4').removeClass('active');
+			jQuery('#'+obj).hide();
+		}else{
+			jQuery('.attribute-content').hide();
+			jQuery('.room_by_room_in h4').removeClass('active');
+			
+			jQuery('h4.'+obj+'-h4').addClass('active');
+			jQuery('#'+obj).show();
+			
+			
+		}
+		collateralTabs.select();
+	}
+</script>

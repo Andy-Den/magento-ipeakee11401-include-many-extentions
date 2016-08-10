@@ -1,0 +1,12 @@
+.itabs .i_titles{position:relative;}
+.itabs .i_titles .i_titles-holder{white-space: nowrap;overflow:hidden;}
+.itabs .i_titles .i_scroll{display:none;cursor:pointer;position:absolute;}
+.itabs .i_titles .i_scroll.i__right{right:0;}
+.itabs .i_titles .i_title{cursor:pointer;margin-right:5px;white-space: nowrap;display: inline-block;}
+.itabs .i_titles .i_title h2{margin-bottom:5px;padding-bottom:1px;border:0;}
+.itabs .i_titles .i_title:hover h2{padding-bottom:0;border-bottom:1px solid;}
+.itabs .i_titles .i_title.i_current h2{padding-bottom:0;border-bottom:1px solid;}
+.itabs .contents .content{display:none;}
+.itabs .contents .content.i_current{display:inline;}
+.itabs .i_titles.with-scroll .i_scroll{display:block;width:20px;background-color: red;}
+.itabs .i_titles.with-scroll .i_titles-holder{margin:0 20px;}

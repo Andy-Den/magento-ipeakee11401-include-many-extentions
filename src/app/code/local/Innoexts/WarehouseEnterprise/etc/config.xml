@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Innoexts
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the InnoExts Commercial License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://innoexts.com/commercial-license-agreement
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@innoexts.com so we can send you a copy immediately.
+ * 
+ * @category    Innoexts
+ * @package     Innoexts_WarehouseEnterprise
+ * @copyright   Copyright (c) 2014 Innoexts (http://www.innoexts.com)
+ * @license     http://innoexts.com/commercial-license-agreement  InnoExts Commercial License
+ */
+-->
+<config>
+    <modules>
+        <Innoexts_WarehouseEnterprise>
+            <version>1.2.1.0</version>
+        </Innoexts_WarehouseEnterprise>
+    </modules>
+    <frontend>
+        <translate>
+            <modules>
+                <Innoexts_WarehouseEnterprise>
+                    <files>
+                        <default>Innoexts_WarehouseEnterprise.csv</default>
+                    </files>
+                </Innoexts_WarehouseEnterprise>
+            </modules>
+        </translate>
+        <layout>
+              <updates>
+                  <warehouseenterprise>
+                      <file>warehouseenterprise.xml</file>
+                  </warehouseenterprise>
+              </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Innoexts_WarehouseEnterprise>
+                    <files>
+                        <default>Innoexts_WarehouseEnterprise.csv</default>
+                    </files>
+                </Innoexts_WarehouseEnterprise>
+            </modules>
+        </translate>
+        <layout>
+              <updates>
+                  <warehouseenterprise>
+                      <file>warehouseenterprise.xml</file>
+                  </warehouseenterprise>
+              </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <models>
+            <warehouseenterprise>
+                <class>Innoexts_WarehouseEnterprise_Model</class>
+                <resourceModel>warehouseenterprise_mysql4</resourceModel>
+            </warehouseenterprise>
+            <warehouseenterprise_mysql4>
+                <class>Innoexts_WarehouseEnterprise_Model_Mysql4</class>
+            </warehouseenterprise_mysql4>
+            <enterprise_catalog>
+                <rewrite>
+                    <index_action_product_price_abstract>Innoexts_WarehouseEnterprise_Model_Enterprise_Catalog_Index_Action_Product_Price_Abstract</index_action_product_price_abstract>
+                    <index_action_product_price_refresh>Innoexts_WarehouseEnterprise_Model_Enterprise_Catalog_Index_Action_Product_Price_Refresh</index_action_product_price_refresh>
+                    <index_action_product_price_refresh_changelog>Innoexts_WarehouseEnterprise_Model_Enterprise_Catalog_Index_Action_Product_Price_Refresh_Changelog</index_action_product_price_refresh_changelog>
+                    <index_action_product_price_refresh_row>Innoexts_WarehouseEnterprise_Model_Enterprise_Catalog_Index_Action_Product_Price_Refresh_Row</index_action_product_price_refresh_row>
+                </rewrite>
+            </enterprise_catalog>
+            <enterprise_cataloginventory>
+                <rewrite>
+                    <index_observer>Innoexts_WarehouseEnterprise_Model_Enterprise_Cataloginventory_Index_Observer</index_observer>
+                </rewrite>
+            </enterprise_cataloginventory>
+            <enterprise_checkout>
+                <rewrite>
+                    <cart>Innoexts_WarehouseEnterprise_Model_Enterprise_Checkout_Cart</cart>
+                </rewrite>
+            </enterprise_checkout>
+            <enterprise_giftcard_mysql4>
+                <rewrite>
+                    <indexer_price>Innoexts_WarehouseEnterprise_Model_Mysql4_GiftCard_Indexer_Price</indexer_price>
+                </rewrite>
+            </enterprise_giftcard_mysql4>
+            <enterprise_pagecache>
+                <rewrite>
+                    <cookie>Innoexts_WarehouseEnterprise_Model_Enterprise_Pagecache_Cookie</cookie>
+                    <processor>Innoexts_WarehouseEnterprise_Model_Enterprise_Pagecache_Processor</processor>
+                    <container_wishlist>Innoexts_WarehouseEnterprise_Model_Enterprise_Pagecache_Container_Wishlist</container_wishlist>
+                </rewrite>
+            </enterprise_pagecache>
+        </models>
+        <resources>
+            <warehouseenterprise_setup>
+                <setup>
+                    <module>Innoexts_WarehouseEnterprise</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </warehouseenterprise_setup>
+            <warehouseenterprise_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </warehouseenterprise_write>
+            <warehouseenterprise_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </warehouseenterprise_read>
+        </resources>
+        <blocks>
+            <warehouseenterprise>
+                <class>Innoexts_WarehouseEnterprise_Block</class>
+            </warehouseenterprise>
+            <enterprise_targetrule>
+                <rewrite>
+                    <checkout_cart_crosssell>Innoexts_WarehouseEnterprise_Block_Enterprise_TargetRule_Checkout_Cart_Crosssell</checkout_cart_crosssell>
+                </rewrite>
+            </enterprise_targetrule>
+        </blocks>
+        <helpers>
+            <warehouseenterprise>
+                <class>Innoexts_WarehouseEnterprise_Helper</class>
+            </warehouseenterprise>
+        </helpers>
+    </global>
+</config>

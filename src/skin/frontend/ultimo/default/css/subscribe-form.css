@@ -1,0 +1,143 @@
+/* Sign up for discount form styles */
+/************************************/
+
+form.discount-form {
+    width: 100%;
+    margin: 0 auto; }
+
+/* This is the style for each individual row. */
+form.discount-form .section {
+    clear: both;
+    padding: 0;
+    color: #666; }
+form .section#row_36568,
+form .section#row_36590 {
+    margin-top: 10px; }
+
+
+/* This is the style for each column within a row. */
+form.discount-form .section .container {
+    float: left;
+    width: 100% !important; }
+
+form #row_36566.section .container,
+form #row_36570.section .container,
+form .section#row_36592 .container,
+form .section#row_36593 .container {
+    width: 50% !important; }
+
+/* This surrounds every field and caption area. */
+form.discount-form .field_block {
+    display: block;
+    padding: 0;
+    margin: 0; }
+
+/* A field's caption normally surrounds its label element. */
+form.discount-form .field_block .caption {
+    display: block;
+    font: normal 13px "Lucida Grande", "Verdana", sans-serif;
+    color: #666;
+    padding: 0;
+    margin: 0 0 7px 0;
+    position: inherit; }
+form.discount-form .field_block .caption#caption_1090556 {
+    margin-bottom: 14px; }
+
+/* The following are special styles for the layout of checkbox and radio fields */
+form.discount-form .field_block .checkbox .caption {
+    display: inline;
+    margin: 0; }
+
+form.discount-form .field_block div.radio {
+    height: auto; }
+
+form.discount-form .field_block div.radio span {
+    display: block;
+    margin: 0 0 10px 0;
+    padding: 0;
+    background: none; }
+
+form.discount-form .field_block div.radio span input.radio {
+    display: none;
+    padding-right: 5px; }
+
+form.discount-form .field_block div.radio span label {
+    line-height: 30px;
+    font-size: 13px; }
+
+/* This is the individual field input. */
+form.discount-form .field_block .field {
+    padding: 0;
+    margin: 0; }
+
+form.discount-form .field_block .field input[type="submit"] {
+    background: #55AA21;
+    line-height: 43px;
+    height: 42px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 0 20px; }
+
+/* The style for field-level errors */
+form.discount-form .field_block .field .field_error {
+    display: block;
+    font-size: 11px;
+    color: #f00;
+    font-weight: bold; }
+
+/* The styles for individual field types */
+form.discount-form .field_block .field input.text, form.discount-form .field_block .field input.float,
+form.discount-form .field_block .field input.password, form.discount-form .field_block .field input.integer,
+form.discount-form .field_block .field input.currency, form.discount-form .field_block .field input.date {
+    border: 1px solid #dadada;
+    font: normal 11px Arial,Helvetica,sans-serif;
+    color: #333;
+    padding-left: 12px;
+    margin: 0;
+    width: 100%;
+    height: 46px; }
+
+form.discount-form .field_block .field input.date {
+    width: 102px; }
+
+form.discount-form .field_block .field input.phone {
+    width: 250px;
+    font-size: 12px;
+    padding: 3px 12px 3px 44px; }
+
+/* The styles for textareas are slightly larger than by default with no CSS */
+form.discount-form .field_block .field textarea {
+    width: 300px;
+    height: 150px; }
+
+/* This can be applied to any field element to make it wider than the default above */
+form.discount-form .field_block .field input.wide {
+    width: 300px; }
+
+/* This can be applied to any field element to make it narrower than the default above */
+form.discount-form .field_block .field input.narrow {
+    width: 100px; }
+
+/* A dropdown menu within a field is styled here. */
+form.discount-form .field_block .field select, .field_block .field select option {
+    width: 200px; }
+
+/* Required fields are red and bold by default. */
+form.discount-form .required {
+    display: none; }
+
+.bronto-content .right img {
+    margin: 30px auto;
+    display: block;
+    padding-left: 60px;
+}
+
+p.validation-advice {
+    margin: 1em 0 0;
+}

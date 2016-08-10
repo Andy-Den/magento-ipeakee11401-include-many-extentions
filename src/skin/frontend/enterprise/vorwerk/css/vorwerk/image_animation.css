@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+
+/**************************************************/
+/*SLIDESHOW FORMATTING */
+/**************************************************/
+
+
+.image_animation {
+    position:relative;
+    height:212px;
+}
+
+.image_animation img {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+    opacity:0.0;
+}
+
+.image_animation img.active {
+    z-index:10;
+    opacity:1.0;
+}
+
+.image_animation img.last-active {
+    z-index:9;
+}

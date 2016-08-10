@@ -1,0 +1,60 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<div class="post-list-item">
+	<h2><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h2>
+    <p class="post-info">
+         <span class="post-date" >
+            <?php echo $this->__('Posted on %s',$post->getPostDate('d/m/Y')); ?>
+         </span>
+        <span>
+            <?php echo $this->__('by'); ?>
+        </span>
+         <span class="author" >
+             <a href="<?php echo $post->getAuthor()->getUrl(); ?>"><?php echo $post->getAuthor()->getDisplayName(); ?></a>
+         </span>
+        </span>
+        <span class="comment-count" >
+            <?php if (Mage::getStoreConfigFlag('wordpress/extend/disqus') && $this->helper('wordpress')->isPluginEnabled('disqus')): ?>
+                <a href="<?php echo $post->getPermalink() ?>#disqus_thread">0 Comments</a>
+            <?php else: ?>
+            <?php echo $post->getCommentCount();?>
+                <?php
+                if ( $post->getCommentCount() >= 2 ):
+                    echo $this->__("Comments");
+                else:
+                    echo $this->__("Comment");
+                endif;
+                ?>
+            <?php endif; ?>
+        </span>
+    </p>
+	<?php echo $this->getBeforePostContentHtml() ?>
+	<div class="post-entry entry<?php if ($post->getFeaturedImage): ?> post-entry-with-image<?php endif; ?>">
+		<?php if ($post->isViewableForVisitor()): ?>
+			<?php if ($featuredImage = $post->getFeaturedImage()): ?>
+				<div class="featured-image">
+					<a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><img src="<?php echo $featuredImage->getFullSizeImage() ?>" alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"/></a>
+				</div>
+			<?php endif; ?>
+            <?php if ($this->displayExcerptInFeed() || $post->hasMoreTag()): ?>
+                <?php echo $post->getPostExcerpt() ?>
+            <?php else: ?>
+                <?php echo Mage::helper('wordpress')->getShortDescription($post->getPostContent()); ?>
+            <?php endif; ?>
+		<?php else: ?>
+			<?php echo $this->getPasswordProtectHtml($post) ?>
+		<?php endif; ?>
+        <p class="read-more">
+            <a class="read-more-link" href="<?php echo $post->getPermalink(); ?>">
+                <span class="read-more-text"><?php echo $this->__("Continue Reading"); ?></span>
+            </a>
+        </p>
+	</div>
+</div>

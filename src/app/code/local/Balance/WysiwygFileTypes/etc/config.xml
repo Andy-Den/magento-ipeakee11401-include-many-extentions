@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <modules>
+    <Balance_WysiwygFileTypes>
+      <version>1.0.0</version>
+    </Balance_WysiwygFileTypes>
+  </modules>
+  <adminhtml>
+    <cms>
+      <browser>
+        <extensions>
+		  <allowed>
+			  <jpg>1</jpg>
+			  <jpeg>1</jpeg>
+			  <png>1</png>
+			  <gif>1</gif>
+		  </allowed>
+		  <image_allowed>
+			  <jpg>1</jpg>
+			  <jpeg>1</jpeg>
+			  <png>1</png>
+			  <gif>1</gif>
+		  </image_allowed>
+		  <media_allowed>
+			  <flv>1</flv>
+			  <swf>1</swf>
+			  <avi>1</avi>
+			  <mov>1</mov>
+			  <rm>1</rm>
+			  <wmv>1</wmv>
+			  <pdf>1</pdf>
+		  </media_allowed>
+		</extensions>
+      </browser>
+    </cms>
+  </adminhtml>
+</config>
